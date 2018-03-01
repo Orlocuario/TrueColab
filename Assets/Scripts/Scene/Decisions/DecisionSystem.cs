@@ -27,7 +27,10 @@ public class DecisionSystem : MonoBehaviour
 
     protected Choice?[] votes;
     protected int playersWhoArrived;
-	protected LevelManager levelManager;
+    protected LevelManager levelManager;
+    private float timeToWait;
+    private int timesVisited;
+    private bool mustTurnDownFeedBack;
 
     #endregion
 
@@ -36,8 +39,9 @@ public class DecisionSystem : MonoBehaviour
     void Start()
     {
         CheckDecisionAttributes();
-		levelManager = FindObjectOfType<LevelManager> ();
+        levelManager = FindObjectOfType<LevelManager>();
         playersWhoArrived = 0;
+        mustTurnDownFeedBack = false;
         ClearVotes();
     }
 
@@ -47,10 +51,10 @@ public class DecisionSystem : MonoBehaviour
 
     public void Vote(Choice choice)
     {
-		int playerId = levelManager.GetLocalPlayerController().playerId;
+        int playerId = levelManager.GetLocalPlayerController().playerId;
 
         votes[playerId] = choice;
-		SendVote (choice);
+        SendVote(choice);
     }
 
     protected void RestartDecision()
@@ -95,6 +99,12 @@ public class DecisionSystem : MonoBehaviour
                         if (agreementCount == agreement)
                         {
                             OnVoteFinished((Choice)votes[i]);
+                            if (mustTurnDownFeedBack)
+                            {
+                                NPCtrigger npcTalk = gameObject.GetComponent<NPCtrigger>();
+                                npcTalk.EndThatFeedBack();
+                                mustTurnDownFeedBack = false;
+                            }
                             return;
                         }
                         else
@@ -111,6 +121,29 @@ public class DecisionSystem : MonoBehaviour
     protected bool GameObjectIsPlayer(GameObject other)
     {
         return other.GetComponent<PlayerController>();
+    }
+
+    protected void CheckIfINeedWaiting()
+    {
+        if (gameObject.GetComponent<NPCtrigger>())
+        {
+            mustTurnDownFeedBack = true;
+            NPCtrigger npcTalk = gameObject.GetComponent<NPCtrigger>();
+            NPCtrigger.NPCFeedback[] feedbacks = npcTalk.feedbacks;
+            float feedBackTime = npcTalk.feedbackTime;
+            float npcTalkingTime = 0;
+
+            foreach (NPCtrigger.NPCFeedback feedBack in feedbacks)
+            {
+                npcTalkingTime += feedBackTime;
+            }
+
+            levelManager.StartVoting(choiceTexts, true, npcTalkingTime);
+        }
+        else
+        {
+            levelManager.StartVoting(choiceTexts, false, 0f);
+        }
     }
 
     private void CheckDecisionAttributes()
@@ -143,9 +176,9 @@ public class DecisionSystem : MonoBehaviour
 
     protected void SendVote(Choice vote)
     {
-		int playerId = levelManager.GetLocalPlayerController().playerId;
+        int playerId = levelManager.GetLocalPlayerController().playerId;
 
-		SendMessageToServer("PlayerVote/" + playerId + "/" + vote);
+        SendMessageToServer("PlayerVote/" + playerId + "/" + vote);
     }
 
     public void SendPreVote(int preVote)
@@ -188,16 +221,16 @@ public class DecisionSystem : MonoBehaviour
         {
             PlayerController pc = collision.gameObject.GetComponent<PlayerController>();
             pc.decisionName = name;
-	        
-			if (++playersWhoArrived == 3)
+
+            if (++playersWhoArrived == 3)
             {
-				pc.StopMoving ();
-				levelManager.StartVoting(choiceTexts);
-			}
-            else 
-			{
-				levelManager.ActivateNPCFeedback ("Han llegado tus compañeros?");
-			}
+                pc.StopMoving();
+                CheckIfINeedWaiting();
+            }
+            else
+            {
+                levelManager.ActivateNPCFeedback("Han llegado tus compañeros?");
+            }
 
         }
     }

@@ -130,6 +130,11 @@ public class NPCtrigger : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    public void EndThatFeedBack()
+    {
+        EndFeedback();
+    }
+
     protected bool GameObjectIsPlayer(GameObject other)
     {
         PlayerController playerController = other.GetComponent<PlayerController>();

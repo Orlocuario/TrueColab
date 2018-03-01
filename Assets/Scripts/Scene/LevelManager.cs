@@ -474,11 +474,18 @@ public class LevelManager : MonoBehaviour
         spiderLog.SetActive(false);
     }
 
-    public void StartVoting(string[] choiceTexts)
+    public void StartVoting(string[] choiceTexts, bool hasNpc, float npcTalkingTime)
     {
-        decisionButtons.SetActive(true);
-        DeactivateLilDecisionFaces();
-        SetVotingTextButtons(choiceTexts);
+        if (hasNpc)
+        {
+            StartCoroutine(WaitNpcToTalk(npcTalkingTime, choiceTexts));
+        }
+        else
+        {
+            decisionButtons.SetActive(true);
+            DeactivateLilDecisionFaces();
+            SetVotingTextButtons(choiceTexts);
+        }
     }
 
     private void SetVotingTextButtons(string[] choiceTexts)
@@ -853,6 +860,14 @@ public class LevelManager : MonoBehaviour
         KillSpider();
     }
 
+    private IEnumerator WaitNpcToTalk(float npcTalkTime, string[] choiceTexts)
+    {
+        yield return new WaitForSeconds(npcTalkTime);
+
+        decisionButtons.SetActive(true);
+        DeactivateLilDecisionFaces();
+        SetVotingTextButtons(choiceTexts);
+    }
     #endregion
 
 }
