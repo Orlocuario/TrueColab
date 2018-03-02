@@ -45,7 +45,7 @@ public class MageController : PlayerController
             if (powerable.IsPowered())
             {
                 PowerableObject.Power power = powerable.GetActivatedPower();
-                if (power.caster.Equals(this))
+                if (power.caster.Equals(this) || power.attack.Equals(new FireballController()) || power.expectedParticles.Equals(new MagePoweredParticles()))
                 {
                     if (power.InPowerArea(player, false))
                     {

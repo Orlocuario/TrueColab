@@ -11,7 +11,8 @@ public class PowerableObject : MonoBehaviour
     public enum ActivationType
     {
         Attack,
-        Power
+        Power,
+        ByParticle
     }
 
     #endregion
@@ -29,6 +30,9 @@ public class PowerableObject : MonoBehaviour
 
         [Tooltip("If ActivationType==Power only")]
         public PlayerController caster;
+
+        [Tooltip("If ActivationType==ByPowered only")]
+        public PoweredParticles expectedParticles;
 
         [Tooltip("Which particles activate with this power, they should be child objects of the PowerableObject")]
         public GameObject[] particles;
@@ -242,6 +246,8 @@ public class PowerableObject : MonoBehaviour
                 return ActivateWithAttack(power, gameObject);
             case ActivationType.Power:
                 return ActivateWithPower(power, gameObject);
+            case ActivationType.ByParticle:
+                return ActivateByParticle(power, gameObject);
             default:
                 return false;
         }
@@ -265,6 +271,25 @@ public class PowerableObject : MonoBehaviour
         return false;
     }
 
+    protected bool ActivateByParticle(Power power, GameObject possibleParticle)
+    {
+        if (possibleParticle.GetComponent<PoweredParticles>())
+        {
+            PoweredParticles poweredParticle = possibleParticle.GetComponent<PoweredParticles>();
+            if (poweredParticle.GetType().Equals(power.expectedParticles.GetType()))
+            {
+                return true;
+            }
+            else
+            {
+                Debug.LogError("This PowerableObject.ActivationType is 'ByParticle' but has no attack set.");
+            }
+        }
+        return false;
+    }
+
+
+
     protected bool ActivateWithPower(Power power, GameObject playerGO) //CheckThis
     {
         if (power.caster)
@@ -272,7 +297,7 @@ public class PowerableObject : MonoBehaviour
             if (PlayerActivatesPower(power.caster, playerGO))
             {
                 PlayerController player = playerGO.GetComponent<PlayerController>();
-				player.availablePowerable = gameObject;
+                player.availablePowerable = gameObject;
 
                 if (player.isPowerOn)
                 {
@@ -307,7 +332,7 @@ public class PowerableObject : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-		
+
         for (int i = 0; i < powers.Length; i++)
         {
             bool activated = ActivatePower(powers[i], collision.gameObject);
@@ -327,7 +352,7 @@ public class PowerableObject : MonoBehaviour
     protected void OnTriggerExit2D(Collider2D collision)
     {
         PlayerController player = collision.GetComponent<PlayerController>();
-		if (player && player.availablePowerable == gameObject)
+        if (player && player.availablePowerable == gameObject)
         {
             player.availablePowerable = null;
             if (powered)

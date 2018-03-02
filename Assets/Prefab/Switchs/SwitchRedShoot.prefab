@@ -141,11 +141,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3310a335c359959459f1e3899f61242d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPoint: {x: 26.74, y: 4.9}
   endPoint: {x: 26.74, y: 3.6}
   dontCollideWithPlayers: 1
   moveSpeed: 0.8
   timeToWait: 0
+  isWorking: 0
+  playerHasReturned: 0
 --- !u!198 &198937241521212586
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -374,7 +375,7 @@ ParticleSystem:
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.16078432, b: 0.6431373, a: 1}
+      maxColor: {r: 1, g: 0.16078432, b: 0.33333334, a: 1}
       minMaxState: 0
     startSize:
       scalar: 1.5

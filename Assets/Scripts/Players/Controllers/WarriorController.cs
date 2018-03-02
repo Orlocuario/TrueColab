@@ -28,16 +28,16 @@ public class WarriorController : PlayerController
     {
         if (isPowerOn)
         {
-            PowerableObject[] powerables = GameObject.FindObjectsOfType<PowerableObject>();
+            PowerableObject[] powerables = FindObjectsOfType<PowerableObject>();
 
             foreach (PowerableObject powerable in powerables)
             {
                 if (powerable.IsPowered())
                 {
                     PowerableObject.Power power = powerable.GetActivatedPower();
-                    if (power.caster.Equals(this))
+                    if (power.caster.Equals(this) || power.attack.Equals(new PunchController()) || power.expectedParticles.Equals(new WarriorPoweredParticles()))
                     {
-						if (power.InPowerArea(player, true))
+                        if (power.InPowerArea(player, true))
                         {
                             return true;
                         }

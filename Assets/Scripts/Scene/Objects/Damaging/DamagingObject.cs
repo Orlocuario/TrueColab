@@ -14,6 +14,9 @@ public class DamagingObject : MonoBehaviour
     public Vector2 force;
     public int damage;
 
+    public GameObject[] particles;
+    public bool activatedParticles;
+
     #endregion
 
     #region Start & Update
@@ -103,6 +106,7 @@ public class DamagingObject : MonoBehaviour
         {
             DealDamage(other.gameObject);
         }
+
     }
 
     #endregion
@@ -145,6 +149,38 @@ public class DamagingObject : MonoBehaviour
         ignoresCollisions[player.name] = ignores;
         SendIgnoreCollisionDataToServer(player, ignores);
 
+    }
+
+    protected void InitializeParticles()
+    {
+        ParticleSystem[] _particles = GetComponentsInChildren<ParticleSystem>();
+
+        if (_particles == null || _particles.Length == 0)
+        {
+            return;
+        }
+
+        particles = new GameObject[_particles.Length];
+
+        for (int i = 0; i < particles.Length; i++)
+        {
+            particles[i] = _particles[i].gameObject;
+        }
+
+        ToggleParticles(false);
+
+    }
+
+    protected virtual void ToggleParticles(bool active)
+    {
+
+        if (particles != null && particles.Length > 0)
+        {
+            for (int i = 0; i < particles.Length; i++)
+            {
+                particles[i].SetActive(active);
+            }
+        }
     }
 
     #endregion

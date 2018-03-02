@@ -8,6 +8,7 @@ public class DamagingInstantiator : MonoBehaviour {
     public Vector2 targetPosition;
     public float instantiationRate;
     public float moveSpeed;
+    public int powerTime;
 
 	public string objectName;
 
@@ -33,39 +34,65 @@ public class DamagingInstantiator : MonoBehaviour {
 			if (damagingObject != null) 
 			{
 				damagingObject.transform.position = initialPosition;
-
-				if (damagingObject.GetComponent <OneTimeMovingObject> ())
-				{
-					OneTimeMovingObject objectMovement = damagingObject.GetComponent <OneTimeMovingObject> ();
-					objectMovement.target = targetPosition; 
-					objectMovement.moveSpeed = moveSpeed;
-					objectMovement.move = true;
-					objectMovement.diesAtTheEnd = true;
-
-					if (targetPosition.y > transform.position.y + 1) 
-					{
-						Quaternion _Q = objectMovement.transform.rotation;
-						objectMovement.transform.rotation = _Q * Quaternion.AngleAxis (-90, new Vector3 (0, 0, 1));
-					}
-					else if (targetPosition.y < transform.position.y - 1) 
-					{
-						Quaternion _Q = objectMovement.transform.rotation;
-						objectMovement.transform.rotation = _Q * Quaternion.AngleAxis (90, new Vector3 (0, 0, 1));
-					}	
-
-					if (targetPosition.x > transform.position.x) 
-					{
-						objectMovement.transform.localScale *= -1; 
-					}
-
-				}
+                TakeCareOfMOvement(damagingObject);
+                TakeCareOfPowerable(damagingObject);
 
 				yield return new WaitForSeconds (instantiationRate);
 			}
 		}
 	}
 
-	private void CheckParameters()
+    private void TakeCareOfPowerable(GameObject damagingObject)
+    {
+        if (damagingObject.GetComponent<PowerableObject>())
+        {
+            PowerableObject powerable = damagingObject.GetComponent<PowerableObject>();
+            PowerableObject.Power[] powers = powerable.powers;
+            powerable.shutdownFrames = powerTime;
+            for (int i = 0; i<powers.Length; i++)
+            {
+                if (i == 0)
+                {
+                    powers[i].attack = new PunchController();
+                }
+                if (i == 1)
+                {
+                    powers[i].expectedParticles = new WarriorPoweredParticles();
+                }
+            }
+        }
+    }
+
+    private void TakeCareOfMOvement(GameObject damagingObject)
+    {
+        if (damagingObject.GetComponent<OneTimeMovingObject>())
+        {
+            OneTimeMovingObject objectMovement = damagingObject.GetComponent<OneTimeMovingObject>();
+            objectMovement.target = targetPosition;
+            objectMovement.moveSpeed = moveSpeed;
+            objectMovement.move = true;
+            objectMovement.diesAtTheEnd = true;
+
+            if (targetPosition.y > transform.position.y + 1)
+            {
+                Quaternion _Q = objectMovement.transform.rotation;
+                objectMovement.transform.rotation = _Q * Quaternion.AngleAxis(-90, new Vector3(0, 0, 1));
+            }
+            else if (targetPosition.y < transform.position.y - 1)
+            {
+                Quaternion _Q = objectMovement.transform.rotation;
+                objectMovement.transform.rotation = _Q * Quaternion.AngleAxis(90, new Vector3(0, 0, 1));
+            }
+
+            if (targetPosition.x > transform.position.x)
+            {
+                objectMovement.transform.localScale *= -1;
+            }
+
+        }
+    }
+
+    private void CheckParameters()
 	{
 		if (initialPosition == new Vector2 (0f, 0f))
 		{

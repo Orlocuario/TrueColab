@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 199877975561576360}
   - component: {fileID: 114229689153164300}
   - component: {fileID: 58575345681860978}
+  - component: {fileID: 114554800050225236}
   m_Layer: 9
   m_Name: BurbujaR
   m_TagString: Untagged
@@ -66,6 +67,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e3a14022c6c84587b0b7edda71cc66d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114554800050225236
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1942036936718924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d607ba7f6165eeb4bba7a3cd997b5091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!198 &198086060667308448
