@@ -106,10 +106,12 @@ public class EnemyController : MonoBehaviour
 
         if (hp <= 0 )
         {
+
             if (LocalPlayerHasControl())
             {
                 SendEnemyDiedToServer(damage);
             }
+
             Die();
         }
 
@@ -244,7 +246,7 @@ public class EnemyController : MonoBehaviour
     protected virtual void SendEnemyDiedToServer(float damage)
     {
         string message = "EnemyDied/" + enemyId + "/" + damage;
-        SendMessageToServer(message, true);
+        SendMessageToServer(message, false);
     }
 
     protected virtual void SendPositionToServer()

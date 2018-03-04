@@ -33,9 +33,8 @@ public class Room
 
     #region Constructor
 
-    public Room(int _id, Server _server, ServerMessageHandler _sender, int _maxPlayers)
+    public Room(int _id, Server _server, ServerMessageHandler _sender, int _maxPlayers, RoomLogger logger)
     {
-
         maxPlayers = _maxPlayers;
         numPlayers = 0;
         sender = _sender;
@@ -50,10 +49,17 @@ public class Room
         players = new List<NetworkPlayer>();
         switchs = new List<RoomSwitch>();
         enemies = new List<NetworkEnemy>();
-        log = new RoomLogger(this.id);
         hpManaGer = new RoomHpMp(this);
-
+        if (logger == null)
+        {
+            log = new RoomLogger(this.id);
+        }
+        else
+        {
+            log = logger;
+        }
         sceneToLoad = Server.instance.sceneToLoad;
+
     }
 
     #endregion
@@ -72,7 +78,7 @@ public class Room
         NetworkPlayer newPlayer = new NetworkPlayer(connectionId, GetPlayerId(), this, address);
         players.Add(newPlayer);
         SetControlEnemies(newPlayer);
-
+      
         if (IsFull())
         {
             Debug.Log("Full room");

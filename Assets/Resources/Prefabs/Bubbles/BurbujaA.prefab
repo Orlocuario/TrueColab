@@ -127,17 +127,8 @@ MonoBehaviour:
   - activationType: 1
     attack: {fileID: 0}
     caster: {fileID: 0}
-    expectedParticles: {fileID: 0}
     particles:
     - {fileID: 0}
-    activatedByPowered: 0
-  - activationType: 2
-    attack: {fileID: 0}
-    caster: {fileID: 0}
-    expectedParticles: {fileID: 0}
-    particles:
-    - {fileID: 0}
-    activatedByPowered: 0
   shutdownFrames: 0
   mustDoSomething: 0
 --- !u!114 &114697798931404616

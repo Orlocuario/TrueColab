@@ -24,6 +24,7 @@ public class Server : MonoBehaviour
     private bool listening;
 
     public List<Room> rooms;
+    public Room lastDestroyedRoom; //Almacena una referencia al ultimo room que se ha destruido para quue el siguiente room en crearse use el mismo logger que el anterior.
 
     private ServerNetworkDiscovery serverNetworkDiscovery;
     public ServerMessageHandler messageHandler;
@@ -32,7 +33,7 @@ public class Server : MonoBehaviour
     public string sceneToLoad;
     public string NPCsLastMessage;
     public bool debug;
-
+    private int roomCounter = 0;
     //Planner Thread
     Thread planner;
     //Cola de mensajes a procesar
@@ -176,6 +177,15 @@ public class Server : MonoBehaviour
                 break;
             case NetworkEventType.DisconnectEvent:
                 DeleteConnection(recConnectionId);
+                try
+                {
+                    RoomManager rm = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>();
+                    rm.DeletePlayerFromRoom(recConnectionId, GetPlayer(recConnectionId).room) ;
+                }
+                catch
+                {
+                    UnityEngine.Debug.LogError("No se encontró RoomManager en ServerScene. uwu");
+                }
                 UnityEngine.Debug.Log("Client " + recConnectionId + " disconnected");
                 break;
         }
@@ -226,6 +236,7 @@ public class Server : MonoBehaviour
 
             messageHandler.SendAllData(connectionId, player.room);
             player.room.SendControlEnemiesToClient(player, false);
+            player.SendDataToRoomBoxManager();
             UnityEngine.Debug.Log("Client " + connectionId + " reconnected");
             return;
         }
@@ -234,7 +245,16 @@ public class Server : MonoBehaviour
         Room room = SearchRoom();
         if (room == null)
         {
-            room = new Room(rooms.Count, this, messageHandler, maxPlayers);
+            roomCounter++;
+            RoomLogger logger = null;
+            if(lastDestroyedRoom != null)
+            {
+                logger = lastDestroyedRoom.log;
+                lastDestroyedRoom = null;
+            }
+            room = new Room(roomCounter, this, messageHandler, maxPlayers,logger);
+            RoomManager rm = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>();
+            rm.AddNewRoom(room);
             rooms.Add(room);
         }
 
@@ -343,6 +363,12 @@ public class Server : MonoBehaviour
 
         string tiempo = " " + hora + ":" + minutos + ":" + segundos;
         return tiempo;
+    }
+
+    public void DestroyRoom(Room room)
+    {
+        lastDestroyedRoom = room;
+        rooms.Remove(room);
     }
 
     #endregion

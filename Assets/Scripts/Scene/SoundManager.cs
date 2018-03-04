@@ -1,0 +1,139 @@
+﻿using UnityEngine;
+
+/**
+ * Store the AudioClips names here.
+ */
+public class GameSounds
+{
+
+    // Players
+    public static string PlayerDie;
+    public static string PlayerJump;
+    public static string PlayerTakeDamage;
+
+    // Attacks
+    public static string PlayerAttack = "watersound";
+    public static string PlayerAttackEnhanced;
+    public static string PlayerAttackSuperEnhanced;
+
+    // Powers
+    public static string MagePower;
+    public static string WarriorPower;
+    public static string EngineerPower;
+
+    // Items
+    public static string GrabItem;
+    public static string DropITem;
+    public static string UseItemFail;
+    public static string UseItemSuccessEffect;
+    public static string UseItemSuccessCongrats;
+
+    // XP
+    public static string GrabExperience;
+
+    // Switches
+    public static string SwitchOn;
+    public static string SwitchOff;
+
+    // Activables
+    public static string GearActivate;
+    public static string RunePlace;
+
+    // NPC
+    public static string NPCTalk;
+
+    // Powerables
+    public static string PowerableParticles;
+
+    // Zones
+    public static string ChatzoneParticles;
+
+    // Portals
+    public static string Portal;
+
+    // Destroyables
+    public static string DestroyBox;
+
+    // Flames
+    public static string FlamesJump;
+
+    // EFfects
+    public static string RockFall;
+    public static string RockStomp;
+    public static string TreeBreak;
+    public static string Smoke;
+
+    // Enemies
+    public static string EnemyTakeDamage;
+    public static string EnemyAttack;
+    public static string EnemyDie;
+
+    public static string SpiderTalk;
+    public static string SpiderDown;
+    public static string SpiderUp;
+    public static string SpiderAttack;
+
+    // Scene
+    public static string SceneComplete;
+    public static string ChangeScene;
+    public static string GameOver;
+    public static string Projectile;
+
+    // Bubbles
+    public static string Bubbles;
+
+    // Diamonds
+    public static string Diamonds;
+
+}
+
+
+public class SoundManager : MonoBehaviour
+{
+
+    public void PlaySound(GameObject gameObject, string soundName, bool loops)
+    {
+
+        AudioClip audioClip = Resources.Load("AudioClips/" + soundName) as AudioClip;
+
+        if(audioClip == null)
+        {
+            Debug.LogError("Sound " + soundName + "does not exist");
+            return;
+        }
+
+        AudioSource source = getSource(gameObject, audioClip, loops);
+
+        source.Play();
+    }
+
+
+    private AudioSource getSource(GameObject gameObject, AudioClip audioClip, bool loops)
+    {
+        AudioSource[] sources = gameObject.GetComponents<AudioSource>();
+        AudioSource source = null;
+
+        if (sources != null && sources.Length > 0)
+        {
+            for (int i = 0; i < sources.Length; i++)
+            {
+                if (sources[i].clip.Equals(audioClip))
+                {
+                    source = sources[i];
+                    break;
+                }
+            }
+
+        }
+        else
+        {
+            source = gameObject.AddComponent<AudioSource>();
+            source.clip = audioClip;
+        }
+
+        source.loop = loops;
+
+        return source;
+    }
+
+}
