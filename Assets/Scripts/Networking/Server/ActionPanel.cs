@@ -38,6 +38,18 @@ public class ActionPanel : MonoBehaviour {
         Text inputText = GameObject.Find("InputSceneText").GetComponent<Text>();
         Server.instance.sceneToLoad = "Escena" + inputText.text;
     }
+
+    public void KillRoom(int boxId, int sceneToLoad)
+    {
+        RoomManager roomManager = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>();
+        Server.instance.DestroyRoom(roomManager.GetRoomFromRoomBox(boxId));
+        roomManager.FreeSpace(boxId);
+    }
+
+    public void SendRoomToScene(int boxId)
+    {
+
+    }
     
     #endregion
 

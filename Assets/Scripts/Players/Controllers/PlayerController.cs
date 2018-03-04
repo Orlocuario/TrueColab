@@ -134,6 +134,10 @@ public class PlayerController : MonoBehaviour
         InitializeParticles();
         IgnoreCollisionWithObjectsWhoHateMe();
         IgnoreCollisionBetweenPlayers();
+
+
+        // TODO: Remove this.
+        FindObjectOfType<SoundManager>().PlaySound(gameObject, GameSounds.PlayerAttack, false);
     }
 
     #endregion

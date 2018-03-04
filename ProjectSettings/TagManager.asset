@@ -28,6 +28,13 @@ TagManager:
   - BurnableBranches1
   - LavaCascade3Final
   - Poi
+  - KillPlane
+  - Checkpoint
+  - JumpButton
+  - OriginalCanvas
+  - OriginalTextCanvas
+  - ChatCanvas
+  - RoomManager
   layers:
   - Default
   - TransparentFX

@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 public class NetworkPlayer
 {
@@ -50,13 +51,29 @@ public class NetworkPlayer
         speedX = 0;
         directionX = 1;
         directionY = 1;
-
+        SendDataToRoomBoxManager();
     }
 
+    public void SendDataToRoomBoxManager()
+    {
+        GameObject roomManager = GameObject.FindGameObjectWithTag("RoomManager");
+        roomManager.GetComponent<RoomManager>().AddNewPlayerToRoom(getPlayerEnum(), connectionId, room);
+    }
     #endregion
 
     #region Common
-
+    public RoomBox.PlayersID getPlayerEnum()
+    {
+        switch (id)
+        {
+            case 0:
+                return RoomBox.PlayersID.Mage;
+            case 1:
+                return RoomBox.PlayersID.Warrior;
+            default:
+                return RoomBox.PlayersID.Engineer;
+        }
+    }
     public void InventoryUpdate(string message)
     {
         char[] separator = new char[1];
