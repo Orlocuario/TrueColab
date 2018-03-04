@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace CnControls
 {
@@ -31,6 +32,7 @@ namespace CnControls
 
         public void Press(Vector2 screenPoint, Camera eventCamera, int pointerId)
         {
+            gameObject.GetComponent<Image>().color = new Color32(144, 144, 144, 255);
             _virtualAxis.Value = Mathf.Clamp(AxisMultiplier, -1f, 1f);
             LastFingerId = pointerId;
         }
@@ -39,6 +41,7 @@ namespace CnControls
         {
             if (LastFingerId == pointerId)
             {
+                gameObject.GetComponent<Image>().color = new Color32(231, 231, 231, 255);
                 _virtualAxis.Value = 0f;
                 LastFingerId = -1;
             }

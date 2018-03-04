@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace CnControls
 {
@@ -18,7 +19,7 @@ namespace CnControls
         /// Utility object that is registered in the system
         /// </summary>
         private VirtualButton _virtualButton;
-        
+
         /// <summary>
         /// It's pretty simple here
         /// When we enable, we register our button in the input system
@@ -44,6 +45,7 @@ namespace CnControls
         /// <param name="eventData">Data of the passed event</param>
         public void OnPointerUp(PointerEventData eventData)
         {
+            gameObject.GetComponent<Image>().color = new Color32(231, 231, 231, 255);
             _virtualButton.Release();
         }
 
@@ -54,6 +56,7 @@ namespace CnControls
         /// <param name="eventData">Data of the passed event</param>
         public void OnPointerDown(PointerEventData eventData)
         {
+            gameObject.GetComponent<Image>().color = new Color32(144, 144, 144, 255);
             _virtualButton.Press();
         }
     }
