@@ -223,7 +223,6 @@ public class Server : MonoBehaviour
             player.connected = true;
             player.connectionId = connectionId;
             SendMessageToClient(connectionId, "ChangeScene/" + player.room.sceneToLoad, true);
-            player.room.
             List <NetworkPlayer> players = player.room.players;
 			foreach (NetworkPlayer connectedPlayer in players)
 			{
@@ -372,10 +371,9 @@ public class Server : MonoBehaviour
         rooms.Remove(room);
     }
 
-    public void SendChangeScene(string sceneId, Room room)
+    public void ChangeRoomScene(Room room, string scene)
     {
-
-        room.sender.SendChangeScene(sceneToLoad, room);
+        room.sender.SendChangeScene(scene, room);
     }
 
     #endregion

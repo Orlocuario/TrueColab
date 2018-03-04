@@ -756,7 +756,9 @@ public class LevelManager : MonoBehaviour
         sceneAnimator.SetBool(parameter, value, gameObject);
     }
 
-	public void CoordinateReconnectionElements()
+    #region Coordinators
+
+    public void CoordinateReconnectionElements()
 	{
         CoordinateBubbleInstantiators();
         CoordinateRotators();
@@ -810,7 +812,7 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
-
+    #endregion
     #region Coroutines
 
     public IEnumerator Respawning(PlayerController player)

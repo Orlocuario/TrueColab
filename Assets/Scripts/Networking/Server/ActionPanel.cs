@@ -48,13 +48,11 @@ public class ActionPanel : MonoBehaviour {
 
     public void ChangeSceneInRoom(int boxId)
     {
-        Text inputText = GameObject.Find("InputSceneText" + boxId).GetComponent<Text>();
+        Text inputText = GameObject.Find("InputText" + boxId).GetComponent<Text>();
         string sceneName = "Escena" + inputText.text;
-    
-        RoomManager roomManager = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>();
-        Server.instance.SendChangeScene(sceneName, roomManager.GetRoomFromRoomBox(boxId));
-    }
-    
-    #endregion
 
+        RoomManager roomManager = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>();
+        Server.instance.ChangeRoomScene(roomManager.GetRoomFromRoomBox(boxId), sceneName);
+    }
+    #endregion
 }
