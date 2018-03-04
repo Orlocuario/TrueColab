@@ -109,12 +109,13 @@ public class RoomManager : MonoBehaviour {
     {
         GameObject box = GameObject.Find("RoomResetButton" + boxId);
         Text boxText = box.GetComponentInChildren<Text>();
-        boxText.text = "uwu";
+        boxText.text = "Empty";
     }
+
     private void UpdateGUI(RoomBox room)
     {
-        GameObject box = GameObject.Find("RoomResetButton" + room.boxId);
-        Text boxText = box.GetComponentInChildren<Text>();
+        GameObject box = GameObject.Find("ResetButtonText" + room.boxId);
+        Text boxText = box.GetComponent<Text>();
         boxText.text = "RESET" + room.boxId +"\n";
         foreach(RoomBox.PlayersID player in room.currentPlayers.Values)
         {
@@ -123,8 +124,4 @@ public class RoomManager : MonoBehaviour {
         //TODO: Hacer que se muestre el room
     }
 
-    // Update is called once per frame
-    void Update () {
-		
-	}
 }

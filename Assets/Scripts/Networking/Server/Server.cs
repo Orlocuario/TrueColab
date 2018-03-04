@@ -371,6 +371,12 @@ public class Server : MonoBehaviour
         rooms.Remove(room);
     }
 
+    public void SendChangeScene(string sceneId, Room room)
+    {
+
+        room.sender.SendChangeScene(sceneToLoad, room);
+    }
+
     #endregion
 
     #region Messaging
