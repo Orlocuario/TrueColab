@@ -596,8 +596,8 @@ public class ClientMessageHandler
                     player.remoteLeft = false;
                 }
             }
-
 			LevelManager lManager = GameObject.FindObjectOfType<LevelManager> ();
+            
         }
     }
 

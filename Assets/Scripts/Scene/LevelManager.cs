@@ -28,6 +28,7 @@ public class LevelManager : MonoBehaviour
     private float waitToKillSpiderCountdown;
     private float waitToGrabItem;
     private int?[] currentChoice;
+    private Vector2[] playersLastPosition;
 
     public float waitToRespawn;
 
@@ -44,6 +45,7 @@ public class LevelManager : MonoBehaviour
         SetFeedbackUI();
         StorePlayers();
 		StorePlayerControllers();
+        playersLastPosition = new Vector2[3];
 
         _ = new Utils();
 

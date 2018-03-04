@@ -223,8 +223,8 @@ public class Server : MonoBehaviour
             player.connected = true;
             player.connectionId = connectionId;
             SendMessageToClient(connectionId, "ChangeScene/" + player.room.sceneToLoad, true);
-			List <NetworkPlayer> players = player.room.players;
-
+            player.room.
+            List <NetworkPlayer> players = player.room.players;
 			foreach (NetworkPlayer connectedPlayer in players)
 			{
 				if (connectedPlayer.controlOverEnemies) 
@@ -288,6 +288,7 @@ public class Server : MonoBehaviour
                 player.room.ChangeControlEnemies();
             }
 
+            
             player.room.SendMessageToAllPlayers("NewChatMessage/" + msg, false);
             player.room.SendMessageToAllPlayersExceptOne("PlayerDisconnected/" + player.id, connectionId, false);
         }
