@@ -179,6 +179,16 @@ public class HUDDisplay : MonoBehaviour
     public void CurrentExpPercentage(string percentage)
     {
         expCurrentPercentage = float.Parse(percentage);
+        
+        Text percentageText = GameObject.Find("ExpPercentage").GetComponent<Text>();
+
+        percentageText.text = "Exp: " + (expCurrentPercentage * 100).ToString("0") + "%";
+    }
+
+    /*
+    public void CurrentExpPercentage(string percentage)
+    {
+        expCurrentPercentage = float.Parse(percentage);
 
         Vector2 expMaskSizeDelta = GameObject.Find("ExpMask").GetComponent<RectTransform>().sizeDelta;
         Text percentageText = GameObject.Find("ExpPercentage").GetComponent<Text>();
@@ -192,6 +202,7 @@ public class HUDDisplay : MonoBehaviour
 
         percentageText.text = "Exp: " + (expCurrentPercentage * 100).ToString("0") + "%";
     }
+    */
 
     #endregion
 
