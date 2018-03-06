@@ -3,6 +3,8 @@
     using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.EventSystems;
+    using UnityEngine.UI;
+
     /// <summary>
     /// Simple button class
     /// Handles press, hold and release, just like a normal button
@@ -21,10 +23,6 @@
         {
 
         }
-        
-
-
-
 
         /// <summary>
         /// Utility object that is registered in the system
@@ -56,6 +54,7 @@
         /// <param name="eventData">Data of the passed event</param>
         public void OnPointerUp(PointerEventData eventData)
         {
+            gameObject.GetComponent<Image>().color = new Color32(231, 231, 231, 255);
             _virtualButton.Release();
         }
 
@@ -67,6 +66,7 @@
         /// 
         public void OnPointerDown(PointerEventData eventData)
         {
+            gameObject.GetComponent<Image>().color = new Color32(144, 144, 144, 255);
             _virtualButton.Press();
         }
     }
