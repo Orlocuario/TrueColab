@@ -371,7 +371,7 @@ public class ClientMessageHandler
         if (NotInClientScene())
         {
             HUDDisplay hpAndMp = GameObject.FindObjectOfType<LevelManager>().hpAndMp;
-            hpAndMp.CurrentExpPercentage(msg[1]);
+            hpAndMp.CurrentExpValue(msg[1]);
         }
     }
 
