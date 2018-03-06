@@ -83,7 +83,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1301050943160048}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.001, y: -0.002, z: -1}
+  m_LocalPosition: {x: -0.01, y: 0.079, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4874426905881810}
@@ -185,6 +185,9 @@ MonoBehaviour:
   localPlayer: 0
   isGrounded: 0
   upPressed: 0
+  availablePowerable: {fileID: 0}
+  availableChatZone: {fileID: 0}
+  decisionName: 
   controlOverEnemies: 0
   groundCheckRadius: 0.25
   canAccelerate: 0
@@ -197,7 +200,7 @@ MonoBehaviour:
   isPowerOn: 0
   directionY: 1
   directionX: 1
-  gravity: 1
+  gravityPower: 0
 --- !u!198 &198702002981555530
 ParticleSystem:
   m_ObjectHideFlags: 1

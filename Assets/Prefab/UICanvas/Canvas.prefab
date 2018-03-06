@@ -3256,6 +3256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224487526493677354}
   - component: {fileID: 222819401445179342}
+  - component: {fileID: 114312892796077164}
   m_Layer: 5
   m_Name: ExperienceBar
   m_TagString: Untagged
@@ -3776,7 +3777,7 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -6780,6 +6781,33 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!114 &114312892796077164
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1907792506641398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.2794118, g: 0.2794118, b: 0.2794118, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -12617,7 +12645,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 1748262113
+  randomSeed: -888244946
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -33698,10 +33726,10 @@ ParticleSystem:
       m_PostInfinity: 2
       m_RotationOrder: 4
     minMaxState: 0
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1418747854
+  randomSeed: -311440646
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -39727,7 +39755,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0000073175124, y: -0.000101208694}
+  m_AnchoredPosition: {x: -0.0000073175124, y: -0.0001012087}
   m_SizeDelta: {x: -8.600006, y: -6.114504}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!224 &224436273639672216
@@ -40015,8 +40043,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 255.1, y: -101.8}
-  m_SizeDelta: {x: 151.3, y: 25.7}
+  m_AnchoredPosition: {x: 256.1, y: -100.4}
+  m_SizeDelta: {x: 149, y: 25.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224491215660928208
 RectTransform:
@@ -40823,7 +40851,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 24.4, y: -11.999907}
+  m_AnchoredPosition: {x: 12.900002, y: -11.999907}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!224 &224716713572712636
@@ -41157,8 +41185,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 88.3, y: -12.8}
-  m_SizeDelta: {x: 123.6, y: 17.1}
+  m_AnchoredPosition: {x: 87.2, y: -12.8}
+  m_SizeDelta: {x: 125.6, y: 17.1}
   m_Pivot: {x: 0.5, y: 0.49999976}
 --- !u!224 &224812591617165702
 RectTransform:
@@ -41467,7 +41495,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.006641231, y: 0.027}
   m_AnchorMax: {x: 1, y: 0.96800005}
-  m_AnchoredPosition: {x: -1.6129309, y: -3.3956833}
+  m_AnchoredPosition: {x: -1.6129309, y: -3.395687}
   m_SizeDelta: {x: 0.5, y: 0}
   m_Pivot: {x: 0.5, y: -0.00000020861626}
 --- !u!224 &224905084655666616

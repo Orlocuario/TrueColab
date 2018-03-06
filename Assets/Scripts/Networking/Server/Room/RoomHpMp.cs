@@ -6,12 +6,12 @@ public class RoomHpMp
 
     #region Attributes
 
+    public int currentExp;  //TODO: Variable Global EXP
     public float maxHP;
     public float maxMP;
     public float maxExp;
     public float currentHP;
     public float currentMP;
-    public float currentExp;
     public float percentageHP;
     public float percentageMP;
     public float percentageExp;
