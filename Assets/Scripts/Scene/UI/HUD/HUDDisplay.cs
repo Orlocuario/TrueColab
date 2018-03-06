@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,7 +18,7 @@ public class HUDDisplay : MonoBehaviour
 
     public float hpCurrentPercentage;
     public float mpCurrentPercentage;
-    public float expCurrentPercentage;
+    public float expCurrentValue;
 
     private float hpLastPercentage;
     private float mpLastPercentage;
@@ -32,7 +33,7 @@ public class HUDDisplay : MonoBehaviour
         // TODO: Setear estos remotamente
         maxHP = 250;
         maxMP = 250;
-        maxExp = 250;
+        //maxExp = 250;
 
         hpCurrentPercentage = 1f;
         mpCurrentPercentage = 1f;
@@ -176,13 +177,13 @@ public class HUDDisplay : MonoBehaviour
         percentageText.text = (mpCurrentPercentage * 100).ToString("0") + "%";
     }
 
-    public void CurrentExpPercentage(string percentage)
+    public void CurrentExpValue(string value)
     {
-        expCurrentPercentage = float.Parse(percentage);
+        expCurrentValue = Int32.Parse(value);
         
-        Text percentageText = GameObject.Find("ExpPercentage").GetComponent<Text>();
+        Text valueText = GameObject.Find("ExpPercentage").GetComponent<Text>();
 
-        percentageText.text = "Exp: " + (expCurrentPercentage * 100).ToString("0") + "%";
+        valueText.text = "Exp: " + expCurrentValue;
     }
 
     /*
