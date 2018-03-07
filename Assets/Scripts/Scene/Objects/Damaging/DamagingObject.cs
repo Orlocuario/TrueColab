@@ -14,6 +14,7 @@ public class DamagingObject : MonoBehaviour
     public Vector2 force;
     public int damage;
 
+
     #endregion
 
     #region Start & Update
@@ -26,7 +27,6 @@ public class DamagingObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
     #endregion
@@ -103,11 +103,17 @@ public class DamagingObject : MonoBehaviour
         {
             DealDamage(other.gameObject);
         }
+
+        if (GameObjectIsEnemy(other.gameObject))
+        {
+            CheckIfImWarriored(other.gameObject);
+        }
     }
+            
 
     #endregion
 
-    #region Utils
+            #region Utils
 
     protected void OnTriggerStay2D(Collider2D other)
     {
@@ -117,6 +123,29 @@ public class DamagingObject : MonoBehaviour
         }
     }
 
+    protected void CheckIfImWarriored(GameObject enemy)
+    {
+        LevelManager levelManager = FindObjectOfType<LevelManager>();
+        try
+        {
+            if (levelManager.GetWarrior().IsWarriored(gameObject))
+            {
+                KillEnemy(enemy);
+            }
+        }
+        catch
+        {
+            Debug.LogError("It Seems there is no warrior");
+        }
+    } 
+
+    protected void KillEnemy (GameObject enemy)
+    {
+        EnemyController eC = enemy.gameObject.GetComponent<EnemyController>();
+        eC.TakeDamage(150);
+        Destroy(gameObject);
+    }
+
     // Attack those who enter the alert zone
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
@@ -124,6 +153,15 @@ public class DamagingObject : MonoBehaviour
         {
             DealDamage(other.gameObject);
         }
+    }
+
+    protected bool GameObjectIsEnemy(GameObject other)
+    {
+        if (other.GetComponent<EnemyController>())
+        {
+            return true;
+        }
+        return false;
     }
 
     protected bool GameObjectIsPlayer(GameObject other)

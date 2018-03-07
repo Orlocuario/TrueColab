@@ -11,7 +11,8 @@ public class PowerableObject : MonoBehaviour
     public enum ActivationType
     {
         Attack,
-        Power
+        Power,
+        ByParticle
     }
 
     #endregion
@@ -29,6 +30,9 @@ public class PowerableObject : MonoBehaviour
 
         [Tooltip("If ActivationType==Power only")]
         public PlayerController caster;
+
+        [Tooltip("If ActivationType==ByParticle only")]
+        public PoweredParticles expectedParticle;
 
         [Tooltip("Which particles activate with this power, they should be child objects of the PowerableObject")]
         public GameObject[] particles;
@@ -242,9 +246,31 @@ public class PowerableObject : MonoBehaviour
                 return ActivateWithAttack(power, gameObject);
             case ActivationType.Power:
                 return ActivateWithPower(power, gameObject);
+            case ActivationType.ByParticle:
+                return ActivateWithParticle(power, gameObject);
             default:
                 return false;
         }
+    }
+
+
+    protected bool ActivateWithParticle(Power power, GameObject possibleParticle)
+    {
+        if (power.expectedParticle != null)
+        {
+            if (ParticleActivatesPower(power.expectedParticle, possibleParticle))
+            {
+                ActivatePower(power);
+                return true;
+            }
+
+            else
+            {
+                return false;
+            }
+        }
+        Debug.LogError("The powerableObject named: " + gameObject.name + " has a ByParticle power set but no ParticleType set");
+        return false; 
     }
 
     protected bool ActivateWithAttack(Power power, GameObject attack)
@@ -272,7 +298,7 @@ public class PowerableObject : MonoBehaviour
             if (PlayerActivatesPower(power.caster, playerGO))
             {
                 PlayerController player = playerGO.GetComponent<PlayerController>();
-				player.availablePowerable = gameObject;
+                player.availablePowerable = gameObject;
 
                 if (player.isPowerOn)
                 {
@@ -307,7 +333,7 @@ public class PowerableObject : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-		
+
         for (int i = 0; i < powers.Length; i++)
         {
             bool activated = ActivatePower(powers[i], collision.gameObject);
@@ -327,7 +353,7 @@ public class PowerableObject : MonoBehaviour
     protected void OnTriggerExit2D(Collider2D collision)
     {
         PlayerController player = collision.GetComponent<PlayerController>();
-		if (player && player.availablePowerable == gameObject)
+        if (player && player.availablePowerable == gameObject)
         {
             player.availablePowerable = null;
             if (powered)
@@ -437,6 +463,19 @@ public class PowerableObject : MonoBehaviour
     public bool ActivatesWithPunch(Power power)
     {
         return power.attack && power.attack.GetType().Equals(new PunchController().GetType());
+    }
+
+    public bool ParticleActivatesPower(PoweredParticles expectedPArticle, GameObject posibleParticle)
+    {
+        if (posibleParticle.GetComponent<PoweredParticles>())
+        {
+            PoweredParticles poweredParticle = posibleParticle.GetComponent<PoweredParticles>();
+            return poweredParticle.GetType().Equals(expectedPArticle.GetType());
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool AttackActivatesPower(AttackController expectedAttack, GameObject attackGO)

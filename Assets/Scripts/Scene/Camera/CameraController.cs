@@ -296,6 +296,7 @@ public class CameraController : MonoBehaviour
         thisCamera.orthographicSize = initialSize;
         currentState = CameraState.Normal;
 
+        target = levelManager.GetLocalPlayer();
         smoothCamera = 3.9f;
         followAhead = .9f;
         followUp = 1f;

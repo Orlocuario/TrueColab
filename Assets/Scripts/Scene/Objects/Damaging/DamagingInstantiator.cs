@@ -2,89 +2,137 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamagingInstantiator : MonoBehaviour {
+public class DamagingInstantiator : MonoBehaviour
+{
 
     public Vector2 initialPosition;
     public Vector2 targetPosition;
     public float instantiationRate;
     public float moveSpeed;
+    public bool startsAtBegginning;
+    public bool needed;
 
-	public string objectName;
+
+    public string objectName;
 
     public bool isWorking;
     public bool playerHasReturned;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
-		initialPosition = gameObject.transform.position;
-		CheckParameters ();
-		StartCoroutine (InstantiateDamaging());
-		
-	}
+        initialPosition = gameObject.transform.position;
+        CheckParameters();
+        if (startsAtBegginning)
+        {
+            needed = true;
+            StartCoroutine(InstantiateDamaging());
+        }
 
-	// Update is called once per frame
-	private IEnumerator InstantiateDamaging()
-	{
+    }
 
-		while (true) 
-		{
-			GameObject damagingObject = (GameObject)Instantiate (Resources.Load ("Prefabs/Damaging/" + objectName));
-			if (damagingObject != null) 
-			{
-				damagingObject.transform.position = initialPosition;
+    public IEnumerator InstantiateDamaging()
+    {
+        while (true)
+        {
+            if (!needed)
+            {
+                yield break;
+            }
+            GameObject damagingObject = (GameObject)Instantiate(Resources.Load("Prefabs/Damaging/" + objectName));
+            GameObject parasiteMageParticle = (GameObject)Instantiate(Resources.Load("Prefabs/Damaging/MageArrowParticle"));
+            GameObject parasiteWarriorParticle = (GameObject)Instantiate(Resources.Load("Prefabs/Damaging/WarriorArrowParticle"));
+            GameObject parasiteEngineerParticle = (GameObject)Instantiate(Resources.Load("Prefabs/Damaging/EngineerArrowParticle"));
 
-				if (damagingObject.GetComponent <OneTimeMovingObject> ())
-				{
-					OneTimeMovingObject objectMovement = damagingObject.GetComponent <OneTimeMovingObject> ();
-					objectMovement.target = targetPosition; 
-					objectMovement.moveSpeed = moveSpeed;
-					objectMovement.move = true;
-					objectMovement.diesAtTheEnd = true;
+            GameObject[] parasitesForDamaging = new GameObject[3] { parasiteMageParticle, parasiteWarriorParticle, parasiteEngineerParticle };
 
-					if (targetPosition.y > transform.position.y + 1) 
-					{
-						Quaternion _Q = objectMovement.transform.rotation;
-						objectMovement.transform.rotation = _Q * Quaternion.AngleAxis (-90, new Vector3 (0, 0, 1));
-					}
-					else if (targetPosition.y < transform.position.y - 1) 
-					{
-						Quaternion _Q = objectMovement.transform.rotation;
-						objectMovement.transform.rotation = _Q * Quaternion.AngleAxis (90, new Vector3 (0, 0, 1));
-					}	
+            if (damagingObject != null)
+            {
+                damagingObject.transform.position = initialPosition;
+                CheckAndSetPowerableData(damagingObject, parasitesForDamaging);
+                CheckAndSetMovingData(damagingObject, parasitesForDamaging);
+                yield return new WaitForSeconds(instantiationRate);
+            }
+        }
+    }
 
-					if (targetPosition.x > transform.position.x) 
-					{
-						objectMovement.transform.localScale *= -1; 
-					}
+    private void CheckAndSetPowerableData(GameObject damagingObject, GameObject[] parasiteParticles)
+    {
+        if (damagingObject.GetComponent<PowerableObject>())
+        {
+            PowerableObject powerableObject = damagingObject.GetComponent<PowerableObject>();
 
-				}
+            for (int i = 0; i < powerableObject.powers.Length; i++)
+            {
+                if (i <= 1)
+                {
+                    powerableObject.powers[i].particles[0] = parasiteParticles[0];
+                }
+                if (i <= 3 && i >= 2)
+                {
+                    powerableObject.powers[i].particles[0] = parasiteParticles[1];
+                }
+                if (i <= 5 && i >= 4)
+                {
+                    powerableObject.powers[i].particles[0] = parasiteParticles[2];
+                }
+            }
+        }
+    }
+    private void CheckAndSetMovingData(GameObject damagingObject, GameObject[] parasitesForDamaging)
+    {
+        if (damagingObject.GetComponent<OneTimeMovingObject>())
+        {
+            OneTimeMovingObject objectMovement = damagingObject.GetComponent<OneTimeMovingObject>();
+            objectMovement.SetParasiteParticles(parasitesForDamaging);
+            objectMovement.target = targetPosition;
+            objectMovement.moveSpeed = moveSpeed;
+            objectMovement.isAttack = true;
+            objectMovement.move = true;
+            objectMovement.diesAtTheEnd = true;
 
-				yield return new WaitForSeconds (instantiationRate);
-			}
-		}
-	}
 
-	private void CheckParameters()
-	{
-		if (initialPosition == new Vector2 (0f, 0f))
-		{
-			Debug.LogError ("DamagingInstantiator: " + gameObject.name + " needs an Initial Position");
-		}
+            if (targetPosition.y > transform.position.y + 1)
+            {
+                Quaternion _Q = objectMovement.transform.rotation;
+                objectMovement.transform.rotation = _Q * Quaternion.AngleAxis(-90, new Vector3(0, 0, 1));
+            }
+            else if (targetPosition.y < transform.position.y - 1)
+            {
+                Quaternion _Q = objectMovement.transform.rotation;
+                objectMovement.transform.rotation = _Q * Quaternion.AngleAxis(90, new Vector3(0, 0, 1));
+            }
 
-		if (targetPosition == new Vector2 (0f, 0f))
-		{
-			Debug.LogError ("DamagingInstantiator: " + gameObject.name + " needs a Target Position");
-		}
+            if (targetPosition.x > transform.position.x)
+            {
+                objectMovement.transform.localScale *= -1;
+            }
 
-		if (instantiationRate == 0f)
-		{
-			Debug.LogError ("DamagingInstantiator: " + gameObject.name + " needs an Instantiatio Rate");
-		}
+        }
 
-		if (moveSpeed == 0f)
-		{
-			Debug.LogError ("DamagingInstantiator: " + gameObject.name + " needs a MoveSpeed");
-		}
-	}
+    }
+    private void CheckParameters()
+    {
+        needed = false;
+        if (initialPosition == new Vector2(0f, 0f))
+        {
+            Debug.LogError("DamagingInstantiator: " + gameObject.name + " needs an Initial Position");
+        }
+
+        if (targetPosition == new Vector2(0f, 0f))
+        {
+            Debug.LogError("DamagingInstantiator: " + gameObject.name + " needs a Target Position");
+        }
+
+        if (instantiationRate == 0f)
+        {
+            Debug.LogError("DamagingInstantiator: " + gameObject.name + " needs an Instantiatio Rate");
+        }
+
+        if (moveSpeed == 0f)
+        {
+            Debug.LogError("DamagingInstantiator: " + gameObject.name + " needs a MoveSpeed");
+        }
+    }
 }

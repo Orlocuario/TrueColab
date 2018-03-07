@@ -39,7 +39,7 @@ public class RoomManager : MonoBehaviour {
     {
         if (activeRooms > maxRooms)
         {
-            Debug.LogError("No es posible mostrar mas de 15 rooms en la interfaz. Se intentó agregar room numero " + activeRooms + 1);
+            Debug.LogError("No es posible mostrar mas de 15 rooms en la interfaz. Se intentó agregar room numero " + activeRooms);
             //TODO: LLevar la cuenta de los rooms a nivel de servidor para que no puedan existir más de maxNumber.
         }
         int id = room.id;

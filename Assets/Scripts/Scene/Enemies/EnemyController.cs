@@ -21,6 +21,7 @@ public class EnemyController : MonoBehaviour
     protected SceneAnimator sceneAnimator;
     protected Rigidbody2D rb2d;
     protected Vector2 force;
+    protected bool playerHasReturned;
 
     protected int currentPatrolPointCount;
     protected float maxHp = 100f;
@@ -28,6 +29,7 @@ public class EnemyController : MonoBehaviour
     protected int damage = 0;
     protected int enemyId;
     protected float hp;
+    protected float timeForAttack = 1.5f;
 
     protected static float alertDistanceFactor = 1.5f;
     protected static float maxXSpeed = .5f;
@@ -78,23 +80,25 @@ public class EnemyController : MonoBehaviour
 
     protected virtual void Patroll()
     {
-
         if (!rb2d)
         {
             Debug.Log("If your are planning to move an enemy it should have a RigidBody2D");
             return;
         }
 
-        if (LocalPlayerHasControl())
+        if (Vector2.Distance(transform.position, currentPatrolPoint) < .1f)
         {
-
-            if (Vector2.Distance(transform.position, currentPatrolPoint) < .1f)
-            {
-                NextPatrollingPoint();
-                SendPatrollingPoint();
-            }
+            NextPatrollingPoint();
         }
 
+        if (playerHasReturned)
+        {
+            if (LocalPlayerHasControl())
+            {
+                SendPatrollingPoint();
+                playerHasReturned = false;
+            }
+        }
         transform.position = Vector3.MoveTowards(transform.position, currentPatrolPoint, patrollingSpeed);
     }
 
@@ -102,9 +106,9 @@ public class EnemyController : MonoBehaviour
     {
         sceneAnimator.StartAnimation("TakingDamage", this.gameObject);
         hp -= damage;
-        Debug.Log(name + " took " + damage + " damage -> " + hp +  "/" + maxHp);
+        Debug.Log(name + " took " + damage + " damage -> " + hp + "/" + maxHp);
 
-        if (hp <= 0 )
+        if (hp <= 0)
         {
 
             if (LocalPlayerHasControl())
@@ -130,6 +134,11 @@ public class EnemyController : MonoBehaviour
         ignoresCollisions[player.name] = ignores;
         SendIgnoreCollisionDataToServer(player, ignores);
 
+    }
+
+    public void ThePlayerReturned (bool thePlayerHasReturned)
+    {
+        playerHasReturned = thePlayerHasReturned;
     }
 
     protected virtual void DealDamage(GameObject player)
@@ -260,7 +269,7 @@ public class EnemyController : MonoBehaviour
         SendMessageToServer(message, false);
     }
 
-    protected void SendPatrollingPoint()
+    protected void SendPatrollingPoint() //TODO necesitamos esto? 
     {
         string message = "EnemyPatrollingPoint/" +
             enemyId + "/" +
@@ -354,7 +363,7 @@ public class EnemyController : MonoBehaviour
     {
         if (GameObjectIsPlayer(other.gameObject))
         {
-            Attack(other.gameObject);
+                Attack(other.gameObject);
         }
     }
 
@@ -380,6 +389,11 @@ public class EnemyController : MonoBehaviour
     {
         yield return new WaitForSeconds(WaitToDie);
         Destroy(this.gameObject);
+    }
+
+    public IEnumerator WaitToAttack()
+    {
+        yield return new WaitForSeconds(timeForAttack);
     }
 
     #endregion

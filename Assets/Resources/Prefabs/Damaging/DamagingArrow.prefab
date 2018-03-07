@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 58188294602719494}
   - component: {fileID: 58110795383588046}
   - component: {fileID: 114849309273594264}
+  - component: {fileID: 114846413556190794}
+  - component: {fileID: 50166641031924282}
   m_Layer: 0
   m_Name: DamagingArrow
   m_TagString: Untagged
@@ -39,11 +41,31 @@ Transform:
   m_GameObject: {fileID: 1831718842093436}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.388, y: -4.349, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50166641031924282
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1831718842093436}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!58 &58110795383588046
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -85,6 +107,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: {x: 500, y: 200}
   damage: 3
+--- !u!114 &114846413556190794
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1831718842093436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed6aead06ddb0814b99f6fddefb6a345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powers:
+  - activationType: 0
+    attack: {fileID: 114650161279034298, guid: 8ba2c26887ab3664ea68e5e15f67dbe7, type: 2}
+    caster: {fileID: 0}
+    expectedParticle: {fileID: 0}
+    particles:
+    - {fileID: 0}
+  - activationType: 2
+    attack: {fileID: 0}
+    caster: {fileID: 0}
+    expectedParticle: {fileID: 114227177581299252, guid: e87af9ff99675494f992ab975fbb8047,
+      type: 2}
+    particles:
+    - {fileID: 0}
+  - activationType: 0
+    attack: {fileID: 114371914756871732, guid: 89376d9061a7444fd87742afeb7ec4c1, type: 2}
+    caster: {fileID: 0}
+    expectedParticle: {fileID: 0}
+    particles:
+    - {fileID: 0}
+  - activationType: 2
+    attack: {fileID: 0}
+    caster: {fileID: 0}
+    expectedParticle: {fileID: 114437524523309886, guid: aad8ec60109673249b56ddbde5a35083,
+      type: 2}
+    particles:
+    - {fileID: 0}
+  - activationType: 0
+    attack: {fileID: 114814635757440896, guid: b51ea212a7e52544e92aa8dfffad1bf9, type: 2}
+    caster: {fileID: 0}
+    expectedParticle: {fileID: 0}
+    particles:
+    - {fileID: 0}
+  - activationType: 2
+    attack: {fileID: 0}
+    caster: {fileID: 0}
+    expectedParticle: {fileID: 114272436284620626, guid: 3916a2536f249e144838ba9e3e38bf10,
+      type: 2}
+    particles:
+    - {fileID: 0}
+  shutdownFrames: 45
+  mustDoSomething: 0
 --- !u!114 &114849309273594264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -99,6 +174,10 @@ MonoBehaviour:
   target: {x: 0, y: 0, z: 0}
   moveSpeed: 0
   move: 0
+  diesAtTheEnd: 0
+  isPlatform: 0
+  timeToWait: 0
+  isAttack: 0
 --- !u!212 &212162377598187556
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -128,8 +207,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1897596871
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300166, guid: 2dfe312e294b87b4cb57bbeffdf809d0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

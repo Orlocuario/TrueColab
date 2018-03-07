@@ -131,6 +131,11 @@ public class RoomHpMp
         room.SendMessageToAllPlayers("DisplayChangeExpToClient/" + currentExp, false);
     }
 
+    public float GetExp()
+    {
+        return currentExp;
+    }
+
     /* public void ChangeExp(string deltaExp)
     {
         float valueDeltaExp = float.Parse(deltaExp);

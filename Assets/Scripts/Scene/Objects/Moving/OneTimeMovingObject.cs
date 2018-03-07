@@ -9,10 +9,13 @@ public class OneTimeMovingObject : MonoBehaviour
 
     public float moveSpeed;
     public bool move;
-	public bool diesAtTheEnd;
+    public bool diesAtTheEnd;
     public bool isPlatform;
     public float timeToWait = 0;
+    public bool isAttack;
 
+
+    private GameObject[] myParasiteParticles;
     private PlayerController[] playerControllers;
 
     #endregion
@@ -29,10 +32,23 @@ public class OneTimeMovingObject : MonoBehaviour
         if (move)
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target, moveSpeed * Time.deltaTime);
-			if (diesAtTheEnd) 
-			{
-				if (gameObject.transform.position == target) 
-				{
+
+            if (isAttack)
+            {
+                foreach (GameObject parasiteParticle in myParasiteParticles)
+                {
+                    if (parasiteParticle != null)
+                    {
+                        parasiteParticle.transform.position = gameObject.transform.position;
+                    }
+                }
+
+            }
+
+            if (diesAtTheEnd)
+            {
+                if (gameObject.transform.position == target)
+                {
                     if (isPlatform)
                     {
                         for (int i = 0; i < playerControllers.Length; i++)
@@ -46,9 +62,14 @@ public class OneTimeMovingObject : MonoBehaviour
                         Destroy(gameObject, timeToWait);
                         return;
                     }
-					Destroy (gameObject);
-				}
-			}
+                    for (int i = 0; i  <myParasiteParticles.Length;i++ )
+                    {
+                        Destroy(myParasiteParticles[i]);
+                        myParasiteParticles[i] = null; 
+                    }
+                    Destroy(gameObject);
+                }
+            }
 
             if (moveSpeed == 0)
             {
@@ -93,6 +114,10 @@ public class OneTimeMovingObject : MonoBehaviour
         return other.GetComponent<PlayerController>();
     }
 
+    public void SetParasiteParticles(GameObject[] parasiteParticles)
+    {
+        myParasiteParticles = new GameObject[3] { parasiteParticles[0], parasiteParticles[1], parasiteParticles[2] };
+    }
 
 
 }

@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
     public PlayerController localPlayer;
     public GameObject[] players;
 	public PlayerController[] playerControllers;
+    public GameObject initialCutsceneController;
     public HUDDisplay hpAndMp;
     public GameObject canvas;
     public GameObject npcLog;
@@ -29,8 +30,8 @@ public class LevelManager : MonoBehaviour
     private float waitToGrabItem;
     private int?[] currentChoice;
     private Vector2[] playersLastPosition;
-
     public float waitToRespawn;
+    public bool startsWithCutScene;
 
     private Text NPCFeedbackText;
     private Text SpiderFeedbackText;
@@ -60,6 +61,28 @@ public class LevelManager : MonoBehaviour
         {
             client = GameObject.Find("ClientObject").GetComponent<Client>();
             client.RequestPlayerIdToServer();
+        }
+
+        if (startsWithCutScene)
+        {
+            if (initialCutsceneController == null)
+            {
+                Debug.LogError("You need an initial cutScene Controller Game Object if you want to start with a cutscene");
+            }
+            else if (initialCutsceneController != null)
+            {
+                if (initialCutsceneController.GetComponent<NPCtrigger>())
+                {
+                    NPCtrigger npcTalk = initialCutsceneController.GetComponent<NPCtrigger>();
+                    npcTalk.ReadNextFeedback();
+                }
+                if (initialCutsceneController.GetComponent<TriggerCamera>())
+                {
+                    TriggerCamera cameraController = initialCutsceneController.GetComponent<TriggerCamera>();
+                    cameraController.OnEnter();
+                }
+
+            }
         }
     }
 
@@ -764,6 +787,7 @@ public class LevelManager : MonoBehaviour
         CoordinateRotators();
         CoordinatePlatformInstantiators();
         CoordinateMovingObjects();
+        CoordinateEnemyControllers();
     }
 
     private void CoordinateMovingObjects()
@@ -789,6 +813,14 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    private void CoordinateEnemyControllers()
+    {
+        EnemyController[] eControllers = FindObjectsOfType<EnemyController>();
+        foreach (EnemyController eController in eControllers)
+        {
+            eController.ThePlayerReturned(true);
+        }
+    }
     private void CoordinateBubbleInstantiators()
     {
         BubbleRotatingInstantiator[] bInstantiators = FindObjectsOfType<BubbleRotatingInstantiator>();

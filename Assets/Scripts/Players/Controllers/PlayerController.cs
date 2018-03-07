@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
 
 	public GameObject availablePowerable;
     public GameObject availableChatZone;
+    public GameObject availableInstantiatorTrigger; 
     public string decisionName;
     public bool controlOverEnemies;
     public float groundCheckRadius;
@@ -415,6 +416,7 @@ public class PlayerController : MonoBehaviour
         SetPowerState(false);
         ResetDamagingObjects();
         ResetChatZones();
+        ResetDamagingTriggers();
         ResetDecisions();
         availablePowerable = null;
         gameObject.SetActive(false);
@@ -427,6 +429,16 @@ public class PlayerController : MonoBehaviour
             ChatZone chatZoneOff = availableChatZone.GetComponent<ChatZone>();
             chatZoneOff.TurnChatZoneOff();
             availableChatZone = null; 
+        }
+    }
+
+    public void ResetDamagingTriggers()
+    {
+        if (availableInstantiatorTrigger != null)
+        {
+            DamagingInstantiatorTrigger availableTrigger = availableInstantiatorTrigger.GetComponent<DamagingInstantiatorTrigger>();
+            availableTrigger.ExitTrigger();
+            availableChatZone = null;
         }
     }
 
@@ -952,11 +964,6 @@ public class PlayerController : MonoBehaviour
 
     #region Coroutines
 
-    public IEnumerator WaitAttacking()
-    {
-        yield return new WaitForSeconds(attackRate);
-        isAttacking = false;
-    }
 
     public IEnumerator WaitTakingDamage()
     {
