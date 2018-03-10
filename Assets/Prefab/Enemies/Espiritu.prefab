@@ -129,6 +129,7 @@ MonoBehaviour:
   patrolling: 0
   fromEditor: 1
   directionX: -1
+  poweredTime: 2
 --- !u!212 &212162879713302450
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -106,14 +106,26 @@ public class DamagingObject : MonoBehaviour
 
         if (GameObjectIsEnemy(other.gameObject))
         {
-            CheckIfImWarriored(other.gameObject);
+            if (CheckIfImWarriored(gameObject))
+            {
+                KillEnemy(other.gameObject);
+            }
+
+            if (CheckIfImMaged())
+            {
+                GetThisEnemyMaged(other.gameObject);
+            }
+        }
+
+        if (GameObjectIsDestroyable(other.gameObject))
+        {
+            if (CheckIfImWarriored(gameObject))
+            {
+                DestroyableObject destroyable = other.gameObject.GetComponent<DestroyableObject>();
+                destroyable.DestroyMe(true);
+            }
         }
     }
-
-
-    #endregion
-
-    #region Utils
 
     protected void OnTriggerStay2D(Collider2D other)
     {
@@ -123,29 +135,6 @@ public class DamagingObject : MonoBehaviour
         }
     }
 
-    protected void CheckIfImWarriored(GameObject enemy)
-    {
-        LevelManager levelManager = FindObjectOfType<LevelManager>();
-        if (levelManager.GetWarrior())
-        {
-            if (levelManager.GetWarrior().IsWarriored(gameObject))
-            {
-                KillEnemy(enemy);
-            }
-        }
-        else
-        {
-            Debug.LogError("It Seems there is no warrior");
-        }
-    }
-
-    protected void KillEnemy(GameObject enemy)
-    {
-        EnemyController eC = enemy.gameObject.GetComponent<EnemyController>();
-        eC.TakeDamage(150);
-        Destroy(gameObject);
-    }
-
     // Attack those who enter the alert zone
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
@@ -153,6 +142,67 @@ public class DamagingObject : MonoBehaviour
         {
             DealDamage(other.gameObject);
         }
+    }
+
+    #endregion
+
+    #region Utils
+    protected void GetThisEnemyMaged(GameObject enemy)
+    {
+        EnemyController eC = enemy.gameObject.GetComponent<EnemyController>();
+        eC.GetThisEnemyMaged();
+    }
+
+    protected void KillEnemy(GameObject enemy)
+    {
+        EnemyController eC = enemy.gameObject.GetComponent<EnemyController>();
+        eC.TakeDamage(150);
+        Destroy(gameObject, .2f);
+    }
+
+
+    protected bool CheckIfImMaged()
+    {
+        LevelManager levelManager = FindObjectOfType<LevelManager>();
+        if (levelManager.GetMage())
+        {
+            if (levelManager.GetMage().ProtectedByShield(gameObject))
+            {
+                return true;
+            }
+        }
+        else
+        {
+            Debug.LogError("It Seems there is no Mage");
+        }
+        return false;
+    }
+
+
+    protected bool CheckIfImWarriored(GameObject enemy)
+    {
+        LevelManager levelManager = FindObjectOfType<LevelManager>();
+        if (levelManager.GetWarrior())
+        {
+            if (levelManager.GetWarrior().IsWarriored(gameObject))
+            {
+                return true;
+            }
+        }
+        else
+        {
+            Debug.LogError("It Seems there is no warrior");
+        }
+        return false;
+    }
+
+    protected bool GameObjectIsDestroyable(GameObject other)
+    {
+        if (other.GetComponent<DestroyableObject>())
+        {
+            return true;
+        }
+        return false;
     }
 
     protected bool GameObjectIsEnemy(GameObject other)

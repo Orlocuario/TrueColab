@@ -9,11 +9,14 @@ public class EnemyController : MonoBehaviour
 
     public Vector2[] patrollingPoints;
     public CircleCollider2D alertZone;
+    private GameObject[] particles;
+
 
     public float patrollingSpeed;
     public bool patrolling;
     public bool fromEditor;
     public int directionX;  // 1 = right, -1 = left
+    public float poweredTime;
 
     protected Dictionary<string, bool> ignoresCollisions;
     protected Vector2 currentPatrolPoint;
@@ -45,7 +48,7 @@ public class EnemyController : MonoBehaviour
         sceneAnimator = FindObjectOfType<SceneAnimator>();
         levelManager = FindObjectOfType<LevelManager>();
         rb2d = GetComponent<Rigidbody2D>();
-
+        InitializeParticles();
         ignoresCollisions = new Dictionary<string, bool> { { "Mage", false }, { "Warrior", false }, { "Engineer", false } };
 
         currentPatrolPointCount = 0;
@@ -104,13 +107,12 @@ public class EnemyController : MonoBehaviour
 
     public virtual void TakeDamage(float damage)
     {
-        sceneAnimator.StartAnimation("TakingDamage", this.gameObject);
+        sceneAnimator.StartAnimation("TakingDamage", gameObject);
         hp -= damage;
         Debug.Log(name + " took " + damage + " damage -> " + hp + "/" + maxHp);
 
         if (hp <= 0)
         {
-
             if (LocalPlayerHasControl())
             {
                 SendEnemyDiedToServer(damage);
@@ -119,6 +121,28 @@ public class EnemyController : MonoBehaviour
             Die();
         }
 
+    }
+
+    public virtual void GetThisEnemyMaged()
+    {
+        ToggleParticles(true, 0);
+        GameObject[] players = levelManager.players;
+        foreach (GameObject player in players)
+        {
+            UpdateCollisionsWithPlayer(player, true);
+        }
+
+        StartCoroutine(WaitTillNoMaged());
+    }
+
+    public void UnmageThisEnemy()
+    {
+        ToggleParticles(false, 0);
+        GameObject[] players = levelManager.players;
+        foreach (GameObject player in players)
+        {
+            UpdateCollisionsWithPlayer(player, false);
+        }
     }
 
     public virtual void UpdateCollisionsWithPlayer(GameObject player, bool ignores)
@@ -133,7 +157,6 @@ public class EnemyController : MonoBehaviour
 
         ignoresCollisions[player.name] = ignores;
         SendIgnoreCollisionDataToServer(player, ignores);
-
     }
 
     public void ThePlayerReturned (bool thePlayerHasReturned)
@@ -310,6 +333,43 @@ public class EnemyController : MonoBehaviour
         return playerController && playerController.localPlayer;
     }
 
+    protected void InitializeParticles()
+    {
+        ParticleSystem[] _particles = gameObject.GetComponentsInChildren<ParticleSystem>();
+
+        if (_particles.Length <= 0)
+        {
+            return;
+        }
+
+        particles = new GameObject[_particles.Length];
+
+        for (int i = 0; i < particles.Length; i++)
+        {
+            particles[i] = _particles[i].gameObject;
+        }
+
+        ToggleParticles(false);
+    }
+
+    protected void ToggleParticles(bool activate)
+    {
+        if (particles != null && particles.Length > 0)
+        {
+            for (int i = 0; i < particles.Length; i++)
+            {
+                particles[i].SetActive(activate);
+            }
+        }
+    }
+
+    protected void ToggleParticles(bool activate, int particleId)
+    {
+        if (particles != null && particles.Length > 0)
+        {
+            particles[particleId].SetActive(activate);
+        }
+    }
     protected void TurnAroundIfNeccessary()
     {
         bool turnAround = false;
@@ -394,6 +454,13 @@ public class EnemyController : MonoBehaviour
     public IEnumerator WaitToAttack()
     {
         yield return new WaitForSeconds(timeForAttack);
+    }
+
+    public IEnumerator WaitTillNoMaged()
+    {
+        yield return new WaitForSeconds(poweredTime);
+
+        UnmageThisEnemy();
     }
 
     #endregion

@@ -52,8 +52,14 @@ public class LevelManager : MonoBehaviour
         _ = new Utils();
 
         hpAndMp = canvas.GetComponent<HUDDisplay>();
-        playerFaceImage = GameObject.Find("PlayerFace").GetComponent<Image>();
-
+        if (GameObject.Find("PlayerFace"))
+        {
+            playerFaceImage = GameObject.Find("PlayerFace").GetComponent<Image>();
+        }
+        else
+        {
+            Debug.LogError("Players Have no Face");
+        }
         waitToKillSpiderCountdown = 5f;
         waitToKillNPCCountdown = 5f;
         waitToGrabItem = 2f;
@@ -217,7 +223,6 @@ public class LevelManager : MonoBehaviour
 
     public void SetLocalPlayer(int id)
     {
-
         switch (id)
         {
             case 0:
@@ -347,7 +352,7 @@ public class LevelManager : MonoBehaviour
             canvas = GameObject.Find("Canvas");
         }
 
-        if (!canvas.activeInHierarchy)
+        if (canvas.activeInHierarchy == false)
         {
             canvas.SetActive(true);
         }
