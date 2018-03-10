@@ -132,10 +132,10 @@ public class DamagingObject : MonoBehaviour
             {
                 KillEnemy(enemy);
             }
-            else
-            {
-                Debug.LogError("It Seems there is no warrior");
-            }
+        }
+        else
+        {
+            Debug.LogError("It Seems there is no warrior");
         }
     }
 
