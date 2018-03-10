@@ -109,11 +109,11 @@ public class DamagingObject : MonoBehaviour
             CheckIfImWarriored(other.gameObject);
         }
     }
-            
+
 
     #endregion
 
-            #region Utils
+    #region Utils
 
     protected void OnTriggerStay2D(Collider2D other)
     {
@@ -126,20 +126,20 @@ public class DamagingObject : MonoBehaviour
     protected void CheckIfImWarriored(GameObject enemy)
     {
         LevelManager levelManager = FindObjectOfType<LevelManager>();
-        try
+        if (levelManager.GetWarrior())
         {
             if (levelManager.GetWarrior().IsWarriored(gameObject))
             {
                 KillEnemy(enemy);
             }
+            else
+            {
+                Debug.LogError("It Seems there is no warrior");
+            }
         }
-        catch
-        {
-            Debug.LogError("It Seems there is no warrior");
-        }
-    } 
+    }
 
-    protected void KillEnemy (GameObject enemy)
+    protected void KillEnemy(GameObject enemy)
     {
         EnemyController eC = enemy.gameObject.GetComponent<EnemyController>();
         eC.TakeDamage(150);

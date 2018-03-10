@@ -971,6 +971,14 @@ public class PlayerController : MonoBehaviour
         isTakingDamage = false;
     }
 
+    public IEnumerator WaitAttacking()
+    {
+        yield return new WaitForSeconds(attackRate + .5f);
+        isAttacking = false;
+    }
+
+
+
     #endregion
 
 }
