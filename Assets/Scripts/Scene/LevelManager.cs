@@ -33,6 +33,7 @@ public class LevelManager : MonoBehaviour
     public float waitToRespawn;
     public bool startsWithCutScene;
 
+    private Image playerFaceImage;
     private Text NPCFeedbackText;
     private Text SpiderFeedbackText;
 
@@ -51,6 +52,7 @@ public class LevelManager : MonoBehaviour
         _ = new Utils();
 
         hpAndMp = canvas.GetComponent<HUDDisplay>();
+        playerFaceImage = GameObject.Find("PlayerFace").GetComponent<Image>();
 
         waitToKillSpiderCountdown = 5f;
         waitToKillNPCCountdown = 5f;
@@ -221,14 +223,20 @@ public class LevelManager : MonoBehaviour
             case 0:
                 localPlayer = players[0].GetComponent<MageController>();
                 Debug.Log("Activating Mage local player");
+                playerFaceImage.color = new Color32(255, 255, 255, 255);
+                playerFaceImage.sprite = decisionFaces["2Mage"].GetComponent<SpriteRenderer>().sprite;
                 break;
             case 1:
                 Debug.Log("Activating Warrior local player");
                 localPlayer = players[1].GetComponent<WarriorController>();
+                playerFaceImage.color = new Color32(255, 255, 255, 255);
+                playerFaceImage.sprite = decisionFaces["2Warrior"].GetComponent<SpriteRenderer>().sprite;
                 break;
             case 2:
                 Debug.Log("Activating Engineer local player");
                 localPlayer = players[2].GetComponent<EngineerController>();
+                playerFaceImage.color = new Color32(255, 255, 255, 255);
+                playerFaceImage.sprite = decisionFaces["2Engineer"].GetComponent<SpriteRenderer>().sprite;
                 break;
         }
 
