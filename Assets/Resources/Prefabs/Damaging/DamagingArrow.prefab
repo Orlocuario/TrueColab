@@ -154,7 +154,7 @@ MonoBehaviour:
   - activationType: 2
     attack: {fileID: 0}
     caster: {fileID: 0}
-    expectedParticle: {fileID: 114272436284620626, guid: 3916a2536f249e144838ba9e3e38bf10,
+    expectedParticle: {fileID: 114709684419732158, guid: 3916a2536f249e144838ba9e3e38bf10,
       type: 2}
     particles:
     - {fileID: 0}

@@ -72,7 +72,6 @@ public class DamagingObject : MonoBehaviour
         }
 
         playerController.TakeDamage(damage, attackForce);
-
     }
 
     #endregion
@@ -127,14 +126,14 @@ public class DamagingObject : MonoBehaviour
         }
     }
 
-    protected void OnTriggerStay2D(Collider2D other)
-    {
-        if (GameObjectIsPlayer(other.gameObject))
-        {
-            DealDamage(other.gameObject);
-        }
-    }
-
+    /*  protected void OnTriggerStay2D(Collider2D other)
+      {
+          if (GameObjectIsPlayer(other.gameObject))
+          {
+              DealDamage(other.gameObject);
+          }
+      }
+          */
     // Attack those who enter the alert zone
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
@@ -232,7 +231,6 @@ public class DamagingObject : MonoBehaviour
 
         ignoresCollisions[player.name] = ignores;
         SendIgnoreCollisionDataToServer(player, ignores);
-
     }
 
     #endregion

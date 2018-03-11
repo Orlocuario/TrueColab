@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class MovableObject : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class MovableObject : MonoBehaviour
     public string openedPrefab; // How it looks when its opened
     public GameObject[] particles;
 
+    protected bool imMoving;
+    protected int poweredFrameCount;
+    protected int shutdownFrames;
     protected SceneAnimator sceneAnimator;
     protected Rigidbody2D rgbd;
 
@@ -27,6 +31,19 @@ public class MovableObject : MonoBehaviour
         InitializeParticles();
     }
 
+    protected virtual void Update()
+    {
+        if (imMoving)
+        {
+            if (poweredFrameCount++ == shutdownFrames)
+            {
+                rgbd.constraints = RigidbodyConstraints2D.FreezePositionX;
+                sceneAnimator.SetBool("Moving", false, gameObject);
+                imMoving = false; 
+            }
+        }
+    }
+
     #endregion
 
     #region Common
@@ -35,6 +52,8 @@ public class MovableObject : MonoBehaviour
     {
         if (rgbd)
         {
+            rgbd.constraints = RigidbodyConstraints2D.None;
+            imMoving = true;
             rgbd.AddForce(force);
 
             if (movedFromLocal)
@@ -50,6 +69,7 @@ public class MovableObject : MonoBehaviour
             sceneAnimator.SetBool("Moving", true, gameObject);
         }
     }
+
 
     protected void TransitionToOpened(GameObject trigger)
     {

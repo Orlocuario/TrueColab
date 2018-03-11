@@ -241,7 +241,6 @@ public class ClientMessageHandler
 
     private void EnemiesSetControl(string[] msg)
     {
-
         bool control = bool.Parse(msg[1]);
 
         if (NotInClientScene())

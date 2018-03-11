@@ -485,12 +485,13 @@ public class PlayerController : MonoBehaviour
 
             levelManager.hpAndMp.ChangeHP(damage); // Change local HP
             SendMessageToServer("ChangeHpHUDToRoom/" + damage); // Change remote HP
-
         }
 
-        StartCoroutine(WaitTakingDamage());
         AnimateTakingDamage();
-
+        if(gameObject.activeInHierarchy)
+        {
+            StartCoroutine(WaitTakingDamage());
+        }
     }
 
     #endregion
