@@ -33,16 +33,40 @@ public class WarriorController : PlayerController
             if (powerable.IsPowered())
             {
                 PowerableObject.Power power = powerable.GetActivatedPower();
-                if (power.caster.Equals(this) || power.attack.GetType().Equals(new PunchController().GetType()) || power.expectedParticle.GetType().Equals(new WarriorPoweredParticles().GetType()))
+
+                if (power.caster != null)
                 {
-                    if (power.InPowerArea(player, true))
+                    if (power.caster.Equals(this))
                     {
-                        return true;
+                        if (power.InPowerArea(player, true))
+                        {
+                            return true;
+                        }
+                    }
+                }
+                else if (power.attack != null)
+                {
+                    if (power.attack.GetType().Equals(new PunchController().GetType()))
+                    {
+                        if (power.InPowerArea(player, true))
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+                else if (power.expectedParticle != null)
+                {
+                    if (power.expectedParticle.GetType().Equals(new WarriorPoweredParticles().GetType()))
+                    {
+                        if (power.InPowerArea(player, true))
+                        {
+                            return true;
+                        }
                     }
                 }
             }
         }
-
         return false;
     }
 

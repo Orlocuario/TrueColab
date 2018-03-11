@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
 
     public Vector2[] patrollingPoints;
     public CircleCollider2D alertZone;
-    private GameObject[] particles;
+    public GameObject[] particles;
 
 
     public float patrollingSpeed;
@@ -17,6 +17,7 @@ public class EnemyController : MonoBehaviour
     public bool fromEditor;
     public int directionX;  // 1 = right, -1 = left
     public float poweredTime;
+    public bool maged;
 
     protected Dictionary<string, bool> ignoresCollisions;
     protected Vector2 currentPatrolPoint;
@@ -33,6 +34,7 @@ public class EnemyController : MonoBehaviour
     protected int enemyId;
     protected float hp;
     protected float timeForAttack = 1.5f;
+    protected float timeMaged;
 
     protected static float alertDistanceFactor = 1.5f;
     protected static float maxXSpeed = .5f;
@@ -49,6 +51,7 @@ public class EnemyController : MonoBehaviour
         levelManager = FindObjectOfType<LevelManager>();
         rb2d = GetComponent<Rigidbody2D>();
         InitializeParticles();
+        maged = false;
         ignoresCollisions = new Dictionary<string, bool> { { "Mage", false }, { "Warrior", false }, { "Engineer", false } };
 
         currentPatrolPointCount = 0;
@@ -65,6 +68,15 @@ public class EnemyController : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (maged)
+        {
+            timeMaged++;
+            Debug.Log(timeMaged);
+            if (timeMaged == poweredTime)
+            {
+                UnmageThisEnemy();
+            }
+        }
         foreach (Vector2 patrollingPoint in patrollingPoints)
         {
             //levelManager._.DrawDistance(transform.position, patrollingPoint, Color.green, this);
@@ -125,6 +137,15 @@ public class EnemyController : MonoBehaviour
 
     public virtual void GetThisEnemyMaged()
     {
+        if (maged)
+        {
+            timeMaged = 0;
+            return;
+        }
+        if (!maged)
+        {
+            maged = true;
+        }
         ToggleParticles(true, 0);
         GameObject[] players = levelManager.players;
         foreach (GameObject player in players)
@@ -132,7 +153,6 @@ public class EnemyController : MonoBehaviour
             UpdateCollisionsWithPlayer(player, true);
         }
 
-        StartCoroutine(WaitTillNoMaged());
     }
 
     public void UnmageThisEnemy()
@@ -143,6 +163,8 @@ public class EnemyController : MonoBehaviour
         {
             UpdateCollisionsWithPlayer(player, false);
         }
+        maged = false;
+        timeMaged = 0;
     }
 
     public virtual void UpdateCollisionsWithPlayer(GameObject player, bool ignores)

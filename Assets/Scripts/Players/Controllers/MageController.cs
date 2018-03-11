@@ -45,22 +45,45 @@ public class MageController : PlayerController
             if (powerable.IsPowered())
             {
                 PowerableObject.Power power = powerable.GetActivatedPower();
-                if (power.caster.Equals(this) || power.attack.Equals(new FireballController()) || power.expectedParticle.Equals(new MagePoweredParticles()))
+
+                if (power.caster != null)
                 {
-                    if (power.InPowerArea(player, false))
+                    if (power.caster.Equals(this))
                     {
-                        return true;
+                        if (power.InPowerArea(player, true))
+                        {
+                            return true;
+                        }
+                    }
+                }
+                else if (power.attack != null)
+                {
+                    if (power.attack.GetType().Equals(new FireballController().GetType()))
+                    {
+                        if (power.InPowerArea(player, true))
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+                else if (power.expectedParticle != null)
+                {
+                    if (power.expectedParticle.GetType().Equals(new MagePoweredParticles().GetType()))
+                    {
+                        if (power.InPowerArea(player, true))
+                        {
+                            return true;
+                        }
                     }
                 }
             }
         }
-
         return false;
     }
-
     #endregion
 
-    #region Utils
+        #region Utils
 
     protected override AttackController GetAttack()
     {

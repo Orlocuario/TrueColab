@@ -119,5 +119,15 @@ public class OneTimeMovingObject : MonoBehaviour
         myParasiteParticles = new GameObject[3] { parasiteParticles[0], parasiteParticles[1], parasiteParticles[2] };
     }
 
+    public void DestroyParasiteParticles()
+    {
+        foreach (GameObject particle in myParasiteParticles)
+        {
+            if (particle != null)
+            {
+                Destroy(particle, .1f);
+            }
+        }
+    }
 
 }

@@ -54,7 +54,14 @@ public class DamagingInstantiatorTrigger : MonoBehaviour
 
     protected bool GameObjectIsPlayer(GameObject other)
     {
-        PlayerController playerController = other.GetComponent<PlayerController>();
-        return playerController && playerController.localPlayer;
+        if (other.GetComponent<PlayerController>())
+        {
+            PlayerController playerController = other.GetComponent<PlayerController>();
+            return playerController;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

@@ -108,11 +108,15 @@ public class DamagingObject : MonoBehaviour
             if (CheckIfImWarriored(gameObject))
             {
                 KillEnemy(other.gameObject);
+                DestroyMeAndParticles();
+                Destroy(gameObject);
             }
 
             if (CheckIfImMaged())
             {
                 GetThisEnemyMaged(other.gameObject);
+                DestroyMeAndParticles();
+                Destroy(gameObject);
             }
         }
 
@@ -146,6 +150,19 @@ public class DamagingObject : MonoBehaviour
     #endregion
 
     #region Utils
+    protected void DestroyMeAndParticles()
+    {
+        if (gameObject.GetComponent<OneTimeMovingObject>())
+        {
+            if (gameObject.GetComponent<OneTimeMovingObject>().isAttack)
+            {
+                gameObject.GetComponent<OneTimeMovingObject>().DestroyParasiteParticles();
+            }
+        }
+
+        Destroy(gameObject, .5f);
+    }
+
     protected void GetThisEnemyMaged(GameObject enemy)
     {
         EnemyController eC = enemy.gameObject.GetComponent<EnemyController>();
@@ -165,10 +182,7 @@ public class DamagingObject : MonoBehaviour
         LevelManager levelManager = FindObjectOfType<LevelManager>();
         if (levelManager.GetMage())
         {
-            if (levelManager.GetMage().ProtectedByShield(gameObject))
-            {
-                return true;
-            }
+           return levelManager.GetMage().ProtectedByShield(gameObject);
         }
         else
         {
