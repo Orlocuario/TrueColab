@@ -192,6 +192,7 @@ public class PowerableObject : MonoBehaviour
             UndoYourPowerableThing(); //this should be an override
         }
 
+        poweredFrameCount = 0;
         powered = false;
         shutdown = false;
         activatedPower = null;

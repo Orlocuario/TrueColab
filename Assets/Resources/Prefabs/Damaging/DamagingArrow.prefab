@@ -174,7 +174,7 @@ MonoBehaviour:
   target: {x: 0, y: 0, z: 0}
   moveSpeed: 0
   move: 0
-  diesAtTheEnd: 0
+  diesAtTheEnd: 1
   isPlatform: 0
   timeToWait: 0
   isAttack: 0

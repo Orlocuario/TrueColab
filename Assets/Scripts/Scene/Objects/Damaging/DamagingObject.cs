@@ -109,14 +109,12 @@ public class DamagingObject : MonoBehaviour
             {
                 KillEnemy(other.gameObject);
                 DestroyMeAndParticles();
-                Destroy(gameObject);
             }
 
             if (CheckIfImMaged())
             {
                 GetThisEnemyMaged(other.gameObject);
                 DestroyMeAndParticles();
-                Destroy(gameObject);
             }
         }
 
@@ -126,6 +124,16 @@ public class DamagingObject : MonoBehaviour
             {
                 DestroyableObject destroyable = other.gameObject.GetComponent<DestroyableObject>();
                 destroyable.DestroyMe(true);
+                DestroyMeAndParticles();
+            }
+        }
+
+        if (GameObjectIsDeactivableKillPlane(other.gameObject))
+        {
+            if (CheckIfImWarriored(gameObject))
+            {
+                Destroy(other.gameObject);
+                DestroyMeAndParticles();
             }
         }
     }
@@ -176,13 +184,29 @@ public class DamagingObject : MonoBehaviour
         Destroy(gameObject, .2f);
     }
 
+    protected bool GameObjectIsDeactivableKillPlane(GameObject other)
+    {
+        if (other.gameObject.GetComponent<KillingObject>())
+        {
+            if (other.gameObject.tag == "DeactivableKillPlane")
+            {
+                return true;
+            }
+
+            return false;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     protected bool CheckIfImMaged()
     {
         LevelManager levelManager = FindObjectOfType<LevelManager>();
         if (levelManager.GetMage())
         {
-           return levelManager.GetMage().ProtectedByShield(gameObject);
+            return levelManager.GetMage().ProtectedByShield(gameObject);
         }
         else
         {
