@@ -202,12 +202,13 @@ public class DamagingObject : MonoBehaviour
                 return true;
             }
 
-            return false;
         }
         else
         {
             return false;
         }
+
+        return false;
     }
 
     protected bool CheckIfImMaged()

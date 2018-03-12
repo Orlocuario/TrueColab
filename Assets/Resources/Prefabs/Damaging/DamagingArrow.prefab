@@ -158,7 +158,7 @@ MonoBehaviour:
       type: 2}
     particles:
     - {fileID: 0}
-  shutdownFrames: 45
+  shutdownFrames: 90
   mustDoSomething: 0
 --- !u!114 &114849309273594264
 MonoBehaviour:

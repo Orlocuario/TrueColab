@@ -180,6 +180,7 @@ MonoBehaviour:
   directionX: -1
   poweredTime: 45
   maged: 0
+  strenght: {x: 0, y: 0}
 --- !u!114 &114948532884764834
 MonoBehaviour:
   m_ObjectHideFlags: 1

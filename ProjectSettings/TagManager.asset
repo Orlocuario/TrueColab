@@ -48,6 +48,7 @@ TagManager:
   - openPathSub
   - RuneSlot
   - DeactivableKillPlane
+  - LavaCascade4
   layers:
   - Default
   - TransparentFX

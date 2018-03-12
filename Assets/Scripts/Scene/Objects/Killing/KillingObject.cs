@@ -21,7 +21,6 @@ public class KillingObject : MonoBehaviour
 
     protected virtual void Start()
     {
-        hitsBeforeKilled = 0;
         particles = GetComponent<ParticleSystem>();
         levelManager = FindObjectOfType<LevelManager>();
 
