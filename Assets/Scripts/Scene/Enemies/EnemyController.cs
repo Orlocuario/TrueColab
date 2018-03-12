@@ -18,6 +18,7 @@ public class EnemyController : MonoBehaviour
     public int directionX;  // 1 = right, -1 = left
     public float poweredTime;
     public bool maged;
+    public Vector2 strenght; 
 
     protected Dictionary<string, bool> ignoresCollisions;
     protected Vector2 currentPatrolPoint;

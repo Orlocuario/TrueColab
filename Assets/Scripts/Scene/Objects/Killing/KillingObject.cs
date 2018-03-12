@@ -12,6 +12,8 @@ public class KillingObject : MonoBehaviour
     public ParticleSystem particles;
     public bool activated;
     public int damage;
+    public int hitsBeforeKilled;
+    protected int hits;
 
     #endregion
 
@@ -19,6 +21,7 @@ public class KillingObject : MonoBehaviour
 
     protected virtual void Start()
     {
+        hitsBeforeKilled = 0;
         particles = GetComponent<ParticleSystem>();
         levelManager = FindObjectOfType<LevelManager>();
 
@@ -68,6 +71,15 @@ public class KillingObject : MonoBehaviour
             {
                 levelManager.Respawn(player);
             }
+        }
+    }
+
+    public virtual void HitByPoweredDamaging()
+    {
+        hits++;
+        if (hits == hitsBeforeKilled)
+        {
+            Destroy(gameObject);
         }
     }
 

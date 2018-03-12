@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 212609497721272734}
   - component: {fileID: 199035693606784870}
   - component: {fileID: 198340463637587436}
+  - component: {fileID: 58252858089271264}
   m_Layer: 0
   m_Name: SuperPunch
   m_TagString: Punch
@@ -56,7 +57,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1270248011828294}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -29.468, y: 22.291128, z: 2.515625}
+  m_LocalPosition: {x: 15.032997, y: 1.2430334, z: 2.515625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4715640924017180}
@@ -83,7 +84,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1270248011828294}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -109,7 +110,21 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.01
+  m_Radius: 0.05676937
+--- !u!58 &58252858089271264
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1270248011828294}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.071538925
 --- !u!114 &114371914756871732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -177,7 +192,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1906517090
+  randomSeed: 331245170
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -2724,7 +2739,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1539841176
+  randomSeed: 346683861
   InitialModule:
     serializedVersion: 3
     enabled: 1

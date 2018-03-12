@@ -132,6 +132,15 @@ public class DamagingObject : MonoBehaviour
         {
             if (CheckIfImWarriored(gameObject))
             {
+                KillingObject kObject = other.gameObject.GetComponent<KillingObject>();
+                kObject.HitByPoweredDamaging();
+                DestroyMeAndParticles();
+            }
+
+            if (CheckIfImMaged())
+            {
+                KillingObject kObject = other.gameObject.GetComponent<KillingObject>();
+                kObject.HitByPoweredDamaging();
                 Destroy(other.gameObject);
                 DestroyMeAndParticles();
             }

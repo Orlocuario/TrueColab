@@ -37,6 +37,8 @@ public class PositiveFeedBackInstantiator : MonoBehaviour
                                 LevelManager levelManager = FindObjectOfType<LevelManager>();
                                 levelManager.InstantiatePrefab(prefabNames[j], instantiationVectors[j]);
                             }
+
+                            Destroy(gameObject);
                         }
 
                     }

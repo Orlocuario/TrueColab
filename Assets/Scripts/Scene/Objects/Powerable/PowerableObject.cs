@@ -484,7 +484,6 @@ public class PowerableObject : MonoBehaviour
         AttackController attack = attackGO.GetComponent<AttackController>();
         if (attack)
         {
-
             if (attack.IsPowered())
             {
                 return attack.GetType().Equals(expectedAttack.GetType());
