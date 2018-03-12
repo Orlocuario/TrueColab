@@ -126,6 +126,17 @@ public class NPCtrigger : MonoBehaviour
         }
     }
 
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        if (GameObjectIsPlayer(other.gameObject))
+        {
+            if (hasDecision)
+            {
+                playersArrived--;
+            }
+        }
+    }
+
     #endregion
 
     #region Utils

@@ -228,7 +228,7 @@ public class Server : MonoBehaviour
 			{
 				if (connectedPlayer.controlOverEnemies) 
 				{
-                    player.room.SendMessageToAllPlayers("PlayerHasReturned/", true);
+                    SendMessageToClient(connectionId, "PlayerHasReturned/", true);
 					break;
 				}	
 			}

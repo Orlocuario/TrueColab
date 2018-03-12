@@ -12,7 +12,6 @@ public class KillingZonesDeactivatorPowerable : PowerableObject {
         {
             kObject.SetActive(false);
         }
-
     }
 
     protected override void UndoYourPowerableThing()
