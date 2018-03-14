@@ -102,12 +102,13 @@ public class PlayerTeleporter : MonoBehaviour
         if(pFilter)
         {
             PlayerFilter playerFilter = pFilter.GetComponent<PlayerFilter>();
-            playerFilter.allowedPlayers[0] = levelManager.GetWarrior();
+            playerFilter.allowedPlayers[0] = levelManager.GetMage();
         }
 
         ParticleSystem particles = pFilter.GetComponent<ParticleSystem>();
         ParticleSystem.MainModule module = particles.main;
-        module.startColor = new Color(249, 0, 77, 255);
+        module.startColor = new Color(0, 255, 213, 255);
+        Destroy(gameObject);
     }
     #endregion
 
