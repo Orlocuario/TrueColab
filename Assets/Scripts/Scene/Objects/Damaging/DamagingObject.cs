@@ -103,48 +103,6 @@ public class DamagingObject : MonoBehaviour
             DealDamage(other.gameObject);
         }
 
-        if (GameObjectIsEnemy(other.gameObject))
-        {
-            if (CheckIfImWarriored(gameObject))
-            {
-                KillEnemy(other.gameObject);
-                DestroyMeAndParticles();
-            }
-
-            if (CheckIfImMaged())
-            {
-                GetThisEnemyMaged(other.gameObject);
-                DestroyMeAndParticles();
-            }
-        }
-
-        if (GameObjectIsDestroyable(other.gameObject))
-        {
-            if (CheckIfImWarriored(gameObject))
-            {
-                DestroyableObject destroyable = other.gameObject.GetComponent<DestroyableObject>();
-                destroyable.DestroyMe(true);
-                DestroyMeAndParticles();
-            }
-        }
-
-        if (GameObjectIsDeactivableKillPlane(other.gameObject))
-        {
-            if (CheckIfImWarriored(gameObject))
-            {
-                KillingObject kObject = other.gameObject.GetComponent<KillingObject>();
-                kObject.HitByPoweredDamaging();
-                DestroyMeAndParticles();
-            }
-
-            if (CheckIfImMaged())
-            {
-                KillingObject kObject = other.gameObject.GetComponent<KillingObject>();
-                kObject.HitByPoweredDamaging();
-                Destroy(other.gameObject);
-                DestroyMeAndParticles();
-            }
-        }
     }
 
     /*  protected void OnTriggerStay2D(Collider2D other)
@@ -175,9 +133,9 @@ public class DamagingObject : MonoBehaviour
             {
                 gameObject.GetComponent<OneTimeMovingObject>().DestroyParasiteParticles();
             }
-        }
+        } 
 
-        Destroy(gameObject, .5f);
+        Destroy(gameObject);
     }
 
     protected void GetThisEnemyMaged(GameObject enemy)
@@ -226,30 +184,23 @@ public class DamagingObject : MonoBehaviour
     }
 
 
-    protected bool CheckIfImWarriored(GameObject enemy)
+    protected bool CheckIfImWarriored(GameObject myself)
     {
         LevelManager levelManager = FindObjectOfType<LevelManager>();
-        if (levelManager.GetWarrior())
+        if (levelManager.GetWarrior() != null)
         {
-            if (levelManager.GetWarrior().IsWarriored(gameObject))
-            {
-                return true;
-            }
+            return levelManager.GetWarrior().IsWarriored(gameObject);
         }
         else
         {
             Debug.LogError("It Seems there is no warrior");
+            return false;
         }
-        return false;
     }
 
     protected bool GameObjectIsDestroyable(GameObject other)
     {
-        if (other.GetComponent<DestroyableObject>())
-        {
-            return true;
-        }
-        return false;
+        return other.GetComponent<DestroyableObject>();
     }
 
     protected bool GameObjectIsEnemy(GameObject other)

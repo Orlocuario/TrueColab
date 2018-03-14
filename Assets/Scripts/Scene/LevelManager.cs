@@ -797,11 +797,11 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void TogglePowerableAnimatorsWithName(string parameter, bool value, string name)
+    public void TogglePowerableAnimatorsWithName(string animatorParameter, bool value, string name)
     {
         GameObject gameObject = GameObject.Find(name);
         SceneAnimator sceneAnimator = FindObjectOfType<SceneAnimator>();
-        sceneAnimator.SetBool(parameter, value, gameObject);
+        sceneAnimator.SetBool(animatorParameter, value, gameObject);
     }
 
     #region Coordinators
@@ -813,6 +813,19 @@ public class LevelManager : MonoBehaviour
         CoordinatePlatformInstantiators();
         CoordinateMovingObjects();
         CoordinateEnemyControllers();
+        CoordinateTriggers();
+    }
+
+    private void CoordinateTriggers()
+    {
+        MovableTriggerInstantiator[] mTriggers = FindObjectsOfType<MovableTriggerInstantiator>();
+        foreach (MovableTriggerInstantiator trigger in mTriggers)
+        {
+            if (trigger.jobDone == true)
+            {
+                trigger.MustInstantiateAndDestroyAgain();
+            }
+        }
     }
 
     private void CoordinateMovingObjects()
@@ -826,6 +839,7 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
+
     private void CoordinatePlatformInstantiators()
     {
         MovingPlatformInstantiator[] mPlatforms = FindObjectsOfType<MovingPlatformInstantiator>();

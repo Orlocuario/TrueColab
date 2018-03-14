@@ -146,23 +146,23 @@ public class EnemyController : MonoBehaviour
         if (!maged)
         {
             maged = true;
-        }
-        ToggleParticles(true, 0);
-        GameObject[] players = levelManager.players;
-        foreach (GameObject player in players)
-        {
-            UpdateCollisionsWithPlayer(player, true);
-        }
 
+            ToggleParticles(true, 0);
+            Collider2D[] colliders = GetComponents<Collider2D>();
+            foreach (Collider2D collider in colliders)
+            {
+                collider.enabled = false;
+            }
+        }
     }
 
     public void UnmageThisEnemy()
     {
         ToggleParticles(false, 0);
-        GameObject[] players = levelManager.players;
-        foreach (GameObject player in players)
+        Collider2D[] colliders = GetComponents<Collider2D>();
+        foreach (Collider2D collider in colliders)
         {
-            UpdateCollisionsWithPlayer(player, false);
+            collider.enabled = true;
         }
         maged = false;
         timeMaged = 0;

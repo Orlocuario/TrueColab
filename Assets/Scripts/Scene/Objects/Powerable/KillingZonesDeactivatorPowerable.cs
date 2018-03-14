@@ -5,12 +5,22 @@ using UnityEngine;
 public class KillingZonesDeactivatorPowerable : PowerableObject {
 
     public KillingObject[] killingObjects;
+    public EnemyController[] enemies; 
 
     protected override void DoYourPowerableThing()
     { 
         foreach (KillingObject kObject in killingObjects)
         {
             kObject.SetActive(false);
+        }
+
+        foreach (EnemyController eController in enemies)
+        {
+            Collider2D[] colliders = eController.GetComponents<Collider2D>();
+            foreach (Collider2D collider in colliders)
+            {
+                collider.enabled = false;
+            }
         }
     }
 
@@ -19,6 +29,15 @@ public class KillingZonesDeactivatorPowerable : PowerableObject {
         foreach (KillingObject kObject in killingObjects)
         {
             kObject.SetActive(true);
+        }
+
+        foreach (EnemyController eController in enemies)
+        {
+            Collider2D[] colliders = eController.GetComponents<Collider2D>();
+            foreach (Collider2D collider in colliders)
+            {
+                collider.enabled = true;
+            }
         }
     }
 

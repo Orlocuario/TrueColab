@@ -5,16 +5,23 @@ using UnityEngine;
 public class PositiveFeedBackInstantiator : MonoBehaviour
 {
 
+    private SoundManager soundManager;
+    private int playersArrived;
+    private bool beenUsed;
+
     public Vector2[] instantiationVectors;
     public string[] prefabNames;
-    private SoundManager soundManager;
     public string[] playersNeeded;
-    private int playersArrived;
 
 
     private void Start()
     {
         playersArrived = 0;
+    }
+
+    public bool BeenUsed ()
+    {
+        return beenUsed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -32,15 +39,17 @@ public class PositiveFeedBackInstantiator : MonoBehaviour
 
                         if (playersArrived == playersNeeded.Length)
                         {
-                            for (int j = 0; j < prefabNames.Length; j++)
+                            if (!beenUsed)
                             {
-                                LevelManager levelManager = FindObjectOfType<LevelManager>();
-                                levelManager.InstantiatePrefab(prefabNames[j], instantiationVectors[j]);
+                                for (int j = 0; j < prefabNames.Length; j++)
+                                {
+                                    LevelManager levelManager = FindObjectOfType<LevelManager>();
+                                    levelManager.InstantiatePrefab(prefabNames[j], instantiationVectors[j]);
+                                }
+
+                                beenUsed = true;
                             }
-
-                            Destroy(gameObject);
                         }
-
                     }
                 }
             }

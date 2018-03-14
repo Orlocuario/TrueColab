@@ -20,12 +20,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4854788194895784}
   - component: {fileID: 212162377598187556}
-  - component: {fileID: 114030195252239796}
   - component: {fileID: 58188294602719494}
   - component: {fileID: 58110795383588046}
   - component: {fileID: 114849309273594264}
   - component: {fileID: 114846413556190794}
   - component: {fileID: 50166641031924282}
+  - component: {fileID: 114042441743606064}
   m_Layer: 0
   m_Name: DamagingArrow
   m_TagString: Untagged
@@ -94,7 +94,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.05258751
---- !u!114 &114030195252239796
+--- !u!114 &114042441743606064
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -102,10 +102,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1831718842093436}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c3f22085f2ad2b4598ae69ae7ab6236, type: 3}
+  m_Script: {fileID: 11500000, guid: 02742ed98d831b345ab5aaa7728042da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: {x: 500, y: 200}
+  force: {x: 500, y: 500}
   damage: 3
 --- !u!114 &114846413556190794
 MonoBehaviour:

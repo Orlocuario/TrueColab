@@ -17,6 +17,7 @@ public class MovingObject : MonoBehaviour
     public bool playerHasReturned;
     private Vector2 currentTarget;
 
+
     #endregion
 
     #region Start & Update

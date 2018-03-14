@@ -10,6 +10,9 @@ public class PlayerTeleporter : MonoBehaviour
 
     protected string playerToTeleport;
     public bool teleportAnyPlayer;
+    public bool mustDoSomething;
+    public bool itsDone;
+    public int id; 
 
     #endregion
 
@@ -18,7 +21,7 @@ public class PlayerTeleporter : MonoBehaviour
     protected virtual void Start()
     {
         levelManager = FindObjectOfType<LevelManager>();
-        CheckTeleportPosition();
+        CheckTeleportPositionAndId();
     }
 
     #endregion
@@ -31,27 +34,26 @@ public class PlayerTeleporter : MonoBehaviour
         {
             if (other.gameObject.GetComponent<PlayerController>())
             {
-				if (other.gameObject.GetComponent<PlayerController> ()) 
-				{
-					if (other.gameObject.GetComponent<PlayerController> ().localPlayer) 
-					{
-						other.gameObject.GetComponent<PlayerController> ().respawnPosition = teleportPosition;
-						levelManager.Respawn ();
-					}
-				}
+                if (other.gameObject.GetComponent<PlayerController>().localPlayer)
+                {
+                    ActivateTeleporter(other.gameObject);
+                }
+
             }
         }
-        
-		else 
+
+        else
         {
-			if (other.gameObject.name == playerToTeleport)
-			{
-				if (other.gameObject.GetComponent<PlayerController> ().localPlayer) 
-				{
-					levelManager.localPlayer.respawnPosition = teleportPosition;
-					levelManager.Respawn ();
-				}
-			}
+            if (playerToTeleport != null)
+            {
+                if (other.gameObject.name == playerToTeleport)
+                {
+                    if (other.gameObject.GetComponent<PlayerController>().localPlayer)
+                    {
+                        ActivateTeleporter(other.gameObject);
+                    }
+                }
+            }
         }
     }
 
@@ -59,14 +61,54 @@ public class PlayerTeleporter : MonoBehaviour
 
     #region Utils
 
-    protected virtual void CheckTeleportPosition()
+    protected void ActivateTeleporter(GameObject other)
+    {
+        other.GetComponent<PlayerController>().respawnPosition = teleportPosition;
+        levelManager.Respawn();
+        if (mustDoSomething)
+        {
+            DoYourTeleportedThing(id);
+        }
+    }
+
+    public virtual void DoYourTeleportedThing(int id)
+    {
+        switch (id)
+        {
+            case 0:
+                HandleCase0();
+                break;
+            default:
+                return;
+        }
+    }
+
+    protected virtual void CheckTeleportPositionAndId()
     {
         if (teleportPosition.Equals(default(Vector2)))
         {
             Debug.Log("you need a teleport position");
         }
+
+        if (teleportPosition.Equals(default(int)))
+        {
+            Debug.LogError("teleport: " + gameObject.name + "needs an Id");
+        }
     }
 
+    private void HandleCase0()
+    {
+        GameObject pFilter = GameObject.Find("ChangableMageFilter1");
+        if(pFilter)
+        {
+            PlayerFilter playerFilter = pFilter.GetComponent<PlayerFilter>();
+            playerFilter.allowedPlayers[0] = levelManager.GetWarrior();
+        }
+
+        ParticleSystem particles = pFilter.GetComponent<ParticleSystem>();
+        ParticleSystem.MainModule module = particles.main;
+        module.startColor = new Color(249, 0, 77, 255);
+    }
     #endregion
 
 }
