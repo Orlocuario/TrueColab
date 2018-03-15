@@ -218,6 +218,9 @@ public class SwitchActions : MonoBehaviour
             case 49:
                 HandlerGroup49();
                 break;
+            case 50:
+                HandlerGroup50();
+                break;
         }
     }
 
@@ -590,7 +593,8 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup50()
     {
-        levelManager.InstantiatePrefab("Ambientales/InstantiateExp", new Vector2(4.1f, -0.4f));
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(3f, -2f));
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(4f, -2f));
     }
 
     #endregion
@@ -602,7 +606,7 @@ public class SwitchActions : MonoBehaviour
 
     #region Messaging
 
-	private void AfterCameraHandler()
+    private void AfterCameraHandler()
 	{
 		
 	}

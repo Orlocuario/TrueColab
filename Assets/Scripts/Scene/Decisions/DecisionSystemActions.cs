@@ -65,9 +65,8 @@ public class DecisionSystemActions : MonoBehaviour
 
     protected void HandleChoice3()
     {
-        levelManager.InstantiatePrefab("EngranajeA", new Vector2(-7.27f, -3.87f)); //Solucionar Vectores}	
-        levelManager.ActivateNPCFeedback("Esto les será de ayuda, busquen otro en el laberinto para poder salir");
-        StartCoroutine(WaitForFeedback(levelManager.GetWaitToNPC()));
+        levelManager.InstantiatePrefab("EngranajeA", new Vector2(-7.27f, -3.87f)); //Solucionar Vectores e instanciar nueva decisión.
+        levelManager.ActivateNPCFeedback("Excelente! Los esperaré. ¡Y recuerden, 1500 de EXP!");
     }
 
     protected void HandleChoice4()

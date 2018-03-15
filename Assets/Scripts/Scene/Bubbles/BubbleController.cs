@@ -152,66 +152,7 @@ public class BubbleController : MonoBehaviour
 			}
 		}
 	}
-		
-	protected bool WarriorActivatedbubblePower()
-	{
-		PowerableObject powerableObject = gameObject.GetComponent <PowerableObject> ();
-		if (powerableObject) 
-		{
-			if (powerableObject.IsPowered ()) 
-			{
-				PowerableObject.Power? activatedPower = powerableObject.GetActivatedPower ();
-				if (activatedPower.Value.caster != null)
-				{
-					if (activatedPower.Value.caster.Equals (new WarriorController ().GetType ())) 
-					{
-						return true; 
-					}
-				}
-			}
-		}
-		return false; 
-	} 
 
-	protected bool MageActivatedBubblePower()
-	{
-		PowerableObject powerableObject = gameObject.GetComponent <PowerableObject> ();
-		if (powerableObject) 
-		{
-			if (powerableObject.IsPowered ()) 
-			{
-				PowerableObject.Power? activatedPower = powerableObject.GetActivatedPower ();
-				if (activatedPower.Value.caster != null)
-				{
-					if (activatedPower.Value.caster.Equals (new MageController ().GetType ())) 
-					{
-						return true; 
-					}
-				}
-			}
-		}
-		return false; 
-	} 
-
-	protected bool EngineerActivatedbubblePower()
-	{
-		PowerableObject powerableObject = gameObject.GetComponent <PowerableObject> ();
-		if (powerableObject) 
-		{
-			if (powerableObject.IsPowered ()) 
-			{
-				PowerableObject.Power? activatedPower = powerableObject.GetActivatedPower ();
-				if (activatedPower.Value.caster != null)
-				{
-					if (activatedPower.Value.caster.Equals (new EngineerController ().GetType ())) 
-					{
-						return true; 
-					}
-				}
-			}
-		}
-		return false; 
-	} 
 	public void InitializeColouredBubbles(MoveType _moveType, PlayerController caster, GameObject bubbleParticle)
     {
 		SetPowerableBubbleCaster (caster);

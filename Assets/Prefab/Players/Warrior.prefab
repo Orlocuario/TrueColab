@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 4437202230951966}
   - component: {fileID: 198702002981555530}
   - component: {fileID: 199342002813201092}
+  - component: {fileID: 58162685528142052}
   m_Layer: 0
   m_Name: ParticulasWarrior
   m_TagString: Untagged
@@ -83,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1301050943160048}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.001, y: -0.002, z: -1}
+  m_LocalPosition: {x: -0.01, y: 0.079, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4874426905881810}
@@ -96,7 +97,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1297910846561336}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 66.602, y: -18.895, z: 1}
+  m_LocalPosition: {x: -0.8, y: 5.94, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4178390081971338}
@@ -124,6 +125,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!58 &58162685528142052
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1301050943160048}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: -0.0000021010637, y: -0.07379532}
+  serializedVersion: 2
+  m_Radius: 0.24624586
 --- !u!61 &61364626995094568
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -185,6 +200,10 @@ MonoBehaviour:
   localPlayer: 0
   isGrounded: 0
   upPressed: 0
+  availablePowerable: {fileID: 0}
+  availableChatZone: {fileID: 0}
+  availableInstantiatorTrigger: {fileID: 0}
+  decisionName: 
   controlOverEnemies: 0
   groundCheckRadius: 0.25
   canAccelerate: 0
@@ -197,7 +216,7 @@ MonoBehaviour:
   isPowerOn: 0
   directionY: 1
   directionX: 1
-  gravity: 1
+  gravityPower: 0
 --- !u!198 &198702002981555530
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -253,7 +272,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1214006595
+  randomSeed: -1396839517
   InitialModule:
     serializedVersion: 3
     enabled: 1

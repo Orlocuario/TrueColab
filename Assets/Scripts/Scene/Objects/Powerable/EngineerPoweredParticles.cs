@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class ElectricParticles : MonoBehaviour
+public class EngineerPoweredParticles : PoweredParticles
 {
-
     #region Events
 
-    protected virtual void OnTriggerEnter2D(Collider2D other)
+    protected override void OnTriggerEnter2D(Collider2D other)
     {
         if (other.GetComponent<PlayerController>())
         {
@@ -23,7 +24,7 @@ public class ElectricParticles : MonoBehaviour
 
     }
 
-    protected virtual void OnTriggerExit2D(Collider2D other)
+    protected override void OnTriggerExit2D(Collider2D other)
     {
         if (other.GetComponent<PlayerController>())
         {
@@ -40,6 +41,5 @@ public class ElectricParticles : MonoBehaviour
         }
     }
     #endregion
+
 }
-
-

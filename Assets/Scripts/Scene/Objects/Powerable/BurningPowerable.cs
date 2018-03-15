@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BurnableObject : PowerableObject
+public class BurningPowerable : PowerableObject
 {
     #region Attributes
 
@@ -14,14 +14,10 @@ public class BurnableObject : PowerableObject
     {
         if (powered)
         {
-            if (collision.gameObject.tag.Equals("BurnableBranches1"))
+            if (collision.gameObject.GetComponent<BurnableObject>())
             {
-                ParticleSystem flameParticles = collision.gameObject.GetComponentInChildren<ParticleSystem>();
-                if (flameParticles)
-                {
-                    flameParticles.Play();
-                    Destroy(collision.gameObject, 1f);
-                }
+                BurnableObject bObject = collision.gameObject.GetComponent<BurnableObject>();
+                bObject.Burn();
             }
         }
 

@@ -14,6 +14,7 @@ public class DamagingObject : MonoBehaviour
     public Vector2 force;
     public int damage;
 
+
     #endregion
 
     #region Start & Update
@@ -26,7 +27,6 @@ public class DamagingObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
     #endregion
@@ -72,7 +72,6 @@ public class DamagingObject : MonoBehaviour
         }
 
         playerController.TakeDamage(damage, attackForce);
-
     }
 
     #endregion
@@ -103,20 +102,17 @@ public class DamagingObject : MonoBehaviour
         {
             DealDamage(other.gameObject);
         }
+
     }
 
-    #endregion
-
-    #region Utils
-
-    protected void OnTriggerStay2D(Collider2D other)
-    {
-        if (GameObjectIsPlayer(other.gameObject))
-        {
-            DealDamage(other.gameObject);
-        }
-    }
-
+    /*  protected void OnTriggerStay2D(Collider2D other)
+      {
+          if (GameObjectIsPlayer(other.gameObject))
+          {
+              DealDamage(other.gameObject);
+          }
+      }
+          */
     // Attack those who enter the alert zone
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
@@ -124,6 +120,101 @@ public class DamagingObject : MonoBehaviour
         {
             DealDamage(other.gameObject);
         }
+    }
+
+    #endregion
+
+    #region Utils
+    protected void DestroyMeAndParticles()
+    {
+        if (gameObject.GetComponent<OneTimeMovingObject>())
+        {
+            if (gameObject.GetComponent<OneTimeMovingObject>().isAttack)
+            {
+                gameObject.GetComponent<OneTimeMovingObject>().DestroyParasiteParticles();
+            }
+        } 
+
+        Destroy(gameObject);
+    }
+
+    protected void GetThisEnemyMaged(GameObject enemy)
+    {
+        EnemyController eC = enemy.gameObject.GetComponent<EnemyController>();
+        eC.GetThisEnemyMaged();
+    }
+
+    protected void KillEnemy(GameObject enemy)
+    {
+        EnemyController eC = enemy.gameObject.GetComponent<EnemyController>();
+        eC.TakeDamage(150);
+        Destroy(gameObject, .2f);
+    }
+
+    protected bool GameObjectIsBurnable(GameObject other)
+    {
+        return other.GetComponent<BurnableObject>();
+    }
+
+    protected bool GameObjectIsDeactivableKillPlane(GameObject other)
+    {
+        if (other.gameObject.GetComponent<KillingObject>())
+        {
+            if (other.gameObject.tag == "DeactivableKillPlane")
+            {
+                return true;
+            }
+
+        }
+        else
+        {
+            return false;
+        }
+
+        return false;
+    }
+
+    protected bool CheckIfImMaged()
+    {
+        LevelManager levelManager = FindObjectOfType<LevelManager>();
+        if (levelManager.GetMage())
+        {
+            return levelManager.GetMage().ProtectedByShield(gameObject);
+        }
+        else
+        {
+            Debug.LogError("It Seems there is no Mage");
+        }
+        return false;
+    }
+
+
+    protected bool CheckIfImWarriored(GameObject myself)
+    {
+        LevelManager levelManager = FindObjectOfType<LevelManager>();
+        if (levelManager.GetWarrior() != null)
+        {
+            return levelManager.GetWarrior().IsWarriored(gameObject);
+        }
+        else
+        {
+            Debug.LogError("It Seems there is no warrior");
+            return false;
+        }
+    }
+
+    protected bool GameObjectIsDestroyable(GameObject other)
+    {
+        return other.GetComponent<DestroyableObject>();
+    }
+
+    protected bool GameObjectIsEnemy(GameObject other)
+    {
+        if (other.GetComponent<EnemyController>())
+        {
+            return true;
+        }
+        return false;
     }
 
     protected bool GameObjectIsPlayer(GameObject other)
@@ -144,7 +235,6 @@ public class DamagingObject : MonoBehaviour
 
         ignoresCollisions[player.name] = ignores;
         SendIgnoreCollisionDataToServer(player, ignores);
-
     }
 
     #endregion

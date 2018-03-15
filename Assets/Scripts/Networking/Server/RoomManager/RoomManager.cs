@@ -39,7 +39,7 @@ public class RoomManager : MonoBehaviour {
     {
         if (activeRooms > maxRooms)
         {
-            Debug.LogError("No es posible mostrar mas de 15 rooms en la interfaz. Se intentó agregar room numero " + activeRooms + 1);
+            Debug.LogError("No es posible mostrar mas de 15 rooms en la interfaz. Se intentó agregar room numero " + activeRooms);
             //TODO: LLevar la cuenta de los rooms a nivel de servidor para que no puedan existir más de maxNumber.
         }
         int id = room.id;
@@ -109,12 +109,13 @@ public class RoomManager : MonoBehaviour {
     {
         GameObject box = GameObject.Find("RoomResetButton" + boxId);
         Text boxText = box.GetComponentInChildren<Text>();
-        boxText.text = "uwu";
+        boxText.text = "Empty";
     }
+
     private void UpdateGUI(RoomBox room)
     {
-        GameObject box = GameObject.Find("RoomResetButton" + room.boxId);
-        Text boxText = box.GetComponentInChildren<Text>();
+        GameObject box = GameObject.Find("ResetButtonText" + room.boxId);
+        Text boxText = box.GetComponent<Text>();
         boxText.text = "RESET" + room.boxId +"\n";
         foreach(RoomBox.PlayersID player in room.currentPlayers.Values)
         {
@@ -123,8 +124,4 @@ public class RoomManager : MonoBehaviour {
         //TODO: Hacer que se muestre el room
     }
 
-    // Update is called once per frame
-    void Update () {
-		
-	}
 }

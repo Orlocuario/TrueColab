@@ -8,7 +8,7 @@ public class PlayerFilter : KillingObject
 {
     #region Attributes
 
-    public PlayerController[] playersCanPass;
+    public PlayerController[] allowedPlayers;
 
     #endregion
 
@@ -33,9 +33,9 @@ public class PlayerFilter : KillingObject
     {
         bool passes = false;
 
-        foreach (PlayerController canPass in playersCanPass)
+        foreach (PlayerController allowedPlayer in allowedPlayers)
         {
-            if (other.GetComponent<PlayerController>() == canPass)
+            if (other.GetComponent<PlayerController>() == allowedPlayer)
             {
                 passes = true;
                 break;

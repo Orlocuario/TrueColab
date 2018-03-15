@@ -16,7 +16,7 @@ public class MovableTriggerInstantiator : MonoBehaviour {
 
 	public ObjectToInstantiate[] instantiateObjects;
 	public GameObject objectNeeded;
-
+    public bool jobDone;
 
 	private LevelManager levelManager; 
 
@@ -35,11 +35,23 @@ public class MovableTriggerInstantiator : MonoBehaviour {
 	{
 		if (other.gameObject == objectNeeded) 
 		{
-			Destroy (other);
-			foreach (ObjectToInstantiate instObject in instantiateObjects) 
-			{
-				levelManager.InstantiatePrefab (instObject.name, instObject.position);
-			}
+            InstantiateObjects(other.gameObject);
 		}		
 	}
+
+    private void InstantiateObjects(GameObject other)
+    {
+        Destroy(other);
+        foreach (ObjectToInstantiate instObject in instantiateObjects)
+        {
+            levelManager.InstantiatePrefab(instObject.name, instObject.position);
+        }
+
+        jobDone = true; 
+    }
+
+    public void MustInstantiateAndDestroyAgain()
+    {
+        InstantiateObjects(objectNeeded);
+    }
 }

@@ -84,9 +84,9 @@ public class Room
             Debug.Log("Full room");
             sender.SendChangeScene(sceneToLoad, this);
             started = true;
-            SendMessageToAllPlayers("Mago: Conectado", false);
-            SendMessageToAllPlayers("Guerrero: Conectado", false);
-            SendMessageToAllPlayers("Ingeniero: Conectado", false);
+            SendMessageToAllPlayers("Verde: Conectado", false);
+            SendMessageToAllPlayers("Rojo: Conectado", false);
+            SendMessageToAllPlayers("Amarillo: Conectado", false);
         }
 
         return true;

@@ -17,12 +17,6 @@ public class MageController : PlayerController
         LoadShieldArea();
     }
 
-    protected override void Update()
-    {
-        base.Update();
-        //levelManager._.DrawCircle(transform.position, shieldArea, null, Color.blue, this);
-    }
-
     #endregion
 
     #region Common
@@ -45,22 +39,45 @@ public class MageController : PlayerController
             if (powerable.IsPowered())
             {
                 PowerableObject.Power power = powerable.GetActivatedPower();
-                if (power.caster.Equals(this))
+
+                if (power.caster != null)
                 {
-                    if (power.InPowerArea(player, false))
+                    if (power.caster.Equals(this))
                     {
-                        return true;
+                        if (power.InPowerArea(player, true))
+                        {
+                            return true;
+                        }
+                    }
+                }
+                else if (power.attack != null)
+                {
+                    if (power.attack.GetType().Equals(new FireballController().GetType()))
+                    {
+                        if (power.InPowerArea(player, true))
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+                else if (power.expectedParticle != null)
+                {
+                    if (power.expectedParticle.GetType().Equals(new MagePoweredParticles().GetType()))
+                    {
+                        if (power.InPowerArea(player, true))
+                        {
+                            return true;
+                        }
                     }
                 }
             }
         }
-
         return false;
     }
-
     #endregion
 
-    #region Utils
+        #region Utils
 
     protected override AttackController GetAttack()
     {

@@ -98,20 +98,43 @@ public class EngineerController : PlayerController
             if (powerable.IsPowered())
             {
                 PowerableObject.Power power = powerable.GetActivatedPower();
-                if (power.caster.Equals(this))
+
+                if (power.caster != null)
                 {
-                    if (power.InPowerArea(playerOrMovable, true))
+                    if (power.caster.Equals(this))
                     {
-                        return true;
+                        if (power.InPowerArea(playerOrMovable, true))
+                        {
+                            return true;
+                        }
+                    }
+                }
+                else if (power.attack != null)
+                {
+                    if (power.attack.GetType().Equals(new ProjectileController().GetType()))
+                    {
+                        if (power.InPowerArea(playerOrMovable, true))
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+                else if (power.expectedParticle != null)
+                {
+                    if (power.expectedParticle.GetType().Equals(new EngineerPoweredParticles().GetType()))
+                    {
+                        if (power.InPowerArea(playerOrMovable, true))
+                        {
+                            return true;
+                        }
                     }
                 }
             }
         }
         return false;
     }
+
     #endregion
-
-
-
 }
 

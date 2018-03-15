@@ -9,11 +9,16 @@ public class EnemyController : MonoBehaviour
 
     public Vector2[] patrollingPoints;
     public CircleCollider2D alertZone;
+    public GameObject[] particles;
+
 
     public float patrollingSpeed;
     public bool patrolling;
     public bool fromEditor;
     public int directionX;  // 1 = right, -1 = left
+    public float poweredTime;
+    public bool maged;
+    public Vector2 strenght;
 
     protected Dictionary<string, bool> ignoresCollisions;
     protected Vector2 currentPatrolPoint;
@@ -21,6 +26,7 @@ public class EnemyController : MonoBehaviour
     protected SceneAnimator sceneAnimator;
     protected Rigidbody2D rb2d;
     protected Vector2 force;
+    protected bool playerHasReturned;
 
     protected int currentPatrolPointCount;
     protected float maxHp = 100f;
@@ -28,6 +34,9 @@ public class EnemyController : MonoBehaviour
     protected int damage = 0;
     protected int enemyId;
     protected float hp;
+    protected float timeForAttack = 1.5f;
+    protected float timeMaged;
+    protected bool deathIsComing;
 
     protected static float alertDistanceFactor = 1.5f;
     protected static float maxXSpeed = .5f;
@@ -43,7 +52,9 @@ public class EnemyController : MonoBehaviour
         sceneAnimator = FindObjectOfType<SceneAnimator>();
         levelManager = FindObjectOfType<LevelManager>();
         rb2d = GetComponent<Rigidbody2D>();
-
+        InitializeParticles();
+        maged = false;
+        deathIsComing = false; 
         ignoresCollisions = new Dictionary<string, bool> { { "Mage", false }, { "Warrior", false }, { "Engineer", false } };
 
         currentPatrolPointCount = 0;
@@ -60,6 +71,15 @@ public class EnemyController : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (maged)
+        {
+            timeMaged++;
+            Debug.Log(timeMaged);
+            if (timeMaged == poweredTime)
+            {
+                UnmageThisEnemy();
+            }
+        }
         foreach (Vector2 patrollingPoint in patrollingPoints)
         {
             //levelManager._.DrawDistance(transform.position, patrollingPoint, Color.green, this);
@@ -78,35 +98,36 @@ public class EnemyController : MonoBehaviour
 
     protected virtual void Patroll()
     {
-
         if (!rb2d)
         {
             Debug.Log("If your are planning to move an enemy it should have a RigidBody2D");
             return;
         }
 
-        if (LocalPlayerHasControl())
+        if (Vector2.Distance(transform.position, currentPatrolPoint) < .1f)
         {
-
-            if (Vector2.Distance(transform.position, currentPatrolPoint) < .1f)
-            {
-                NextPatrollingPoint();
-                SendPatrollingPoint();
-            }
+            NextPatrollingPoint();
         }
 
+        if (playerHasReturned)
+        {
+            if (LocalPlayerHasControl())
+            {
+                SendPatrollingPoint();
+                playerHasReturned = false;
+            }
+        }
         transform.position = Vector3.MoveTowards(transform.position, currentPatrolPoint, patrollingSpeed);
     }
 
     public virtual void TakeDamage(float damage)
     {
-        sceneAnimator.StartAnimation("TakingDamage", this.gameObject);
+        sceneAnimator.StartAnimation("TakingDamage", gameObject);
         hp -= damage;
-        Debug.Log(name + " took " + damage + " damage -> " + hp +  "/" + maxHp);
+        Debug.Log(name + " took " + damage + " damage -> " + hp + "/" + maxHp);
 
-        if (hp <= 0 )
+        if (hp <= 0)
         {
-
             if (LocalPlayerHasControl())
             {
                 SendEnemyDiedToServer(damage);
@@ -115,6 +136,38 @@ public class EnemyController : MonoBehaviour
             Die();
         }
 
+    }
+
+    public virtual void GetThisEnemyMaged()
+    {
+        if (maged)
+        {
+            timeMaged = 0;
+            return;
+        }
+        if (!maged)
+        {
+            maged = true;
+
+            ToggleParticles(true, 0);
+            Collider2D[] colliders = GetComponents<Collider2D>();
+            foreach (Collider2D collider in colliders)
+            {
+                collider.enabled = false;
+            }
+        }
+    }
+
+    public void UnmageThisEnemy()
+    {
+        ToggleParticles(false, 0);
+        Collider2D[] colliders = GetComponents<Collider2D>();
+        foreach (Collider2D collider in colliders)
+        {
+            collider.enabled = true;
+        }
+        maged = false;
+        timeMaged = 0;
     }
 
     public virtual void UpdateCollisionsWithPlayer(GameObject player, bool ignores)
@@ -129,7 +182,11 @@ public class EnemyController : MonoBehaviour
 
         ignoresCollisions[player.name] = ignores;
         SendIgnoreCollisionDataToServer(player, ignores);
+    }
 
+    public void ThePlayerReturned (bool thePlayerHasReturned)
+    {
+        playerHasReturned = thePlayerHasReturned;
     }
 
     protected virtual void DealDamage(GameObject player)
@@ -175,8 +232,13 @@ public class EnemyController : MonoBehaviour
     }
 
     public void Die()
-    {
-        sceneAnimator.StartAnimation("Dying", this.gameObject);
+    { 
+        if (deathIsComing)
+        {
+            return;
+        }
+        sceneAnimator.StartAnimation("Dying", gameObject);
+        deathIsComing = true; 
         StartCoroutine(WaitDying());
     }
 
@@ -260,7 +322,7 @@ public class EnemyController : MonoBehaviour
         SendMessageToServer(message, false);
     }
 
-    protected void SendPatrollingPoint()
+    protected void SendPatrollingPoint() //TODO necesitamos esto? 
     {
         string message = "EnemyPatrollingPoint/" +
             enemyId + "/" +
@@ -301,6 +363,43 @@ public class EnemyController : MonoBehaviour
         return playerController && playerController.localPlayer;
     }
 
+    protected void InitializeParticles()
+    {
+        ParticleSystem[] _particles = gameObject.GetComponentsInChildren<ParticleSystem>();
+
+        if (_particles.Length <= 0)
+        {
+            return;
+        }
+
+        particles = new GameObject[_particles.Length];
+
+        for (int i = 0; i < particles.Length; i++)
+        {
+            particles[i] = _particles[i].gameObject;
+        }
+
+        ToggleParticles(false);
+    }
+
+    protected void ToggleParticles(bool activate)
+    {
+        if (particles != null && particles.Length > 0)
+        {
+            for (int i = 0; i < particles.Length; i++)
+            {
+                particles[i].SetActive(activate);
+            }
+        }
+    }
+
+    protected void ToggleParticles(bool activate, int particleId)
+    {
+        if (particles != null && particles.Length > 0)
+        {
+            particles[particleId].SetActive(activate);
+        }
+    }
     protected void TurnAroundIfNeccessary()
     {
         bool turnAround = false;
@@ -354,7 +453,7 @@ public class EnemyController : MonoBehaviour
     {
         if (GameObjectIsPlayer(other.gameObject))
         {
-            Attack(other.gameObject);
+                Attack(other.gameObject);
         }
     }
 
@@ -379,7 +478,19 @@ public class EnemyController : MonoBehaviour
     public IEnumerator WaitDying()
     {
         yield return new WaitForSeconds(WaitToDie);
-        Destroy(this.gameObject);
+        Destroy(gameObject);
+    }
+
+    public IEnumerator WaitToAttack()
+    {
+        yield return new WaitForSeconds(timeForAttack);
+    }
+
+    public IEnumerator WaitTillNoMaged()
+    {
+        yield return new WaitForSeconds(poweredTime);
+
+        UnmageThisEnemy();
     }
 
     #endregion

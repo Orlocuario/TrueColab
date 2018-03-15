@@ -12,7 +12,9 @@ public class NPCtrigger : MonoBehaviour
     public Vector3 whereToRespawn;
 
     public bool freezesPlayer;
+    public bool hasDecision;
     public float feedbackTime;
+
 
     [System.Serializable]
     public struct NPCFeedback
@@ -25,8 +27,11 @@ public class NPCtrigger : MonoBehaviour
 
     private NPCFeedback activeFeedback;
     private LevelManager levelManager;
+    public DecisionSystem dSystem;
 
     private int feedbackCount;
+    private int playersArrived;
+    public int playersNeeded;
 
     #endregion
 
@@ -37,6 +42,18 @@ public class NPCtrigger : MonoBehaviour
         levelManager = FindObjectOfType<LevelManager>();
         ToggleParticles(false);
         feedbackCount = 0;
+        playersArrived = 0;
+        if (hasDecision)
+        {
+            if (playersNeeded == 0)
+            {
+                Debug.LogError("this NPC has a decision system after the trigger but no number of players needed before starting");
+            }
+            if (!dSystem)
+            {
+                Debug.LogError("this NPC has needs a decision system to control");
+            }
+        }
     }
 
     #endregion
@@ -75,7 +92,6 @@ public class NPCtrigger : MonoBehaviour
             levelManager.SetNPCText(activeFeedback.message);
         }
 
-
         feedbackCount += 1;
         StartCoroutine(WaitToReadNPCMessage());
     }
@@ -87,12 +103,37 @@ public class NPCtrigger : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (GameObjectIsPlayer(other.gameObject))
-        {
+        { 
+            if (hasDecision)
+            {
+                playersArrived++;
+                if (playersArrived == playersNeeded)
+                {
+                    ReadNextFeedback();
+                }
+                else
+                {
+                    levelManager.ActivateNPCFeedback("¿Estás Solo? Así no podrás salir jamás...");
+                    return;
+                }
+            }
+
             if (freezesPlayer)
             {
                 levelManager.localPlayer.StopMoving();
             }
             ReadNextFeedback();
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        if (GameObjectIsPlayer(other.gameObject))
+        {
+            if (hasDecision)
+            {
+                playersArrived--;
+            }
         }
     }
 
@@ -124,6 +165,12 @@ public class NPCtrigger : MonoBehaviour
         {
             levelManager.localPlayer.respawnPosition = whereToRespawn;
             levelManager.Respawn();
+        }
+
+        if (hasDecision)
+        {
+            dSystem.StartThisVoting();
+            
         }
 
         levelManager.ShutNPCFeedback(true);

@@ -223,13 +223,12 @@ public class Server : MonoBehaviour
             player.connected = true;
             player.connectionId = connectionId;
             SendMessageToClient(connectionId, "ChangeScene/" + player.room.sceneToLoad, true);
-			List <NetworkPlayer> players = player.room.players;
-
+            List <NetworkPlayer> players = player.room.players;
 			foreach (NetworkPlayer connectedPlayer in players)
 			{
 				if (connectedPlayer.controlOverEnemies) 
 				{
-					SendMessageToClient (player.connectionId, "PlayerHasReturned/", true);
+                    SendMessageToClient(connectionId, "PlayerHasReturned/", true);
 					break;
 				}	
 			}
@@ -288,6 +287,7 @@ public class Server : MonoBehaviour
                 player.room.ChangeControlEnemies();
             }
 
+            
             player.room.SendMessageToAllPlayers("NewChatMessage/" + msg, false);
             player.room.SendMessageToAllPlayersExceptOne("PlayerDisconnected/" + player.id, connectionId, false);
         }
@@ -369,6 +369,11 @@ public class Server : MonoBehaviour
     {
         lastDestroyedRoom = room;
         rooms.Remove(room);
+    }
+
+    public void ChangeRoomScene(Room room, string scene)
+    {
+        room.sender.SendChangeScene(scene, room);
     }
 
     #endregion

@@ -241,7 +241,6 @@ public class ClientMessageHandler
 
     private void EnemiesSetControl(string[] msg)
     {
-
         bool control = bool.Parse(msg[1]);
 
         if (NotInClientScene())
@@ -371,7 +370,7 @@ public class ClientMessageHandler
         if (NotInClientScene())
         {
             HUDDisplay hpAndMp = GameObject.FindObjectOfType<LevelManager>().hpAndMp;
-            hpAndMp.CurrentExpPercentage(msg[1]);
+            hpAndMp.CurrentExpValue(msg[1]);
         }
     }
 
@@ -596,8 +595,8 @@ public class ClientMessageHandler
                     player.remoteLeft = false;
                 }
             }
-
 			LevelManager lManager = GameObject.FindObjectOfType<LevelManager> ();
+            
         }
     }
 

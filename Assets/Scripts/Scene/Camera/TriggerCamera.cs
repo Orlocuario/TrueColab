@@ -35,7 +35,7 @@ public class TriggerCamera : MonoBehaviour
 
     #region Common 
 
-    private IEnumerator OnEnter()
+    public IEnumerator OnEnter()
     {
         for (int i = 0; i < movements.Length; i++)
         {

@@ -9,7 +9,7 @@ public class MurcielagoController : EnemyController
 
     protected override void Start()
     {
-        force = new Vector2(1500f, 200f);
+        force = strenght;
         damage = 5;
         maxHp = 20f;
         base.Start();

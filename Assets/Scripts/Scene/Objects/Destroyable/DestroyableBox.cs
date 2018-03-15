@@ -24,7 +24,6 @@ public class DestroyableBox : DestroyableObject
         Destroy(metalCorners);
 
         base.DestroyMe(destroyedFromLocal);
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

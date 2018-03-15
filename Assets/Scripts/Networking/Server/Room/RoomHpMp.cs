@@ -1,15 +1,17 @@
 ﻿
+using System;
+
 public class RoomHpMp
 {
 
     #region Attributes
 
+    public int currentExp;  //TODO: Variable Global EXP
     public float maxHP;
     public float maxMP;
     public float maxExp;
     public float currentHP;
     public float currentMP;
-    public float currentExp;
     public float percentageHP;
     public float percentageMP;
     public float percentageExp;
@@ -26,7 +28,7 @@ public class RoomHpMp
         this.room = room;
         maxHP = 250;
         maxMP = 250;
-        maxExp = 250;
+        //maxExp = 250;
         currentHP = maxHP;
         currentMP = maxMP;
         currentExp = 0;
@@ -123,6 +125,19 @@ public class RoomHpMp
 
     public void ChangeExp(string deltaExp)
     {
+        int valueDeltaExp = Int32.Parse(deltaExp);
+        currentExp += valueDeltaExp;
+
+        room.SendMessageToAllPlayers("DisplayChangeExpToClient/" + currentExp, false);
+    }
+
+    public float GetExp()
+    {
+        return currentExp;
+    }
+
+    /* public void ChangeExp(string deltaExp)
+    {
         float valueDeltaExp = float.Parse(deltaExp);
         currentExp += valueDeltaExp;
 
@@ -133,14 +148,14 @@ public class RoomHpMp
         }
 
         percentageExp = currentExp / maxExp;
-        room.SendMessageToAllPlayers("DisplayChangeExpToClient/" + percentageExp,false);
+        room.SendMessageToAllPlayers("DisplayChangeExpToClient/" + percentageExp, false);
     }
 
     public void ChangeMaxExp(string NewMaxExp)
     {
         maxExp = float.Parse(NewMaxExp);
         ChangeExp(NewMaxExp);
-    }
+    } */
     
     #endregion
 

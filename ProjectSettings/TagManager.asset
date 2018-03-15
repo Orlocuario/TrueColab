@@ -35,6 +35,20 @@ TagManager:
   - OriginalTextCanvas
   - ChatCanvas
   - RoomManager
+  - Fireball
+  - Punch
+  - Arrow
+  - ArbolCaida
+  - rocaCaida
+  - RejaRocaEng
+  - SujetaRoca
+  - KillPlaneSpikes
+  - Agua
+  - "RocaGiganteAra\xF1a"
+  - openPathSub
+  - RuneSlot
+  - DeactivableKillPlane
+  - LavaCascade4
   layers:
   - Default
   - TransparentFX

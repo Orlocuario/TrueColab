@@ -13,7 +13,8 @@ public class LevelManager : MonoBehaviour
     public Utils _;
     public PlayerController localPlayer;
     public GameObject[] players;
-	public PlayerController[] playerControllers;
+    public PlayerController[] playerControllers;
+    public GameObject initialCutsceneController;
     public HUDDisplay hpAndMp;
     public GameObject canvas;
     public GameObject npcLog;
@@ -28,9 +29,11 @@ public class LevelManager : MonoBehaviour
     private float waitToKillSpiderCountdown;
     private float waitToGrabItem;
     private int?[] currentChoice;
-
+    private Vector2[] playersLastPosition;
     public float waitToRespawn;
+    public bool startsWithCutScene;
 
+    private Image playerFaceImage;
     private Text NPCFeedbackText;
     private Text SpiderFeedbackText;
 
@@ -43,12 +46,20 @@ public class LevelManager : MonoBehaviour
         SetCanvas();
         SetFeedbackUI();
         StorePlayers();
-		StorePlayerControllers();
+        StorePlayerControllers();
+        playersLastPosition = new Vector2[3];
 
         _ = new Utils();
 
         hpAndMp = canvas.GetComponent<HUDDisplay>();
-
+        if (GameObject.Find("PlayerFace"))
+        {
+            playerFaceImage = GameObject.Find("PlayerFace").GetComponent<Image>();
+        }
+        else
+        {
+            Debug.LogError("Players Have no Face");
+        }
         waitToKillSpiderCountdown = 5f;
         waitToKillNPCCountdown = 5f;
         waitToGrabItem = 2f;
@@ -58,6 +69,28 @@ public class LevelManager : MonoBehaviour
         {
             client = GameObject.Find("ClientObject").GetComponent<Client>();
             client.RequestPlayerIdToServer();
+        }
+
+        if (startsWithCutScene)
+        {
+            if (initialCutsceneController == null)
+            {
+                Debug.LogError("You need an initial cutScene Controller Game Object if you want to start with a cutscene");
+            }
+            else if (initialCutsceneController != null)
+            {
+                if (initialCutsceneController.GetComponent<NPCtrigger>())
+                {
+                    NPCtrigger npcTalk = initialCutsceneController.GetComponent<NPCtrigger>();
+                    npcTalk.ReadNextFeedback();
+                }
+                if (initialCutsceneController.GetComponent<TriggerCamera>())
+                {
+                    TriggerCamera cameraController = initialCutsceneController.GetComponent<TriggerCamera>();
+                    cameraController.OnEnter();
+                }
+
+            }
         }
     }
 
@@ -190,20 +223,34 @@ public class LevelManager : MonoBehaviour
 
     public void SetLocalPlayer(int id)
     {
-
         switch (id)
         {
             case 0:
                 localPlayer = players[0].GetComponent<MageController>();
                 Debug.Log("Activating Mage local player");
+                if (playerFaceImage != null)
+                {
+                    playerFaceImage.color = new Color32(255, 255, 255, 255);
+                    playerFaceImage.sprite = decisionFaces["2Mage"].GetComponent<SpriteRenderer>().sprite;
+                }
                 break;
             case 1:
                 Debug.Log("Activating Warrior local player");
                 localPlayer = players[1].GetComponent<WarriorController>();
+                if (playerFaceImage != null)
+                {
+                    playerFaceImage.color = new Color32(255, 255, 255, 255);
+                    playerFaceImage.sprite = decisionFaces["2Warrior"].GetComponent<SpriteRenderer>().sprite;
+                }
                 break;
             case 2:
                 Debug.Log("Activating Engineer local player");
                 localPlayer = players[2].GetComponent<EngineerController>();
+                if (playerFaceImage != null)
+                {
+                    playerFaceImage.color = new Color32(255, 255, 255, 255);
+                    playerFaceImage.sprite = decisionFaces["2Engineer"].GetComponent<SpriteRenderer>().sprite;
+                }
                 break;
         }
 
@@ -265,9 +312,9 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(WaitForCollision(newObject, player));
     }
 
-    public void InsantiateGameObject(string[] msg) 
+    public void InsantiateGameObject(string[] msg)
     {
-		Debug.LogError ("Sistema Instanciación Planner no tiene Vector de instanciación"); 
+        Debug.LogError("Sistema Instanciación Planner no tiene Vector de instanciación");
         string objectName = "";
         for (int i = 1; i < msg.Length; i++)
         {
@@ -329,19 +376,19 @@ public class LevelManager : MonoBehaviour
         players[2] = GameObject.Find("Engineer");
     }
 
-	protected void StorePlayerControllers()
-	{
-		playerControllers = new PlayerController[3];
+    protected void StorePlayerControllers()
+    {
+        playerControllers = new PlayerController[3];
 
-		playerControllers [0] = GameObject.Find ("Mage").GetComponent <MageController> ();
-		playerControllers [1] = GameObject.Find ("Warrior").GetComponent <WarriorController> ();
-		playerControllers [2] = GameObject.Find ("Engineer").GetComponent<EngineerController> ();
-	}
+        playerControllers[0] = GameObject.Find("Mage").GetComponent<MageController>();
+        playerControllers[1] = GameObject.Find("Warrior").GetComponent<WarriorController>();
+        playerControllers[2] = GameObject.Find("Engineer").GetComponent<EngineerController>();
+    }
 
-	public PlayerController[] GetPlayerControllers()
-	{
-		return playerControllers;
-	}
+    public PlayerController[] GetPlayerControllers()
+    {
+        return playerControllers;
+    }
     public GameObject GetLocalPlayer()
     {
         return localPlayer.gameObject;
@@ -535,23 +582,23 @@ public class LevelManager : MonoBehaviour
     {
         if (localPlayer.decisionName != null)
         {
-			if (currentChoice [localPlayer.playerId] != null) 
-			{
-				decisionFaces [currentChoice [localPlayer.playerId] + localPlayer.name].SetActive (false);
-				currentChoice [localPlayer.playerId] = null; 
-			}
+            if (currentChoice[localPlayer.playerId] != null)
+            {
+                decisionFaces[currentChoice[localPlayer.playerId] + localPlayer.name].SetActive(false);
+                currentChoice[localPlayer.playerId] = null;
+            }
 
-			currentChoice [localPlayer.playerId] = choiceVoted;
-			decisionFaces [choiceVoted + localPlayer.name].SetActive (true);
-			SendPreVote ();
-			
+            currentChoice[localPlayer.playerId] = choiceVoted;
+            decisionFaces[choiceVoted + localPlayer.name].SetActive(true);
+            SendPreVote();
+
         }
     }
 
     public void SendPreVote()
     {
         DecisionSystem actualDecision = GameObject.Find(localPlayer.decisionName).GetComponent<DecisionSystem>();
-		actualDecision.SendPreVote(currentChoice[localPlayer.playerId].Value);
+        actualDecision.SendPreVote(currentChoice[localPlayer.playerId].Value);
     }
 
     public void ReceivePreVote(int playerId, int preVote)
@@ -570,7 +617,7 @@ public class LevelManager : MonoBehaviour
         {
             Debug.Log("Sending my Vote");
             DecisionSystem actualDecision = GameObject.Find(localPlayer.decisionName).GetComponent<DecisionSystem>();
-			actualDecision.Vote(actualDecision.choices[currentChoice[localPlayer.playerId].Value]);
+            actualDecision.Vote(actualDecision.choices[currentChoice[localPlayer.playerId].Value]);
             currentChoice = null;
         }
         else
@@ -651,26 +698,29 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-	public void InstantiateBubbleWithTargets(string bubbleType, Vector2 initialPosition, Vector2[] targetPositions, float movementSpeed, float timeToWait, float timeToKillBubble)
+    public void InstantiateBubbleWithTargets(string bubbleType, Vector2 initialPosition, Vector2[] targetPositions, float movementSpeed, float timeToWait, float timeToKillBubble)
     {
         GameObject bubble = (GameObject)Instantiate(Resources.Load("Prefabs/Bubbles/" + bubbleType));
         if (bubble)
         {
-			if (bubbleType == "BurbujaN") {
-				BubbleController bController = bubble.GetComponent<BubbleController> ();
-				bController.InitializeNeutralBubble (BubbleController.MoveType.Targets, players);
-				bController.SetMovement (initialPosition, targetPositions, movementSpeed, timeToWait, timeToKillBubble);
-			} else {
-				GameObject bubbleParticle = InstantiatePrefab ("BubbleParticles/" + bubbleType, initialPosition);
-				PlayerController powerCaster = GetPowerableBubbleCaster (bubbleType);
-				BubbleController bController = bubble.GetComponent<BubbleController> ();
-				bController.InitializeColouredBubbles (BubbleController.MoveType.Targets, powerCaster, bubbleParticle);
-				bController.SetMovement (initialPosition, targetPositions, movementSpeed, timeToWait, timeToKillBubble);
+            if (bubbleType == "BurbujaN")
+            {
+                BubbleController bController = bubble.GetComponent<BubbleController>();
+                bController.InitializeNeutralBubble(BubbleController.MoveType.Targets, players);
+                bController.SetMovement(initialPosition, targetPositions, movementSpeed, timeToWait, timeToKillBubble);
+            }
+            else
+            {
+                GameObject bubbleParticle = InstantiatePrefab("BubbleParticles/" + bubbleType, initialPosition);
+                PlayerController powerCaster = GetPowerableBubbleCaster(bubbleType);
+                BubbleController bController = bubble.GetComponent<BubbleController>();
+                bController.InitializeColouredBubbles(BubbleController.MoveType.Targets, powerCaster, bubbleParticle);
+                bController.SetMovement(initialPosition, targetPositions, movementSpeed, timeToWait, timeToKillBubble);
 
-			}
+            }
         }
     }
-    
+
     public void TogglePowerableAnimatorsWithTag(string parameter, bool value, string tag)
     {
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag(tag);
@@ -682,24 +732,24 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-	private PlayerController GetPowerableBubbleCaster (string bubbleType)
-	{
-		if (bubbleType == "BurbujaV") 
-		{
-			return GetMage ();
-		}
+    private PlayerController GetPowerableBubbleCaster(string bubbleType)
+    {
+        if (bubbleType == "BurbujaV")
+        {
+            return GetMage();
+        }
 
-		if (bubbleType == "BurbujaR") 
-		{
-			return GetWarrior ();
-		}
+        if (bubbleType == "BurbujaR")
+        {
+            return GetWarrior();
+        }
 
-		else
-		{
-			return GetEngineer ();
-		}
-	
-	}
+        else
+        {
+            return GetEngineer();
+        }
+
+    }
 
     public IEnumerator WaitForCamera(float stepsToTarget, float freezeTime)
     {
@@ -747,19 +797,35 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void TogglePowerableAnimatorsWithName(string parameter, bool value, string name)
+    public void TogglePowerableAnimatorsWithName(string animatorParameter, bool value, string name)
     {
         GameObject gameObject = GameObject.Find(name);
         SceneAnimator sceneAnimator = FindObjectOfType<SceneAnimator>();
-        sceneAnimator.SetBool(parameter, value, gameObject);
+        sceneAnimator.SetBool(animatorParameter, value, gameObject);
     }
 
-	public void CoordinateReconnectionElements()
-	{
+    #region Coordinators
+
+    public void CoordinateReconnectionElements()
+    {
         CoordinateBubbleInstantiators();
         CoordinateRotators();
         CoordinatePlatformInstantiators();
         CoordinateMovingObjects();
+        CoordinateEnemyControllers();
+        CoordinateTriggers();
+    }
+
+    private void CoordinateTriggers()
+    {
+        MovableTriggerInstantiator[] mTriggers = FindObjectsOfType<MovableTriggerInstantiator>();
+        foreach (MovableTriggerInstantiator trigger in mTriggers)
+        {
+            if (trigger.jobDone == true)
+            {
+                trigger.MustInstantiateAndDestroyAgain();
+            }
+        }
     }
 
     private void CoordinateMovingObjects()
@@ -773,6 +839,7 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
+
     private void CoordinatePlatformInstantiators()
     {
         MovingPlatformInstantiator[] mPlatforms = FindObjectsOfType<MovingPlatformInstantiator>();
@@ -785,6 +852,14 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    private void CoordinateEnemyControllers()
+    {
+        EnemyController[] eControllers = FindObjectsOfType<EnemyController>();
+        foreach (EnemyController eController in eControllers)
+        {
+            eController.ThePlayerReturned(true);
+        }
+    }
     private void CoordinateBubbleInstantiators()
     {
         BubbleRotatingInstantiator[] bInstantiators = FindObjectsOfType<BubbleRotatingInstantiator>();
@@ -808,7 +883,7 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
-
+    #endregion
     #region Coroutines
 
     public IEnumerator Respawning(PlayerController player)

@@ -192,16 +192,24 @@ public class DecisionSystem : MonoBehaviour
 			if (++playersWhoArrived == 3)
             {
 				pc.StopMoving ();
-				levelManager.StartVoting(choiceTexts);
+                StartThisVoting();
 			}
             else 
 			{
-				levelManager.ActivateNPCFeedback ("Han llegado tus compañeros?");
+                if (collision.GetComponent<PlayerController>().localPlayer)
+                {
+				    levelManager.ActivateNPCFeedback ("Han llegado tus compañeros?");
+                }
 			}
 
         }
     }
 
+
+    public void StartThisVoting()
+    {
+        levelManager.StartVoting(choiceTexts);
+    }
     private void OnTriggerExit2D(Collider2D other)
     {
         if (GameObjectIsPlayer(other.gameObject))
