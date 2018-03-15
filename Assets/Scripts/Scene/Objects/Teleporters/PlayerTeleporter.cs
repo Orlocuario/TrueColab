@@ -29,7 +29,7 @@ public class PlayerTeleporter : MonoBehaviour
     #region Events
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
-    {
+        {
         if (teleportAnyPlayer)
         {
             if (other.gameObject.GetComponent<PlayerController>())

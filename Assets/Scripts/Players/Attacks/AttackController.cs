@@ -120,7 +120,6 @@ public class AttackController : MonoBehaviour
     // Hacer que reciba un enemigo
     protected void DealDamage(GameObject enemy)
     {
-
         float dealtDamage = GetDamage();
 
         EnemyController enemyController = enemy.GetComponent<EnemyController>();
