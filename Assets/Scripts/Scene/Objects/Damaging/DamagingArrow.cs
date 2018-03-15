@@ -56,5 +56,16 @@ public class DamagingArrow : DamagingObject
                 DestroyMeAndParticles();
             }
         }
+
+        if (GameObjectIsBurnable(other.gameObject))
+        {
+           if (CheckIfImWarriored(gameObject))
+            {
+                BurnableObject bObject = other.gameObject.GetComponent<BurnableObject>();
+                bObject.Burn();
+                DestroyMeAndParticles();
+            }
+            DestroyMeAndParticles();
+        }
     }
 }

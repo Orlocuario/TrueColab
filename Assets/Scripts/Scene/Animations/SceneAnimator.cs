@@ -64,6 +64,7 @@ public class SceneAnimator : MonoBehaviour
             {
                 animator.SetBool(animName, true);
                 yield return new WaitForSeconds(animLength);
+
                 animator.SetBool(animName, false);
             }
             else

@@ -151,6 +151,11 @@ public class DamagingObject : MonoBehaviour
         Destroy(gameObject, .2f);
     }
 
+    protected bool GameObjectIsBurnable(GameObject other)
+    {
+        return other.GetComponent<BurnableObject>();
+    }
+
     protected bool GameObjectIsDeactivableKillPlane(GameObject other)
     {
         if (other.gameObject.GetComponent<KillingObject>())

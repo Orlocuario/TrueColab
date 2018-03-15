@@ -42,6 +42,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1530969131857962
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4637312193705144}
+  - component: {fileID: 114344960730671756}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1581140408619588
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,9 +117,10 @@ Transform:
   m_LocalPosition: {x: -49.602825, y: 30.458471, z: -0.0078125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4637312193705144}
   - {fileID: 4720349987801522}
-  - {fileID: 4777770814857498}
   - {fileID: 4783018367456580}
+  - {fileID: 4777770814857498}
   - {fileID: 4558548203744886}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -119,7 +136,20 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4309156720111184}
-  m_RootOrder: 3
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4637312193705144
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1530969131857962}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.27, y: 2.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4309156720111184}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4720349987801522
 Transform:
@@ -132,7 +162,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4309156720111184}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4777770814857498
 Transform:
@@ -145,7 +175,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4309156720111184}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4783018367456580
 Transform:
@@ -178,6 +208,17 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
+--- !u!114 &114344960730671756
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1530969131857962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88849f74dba6d7f4aa239abec09acef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114373349630899480
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -216,12 +257,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localPlayer: {fileID: 0}
   players: []
+  playerControllers: []
+  initialCutsceneController: {fileID: 0}
   hpAndMp: {fileID: 0}
   canvas: {fileID: 0}
   npcLog: {fileID: 0}
   spiderLog: {fileID: 0}
   decisionButtons: {fileID: 0}
   waitToRespawn: 2
+  startsWithCutScene: 0
 --- !u!114 &114661005859544558
 MonoBehaviour:
   m_ObjectHideFlags: 1

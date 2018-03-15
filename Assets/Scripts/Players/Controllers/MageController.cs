@@ -17,12 +17,6 @@ public class MageController : PlayerController
         LoadShieldArea();
     }
 
-    protected override void Update()
-    {
-        base.Update();
-        //levelManager._.DrawCircle(transform.position, shieldArea, null, Color.blue, this);
-    }
-
     #endregion
 
     #region Common

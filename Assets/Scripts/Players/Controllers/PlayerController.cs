@@ -137,7 +137,7 @@ public class PlayerController : MonoBehaviour
         IgnoreCollisionBetweenPlayers();
 
 
-        // TODO: Remove this.
+        // TODO: Remove this. // Really???
         FindObjectOfType<SoundManager>().PlaySound(gameObject, GameSounds.PlayerAttack, false);
     }
 
@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
 
     #region Update
 
-    protected virtual void Update()
+    protected virtual void FixedUpdate()
     {
         if (!connected || !canMove)
         {

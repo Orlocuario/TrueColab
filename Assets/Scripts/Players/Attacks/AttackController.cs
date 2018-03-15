@@ -160,6 +160,7 @@ public class AttackController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
     }
 
     protected void MoveToTarget()
@@ -174,7 +175,7 @@ public class AttackController : MonoBehaviour
 
     protected void IgnoreCollisionWithObjectsWhoHateMe()
     {
-        IgnoreCollisionWithAttacks[] objectsWhoHateMe = GameObject.FindObjectsOfType<IgnoreCollisionWithAttacks>();
+        IgnoreCollisionWithAttacks[] objectsWhoHateMe = FindObjectsOfType<IgnoreCollisionWithAttacks>();
 
         if (objectsWhoHateMe != null)
         {

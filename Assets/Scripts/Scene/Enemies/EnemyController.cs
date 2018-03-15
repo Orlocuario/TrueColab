@@ -18,7 +18,7 @@ public class EnemyController : MonoBehaviour
     public int directionX;  // 1 = right, -1 = left
     public float poweredTime;
     public bool maged;
-    public Vector2 strenght; 
+    public Vector2 strenght;
 
     protected Dictionary<string, bool> ignoresCollisions;
     protected Vector2 currentPatrolPoint;
@@ -36,6 +36,7 @@ public class EnemyController : MonoBehaviour
     protected float hp;
     protected float timeForAttack = 1.5f;
     protected float timeMaged;
+    protected bool deathIsComing;
 
     protected static float alertDistanceFactor = 1.5f;
     protected static float maxXSpeed = .5f;
@@ -53,6 +54,7 @@ public class EnemyController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         InitializeParticles();
         maged = false;
+        deathIsComing = false; 
         ignoresCollisions = new Dictionary<string, bool> { { "Mage", false }, { "Warrior", false }, { "Engineer", false } };
 
         currentPatrolPointCount = 0;
@@ -230,8 +232,13 @@ public class EnemyController : MonoBehaviour
     }
 
     public void Die()
-    {
-        sceneAnimator.StartAnimation("Dying", this.gameObject);
+    { 
+        if (deathIsComing)
+        {
+            return;
+        }
+        sceneAnimator.StartAnimation("Dying", gameObject);
+        deathIsComing = true; 
         StartCoroutine(WaitDying());
     }
 
@@ -471,7 +478,7 @@ public class EnemyController : MonoBehaviour
     public IEnumerator WaitDying()
     {
         yield return new WaitForSeconds(WaitToDie);
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
     public IEnumerator WaitToAttack()
