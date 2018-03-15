@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 50973638855771348}
   - component: {fileID: 58897150090711800}
   - component: {fileID: 58076335058822172}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Espiritu
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -125,11 +125,14 @@ MonoBehaviour:
   - {x: -16, y: -2.325}
   - {x: -14, y: -2.325}
   alertZone: {fileID: 58897150090711800}
+  particles: []
   patrollingSpeed: 0
   patrolling: 0
   fromEditor: 1
   directionX: -1
   poweredTime: 2
+  maged: 0
+  strenght: {x: 0, y: 0}
 --- !u!212 &212162879713302450
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -236,6 +236,7 @@ public class PlayerController : MonoBehaviour
 
     public virtual void CastLocalAttack(Vector2 startPosition)
     {
+        Debug.Log("Im Castingmy local attack");
         isAttacking = true;
 
         AttackController attack = GetAttack();

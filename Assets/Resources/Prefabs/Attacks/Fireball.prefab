@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 199424551157106478}
   - component: {fileID: 198929193170461792}
   - component: {fileID: 58100444761376736}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Fireball
   m_TagString: Fireball
   m_Icon: {fileID: 0}
