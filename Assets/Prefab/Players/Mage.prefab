@@ -229,6 +229,9 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 512
+  whatIsAlsoGround:
+    serializedVersion: 2
+    m_Bits: 8192
   particles: []
   groundCheck: {fileID: 4101700835687490}
   parent: {fileID: 0}
@@ -260,6 +263,7 @@ MonoBehaviour:
   directionY: 1
   directionX: 1
   gravityPower: 0
+  playerHasReturned: 0
 --- !u!198 &198612928901611572
 ParticleSystem:
   m_ObjectHideFlags: 1

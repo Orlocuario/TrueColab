@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public PlannerPlayer playerObj;
     public Vector3 respawnPosition;
     public LayerMask whatIsGround;
+    public LayerMask whatIsAlsoGround;
     public GameObject[] particles;
     public Transform groundCheck;
     public GameObject parent;
@@ -51,6 +52,7 @@ public class PlayerController : MonoBehaviour
     public int directionX;
     // 1 = derecha, -1 = izquierda
     public float gravityPower;
+    public bool playerHasReturned;
 
     protected SceneAnimator sceneAnimator;
     protected LevelManager levelManager;
@@ -156,7 +158,12 @@ public class PlayerController : MonoBehaviour
         {
             parent = transform.parent.gameObject;
         }
-
+        if (playerHasReturned)
+        {
+            SendPlayerDataToServer();
+            SendPowerDataToServer();
+            playerHasReturned = false; 
+        }
         Move();
         Attack();
         UsePower();
@@ -835,7 +842,18 @@ public class PlayerController : MonoBehaviour
     {
         // El radio del groundChecker debe ser menor a la medida del collider del player/2 para que no haga contactos laterales.
         groundCheckRadius = GetComponent<Collider2D>().bounds.extents.x;
-        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+
+        if (Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround))
+        {
+            return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+        }
+
+        else if (Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsAlsoGround))
+        {
+            return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsAlsoGround);
+        }
+
+        return false;
     }
 
     protected virtual bool IsJumping(bool isGrounded)

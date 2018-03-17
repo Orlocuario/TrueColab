@@ -49,6 +49,7 @@ TagManager:
   - RuneSlot
   - DeactivableKillPlane
   - LavaCascade4
+  - ChangableLava2
   layers:
   - Default
   - TransparentFX

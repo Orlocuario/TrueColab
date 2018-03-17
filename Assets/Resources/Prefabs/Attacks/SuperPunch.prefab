@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 199035693606784870}
   - component: {fileID: 198340463637587436}
   - component: {fileID: 58252858089271264}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SuperPunch
   m_TagString: Punch
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 4715640924017180}
   - component: {fileID: 198296000668618178}
   - component: {fileID: 199791587749989898}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EnergyPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

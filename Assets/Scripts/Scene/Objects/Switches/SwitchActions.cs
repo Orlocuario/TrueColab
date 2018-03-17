@@ -597,6 +597,18 @@ public class SwitchActions : MonoBehaviour
         levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(4f, -2f));
     }
 
+    private void HAndlerGroup51()
+    {
+        levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(-24.416f, -1.56f), new Vector2(-20.7f, 0.5f), true, 1);
+        GameObject altarToMove = GameObject.Find("AltarHabilidadWarrior");
+        if (altarToMove)
+        {
+            Transform transfomrAltar = altarToMove.transform;
+            transfomrAltar.position = new Vector2(-29.437f, 0.23f);
+        }   
+            
+    }
+
     #endregion
 
     #region Utils

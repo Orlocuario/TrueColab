@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 50221022604734314}
   - component: {fileID: 58064622419786608}
   - component: {fileID: 58641639487900070}
+  - component: {fileID: 114470056576096540}
   m_Layer: 13
   m_Name: Murcielago
   m_TagString: Enemy
@@ -157,6 +158,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114470056576096540
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1107423655529542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116e24f79d13ee544997ee750bc65bcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114627446036342278
 MonoBehaviour:
   m_ObjectHideFlags: 1

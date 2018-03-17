@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4029258742051156}
   - component: {fileID: 198723800346407192}
   - component: {fileID: 199939289395915934}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ElectricParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 199121275574206140}
   - component: {fileID: 198202543671637208}
   - component: {fileID: 58926542416598038}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SuperProjectile
   m_TagString: Arrow
   m_Icon: {fileID: 0}

@@ -29,7 +29,7 @@ public class PlayerTeleporter : MonoBehaviour
     #region Events
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
-        {
+    {
         if (teleportAnyPlayer)
         {
             if (other.gameObject.GetComponent<PlayerController>())
@@ -75,8 +75,8 @@ public class PlayerTeleporter : MonoBehaviour
     {
         switch (id)
         {
-            case 0:
-                HandleCase0();
+            case 1:
+                HandleCase1();
                 break;
             default:
                 return;
@@ -96,7 +96,7 @@ public class PlayerTeleporter : MonoBehaviour
         }
     }
 
-    private void HandleCase0()
+    private void HandleCase1()
     {
         GameObject pFilter = GameObject.Find("ChangableMageFilter1");
         if(pFilter)
@@ -108,6 +108,11 @@ public class PlayerTeleporter : MonoBehaviour
         ParticleSystem particles = pFilter.GetComponent<ParticleSystem>();
         ParticleSystem.MainModule module = particles.main;
         module.startColor = new Color(0, 255, 213, 255);
+
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(-22.21f, -2.135f), new Vector2(-21f, 0.5f));
+
+        GameObject switchObject = GameObject.Find("Switch (2)");
+        Destroy(switchObject);
         Destroy(gameObject);
     }
     #endregion

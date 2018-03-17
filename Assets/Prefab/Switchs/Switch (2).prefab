@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 212194214886314548}
   - component: {fileID: 50000169157640900}
   - component: {fileID: 60799787131225624}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Switch (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,13 +94,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d204be8a88a5d42bd19b6f9cea752e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groupId: 0
-  individualId: 0
-  desactivable: 0
-  on: 0
+  switchObj: {fileID: 0}
+  particles: {fileID: 0}
   activation: 0
   switchColor: 1
-  switchObj: {fileID: 0}
+  desactivable: 0
+  individualId: 0
+  groupId: 0
+  damageDone: 0
+  damageIfIncorrect: 0
+  isActivated: 0
 --- !u!212 &212194214886314548
 SpriteRenderer:
   m_ObjectHideFlags: 1
