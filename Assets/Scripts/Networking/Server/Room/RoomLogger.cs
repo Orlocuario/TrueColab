@@ -42,10 +42,18 @@ public class RoomLogger
         writer.Close();
     }
 
-    public void WriteEnterPOI(int playerId, string poiName)
+    public void WriteEnterPOI(int playerId, string poiId)
     {
         StreamWriter writer = GetWriter();
-        writer.WriteLine(GetTime() + "Player " + playerId + " entered poi with ID: " + poiName);
+        writer.WriteLine(GetTime() + "Player " + playerId + " entered poi with ID: " + poiId);
+        writer.Close();
+    }
+
+    public void WritePoiIsReady(int playerID, string poiID)
+    {
+        StreamWriter writer = GetWriter();
+        writer.NewLine = true;
+        writer.WriteLine(GetTime() +"Poi number: " + poiID + " was reached by all the necessary players");
         writer.Close();
     }
 

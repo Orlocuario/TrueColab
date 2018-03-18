@@ -118,9 +118,9 @@ public class ServerMessageHandler
             case "IgnoreCollisionBetweenObjects":
                 SendIgnoreCollisionBetweenObjects(message, connectionId);
                 break;
-		    case "BubbleInstantiatorData":
-			    SendBubbleInstantiatorDaTa (message, connectionId);
-			    break;
+            case "BubbleInstantiatorData":
+                SendBubbleInstantiatorDaTa(message, connectionId);
+                break;
             case "CoordinateRotators":
                 SendRotatorsData(message, connectionId);
                 break;
@@ -133,14 +133,28 @@ public class ServerMessageHandler
             case "EnterPOI":
                 HandleEnterPOI(msg, connectionId);
                 break;
+            case "ReadyPoi":
+                HandleReadyPoi(msg, connectionId);
+                break;
             default:
                 break;
         }
     }
 
+    private void HandleReadyPoi(string[] msg, int connectionId)
+    {
+        string poiID = msg[1].ToString();
+        NetworkPlayer player = server.GetPlayer(connectionId);
+        RoomLogger log = player.room.log;
+        log.WritePoiIsReady(player.id, poiID);
+
+        Debug.Log("POI " + poiID + " reached by " + player.id + " in room " + player.room.id + ".Writed in log.");
+
+    }
+
     private void HandleEnterPOI(string[] msg, int connectionID)
     {
-        string poiID = msg[1];
+        string poiID = msg[1].ToString();
         NetworkPlayer player = server.GetPlayer(connectionID);
         RoomLogger log = player.room.log;
         log.WriteEnterPOI(player.id, poiID);
@@ -232,7 +246,7 @@ public class ServerMessageHandler
         NetworkPlayer player = server.GetPlayer(connectionId);
         Room room = player.room;
 
-		room.SendMessageToAllPlayersExceptOne(message, connectionId, true);
+        room.SendMessageToAllPlayersExceptOne(message, connectionId, true);
         room.systemsManager.AddSystem(systemName);
     }
 
@@ -526,12 +540,12 @@ public class ServerMessageHandler
         server.SendMessageToClient(connectionId, message, true);
     }
 
-	private void SendBubbleInstantiatorDaTa(string message, int connectionId)
-	{
-		NetworkPlayer player = server.GetPlayer(connectionId);
-		Room room = player.room;
-		room.SendMessageToAllPlayers(message, true);
-	}
+    private void SendBubbleInstantiatorDaTa(string message, int connectionId)
+    {
+        NetworkPlayer player = server.GetPlayer(connectionId);
+        Room room = player.room;
+        room.SendMessageToAllPlayers(message, true);
+    }
 
     private void SendRotatorsData(string message, int connectionId)
     {

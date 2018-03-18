@@ -552,6 +552,12 @@ public class PlayerController : MonoBehaviour
         return other.GetComponent<PlannerPoi>();
     }
 
+    protected bool GameObjectIsNewPOI(GameObject other)
+    {
+        return other.GetComponent<Poi>();
+    }
+
+
     #endregion
 
     // Set player data from other classes
@@ -969,6 +975,16 @@ public class PlayerController : MonoBehaviour
     public void SendMPDataToServer()
     {
         SendMessageToServer("ChangeMpHUDToRoom/" + mpSpendRate);
+    }
+
+    public void SendPoiEnterToServer(int poiId)
+    {
+        Client.instance.SendMessageToServer("EnterPOI/" + poiId, true);
+    }
+
+    public void SendPoiIsReadyToServer(int poiId)
+    {
+        Client.instance.SendMessageToServer("ReadyPoi/" + poiId, true);
     }
 
     protected void SendMessageToServer(string message)
