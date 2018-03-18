@@ -52,7 +52,6 @@ public class RoomLogger
     public void WritePoiIsReady(int playerID, string poiID)
     {
         StreamWriter writer = GetWriter();
-        writer.NewLine = true;
         writer.WriteLine(GetTime() +"Poi number: " + poiID + " was reached by all the necessary players");
         writer.Close();
     }

@@ -7,12 +7,11 @@ public class Poi : MonoBehaviour {
     public int id;
     public PlayerController[] playersNeeded;
     private int playersArrived;
-    private int?[] playersDone;
 
 
     private void Start()
     {
-        
+        CheckParameters();
     } 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -26,7 +25,7 @@ public class Poi : MonoBehaviour {
                 playersArrived++;
                 if (playersArrived == playersNeeded.Length)
                 {
-                    
+                    pController.SendPoiIsReadyToServer(id);
                 }
 
             }
@@ -55,5 +54,18 @@ public class Poi : MonoBehaviour {
         }
 
         return false;
+    }
+
+    private void CheckParameters()
+    {
+        if (id == 0)
+        {
+            Debug.LogError("A poi needs an ID");
+        }
+
+        if (playersNeeded == null)
+        {
+            Debug.LogError("A poi needs players to be ready");
+        }
     }
 }
