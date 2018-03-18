@@ -53,9 +53,9 @@ public class RoomLogger
     public void WritePoiIsReady(int playerID, string poiID)
     {
         StreamWriter writer = GetWriter();
-        writer.NewLine = true;
+        writer.WriteLine("");
         TimeSpan spans = GetTimeAsDateTime().Subtract(lastPOIP);
-        writer.WriteLine(GetTime() +"Poi number: " + poiID + " was reached by all the necessary players. Seconds spent reaching this POI from the last one: " + spans.TotalSeconds);
+        writer.WriteLine(GetTime() +"Poi number: " + poiID + " was reached by all the necessary players. Seconds spent reaching this POI from the last one was: " + spans.TotalSeconds);
         lastPOIP = GetTimeAsDateTime();
         writer.Close();
     }
@@ -92,8 +92,7 @@ public class RoomLogger
 
     public void WriteEmptyLine()
     {
-        StreanWriter writer = GetWriter();
-
+        StreamWriter writer = GetWriter();
     }
 
     public void WriteNewPosition(int playerId, float positionX, float positionY, bool pressingJump, bool pressingLeft, bool pressingRight)

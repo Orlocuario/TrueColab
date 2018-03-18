@@ -31,7 +31,7 @@ public class SlideRock : DamagingObject
 
     private void KillAndDestroy(GameObject pasadizo)
     {
-        GameObject humo = (GameObject)Instantiate(Resources.Load("Prefabs/FeedbackParticles/Humo"));
+        GameObject humo = (GameObject)Instantiate(Resources.Load("Prefabs/Humo"));
         humo.GetComponent<Transform>().position = new Vector2(34.1f, -7.07f);
 
         Destroy(humo, 5f);
@@ -50,7 +50,7 @@ public class SlideRock : DamagingObject
 
     #region Events
 
-    protected override void OnTriggerEnter2D(Collider2D collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.name == "PasadizoJ1J2")
         {
