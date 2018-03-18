@@ -7,7 +7,7 @@ public class RoomLogger
     #region Attributes
 
     int roomId;
-
+    DateTime lastPOIP; //One for each player
     #endregion
 
     #region Constructor
@@ -15,6 +15,7 @@ public class RoomLogger
     public RoomLogger(int id)
     {
         this.roomId = id;
+        lastPOIP = GetTimeAsDateTime();
     }
 
     #endregion
@@ -52,9 +53,20 @@ public class RoomLogger
     public void WritePoiIsReady(int playerID, string poiID)
     {
         StreamWriter writer = GetWriter();
-        writer.WriteLine(GetTime() +"Poi number: " + poiID + " was reached by all the necessary players");
+        writer.NewLine = true;
+        TimeSpan spans = GetTimeAsDateTime().Subtract(lastPOIP);
+        writer.WriteLine(GetTime() +"Poi number: " + poiID + " was reached by all the necessary players. Seconds spent reaching this POI from the last one: " + spans.TotalSeconds);
+        lastPOIP = GetTimeAsDateTime();
         writer.Close();
     }
+
+    public void WriteNewLine()
+    {
+        StreamWriter writer = GetWriter();
+        writer.WriteLine("");
+        writer.Close();
+    }
+
 
     //Modificar si se cambia el sistema de inventario
     public void WriteInventory(int playerId, string message)
@@ -75,6 +87,12 @@ public class RoomLogger
             writer.WriteLine(GetTime() + " Player " + playerId + " tossed item in slot " + index + "\n");
         }
         writer.Close();
+
+    }
+
+    public void WriteEmptyLine()
+    {
+        StreanWriter writer = GetWriter();
 
     }
 
@@ -112,7 +130,12 @@ public class RoomLogger
     #region Utils
 
     private string GetTime(){
-      return DateTime.Now.ToString("HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo);
+      return DateTime.Now.ToString("HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo);        
+    }
+
+    private DateTime GetTimeAsDateTime()
+    {
+        return DateTime.Now;
     }
 
     private StreamWriter GetWriter()
