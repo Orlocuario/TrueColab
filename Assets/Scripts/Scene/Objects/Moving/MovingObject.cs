@@ -82,7 +82,8 @@ public class MovingObject : MonoBehaviour
 
     public void SetData(Vector2 start, Vector2 end, float speed, float timeIllWait, bool ignoreCollisionWithPlayers)
     {
-        transform.position = start;
+        startPoint = start;
+        endPoint = end;
         currentTarget = end;
         moveSpeed = speed;
         timeToWait = timeIllWait;

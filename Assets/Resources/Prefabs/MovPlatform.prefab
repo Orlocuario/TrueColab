@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3310a335c359959459f1e3899f61242d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endPoint: {x: 1.73, y: 3.21}
+  endPoint: {x: 0, y: 0}
   dontCollideWithPlayers: 0
   moveSpeed: 0.8
   timeToWait: 1
