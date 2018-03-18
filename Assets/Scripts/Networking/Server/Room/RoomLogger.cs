@@ -42,6 +42,13 @@ public class RoomLogger
         writer.Close();
     }
 
+    public void WriteEnterPOI(int playerId, string poiName)
+    {
+        StreamWriter writer = GetWriter();
+        writer.WriteLine(GetTime() + "Player " + playerId + " entered poi with ID: " + poiName);
+        writer.Close();
+    }
+
     //Modificar si se cambia el sistema de inventario
     public void WriteInventory(int playerId, string message)
     {
