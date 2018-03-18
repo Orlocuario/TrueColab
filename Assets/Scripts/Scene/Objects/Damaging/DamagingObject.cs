@@ -129,7 +129,7 @@ public class DamagingObject : MonoBehaviour
     {
         if (gameObject.GetComponent<OneTimeMovingObject>())
         {
-            if (gameObject.GetComponent<OneTimeMovingObject>().isAttack)
+            if (gameObject.GetComponent<OneTimeMovingObject>().needsParticles)
             {
                 gameObject.GetComponent<OneTimeMovingObject>().DestroyParasiteParticles();
             }

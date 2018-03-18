@@ -12,7 +12,8 @@ public class OneTimeMovingObject : MonoBehaviour
     public bool diesAtTheEnd;
     public bool isPlatform;
     public float timeToWait = 0;
-    public bool isAttack;
+    public bool needsParticles;
+
 
 
     private GameObject[] myParasiteParticles;
@@ -33,7 +34,7 @@ public class OneTimeMovingObject : MonoBehaviour
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target, moveSpeed * Time.deltaTime);
 
-            if (isAttack)
+            if (needsParticles)
             {
                 foreach (GameObject parasiteParticle in myParasiteParticles)
                 {
@@ -62,10 +63,13 @@ public class OneTimeMovingObject : MonoBehaviour
                         Destroy(gameObject, timeToWait);
                         return;
                     }
-                    for (int i = 0; i  <myParasiteParticles.Length;i++ )
+                    if (needsParticles)
                     {
-                        Destroy(myParasiteParticles[i]);
-                        myParasiteParticles[i] = null; 
+                        for (int i = 0; i  <myParasiteParticles.Length;i++ )
+                        {
+                            Destroy(myParasiteParticles[i]);
+                            myParasiteParticles[i] = null; 
+                        }
                     }
                     Destroy(gameObject);
                 }

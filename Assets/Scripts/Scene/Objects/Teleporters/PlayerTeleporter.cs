@@ -110,6 +110,7 @@ public class PlayerTeleporter : MonoBehaviour
         module.startColor = new Color(0, 255, 213, 255);
 
         levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(-22.21f, -2.135f), new Vector2(-21f, 0.5f));
+        levelManager.InstatiateSprite("Arrows/mageArrowDown", new Vector2(-22f, 0.9f));
 
         GameObject switchObject = GameObject.Find("Switch (2)");
         Destroy(switchObject);

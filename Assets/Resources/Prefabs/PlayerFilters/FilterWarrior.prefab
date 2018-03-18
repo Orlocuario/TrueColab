@@ -72,8 +72,7 @@ MonoBehaviour:
   activated: 1
   damage: 3
   hitsBeforeKilled: 0
-  playersCanPass:
-  - {fileID: 0}
+  allowedPlayers: []
 --- !u!198 &198100996994816312
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -302,7 +301,7 @@ ParticleSystem:
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.9764706, g: 0.023529412, b: 0.023529412, a: 1}
+      maxColor: {r: 0.9843137, g: 0.02745098, b: 0.28627452, a: 1}
       minMaxState: 0
     startSize:
       scalar: 0.1

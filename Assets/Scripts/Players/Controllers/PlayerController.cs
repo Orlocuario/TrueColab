@@ -33,9 +33,9 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded;
     public bool upPressed;
 
-	public GameObject availablePowerable;
+    public GameObject availablePowerable;
     public GameObject availableChatZone;
-    public GameObject availableInstantiatorTrigger; 
+    public GameObject availableInstantiatorTrigger;
     public string decisionName;
     public bool controlOverEnemies;
     public float groundCheckRadius;
@@ -116,8 +116,8 @@ public class PlayerController : MonoBehaviour
         connected = true;
         canMove = true;
         availableChatZone = null;
-		decisionName = null;
-		availablePowerable = null; 
+        decisionName = null;
+        availablePowerable = null;
         gravityPower = 2.3f;
 
         remoteAttacking = false;
@@ -162,7 +162,7 @@ public class PlayerController : MonoBehaviour
         {
             SendPlayerDataToServer();
             SendPowerDataToServer();
-            playerHasReturned = false; 
+            playerHasReturned = false;
         }
         Move();
         Attack();
@@ -436,7 +436,7 @@ public class PlayerController : MonoBehaviour
         {
             ChatZone chatZoneOff = availableChatZone.GetComponent<ChatZone>();
             chatZoneOff.TurnChatZoneOff();
-            availableChatZone = null; 
+            availableChatZone = null;
         }
     }
 
@@ -496,7 +496,7 @@ public class PlayerController : MonoBehaviour
         }
 
         AnimateTakingDamage();
-        if(gameObject.activeInHierarchy)
+        if (gameObject.activeInHierarchy)
         {
             StartCoroutine(WaitTakingDamage());
         }
@@ -590,14 +590,14 @@ public class PlayerController : MonoBehaviour
         {
             directionY = 1;
             rb2d.gravityScale = 2.5f;
-            
+
         }
         else
         {
             directionY = -1;
             rb2d.gravityScale = -1.5f;
-			cameraState = CameraState.Backwards;
-			SetCamera();
+            cameraState = CameraState.Backwards;
+            SetCamera();
         }
 
         transform.localScale = new Vector3(directionX, directionY, 1f);
@@ -606,12 +606,12 @@ public class PlayerController : MonoBehaviour
     private void SetCamera()
     {
         GameObject camera = GameObject.Find("MainCamera");
-		if (camera != null) 
-		{
-			CameraController cameraController = camera.GetComponent<CameraController>();
-			float cameraSize = cameraController.initialSize;
-			cameraController.ChangeState(cameraState, cameraSize, transform.position.x, transform.position.y, true, false, false, 100, 70);
-		}
+        if (camera != null)
+        {
+            CameraController cameraController = camera.GetComponent<CameraController>();
+            float cameraSize = cameraController.initialSize;
+            cameraController.ChangeState(cameraState, cameraSize, transform.position.x, transform.position.y, true, false, false, 100, 70);
+        }
     }
 
     protected void SetRespawn(Vector3 placeToGo)
@@ -632,6 +632,7 @@ public class PlayerController : MonoBehaviour
         if (availablePowerable != null)
         {
             TogglePowerable(active);
+            ToggleParticles(false);
         }
     }
 
@@ -847,13 +848,10 @@ public class PlayerController : MonoBehaviour
         {
             return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
         }
-
-        else if (Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsAlsoGround))
+        else
         {
             return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsAlsoGround);
         }
-
-        return false;
     }
 
     protected virtual bool IsJumping(bool isGrounded)
