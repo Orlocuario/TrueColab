@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 50142018120206434}
   - component: {fileID: 95622993178529428}
   - component: {fileID: 114658916424741128}
+  - component: {fileID: 114465290946396754}
   m_Layer: 10
   m_Name: Mage
   m_TagString: Player
@@ -201,6 +202,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114465290946396754
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1883630760672116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57155315586ba451f8a5fe45a498d201, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114658916424741128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -217,6 +229,9 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 512
+  whatIsAlsoGround:
+    serializedVersion: 2
+    m_Bits: 16384
   particles: []
   groundCheck: {fileID: 4101700835687490}
   parent: {fileID: 0}
@@ -248,6 +263,7 @@ MonoBehaviour:
   directionY: 1
   directionX: 1
   gravityPower: 0
+  playerHasReturned: 0
 --- !u!198 &198612928901611572
 ParticleSystem:
   m_ObjectHideFlags: 1

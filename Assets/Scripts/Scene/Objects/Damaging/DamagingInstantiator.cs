@@ -11,6 +11,7 @@ public class DamagingInstantiator : MonoBehaviour
     public float moveSpeed;
     public bool startsAtBegginning;
     public bool needed;
+    public bool needsParticles;
 
 
     public string objectName;
@@ -41,19 +42,33 @@ public class DamagingInstantiator : MonoBehaviour
                 yield break;
             }
             GameObject damagingObject = (GameObject)Instantiate(Resources.Load("Prefabs/Damaging/" + objectName));
-            GameObject parasiteMageParticle = (GameObject)Instantiate(Resources.Load("Prefabs/Damaging/MageArrowParticle"));
-            GameObject parasiteWarriorParticle = (GameObject)Instantiate(Resources.Load("Prefabs/Damaging/WarriorArrowParticle"));
-            GameObject parasiteEngineerParticle = (GameObject)Instantiate(Resources.Load("Prefabs/Damaging/EngineerArrowParticle"));
 
-            GameObject[] parasitesForDamaging = new GameObject[3] { parasiteMageParticle, parasiteWarriorParticle, parasiteEngineerParticle };
-
-            if (damagingObject != null)
+            if (needsParticles)
             {
-                damagingObject.transform.position = initialPosition;
-                CheckAndSetPowerableData(damagingObject, parasitesForDamaging);
-                CheckAndSetMovingData(damagingObject, parasitesForDamaging);
-                yield return new WaitForSeconds(instantiationRate);
-                Debug.Log("Instantiated damagingObjects");
+                GameObject parasiteMageParticle = (GameObject)Instantiate(Resources.Load("Prefabs/Damaging/MageArrowParticle"));
+                GameObject parasiteWarriorParticle = (GameObject)Instantiate(Resources.Load("Prefabs/Damaging/WarriorArrowParticle"));
+                GameObject parasiteEngineerParticle = (GameObject)Instantiate(Resources.Load("Prefabs/Damaging/EngineerArrowParticle"));
+                GameObject[] parasitesForDamaging = new GameObject[3] { parasiteMageParticle, parasiteWarriorParticle, parasiteEngineerParticle };
+
+                if (damagingObject != null)
+                {
+                    damagingObject.transform.position = initialPosition;
+                    CheckAndSetPowerableData(damagingObject, parasitesForDamaging);
+                    CheckAndSetMovingData(damagingObject, parasitesForDamaging);
+                    yield return new WaitForSeconds(instantiationRate);
+                    Debug.Log("Instantiated damagingObjects");
+                }
+            }
+
+            else if (!needsParticles)
+            {
+                if (damagingObject != null)
+                {
+                    damagingObject.transform.position = initialPosition;
+                    CheckAndSetMovingData(damagingObject);
+                    yield return new WaitForSeconds(instantiationRate);
+                    Debug.Log("Instantiated damagingObjects");
+                }
             }
         }
     }
@@ -81,6 +96,7 @@ public class DamagingInstantiator : MonoBehaviour
             }
         }
     }
+
     private void CheckAndSetMovingData(GameObject damagingObject, GameObject[] parasitesForDamaging)
     {
         if (damagingObject.GetComponent<OneTimeMovingObject>())
@@ -89,7 +105,39 @@ public class DamagingInstantiator : MonoBehaviour
             objectMovement.SetParasiteParticles(parasitesForDamaging);
             objectMovement.target = targetPosition;
             objectMovement.moveSpeed = moveSpeed;
-            objectMovement.isAttack = true;
+            objectMovement.needsParticles = true;
+            objectMovement.move = true;
+            objectMovement.diesAtTheEnd = true;
+
+
+            if (targetPosition.y > transform.position.y + 1)
+            {
+                Quaternion _Q = objectMovement.transform.rotation;
+                objectMovement.transform.rotation = _Q * Quaternion.AngleAxis(-90, new Vector3(0, 0, 1));
+            }
+            else if (targetPosition.y < transform.position.y - 1)
+            {
+                Quaternion _Q = objectMovement.transform.rotation;
+                objectMovement.transform.rotation = _Q * Quaternion.AngleAxis(90, new Vector3(0, 0, 1));
+            }
+
+            if (targetPosition.x > transform.position.x)
+            {
+                objectMovement.transform.localScale *= -1;
+            }
+
+        }
+
+    }
+
+    private void CheckAndSetMovingData(GameObject damagingObject)
+    {
+        if (damagingObject.GetComponent<OneTimeMovingObject>())
+        {
+            OneTimeMovingObject objectMovement = damagingObject.GetComponent<OneTimeMovingObject>();
+            objectMovement.target = targetPosition;
+            objectMovement.moveSpeed = moveSpeed;
+            objectMovement.needsParticles = false;
             objectMovement.move = true;
             objectMovement.diesAtTheEnd = true;
 

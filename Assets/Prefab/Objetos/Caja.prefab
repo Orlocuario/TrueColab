@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114381952529726816}
   - component: {fileID: 50455856794207122}
   - component: {fileID: 212752011524194558}
-  m_Layer: 9
+  m_Layer: 14
   m_Name: Caja
   m_TagString: Destroyable
   m_Icon: {fileID: 0}
@@ -88,7 +88,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51cdab313db5fe241b9dc11cb2413f4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyDelayTime: 0
+  reinforced: 0
   brokenBox: {fileID: 21300090, guid: 57ba4181729beb142bfd795c32f0de9e, type: 3}
+  metalCorners: {fileID: 0}
 --- !u!212 &212752011524194558
 SpriteRenderer:
   m_ObjectHideFlags: 1

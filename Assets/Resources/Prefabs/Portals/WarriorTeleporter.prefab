@@ -23,7 +23,8 @@ GameObject:
   - component: {fileID: 199848479954648102}
   - component: {fileID: 58004499929373100}
   - component: {fileID: 114914947311703396}
-  m_Layer: 0
+  - component: {fileID: 50239369990983724}
+  m_Layer: 10
   m_Name: WarriorTeleporter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,8 +41,7 @@ GameObject:
   - component: {fileID: 4854777572129710}
   - component: {fileID: 198427528222953736}
   - component: {fileID: 199180212353805346}
-  - component: {fileID: 114126338294169336}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Particle System (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1094890611581008}
   m_LocalRotation: {x: -0, y: -0, z: 0.46820492, w: 0.88361996}
-  m_LocalPosition: {x: 82.855, y: -18.577, z: 0}
+  m_LocalPosition: {x: -24.416, y: -1.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4854777572129710}
@@ -75,6 +75,26 @@ Transform:
   m_Father: {fileID: 4352715059469020}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 55.836002}
+--- !u!50 &50239369990983724
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1094890611581008}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!58 &58004499929373100
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -89,20 +109,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25978085
---- !u!114 &114126338294169336
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1424831065750080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97002ec031d09245b3537b89b1ac288, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  warriorController: {fileID: 0}
-  theLevelManager: {fileID: 0}
-  teleportPosition: {x: 0, y: 0}
 --- !u!114 &114914947311703396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -114,7 +120,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ce0b273be5f464aa5f6c23ec954063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teleportPosition: {x: 0, y: 0}
+  teleportPosition: {x: -20.7, y: 0.5}
+  teleportAnyPlayer: 0
+  mustDoSomething: 1
+  itsDone: 0
+  id: 1
 --- !u!198 &198427528222953736
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -170,7 +180,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 2136157544
+  randomSeed: 544140318
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -2807,7 +2817,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1637756252
+  randomSeed: 1143112135
   InitialModule:
     serializedVersion: 3
     enabled: 1

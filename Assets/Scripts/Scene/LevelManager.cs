@@ -698,6 +698,18 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void InstantiatePortal(string portalType, Vector2 initialPosition, Vector2 teleportPosition, bool mustDoSomething, int id)
+    {
+        GameObject portal = (GameObject)Instantiate(Resources.Load("Prefabs/Portals/" + portalType));
+        if (portal)
+        {
+            portal.GetComponent<Transform>().position = initialPosition;
+            portal.GetComponent<PlayerTeleporter>().teleportPosition = teleportPosition;
+            portal.GetComponent<PlayerTeleporter>().mustDoSomething = mustDoSomething;
+            portal.GetComponent<PlayerTeleporter>().id = id;
+        }
+    }
+
     public void InstantiateBubbleWithTargets(string bubbleType, Vector2 initialPosition, Vector2[] targetPositions, float movementSpeed, float timeToWait, float timeToKillBubble)
     {
         GameObject bubble = (GameObject)Instantiate(Resources.Load("Prefabs/Bubbles/" + bubbleType));
@@ -808,6 +820,7 @@ public class LevelManager : MonoBehaviour
 
     public void CoordinateReconnectionElements()
     {
+        CoordinatePlayers();
         CoordinateBubbleInstantiators();
         CoordinateRotators();
         CoordinatePlatformInstantiators();
@@ -828,6 +841,14 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    private void CoordinatePlayers()
+    {
+        PlayerController[] pControllers = FindObjectsOfType<PlayerController>();
+        foreach (PlayerController pController in pControllers)
+        {
+            pController.playerHasReturned = true; 
+        }
+    }
     private void CoordinateMovingObjects()
     {
         MovingObject[] mObjects = FindObjectsOfType<MovingObject>();

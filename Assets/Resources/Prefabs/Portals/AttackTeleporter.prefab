@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198313051464653058}
   - component: {fileID: 199463678033133610}
   - component: {fileID: 114253723973180070}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 199281042526003210}
   - component: {fileID: 58876307229540626}
   - component: {fileID: 114071240146170918}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: AttackTeleporter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74b46ac362e17974ea94befbff6158d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instatiationPosition: {x: -54.38, y: 22.41}
+  startPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
 --- !u!114 &114253723973180070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -112,7 +113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74b46ac362e17974ea94befbff6158d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instatiationPosition: {x: 0, y: 0}
+  startPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
 --- !u!198 &198205494398891234
 ParticleSystem:
   m_ObjectHideFlags: 1

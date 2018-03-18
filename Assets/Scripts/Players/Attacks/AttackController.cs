@@ -180,10 +180,12 @@ public class AttackController : MonoBehaviour
         {
             foreach (IgnoreCollisionWithAttacks objectWhoHatesMe in objectsWhoHateMe)
             {
-                Collider2D colliderWhoHatesMe = objectWhoHatesMe.GetComponent<Collider2D>();
-                Physics2D.IgnoreCollision(colliderWhoHatesMe, GetComponent<Collider2D>(), true);
+                Collider2D[] collidersWhoHateME = objectWhoHatesMe.GetComponents<Collider2D>();
+                foreach (Collider2D hatingCollider in collidersWhoHateME)
+                {
+                    Physics2D.IgnoreCollision(hatingCollider, GetComponent<Collider2D>(), true);
+                }
             }
-
         }
     }
 

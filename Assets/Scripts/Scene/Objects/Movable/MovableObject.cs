@@ -105,7 +105,7 @@ public class MovableObject : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         // Prevents weird collisions with other game objects.
         if (!collision.gameObject || !collision.gameObject.GetComponent<Rigidbody2D>())

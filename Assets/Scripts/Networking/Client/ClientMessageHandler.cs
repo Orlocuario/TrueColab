@@ -253,7 +253,12 @@ public class ClientMessageHandler
                 return;
             }
 
+            if (localPlayer)
+            {
+                Debug.Log("Now I Have a Local Player!!!!!");
+            }
             localPlayer.controlOverEnemies = control;
+            
 
             if (control)
             {

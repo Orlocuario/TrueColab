@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 199848479954648102}
   - component: {fileID: 58004499929373100}
   - component: {fileID: 114973518230364780}
+  - component: {fileID: 50302682392040890}
   m_Layer: 0
   m_Name: MageTeleporter
   m_TagString: Untagged
@@ -74,6 +75,26 @@ Transform:
   m_Father: {fileID: 4352715059469020}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 55.836002}
+--- !u!50 &50302682392040890
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1094890611581008}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!58 &58004499929373100
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -100,6 +121,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teleportPosition: {x: 0, y: 0}
+  teleportAnyPlayer: 0
+  mustDoSomething: 0
+  itsDone: 0
+  id: 0
 --- !u!198 &198427528222953736
 ParticleSystem:
   m_ObjectHideFlags: 1

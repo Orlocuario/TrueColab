@@ -49,6 +49,8 @@ TagManager:
   - RuneSlot
   - DeactivableKillPlane
   - LavaCascade4
+  - ChangableLava2
+  - LavaCascade3
   layers:
   - Default
   - TransparentFX
@@ -62,9 +64,9 @@ TagManager:
   - Ground
   - Player
   - Particles
-  - 
-  - 
-  - 
+  - Attacks
+  - AttackReceipers
+  - DestroyableGround
   - 
   - 
   - 

@@ -125,7 +125,7 @@ public class PowerableObject : MonoBehaviour
 
     #region Start & Update
 
-    protected void Start()
+    protected virtual void Start()
     {
         levelManager = FindObjectOfType<LevelManager>();
         InitializeParticles();

@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public PlannerPlayer playerObj;
     public Vector3 respawnPosition;
     public LayerMask whatIsGround;
+    public LayerMask whatIsAlsoGround;
     public GameObject[] particles;
     public Transform groundCheck;
     public GameObject parent;
@@ -32,9 +33,9 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded;
     public bool upPressed;
 
-	public GameObject availablePowerable;
+    public GameObject availablePowerable;
     public GameObject availableChatZone;
-    public GameObject availableInstantiatorTrigger; 
+    public GameObject availableInstantiatorTrigger;
     public string decisionName;
     public bool controlOverEnemies;
     public float groundCheckRadius;
@@ -51,6 +52,7 @@ public class PlayerController : MonoBehaviour
     public int directionX;
     // 1 = derecha, -1 = izquierda
     public float gravityPower;
+    public bool playerHasReturned;
 
     protected SceneAnimator sceneAnimator;
     protected LevelManager levelManager;
@@ -114,8 +116,8 @@ public class PlayerController : MonoBehaviour
         connected = true;
         canMove = true;
         availableChatZone = null;
-		decisionName = null;
-		availablePowerable = null; 
+        decisionName = null;
+        availablePowerable = null;
         gravityPower = 2.3f;
 
         remoteAttacking = false;
@@ -156,7 +158,12 @@ public class PlayerController : MonoBehaviour
         {
             parent = transform.parent.gameObject;
         }
-
+        if (playerHasReturned)
+        {
+            SendPlayerDataToServer();
+            SendPowerDataToServer();
+            playerHasReturned = false;
+        }
         Move();
         Attack();
         UsePower();
@@ -236,6 +243,7 @@ public class PlayerController : MonoBehaviour
 
     public virtual void CastLocalAttack(Vector2 startPosition)
     {
+        Debug.Log("Im Castingmy local attack");
         isAttacking = true;
 
         AttackController attack = GetAttack();
@@ -428,7 +436,7 @@ public class PlayerController : MonoBehaviour
         {
             ChatZone chatZoneOff = availableChatZone.GetComponent<ChatZone>();
             chatZoneOff.TurnChatZoneOff();
-            availableChatZone = null; 
+            availableChatZone = null;
         }
     }
 
@@ -488,7 +496,7 @@ public class PlayerController : MonoBehaviour
         }
 
         AnimateTakingDamage();
-        if(gameObject.activeInHierarchy)
+        if (gameObject.activeInHierarchy)
         {
             StartCoroutine(WaitTakingDamage());
         }
@@ -582,14 +590,14 @@ public class PlayerController : MonoBehaviour
         {
             directionY = 1;
             rb2d.gravityScale = 2.5f;
-            
+
         }
         else
         {
             directionY = -1;
             rb2d.gravityScale = -1.5f;
-			cameraState = CameraState.Backwards;
-			SetCamera();
+            cameraState = CameraState.Backwards;
+            SetCamera();
         }
 
         transform.localScale = new Vector3(directionX, directionY, 1f);
@@ -598,12 +606,12 @@ public class PlayerController : MonoBehaviour
     private void SetCamera()
     {
         GameObject camera = GameObject.Find("MainCamera");
-		if (camera != null) 
-		{
-			CameraController cameraController = camera.GetComponent<CameraController>();
-			float cameraSize = cameraController.initialSize;
-			cameraController.ChangeState(cameraState, cameraSize, transform.position.x, transform.position.y, true, false, false, 100, 70);
-		}
+        if (camera != null)
+        {
+            CameraController cameraController = camera.GetComponent<CameraController>();
+            float cameraSize = cameraController.initialSize;
+            cameraController.ChangeState(cameraState, cameraSize, transform.position.x, transform.position.y, true, false, false, 100, 70);
+        }
     }
 
     protected void SetRespawn(Vector3 placeToGo)
@@ -624,6 +632,7 @@ public class PlayerController : MonoBehaviour
         if (availablePowerable != null)
         {
             TogglePowerable(active);
+            ToggleParticles(false);
         }
     }
 
@@ -834,7 +843,15 @@ public class PlayerController : MonoBehaviour
     {
         // El radio del groundChecker debe ser menor a la medida del collider del player/2 para que no haga contactos laterales.
         groundCheckRadius = GetComponent<Collider2D>().bounds.extents.x;
-        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+
+        if (Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround))
+        {
+            return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+        }
+        else
+        {
+            return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsAlsoGround);
+        }
     }
 
     protected virtual bool IsJumping(bool isGrounded)

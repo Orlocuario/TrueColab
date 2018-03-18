@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61289825871989456}
   - component: {fileID: 50426828938959510}
   - component: {fileID: 114347100540728230}
-  m_Layer: 9
+  m_Layer: 13
   m_Name: SwitchGreenShoot
   m_TagString: SwitchMovingObject
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 4631218345325788}
   - component: {fileID: 199039662724333444}
   - component: {fileID: 198908487940225476}
-  m_Layer: 9
+  m_Layer: 13
   m_Name: ParticleGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,10 +120,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3310a335c359959459f1e3899f61242d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPoint: {x: 26.74, y: 2.3}
   endPoint: {x: 26.74, y: 3.6}
   dontCollideWithPlayers: 1
   moveSpeed: 0.8
+  timeToWait: 0
+  isWorking: 0
+  playerHasReturned: 0
 --- !u!114 &114499137852718694
 MonoBehaviour:
   m_ObjectHideFlags: 1

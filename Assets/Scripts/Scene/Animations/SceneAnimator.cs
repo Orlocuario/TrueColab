@@ -21,17 +21,20 @@ public class SceneAnimator : MonoBehaviour
         StartCoroutine(SetBoolAfter(animator, parameter, value, time));
     }
 
-    public void SetBool(string parameter, bool value, GameObject gameObject)
+    public void SetBool(string parameter, bool value, GameObject animatorGameObject)
     {
-        Animator animator = gameObject.GetComponent<Animator>();
-
-        if (!animator)
+        if (animatorGameObject)
         {
-            Debug.Log(gameObject.name + " has no animator ");
-            return;
-        }
+            Animator animator = animatorGameObject.GetComponent<Animator>();
 
-        animator.SetBool(parameter, value);
+            if (!animator)
+            {
+                Debug.Log(animatorGameObject.name + " has no animator ");
+                return;
+            }
+
+            animator.SetBool(parameter, value);
+        }
     }
 
     public void SetFloat(string parameter, float value, GameObject gameObject)

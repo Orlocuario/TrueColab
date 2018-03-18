@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 61228434254727420}
   - component: {fileID: 251371797806482796}
   - component: {fileID: 114537745321621530}
+  - component: {fileID: 114371837262506392}
   m_Layer: 9
   m_Name: MovPlatform
   m_TagString: MovingPlatform
@@ -86,6 +87,17 @@ BoxCollider2D:
   m_Offset: {x: -0.00018692017, y: 0.17775977}
   serializedVersion: 2
   m_Size: {x: 1.0504155, y: 0.11966634}
+--- !u!114 &114371837262506392
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1334261027125310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57155315586ba451f8a5fe45a498d201, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114537745321621530
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -97,11 +109,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3310a335c359959459f1e3899f61242d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPoint: {x: 1.73, y: 0.71}
-  endPoint: {x: 1.73, y: 3.21}
+  endPoint: {x: 0, y: 0}
   dontCollideWithPlayers: 0
   moveSpeed: 0.8
   timeToWait: 1
+  isWorking: 0
+  playerHasReturned: 0
 --- !u!212 &212734071109199212
 SpriteRenderer:
   m_ObjectHideFlags: 1

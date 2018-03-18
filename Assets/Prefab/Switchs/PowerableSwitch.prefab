@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4076527796068762}
   - component: {fileID: 199781648222619700}
   - component: {fileID: 198673301837605928}
-  m_Layer: 9
+  m_Layer: 13
   m_Name: PowerableParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 50263892865571014}
   - component: {fileID: 114071442521152222}
   - component: {fileID: 114293841397804428}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: PowerableSwitch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,11 +124,13 @@ MonoBehaviour:
   - activationType: 0
     attack: {fileID: 114371914756871732, guid: 89376d9061a7444fd87742afeb7ec4c1, type: 2}
     caster: {fileID: 0}
+    expectedParticle: {fileID: 0}
     particles:
     - {fileID: 1006099626759028}
     - {fileID: 1006099626759028}
   shutdownFrames: 0
   mustDoSomething: 0
+  numberOfCascadeTag: 0
 --- !u!114 &114293841397804428
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -140,11 +142,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee3846ec8607d1f4499bddf1882d2a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPoint: {x: 8.73, y: -1.315}
   endPoint: {x: 8.73, y: -2.263}
   dontCollideWithPlayers: 1
   moveSpeed: 0.5
   timeToWait: 0
+  isWorking: 0
+  playerHasReturned: 0
 --- !u!198 &198673301837605928
 ParticleSystem:
   m_ObjectHideFlags: 1

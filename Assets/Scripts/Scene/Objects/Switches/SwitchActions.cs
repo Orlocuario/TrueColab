@@ -221,6 +221,11 @@ public class SwitchActions : MonoBehaviour
             case 50:
                 HandlerGroup50();
                 break;
+            case 51:
+                HandlerGroup51();
+                break;
+            default:
+                return;
         }
     }
 
@@ -228,10 +233,12 @@ public class SwitchActions : MonoBehaviour
 
     #region Handlers
 
+    //Switches escena 2
+
     private void HandlerGroup0()
     {
-        GameObject platEngineer = levelManager.InstantiatePrefab("MovPlatform", new Vector2(13.3f, -1f));
-        levelManager.SetMovingObjectData(platEngineer, new Vector2(13.5f, -1.77f), new Vector2(13.5f, 0.36f), 1f, 1f, false);
+        GameObject platEngineer = levelManager.InstantiatePrefab("MovPlatform", new Vector2(13.3f, -1.6f));
+        levelManager.SetMovingObjectData(platEngineer, new Vector2(13.3f, -1.6f), new Vector2(13.3f, 0.7f), 1f, 1.5f, false);
         levelManager.ShowFeedbackParticles("FBMageButt", new Vector2(13.2f, -1.3f), 3f);
     }
 
@@ -250,11 +257,13 @@ public class SwitchActions : MonoBehaviour
     private void HandlerGroup2()
     {
         CameraController mainCamera = GameObject.Find("MainCamera").GetComponent<CameraController>();
-        mainCamera.ChangeState(CameraState.TargetZoom, 5, 34.9f, -3.06f, false, false, false, 100, 70);
+        mainCamera.ChangeState(CameraState.TargetZoom, 5, 34.9f, -3.06f, true, false, false, 100, 70);
           
 		SlideRock rocaGigante = FindObjectOfType<SlideRock>();
 		rocaGigante.Slide();
 		Debug.Log ("Got Rock");
+
+        levelManager.InstatiateSprite("Arrows/engineerArrowUp", new Vector2(45.3f, -6.42f));
 
         BendTree bendTree = FindObjectOfType<BendTree>();
 		bendTree.Fall();
@@ -351,6 +360,8 @@ public class SwitchActions : MonoBehaviour
     {
 		levelManager.InstantiatePrefab("Ambientales/Exp", new Vector2(80.45f, -18.52f));
     }
+
+    // Switches Escena 1
 
     private void HandlerGroup9()
     {
@@ -595,6 +606,13 @@ public class SwitchActions : MonoBehaviour
     {
         levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(3f, -2f));
         levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(4f, -2f));
+    }
+
+    private void HandlerGroup51()
+    {
+        levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(-24.416f, -1.56f), new Vector2(-20.7f, 0.5f), true, 1);
+        BurnableObject treeToBurn = GameObject.Find("TreeAltarHolder").GetComponent<BurnableObject>();
+        treeToBurn.Burn();
     }
 
     #endregion
