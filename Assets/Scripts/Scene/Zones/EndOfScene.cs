@@ -9,7 +9,7 @@ public class EndOfScene : MonoBehaviour
     LevelManager levelManager;
 
     private int playersWhoArrived;
-    private int playersToArrive;
+    public int playersToArrive;
 
     #endregion
 
@@ -19,7 +19,11 @@ public class EndOfScene : MonoBehaviour
     {
         levelManager = FindObjectOfType<LevelManager>();
         playersWhoArrived = 0;
-        playersToArrive = 3; // This could be managed dinamically
+
+        if (playersToArrive == 0)
+        {
+            Debug.Log("Theres an End of Scene without an amount of players needed");
+        }
     }
 
     #endregion

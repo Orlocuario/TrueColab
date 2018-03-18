@@ -233,6 +233,8 @@ public class SwitchActions : MonoBehaviour
 
     #region Handlers
 
+    //Switches escena 2
+
     private void HandlerGroup0()
     {
         GameObject platEngineer = levelManager.InstantiatePrefab("MovPlatform", new Vector2(13.3f, -1f));
@@ -255,11 +257,13 @@ public class SwitchActions : MonoBehaviour
     private void HandlerGroup2()
     {
         CameraController mainCamera = GameObject.Find("MainCamera").GetComponent<CameraController>();
-        mainCamera.ChangeState(CameraState.TargetZoom, 5, 34.9f, -3.06f, false, false, false, 100, 70);
+        mainCamera.ChangeState(CameraState.TargetZoom, 5, 34.9f, -3.06f, true, false, false, 100, 70);
           
 		SlideRock rocaGigante = FindObjectOfType<SlideRock>();
 		rocaGigante.Slide();
 		Debug.Log ("Got Rock");
+
+        levelManager.InstatiateSprite("Arrows/engineerArrowUp", new Vector2(45.3f, -6.42f));
 
         BendTree bendTree = FindObjectOfType<BendTree>();
 		bendTree.Fall();
@@ -356,6 +360,8 @@ public class SwitchActions : MonoBehaviour
     {
 		levelManager.InstantiatePrefab("Ambientales/Exp", new Vector2(80.45f, -18.52f));
     }
+
+    // Switches Escena 1
 
     private void HandlerGroup9()
     {
