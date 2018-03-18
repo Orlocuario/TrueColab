@@ -130,10 +130,21 @@ public class ServerMessageHandler
             case "CoordinateMovingObject":
                 SyncMovingObjects(message, connectionId);
                 break;
-
+            case "EnterPOI":
+                HandleEnterPOI(msg, connectionId);
+                break;
             default:
                 break;
         }
+    }
+
+    private void HandleEnterPOI(string[] msg, int connectionID)
+    {
+        string poiID = msg[1];
+        NetworkPlayer player = server.GetPlayer(connectionID);
+        RoomLogger log = player.room.log;
+        log.WriteEnterPOI(player.id, poiID);
+        Debug.Log("POI " + poiID + " reached by " + player.id + " in room " + player.room.id + ".Writed in log.");
     }
 
     private void HandleChangeScene(string[] msg, int connectionId)

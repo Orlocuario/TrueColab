@@ -923,6 +923,7 @@ public class PlayerController : MonoBehaviour
                 }
                 Planner planner = FindObjectOfType<Planner>();
                 planner.Monitor();
+                Client.instance.SendMessageToServer("EnterPOI/" + newPoi.name, true);
             }
         }
     }
