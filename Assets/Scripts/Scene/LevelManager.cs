@@ -668,7 +668,6 @@ public class LevelManager : MonoBehaviour
 
     public void SetMovingObjectData(GameObject movingObject, Vector2 startPos, Vector2 endPos, float moveSpeed, float timeToWait, bool ignoreCollisionWithPlayers)
     {
-
         MovingObject movingController = movingObject.GetComponent<MovingObject>();
 
         if (movingController)

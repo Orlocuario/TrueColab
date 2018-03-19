@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 95430949265829488}
   - component: {fileID: 114960681359633366}
   - component: {fileID: 114281067580633786}
+  - component: {fileID: 114289011159733798}
   m_Layer: 10
   m_Name: Engineer
   m_TagString: Player
@@ -102,7 +103,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1208380953250652}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.45, y: 5.93, z: 1}
+  m_LocalPosition: {x: -18.877476, y: -12.827766, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4006069394395388}
@@ -213,6 +214,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57155315586ba451f8a5fe45a498d201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114289011159733798
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1208380953250652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 674787648a06c3e45abb54a4619c52ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powers:
+  - activationType: 2
+    attack: {fileID: 0}
+    caster: {fileID: 0}
+    expectedParticle: {fileID: 0}
+    particles:
+    - {fileID: 0}
+  shutdownFrames: 0
+  mustDoSomething: 0
 --- !u!114 &114960681359633366
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -229,6 +250,9 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 512
+  whatIsAlsoGround:
+    serializedVersion: 2
+    m_Bits: 0
   particles: []
   groundCheck: {fileID: 4006069394395388}
   parent: {fileID: 0}
@@ -260,6 +284,8 @@ MonoBehaviour:
   directionY: 1
   directionX: 1
   gravityPower: 0
+  playerHasReturned: 0
+  parasiteMagedParticle: {fileID: 0}
 --- !u!198 &198101886868948996
 ParticleSystem:
   m_ObjectHideFlags: 1

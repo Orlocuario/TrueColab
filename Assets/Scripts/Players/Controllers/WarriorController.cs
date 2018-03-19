@@ -7,9 +7,25 @@ public class WarriorController : PlayerController
 
     #region Attributes
 
+    public GameObject parasiteMagedParticle;
     protected int attacks = 0;
 
     #endregion
+
+    protected override void Start()
+    {
+        base.Start();
+        if (parasiteMagedParticle == null)
+        {
+            Debug.LogError("you must set your parasiteMagedParticle in your Warrior");
+        }
+    }
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+
+        parasiteMagedParticle.transform.position = gameObject.transform.position;
+    }
 
     #region Utils
 
@@ -22,6 +38,15 @@ public class WarriorController : PlayerController
         PunchController attackController = (PunchController)attackObject.GetComponent(attackType);
 
         return attackController;
+    }
+
+    public void ProtectedByMage(bool imProtected)
+    {
+        EnemyController[] eControllers = FindObjectsOfType<EnemyController>();
+        foreach (EnemyController enemyController in eControllers)
+        {
+            enemyController.UpdateCollisionsWithPlayer(gameObject, imProtected);
+        }
     }
 
     public bool IsWarriored(GameObject player)

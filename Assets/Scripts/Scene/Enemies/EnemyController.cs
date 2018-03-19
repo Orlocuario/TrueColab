@@ -80,10 +80,6 @@ public class EnemyController : MonoBehaviour
                 UnmageThisEnemy();
             }
         }
-        foreach (Vector2 patrollingPoint in patrollingPoints)
-        {
-            //levelManager._.DrawDistance(transform.position, patrollingPoint, Color.green, this);
-        }
     }
 
     #endregion
@@ -181,7 +177,10 @@ public class EnemyController : MonoBehaviour
         }
 
         ignoresCollisions[player.name] = ignores;
-        SendIgnoreCollisionDataToServer(player, ignores);
+        if (LocalPlayerHasControl())
+        {
+            SendIgnoreCollisionDataToServer(player, ignores);
+        }
     }
 
     public void ThePlayerReturned (bool thePlayerHasReturned)
@@ -205,21 +204,6 @@ public class EnemyController : MonoBehaviour
         }
 
         // Don't hit protected players
-        if (mage.ProtectedByShield(player))
-        {
-            if (!ignoresCollisions[player.name])
-            {
-                UpdateCollisionsWithPlayer(player, true);
-            }
-            return;
-        }
-        else
-        {
-            if (ignoresCollisions[player.name])
-            {
-                UpdateCollisionsWithPlayer(player, false);
-            }
-        }
 
         // If player is at the left side of the enemy push it to the left
         if (playerPosition.x < transform.position.x)

@@ -8,9 +8,24 @@ public class EngineerController : PlayerController
 
     #region Attributes
 
+    public GameObject parasiteMagedParticle;
     private bool jumpedInAir;
 
     #endregion
+
+    protected override void Start()
+    {
+        base.Start();
+        if (parasiteMagedParticle == null)
+        {
+            Debug.LogError("you must set your parasiteMagedParticle in your Engineer");
+        }
+    }
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        parasiteMagedParticle.transform.position = gameObject.transform.position;
+    }
 
     #region Utils
 
@@ -133,6 +148,15 @@ public class EngineerController : PlayerController
             }
         }
         return false;
+    }
+
+    public void ProtectedByMage(bool imProtected)
+    {
+        EnemyController[] eControllers = FindObjectsOfType<EnemyController>();
+        foreach (EnemyController enemyController in eControllers)
+        {
+            enemyController.UpdateCollisionsWithPlayer(gameObject, imProtected);
+        }
     }
 
     #endregion

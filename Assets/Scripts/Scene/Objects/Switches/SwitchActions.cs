@@ -238,7 +238,7 @@ public class SwitchActions : MonoBehaviour
     private void HandlerGroup0()
     {
         GameObject platEngineer = levelManager.InstantiatePrefab("MovPlatform", new Vector2(13.3f, -1.6f));
-        levelManager.SetMovingObjectData(platEngineer, new Vector2(13.3f, -1.6f), new Vector2(13.3f, 0.7f), 1f, 1.5f, false);
+        levelManager.SetMovingObjectData(platEngineer, new Vector2(13.3f, -1.9f), new Vector2(13.3f, 0.7f), 1f, 1.5f, false);
         levelManager.ShowFeedbackParticles("FBMageButt", new Vector2(13.2f, -1.3f), 3f);
     }
 
@@ -252,6 +252,9 @@ public class SwitchActions : MonoBehaviour
 		levelManager.DestroyObject("RejaEng", .1f);
 		levelManager.DestroyObject("SpikesDead", .1f);
 		levelManager.DestroyObject("LavaPool", .1f);
+
+        GameObject sueloMetal = GameObject.Find("SueloMetal");
+        sueloMetal.AddComponent<PlatformEffector2D>();
     }
 
     private void HandlerGroup2()

@@ -332,10 +332,8 @@ public class PlayerController : MonoBehaviour
 
     public void UsePower()
     {
-
         if (localPlayer)
         {
-
             if (!levelManager.hpAndMp)
             {
                 Debug.Log("Levelmanager HpAndMp is not set");
@@ -638,7 +636,6 @@ public class PlayerController : MonoBehaviour
         if (availablePowerable != null)
         {
             TogglePowerable(active);
-            ToggleParticles(false);
         }
     }
 
