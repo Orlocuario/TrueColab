@@ -362,6 +362,15 @@ public class PowerableObject : MonoBehaviour
                 shutdown = true;
             }
         }
+
+        if (collision.GetComponent<MagePoweredParticles>())
+        {
+            if (powered)
+            {
+                shutdown = true;
+            }
+        }
+            
     }
 
 

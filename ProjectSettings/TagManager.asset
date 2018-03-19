@@ -67,8 +67,8 @@ TagManager:
   - Attacks
   - AttackReceipers
   - DestroyableGround
-  - 
-  - 
+  - Enemies
+  - PlayersWithNoEnemies
   - 
   - 
   - 

@@ -334,6 +334,7 @@ public class PlayerController : MonoBehaviour
     {
         if (localPlayer)
         {
+
             if (!levelManager.hpAndMp)
             {
                 Debug.Log("Levelmanager HpAndMp is not set");

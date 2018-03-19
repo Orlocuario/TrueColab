@@ -232,8 +232,8 @@ MonoBehaviour:
     expectedParticle: {fileID: 0}
     particles:
     - {fileID: 0}
-  shutdownFrames: 0
-  mustDoSomething: 0
+  shutdownFrames: 60
+  mustDoSomething: 1
 --- !u!114 &114960681359633366
 MonoBehaviour:
   m_ObjectHideFlags: 1

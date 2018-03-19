@@ -152,11 +152,6 @@ public class EngineerController : PlayerController
 
     public void ProtectedByMage(bool imProtected)
     {
-        EnemyController[] eControllers = FindObjectsOfType<EnemyController>();
-        foreach (EnemyController enemyController in eControllers)
-        {
-            enemyController.UpdateCollisionsWithPlayer(gameObject, imProtected);
-        }
     }
 
     #endregion

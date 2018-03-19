@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 58064622419786608}
   - component: {fileID: 58641639487900070}
   - component: {fileID: 114470056576096540}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: Murcielago
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 199831702345185532}
   - component: {fileID: 58079216685248390}
   - component: {fileID: 114948532884764834}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: BurbujaV
   m_TagString: Untagged
   m_Icon: {fileID: 0}

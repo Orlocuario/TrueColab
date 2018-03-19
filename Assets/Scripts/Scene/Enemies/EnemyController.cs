@@ -54,7 +54,7 @@ public class EnemyController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         InitializeParticles();
         maged = false;
-        deathIsComing = false; 
+        deathIsComing = false;
         ignoresCollisions = new Dictionary<string, bool> { { "Mage", false }, { "Warrior", false }, { "Engineer", false } };
 
         currentPatrolPointCount = 0;
@@ -183,14 +183,14 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void ThePlayerReturned (bool thePlayerHasReturned)
+    public void ThePlayerReturned(bool thePlayerHasReturned)
     {
         playerHasReturned = thePlayerHasReturned;
     }
 
     protected virtual void DealDamage(GameObject player)
     {
-
+        LevelManager levelManager = FindObjectOfType<LevelManager>();
         PlayerController playerController = player.GetComponent<PlayerController>();
         MageController mage = levelManager.GetMage();
 
@@ -204,6 +204,21 @@ public class EnemyController : MonoBehaviour
         }
 
         // Don't hit protected players
+        if (mage.ProtectedByShield(player))
+        {
+            if (!ignoresCollisions[player.name])
+            {
+                UpdateCollisionsWithPlayer(player, true);
+            }
+            return;
+        }
+        else
+        {
+            if (ignoresCollisions[player.name])
+            {
+                UpdateCollisionsWithPlayer(player, false);
+            }
+        }
 
         // If player is at the left side of the enemy push it to the left
         if (playerPosition.x < transform.position.x)
@@ -212,17 +227,17 @@ public class EnemyController : MonoBehaviour
         }
 
         playerController.TakeDamage(damage, attackForce);
-
     }
 
+
     public void Die()
-    { 
+    {
         if (deathIsComing)
         {
             return;
         }
         sceneAnimator.StartAnimation("Dying", gameObject);
-        deathIsComing = true; 
+        deathIsComing = true;
         StartCoroutine(WaitDying());
     }
 
@@ -433,23 +448,24 @@ public class EnemyController : MonoBehaviour
 
     #region Events
 
-    protected void OnTriggerStay2D(Collider2D other)
+   /* protected void OnTriggerStay2D(Collider2D other)
     {
         if (GameObjectIsPlayer(other.gameObject))
         {
-                Attack(other.gameObject);
+            Attack(other.gameObject);
         }
-    }
+    }*/
 
     // Attack those who enter the alert zone
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (GameObjectIsPlayer(other.gameObject))
         {
-            Attack(other.gameObject);
+           
+                Attack(other.gameObject);
+            
         }
     }
-
     // Attack those who collide with me
     protected virtual void OnCollisionEnter2D(Collision2D other)
     {

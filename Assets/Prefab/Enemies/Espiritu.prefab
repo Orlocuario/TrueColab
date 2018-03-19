@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 50973638855771348}
   - component: {fileID: 58897150090711800}
   - component: {fileID: 58076335058822172}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: Espiritu
   m_TagString: Enemy
   m_Icon: {fileID: 0}
