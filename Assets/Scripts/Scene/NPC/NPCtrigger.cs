@@ -109,6 +109,7 @@ public class NPCtrigger : MonoBehaviour
                 playersArrived++;
                 if (playersArrived == playersNeeded)
                 {
+                    DestroyMyCollider();
                     ReadNextFeedback();
                 }
                 else
@@ -122,6 +123,7 @@ public class NPCtrigger : MonoBehaviour
             {
                 levelManager.localPlayer.StopMoving();
             }
+            DestroyMyCollider();
             ReadNextFeedback();
         }
     }
@@ -140,6 +142,15 @@ public class NPCtrigger : MonoBehaviour
     #endregion
 
     #region Utils
+
+    protected void DestroyMyCollider()
+    {
+        Collider2D collider = gameObject.GetComponent<Collider2D>();
+        if (collider.isTrigger)
+        {
+            collider.enabled = false;
+        }
+    }
 
     protected void ToggleParticles(bool active)
     {
