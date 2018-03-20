@@ -879,10 +879,12 @@ public class PlayerController : MonoBehaviour
         {
             return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
         }
-        else
+        else if (Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsAlsoGround))
         {
             return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsAlsoGround);
         }
+
+        return false;
     }
 
     protected virtual bool IsJumping(bool isGrounded)

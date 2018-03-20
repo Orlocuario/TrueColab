@@ -443,7 +443,7 @@ public class SwitchActions : MonoBehaviour
         }
 
 		levelManager.DestroyObject("CajaSwitchFierro", 2.5f);
-		levelManager.InstantiatePortal("EnginTeleporter", new Vector2(-52.25f, -52.25f), new Vector2(-48.83f, 43.307f));
+		levelManager.InstantiatePortal("EnginTeleporter", new Vector2(-53.96f, 45.62f), new Vector2(-48.73f, 43.36f));
     }
     private void HandlerGroup16()
     {

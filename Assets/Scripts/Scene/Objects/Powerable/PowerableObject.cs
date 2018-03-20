@@ -223,14 +223,23 @@ public class PowerableObject : MonoBehaviour
 
     protected void TurnObjectsIfNeeded(Power power)
     {
-        MovableObject[] objects = FindObjectsOfType<MovableObject>();
-
-        foreach (MovableObject movable in objects)
+        MovableObject[] mObjects = FindObjectsOfType<MovableObject>();
+        foreach (MovableObject movable in mObjects)
         {
             if (power.InPowerArea(movable.gameObject, true))
             {
                 Rigidbody2D movableRb2d = movable.GetComponent<Rigidbody2D>();
                 movableRb2d.gravityScale *= -1;
+            }
+        }
+
+        DestroyableBox[] dBoxes = FindObjectsOfType<DestroyableBox>();
+        foreach (DestroyableBox box in dBoxes)
+        {
+            if (power.InPowerArea(box.gameObject, true))
+            {
+                Rigidbody2D boxRigidBody = box.GetComponent<Rigidbody2D>();
+                boxRigidBody.gravityScale *= -1;
             }
         }
     }
