@@ -130,6 +130,7 @@ public class PowerableObject : MonoBehaviour
         levelManager = FindObjectOfType<LevelManager>();
         InitializeParticles();
         poweredFrameCount = 0;
+        SetShutDownFrames();
     }
 
     protected void Update()
@@ -150,6 +151,14 @@ public class PowerableObject : MonoBehaviour
     #endregion
 
     #region Common
+
+    protected virtual void SetShutDownFrames()
+    {
+        if (shutdownFrames == 0)
+        {
+            shutdownFrames = 1; 
+        }
+    }
 
     public virtual void ActivatePower(Power power)
     {
@@ -358,23 +367,27 @@ public class PowerableObject : MonoBehaviour
 
     protected void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.GetComponent<MagePoweredParticles>())
+        {
+            if (powered)
+            {
+                shutdown = true;
+                return;
+            }
+        }
+
         PlayerController player = collision.GetComponent<PlayerController>();
         if (player && player.availablePowerable == gameObject)
         {
             player.availablePowerable = null;
             if (powered)
             {
+                DeactivatePower();
                 shutdown = true;
             }
         }
 
-        if (collision.GetComponent<MagePoweredParticles>())
-        {
-            if (powered)
-            {
-                shutdown = true;
-            }
-        }
+
             
     }
 

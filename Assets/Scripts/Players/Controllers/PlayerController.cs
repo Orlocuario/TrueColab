@@ -635,10 +635,7 @@ public class PlayerController : MonoBehaviour
         ToggleParticles(active);
         isPowerOn = active;
 
-        if (isPowerOn == false)
-        {
-            TurnPowerablePlayersOff();
-        }
+        TurnPlayerPowerablesOff(isPowerOn);
 
         if (availablePowerable != null)
         {
@@ -675,6 +672,15 @@ public class PlayerController : MonoBehaviour
             enemy.UpdateCollisionsWithPlayer(gameObject, false);
         }
     }
+
+    protected void TurnPlayerPowerablesOff(bool isPowerOn)
+    {
+        if (isPowerOn == false)
+        {
+            TurnPowerablePlayersOff();
+        }
+    }
+
 
     protected void TogglePowerable(bool activate)
     {

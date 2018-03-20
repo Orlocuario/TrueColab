@@ -81,12 +81,15 @@ public class GearSystemActions : ActivableSystemActions
             SetAnimatorBool("startMovingMachine", false, gearSystem, 2f);
         }
 
-        if (gearSystem.switchObj)
+        if (Object.FindObjectOfType<Planner>())
         {
-            gearSystem.switchObj.ActivateSwitch();
+            if (gearSystem.switchObj)
+            {
+                gearSystem.switchObj.ActivateSwitch();
 
-            Planner planner = GameObject.FindObjectOfType<Planner>();
-            planner.Monitor();
+                Planner planner = Object.FindObjectOfType<Planner>();
+                planner.Monitor();
+            }
         }
 
         if (notifyOthers)

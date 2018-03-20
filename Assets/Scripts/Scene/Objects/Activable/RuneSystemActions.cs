@@ -38,13 +38,16 @@ public class RuneSystemActions : ActivableSystemActions
         Collider2D collider = runeSystem.GetComponent<Collider2D>();
         collider.enabled = false;
 
-        if (runeSystem.obstacleObj != null)
+        if (Object.FindObjectOfType<Planner>())
         {
-            runeSystem.obstacleObj.OpenDoor();
+            if (runeSystem.obstacleObj != null)
+            {
+                runeSystem.obstacleObj.OpenDoor();
 
-            Planner planner = GameObject.FindObjectOfType<Planner>();
-            planner.Monitor();
+                Planner planner = Object.FindObjectOfType<Planner>();
+                planner.Monitor();
 
+            }
         }
 
         if (notifyOthers)

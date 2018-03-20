@@ -450,7 +450,7 @@ public class ClientMessageHandler
         if (NotInClientScene())
         {
             string spriteName = msg[1];
-            int playerId = Int32.Parse(msg[2]);
+            int playerId = int.Parse(msg[2]);
 
             LevelManager levelManager = GameObject.FindObjectOfType<LevelManager>();
             levelManager.CreateGameObject(spriteName, playerId);
