@@ -275,16 +275,19 @@ public class PowerableObject : MonoBehaviour
         {
             if (ParticleActivatesPower(power.expectedParticle, possibleParticle))
             {
+                ToggleTrigger(true);
                 ActivatePower(power);
                 return true;
             }
 
             else
             {
+                ToggleTrigger(true);
                 return false;
             }
         }
         Debug.LogError("The powerableObject named: " + gameObject.name + " has a ByParticle power set but no ParticleType set");
+        ToggleTrigger(true);
         return false; 
     }
 
@@ -294,6 +297,7 @@ public class PowerableObject : MonoBehaviour
         {
             if (AttackActivatesPower(power.attack, attack))
             {
+                ToggleTrigger(true);
                 ActivatePower(power);
                 return true;
             }
@@ -303,6 +307,7 @@ public class PowerableObject : MonoBehaviour
             Debug.LogError("This PowerableObject.ActivationType is 'Attack' but has no attack set.");
         }
 
+        ToggleTrigger(true);
         return false;
     }
 
@@ -317,6 +322,7 @@ public class PowerableObject : MonoBehaviour
 
                 if (player.isPowerOn)
                 {
+                    ToggleTrigger(true);
                     ActivatePower(power);
                     return true;
                 }
@@ -328,6 +334,7 @@ public class PowerableObject : MonoBehaviour
             Debug.LogError("This PowerableObject.ActivationType is 'Power' but has no caster set.");
         }
 
+        ToggleTrigger(true);
         return false;
 
     }
@@ -348,6 +355,7 @@ public class PowerableObject : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
+        ToggleTrigger(false);
 
         for (int i = 0; i < powers.Length; i++)
         {
@@ -450,6 +458,18 @@ public class PowerableObject : MonoBehaviour
         }*/
 
 
+    }
+
+    protected void ToggleTrigger(bool activated)
+    {
+        Collider2D[] colliders = GetComponents<Collider2D>();
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.isTrigger)
+            {
+                collider.enabled = activated; 
+            }
+        }
     }
 
     protected void DebugPowerableTrigger()

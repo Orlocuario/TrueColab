@@ -60,7 +60,6 @@ public class GearSystemActions : ActivableSystemActions
         SpriteRenderer systemSpriteRenderer = gearSystem.GetComponent<SpriteRenderer>();
         systemSpriteRenderer.sprite = gearSystem.activatedSprite;
 
-        // If is Engineer: Start Coroutine
 
         gearSystem.ToggleParticles(true);
         SetAnimatorBool("startMoving", true, gearSystem);
@@ -129,16 +128,20 @@ public class GearSystemActions : ActivableSystemActions
 
         // Doing Something
 
+        SetAnimatorBool("startMoving", true, gearSystem);
         OneTimeMovingObject altarEngin1 = GameObject.Find("AltarEnginMovable").GetComponent<OneTimeMovingObject>();
         altarEngin1.move = true;
 
         //  Planner 
-        if (gearSystem.switchObj)
+        if (Object.FindObjectOfType<Planner>())
         {
-            gearSystem.switchObj.ActivateSwitch();
+            if (gearSystem.switchObj)
+            {
+                gearSystem.switchObj.ActivateSwitch();
 
-            Planner planner = GameObject.FindObjectOfType<Planner>();
-            planner.Monitor();
+                Planner planner = Object.FindObjectOfType<Planner>();
+                planner.Monitor();
+            }
         }
 
         if (notifyOthers)
@@ -175,22 +178,27 @@ public class GearSystemActions : ActivableSystemActions
 
 		SpriteRenderer systemSpriteRenderer = gearSystem.GetComponent<SpriteRenderer>();
 		systemSpriteRenderer.sprite = gearSystem.activatedSprite;
+        SetAnimatorBool("startMoving", true, gearSystem);
 
-		// Doing Something
 
-		BubbleRotatingInstantiator bInstantiatior = GameObject.Find ("BubbleCentralInstatiator").GetComponent<BubbleRotatingInstantiator>();
+        // Doing Something
+
+        BubbleRotatingInstantiator bInstantiatior = GameObject.Find ("BubbleCentralInstatiator").GetComponent<BubbleRotatingInstantiator>();
 		bInstantiatior.GearActivation ();
 
-		//  Planner 
-		if (gearSystem.switchObj)
-		{
-			gearSystem.switchObj.ActivateSwitch();
+        //  Planner 
+        if (Object.FindObjectOfType<Planner>())
+        {
+            if (gearSystem.switchObj)
+            {
+                gearSystem.switchObj.ActivateSwitch();
 
-			Planner planner = GameObject.FindObjectOfType<Planner>();
-			planner.Monitor();
-		}
+                Planner planner = Object.FindObjectOfType<Planner>();
+                planner.Monitor();
+            }
+        }
 
-		if (notifyOthers)
+        if (notifyOthers)
 		{
 			SendMessageToServer("ActivateSystem/" + gearSystem.name, true);
 		}
@@ -229,16 +237,19 @@ public class GearSystemActions : ActivableSystemActions
 		BubbleRotatingInstantiator bInstantiatior = GameObject.Find ("BubbleCentralInstatiator").GetComponent<BubbleRotatingInstantiator>();
 		bInstantiatior.GearActivation ();
 
-		//  Planner 
-		if (gearSystem.switchObj)
-		{
-			gearSystem.switchObj.ActivateSwitch();
+        //  Planner 
+        if (Object.FindObjectOfType<Planner>())
+        {
+            if (gearSystem.switchObj)
+            {
+                gearSystem.switchObj.ActivateSwitch();
 
-			Planner planner = GameObject.FindObjectOfType<Planner>();
-			planner.Monitor();
-		}
+                Planner planner = Object.FindObjectOfType<Planner>();
+                planner.Monitor();
+            }
+        }
 
-		if (notifyOthers)
+        if (notifyOthers)
 		{
 			SendMessageToServer("ActivateSystem/" + gearSystem.name, true);
 		}
