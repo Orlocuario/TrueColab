@@ -634,9 +634,30 @@ public class PlayerController : MonoBehaviour
     {
         ToggleParticles(active);
         isPowerOn = active;
+
+        if (isPowerOn == false)
+        {
+            TurnPowerablePlayersOff();
+        }
+
         if (availablePowerable != null)
         {
             TogglePowerable(active);
+        }
+    }
+
+    protected void TurnPowerablePlayersOff()
+    {
+        GameObject[] players = levelManager.players;
+        foreach (GameObject player in players)
+        {
+            if (player.GetComponent<PowerablePlayer>())
+            {
+                if (player.GetComponent<PowerablePlayer>().IsPowered())
+                {
+                    player.GetComponent<PowerablePlayer>().ShutDownPowerable();
+                }
+            }
         }
     }
 

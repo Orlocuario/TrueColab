@@ -239,6 +239,11 @@ public class PowerableObject : MonoBehaviour
 
     }
 
+    public void ShutDownPowerable()
+    {
+        shutdown = true; 
+    }
+
     protected virtual bool ActivatePower(Power power, GameObject gameObject)
     {
         switch (power.activationType)

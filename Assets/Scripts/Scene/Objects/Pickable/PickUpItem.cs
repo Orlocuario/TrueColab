@@ -20,11 +20,14 @@ public class PickUpItem : MonoBehaviour
 
         if (itemObj != null)
         {
-            LevelManager levelManager = GameObject.FindObjectOfType<LevelManager>();
-            Planner planner = FindObjectOfType<Planner>();
+            if (FindObjectOfType<Planner>())
+            {
+                LevelManager levelManager = GameObject.FindObjectOfType<LevelManager>();
+                Planner planner = FindObjectOfType<Planner>();
 
-            itemObj.PickUp(levelManager.localPlayer.playerObj);
-            planner.Monitor();
+                itemObj.PickUp(levelManager.localPlayer.playerObj);
+                planner.Monitor();
+            }
         }
 
         SendMessageToServer("OthersDestroyObject/" + name, true);
