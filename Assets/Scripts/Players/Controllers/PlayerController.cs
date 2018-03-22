@@ -361,7 +361,7 @@ public class PlayerController : MonoBehaviour
             // Hay maná
             else
             {
-                // Reseteo la variable para avisar que el maná se acabó (volvió?)
+                // Vuelvo a setear la variable que indica que tengo maná
                 if (mpDepleted)
                 {
                     mpDepleted = false;
@@ -370,6 +370,7 @@ public class PlayerController : MonoBehaviour
                 // Toggle power button
                 if (powerButtonPressed)
                 {
+                    Debug.Log("Se presionó el botón de poder. El valor de isPowerOn es: " + isPowerOn);
                     SetPowerState(!isPowerOn);
                     SendPowerDataToServer();
                 }
@@ -425,8 +426,22 @@ public class PlayerController : MonoBehaviour
         ResetChatZones();
         ResetDamagingTriggers();
         ResetDecisions();
+        ResetPowerables();
         availablePowerable = null;
         gameObject.SetActive(false);
+    }
+
+    public void ResetPowerables()
+    {
+        PowerableObject[] powerableObjects = FindObjectsOfType<PowerableObject>();
+        foreach (PowerableObject powerable in powerableObjects)
+        {
+            if (availablePowerable == powerable.gameObject)
+            {
+                Debug.Log("I was trying to erase everything but i couldnt");
+                //powerable.ErasePlayerInAndAvailablePower(gameObject);
+            }
+        }
     }
 
     public void ResetChatZones()
@@ -635,15 +650,13 @@ public class PlayerController : MonoBehaviour
         ToggleParticles(active);
         isPowerOn = active;
 
-        TurnPlayerPowerablesOff(isPowerOn);
-
         if (availablePowerable != null)
         {
             TogglePowerable(active);
         }
     }
 
-    protected void TurnPowerablePlayersOff()
+    /*protected void TurnPowerablePlayersOff()
     {
         GameObject[] players = levelManager.players;
         foreach (GameObject player in players)
@@ -656,7 +669,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 
     protected void ResetDamagingObjects()
     {
@@ -673,13 +686,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    protected void TurnPlayerPowerablesOff(bool isPowerOn)
+    /*protected void TurnPlayerPowerablesOff(bool isPowerOn)
     {
         if (isPowerOn == false)
         {
             TurnPowerablePlayersOff();
         }
-    }
+    }*/
 
 
     protected void TogglePowerable(bool activate)

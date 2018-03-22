@@ -42,7 +42,12 @@ public class MovingObject : MonoBehaviour
 
     void Update()
     {
-        if (currentTarget == null || endPoint == null)
+        if (currentTarget.Equals(default(Vector2)))
+        {
+            return;
+        }
+
+        if (endPoint.Equals(default(Vector2)))
         {
             return;
         }
@@ -57,7 +62,7 @@ public class MovingObject : MonoBehaviour
 			StartCoroutine (WaitForPlayer(timeToWait, endPoint));
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, currentTarget, moveSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, currentTarget, moveSpeed * Time.deltaTime);
 
         if (playerHasReturned)
         {
@@ -73,7 +78,6 @@ public class MovingObject : MonoBehaviour
     {
         string x = transform.position.x.ToString();
         string y = transform.position.y.ToString();
-        string z = transform.position.z.ToString();
 
         string message = "CoordinateMovingObject/" + name + "/" + x + "/"  + y + "/" + currentTarget;
         SendMessageToServer(message, true);

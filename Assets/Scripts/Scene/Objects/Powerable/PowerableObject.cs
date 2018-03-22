@@ -120,6 +120,7 @@ public class PowerableObject : MonoBehaviour
     protected int poweredFrameCount; // How many frames it has been powered.
     protected bool shutdown;
     protected bool powered;
+    protected PlayerController[] playerControllers;
 
     #endregion
 
@@ -131,6 +132,7 @@ public class PowerableObject : MonoBehaviour
         InitializeParticles();
         poweredFrameCount = 0;
         SetShutDownFrames();
+        playerControllers = new PlayerController[3];
     }
 
     protected void Update()
@@ -156,7 +158,7 @@ public class PowerableObject : MonoBehaviour
     {
         if (shutdownFrames == 0)
         {
-            shutdownFrames = 1; 
+            shutdownFrames = 1;
         }
     }
 
@@ -223,23 +225,14 @@ public class PowerableObject : MonoBehaviour
 
     protected void TurnObjectsIfNeeded(Power power)
     {
-        MovableObject[] mObjects = FindObjectsOfType<MovableObject>();
-        foreach (MovableObject movable in mObjects)
+        MovableObject[] objects = FindObjectsOfType<MovableObject>();
+
+        foreach (MovableObject movable in objects)
         {
             if (power.InPowerArea(movable.gameObject, true))
             {
                 Rigidbody2D movableRb2d = movable.GetComponent<Rigidbody2D>();
                 movableRb2d.gravityScale *= -1;
-            }
-        }
-
-        DestroyableBox[] dBoxes = FindObjectsOfType<DestroyableBox>();
-        foreach (DestroyableBox box in dBoxes)
-        {
-            if (power.InPowerArea(box.gameObject, true))
-            {
-                Rigidbody2D boxRigidBody = box.GetComponent<Rigidbody2D>();
-                boxRigidBody.gravityScale *= -1;
             }
         }
     }
@@ -259,7 +252,7 @@ public class PowerableObject : MonoBehaviour
 
     public void ShutDownPowerable()
     {
-        shutdown = true; 
+        shutdown = true;
     }
 
     protected virtual bool ActivatePower(Power power, GameObject gameObject)
@@ -284,20 +277,17 @@ public class PowerableObject : MonoBehaviour
         {
             if (ParticleActivatesPower(power.expectedParticle, possibleParticle))
             {
-                ToggleTrigger(true);
                 ActivatePower(power);
                 return true;
             }
 
             else
             {
-                ToggleTrigger(true);
                 return false;
             }
         }
         Debug.LogError("The powerableObject named: " + gameObject.name + " has a ByParticle power set but no ParticleType set");
-        ToggleTrigger(true);
-        return false; 
+        return false;
     }
 
     protected bool ActivateWithAttack(Power power, GameObject attack)
@@ -306,7 +296,6 @@ public class PowerableObject : MonoBehaviour
         {
             if (AttackActivatesPower(power.attack, attack))
             {
-                ToggleTrigger(true);
                 ActivatePower(power);
                 return true;
             }
@@ -316,7 +305,6 @@ public class PowerableObject : MonoBehaviour
             Debug.LogError("This PowerableObject.ActivationType is 'Attack' but has no attack set.");
         }
 
-        ToggleTrigger(true);
         return false;
     }
 
@@ -331,7 +319,6 @@ public class PowerableObject : MonoBehaviour
 
                 if (player.isPowerOn)
                 {
-                    ToggleTrigger(true);
                     ActivatePower(power);
                     return true;
                 }
@@ -343,7 +330,6 @@ public class PowerableObject : MonoBehaviour
             Debug.LogError("This PowerableObject.ActivationType is 'Power' but has no caster set.");
         }
 
-        ToggleTrigger(true);
         return false;
 
     }
@@ -364,26 +350,32 @@ public class PowerableObject : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-        ToggleTrigger(false);
-
-        for (int i = 0; i < powers.Length; i++)
+        if (collision.GetComponent<PlayerController>())
         {
-            bool activated = ActivatePower(powers[i], collision.gameObject);
-            if (activated)
+            CheckIfPlayerEntered(collision.gameObject);
+
+            for (int i = 0; i < powers.Length; i++)
             {
-                // Start shutting down immediatelly if is attack activated
-                if (powers[i].activationType.Equals(ActivationType.Attack))
+                bool activated = ActivatePower(powers[i], collision.gameObject);
+                if (activated)
                 {
-                    shutdown = true;
+                    // Start shutting down immediatelly if is attack activated
+                    if (powers[i].activationType.Equals(ActivationType.Attack))
+                    {
+                        shutdown = true;
+                    }
+                    break;
                 }
-                break;
             }
         }
+
+
     }
 
 
     protected void OnTriggerExit2D(Collider2D collision)
     {
+
         if (collision.GetComponent<MagePoweredParticles>())
         {
             if (powered)
@@ -393,19 +385,21 @@ public class PowerableObject : MonoBehaviour
             }
         }
 
-        PlayerController player = collision.GetComponent<PlayerController>();
-        if (player && player.availablePowerable == gameObject)
+        if (collision.GetComponent<PlayerController>())
         {
-            player.availablePowerable = null;
-            if (powered)
+            CheckIfPlayerAlreadyLeft(collision.gameObject);
+
+            PlayerController player = collision.GetComponent<PlayerController>();
+            if (player && player.availablePowerable == gameObject)
             {
-                DeactivatePower();
-                shutdown = true;
+                player.availablePowerable = null;
+                if (powered)
+                {
+                    DeactivatePower();
+                }
             }
         }
 
-
-            
     }
 
 
@@ -428,19 +422,15 @@ public class PowerableObject : MonoBehaviour
         /*
         if (power.caster)
         {
-
             Vector2 playerPosition = power.caster.transform.position;
             Vector2 particlePosition = ps.transform.position;
             Vector2 border = particlePosition;
-
             float baseDistance = boxCollider.size.x / 2;
             float verticalDistance = boxCollider.size.y / 2;
-
             if (playerPosition.x >= particlePosition.x + baseDistance)
             {
                 border.x = particlePosition.x + baseDistance;
             }
-
             else if (playerPosition.x <= particlePosition.x - baseDistance)
             {
                 border.x = particlePosition.x - baseDistance;
@@ -449,7 +439,6 @@ public class PowerableObject : MonoBehaviour
             {
                 border.x = playerPosition.x;
             }
-
             if (playerPosition.y >= particlePosition.y + verticalDistance)
             {
                 border.y = particlePosition.y + verticalDistance;
@@ -462,23 +451,10 @@ public class PowerableObject : MonoBehaviour
             {
                 border.y = playerPosition.y;
             }
-
             levelManager._.DrawDistance(playerPosition, border, Color.green, this);
         }*/
 
 
-    }
-
-    protected void ToggleTrigger(bool activated)
-    {
-        Collider2D[] colliders = GetComponents<Collider2D>();
-        foreach (Collider2D collider in colliders)
-        {
-            if (collider.isTrigger)
-            {
-                collider.enabled = activated; 
-            }
-        }
     }
 
     protected void DebugPowerableTrigger()
@@ -489,6 +465,34 @@ public class PowerableObject : MonoBehaviour
     #endregion
 
     #region Validators
+
+    protected void CheckIfPlayerEntered(GameObject playerObject)
+    {
+        PlayerController player = playerObject.GetComponent<PlayerController>();
+        int i = player.playerId;
+        if (playerControllers[i] == null)
+        {
+            playerControllers[i] = player;
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    protected void CheckIfPlayerAlreadyLeft(GameObject playerObject)
+    {
+        PlayerController player = playerObject.GetComponent<PlayerController>();
+        int i = player.playerId;
+        if (playerControllers[i] != null)
+        {
+            playerControllers[i] = null;
+        }
+        else
+        {
+            return;
+        }
+    }
 
     public bool CasterIsWarrior(Power power)
     {

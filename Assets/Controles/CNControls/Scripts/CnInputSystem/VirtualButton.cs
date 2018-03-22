@@ -50,6 +50,10 @@ namespace CnControls
 		/// </summary>
 		public void Release()
 		{
+            if (IsPressed == false)
+            {
+                return;
+            }
 			IsPressed = false;
 			_lastReleasedFrame = Time.frameCount;
 		}

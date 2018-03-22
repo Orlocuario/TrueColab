@@ -277,15 +277,12 @@ public class SwitchActions : MonoBehaviour
     private void HandlerGroup3()
     {
         GameObject platLadder = levelManager.InstantiatePrefab("MovPlatform", new Vector2(43f, -16.46f));
-        MovingObject movingPlatform = platLadder.GetComponent<MovingObject>();
 
         Vector2 startPos = platLadder.transform.position;
         Vector2 endPos = new Vector2(startPos.x, startPos.y + 4.2f);
-        
-
         levelManager.SetMovingObjectData(platLadder, startPos, endPos, 0.8f, 1f, false);
 
-		levelManager.ShowFeedbackParticles("FBMageButt", new Vector2(41.4f, -16.3f), 3f);
+        levelManager.ShowFeedbackParticles("FBMageButt", new Vector2(41.4f, -16.3f), 3f);
 		levelManager.TogglePlayerFilter("FilterMage", true);
     }
 

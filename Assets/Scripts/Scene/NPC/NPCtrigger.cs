@@ -15,6 +15,9 @@ public class NPCtrigger : MonoBehaviour
     public bool hasDecision;
     public float feedbackTime;
 
+    public bool forOnePlayerOnly;
+    public int requestedID; 
+
 
     [System.Serializable]
     public struct NPCFeedback
@@ -43,17 +46,10 @@ public class NPCtrigger : MonoBehaviour
         ToggleParticles(false);
         feedbackCount = 0;
         playersArrived = 0;
-        if (hasDecision)
-        {
-            if (playersNeeded == 0)
-            {
-                Debug.LogError("this NPC has a decision system after the trigger but no number of players needed before starting");
-            }
-            if (!dSystem)
-            {
-                Debug.LogError("this NPC has needs a decision system to control");
-            }
-        }
+
+        CheckDecisionParameters();
+        CheckPlayersNeededParameters();
+        
     }
 
     #endregion
@@ -103,26 +99,15 @@ public class NPCtrigger : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (GameObjectIsPlayer(other.gameObject))
-        { 
-            if (hasDecision)
-            {
-                playersArrived++;
-                if (playersArrived == playersNeeded)
-                {
-                    DestroyMyCollider();
-                    ReadNextFeedback();
-                }
-                else
-                {
-                    levelManager.ActivateNPCFeedback("¿Estás Solo? Así no podrás salir jamás...");
-                    return;
-                }
-            }
+        {
+            CheckIfEndsWithDecision();
+            PlayerFeedBackId(other.gameObject);
 
             if (freezesPlayer)
             {
                 levelManager.localPlayer.StopMoving();
             }
+
             DestroyMyCollider();
             ReadNextFeedback();
         }
@@ -142,6 +127,64 @@ public class NPCtrigger : MonoBehaviour
     #endregion
 
     #region Utils
+
+    protected void CheckPlayersNeededParameters()
+    {
+        if (forOnePlayerOnly)
+        {
+            if (requestedID.Equals(default(int)))
+            {
+                Debug.LogError("The NPC Trigger named: " + name + " / Needs an entrance ID");
+            }
+        }
+    }
+
+    protected void CheckDecisionParameters()
+    {
+        if (hasDecision)
+        {
+            if (playersNeeded == 0)
+            {
+                Debug.LogError("this NPC has a decision system after the trigger but no number of players needed before starting");
+            }
+            if (!dSystem)
+            {
+                Debug.LogError("this NPC has needs a decision system to control");
+            }
+        }
+    }
+
+    protected void CheckIfEndsWithDecision()
+    {
+        if (hasDecision)
+        {
+            playersArrived++;
+            if (playersArrived == playersNeeded)
+            {
+                DestroyMyCollider();
+                ReadNextFeedback();
+            }
+            else
+            {
+                levelManager.ActivateNPCFeedback("¿Estás Solo? Así no podrás salir jamás...");
+                return;
+            }
+        }
+    }
+
+    protected void PlayerFeedBackId(GameObject player)
+    {
+        if (forOnePlayerOnly)
+        {
+            int incomingId = player.GetComponent<PlayerController>().playerId;
+            if (incomingId == requestedID)
+            {
+                DestroyMyCollider();
+                ReadNextFeedback();
+            }
+        }
+
+    }
 
     protected void DestroyMyCollider()
     {
@@ -181,11 +224,10 @@ public class NPCtrigger : MonoBehaviour
         if (hasDecision)
         {
             dSystem.StartThisVoting();
-            
         }
 
         levelManager.ShutNPCFeedback(true);
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
     protected bool GameObjectIsPlayer(GameObject other)
