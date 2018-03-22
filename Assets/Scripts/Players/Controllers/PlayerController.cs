@@ -438,8 +438,8 @@ public class PlayerController : MonoBehaviour
         {
             if (availablePowerable == powerable.gameObject)
             {
-                Debug.Log("I was trying to erase everything but i couldnt");
-                //powerable.ErasePlayerInAndAvailablePower(gameObject);
+                availablePowerable = null;
+                powerable.ErasePlayerInPowerZone(gameObject);
             }
         }
     }

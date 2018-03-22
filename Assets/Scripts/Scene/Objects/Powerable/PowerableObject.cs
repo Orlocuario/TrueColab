@@ -350,6 +350,23 @@ public class PowerableObject : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.GetComponent<MagePoweredParticles>())
+        {
+            for (int i = 0; i < powers.Length; i++)
+            {
+                bool activated = ActivatePower(powers[i], collision.gameObject);
+                if (activated)
+                {
+                    // Start shutting down immediatelly if is attack activated
+                    if (powers[i].activationType.Equals(ActivationType.Attack))
+                    {
+                        shutdown = true;
+                    }
+                    break;
+                }
+            }
+        }
+
         if (collision.GetComponent<PlayerController>())
         {
             CheckIfPlayerEntered(collision.gameObject);
@@ -480,6 +497,21 @@ public class PowerableObject : MonoBehaviour
         }
     }
 
+    public void ErasePlayerInPowerZone(GameObject player)
+    {
+        PlayerController pController = player.GetComponent<PlayerController>();
+        int playerID = pController.playerId;
+
+        if (playerControllers[playerID] != null)
+        {
+            playerControllers[playerID] = null;
+            if (activatedPower.Value.caster.GetType().Equals(pController.GetType()))
+            {
+                shutdown = true; 
+            }
+        }
+    }
+
     protected void CheckIfPlayerAlreadyLeft(GameObject playerObject)
     {
         PlayerController player = playerObject.GetComponent<PlayerController>();
@@ -520,6 +552,7 @@ public class PowerableObject : MonoBehaviour
         PlayerController player = playerGO.GetComponent<PlayerController>();
         return player && player.GetType().Equals(expectedCaster.GetType());
     }
+
 
     public bool ActivatesWithPunch(Power power)
     {

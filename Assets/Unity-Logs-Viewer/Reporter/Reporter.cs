@@ -686,7 +686,7 @@ public class Reporter : MonoBehaviour
 		}
 	}
 
-	Rect countRect;
+	Rect countRect; 
 	Rect timeRect;
 	Rect timeLabelRect;
 	Rect sceneRect;

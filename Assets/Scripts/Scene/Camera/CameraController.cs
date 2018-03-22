@@ -3,6 +3,7 @@
 public enum CameraState
 {
     Normal,
+    NormalWithDifferentTarget,
     Backwards,
     FixedX,
     FixedY,
@@ -33,6 +34,8 @@ public class CameraController : MonoBehaviour
     private Vector3 targetPosition;
     private GameObject target;
     private Camera thisCamera;
+    private GameObject inputChat;
+    private GameObject panelChat;
 
     public float stepsToTarget = 100;
     public float initialSize = 2.8f;
@@ -49,6 +52,8 @@ public class CameraController : MonoBehaviour
     {
         levelManager = FindObjectOfType<LevelManager>();
         thisCamera = GetComponent<Camera>();
+        inputChat = GameObject.Find("PanelInput");
+        panelChat = GameObject.Find("PanelChat");
 
         ChangeState(CameraState.Normal, 10, 0, 0, false, false, false, 100f, 70f);
     }
@@ -202,7 +207,7 @@ public class CameraController : MonoBehaviour
         this.target = target;
     }
 
-    public void ChangeState(CameraState state, float ortographicsize, float x, float y, bool sinChat,
+    public void ChangeState(CameraState state, float ortographicsize, float x, float y, bool apagarChat,
                             bool playerCantMove, bool sinCanvas, float stepsToTarget, float freezeTime)
     {
         switch (state)
@@ -210,8 +215,11 @@ public class CameraController : MonoBehaviour
             case CameraState.Normal:
                 SetDefaultValues();
                 break;
+            case CameraState.NormalWithDifferentTarget:
+                SetNewTarget(ortographicsize, x, y, apagarChat);
+                break;
             case CameraState.Zoomed:
-                SetZoomedValues(ortographicsize, x, y, sinChat, sinCanvas);
+                SetZoomedValues(ortographicsize, x, y, apagarChat, sinCanvas);
                 break;
             case CameraState.FixedX:
                 SetFixedX();
@@ -222,6 +230,9 @@ public class CameraController : MonoBehaviour
             case CameraState.TargetZoom:
                 TargetedZoom(ortographicsize, x, y, playerCantMove, sinCanvas, stepsToTarget, freezeTime);
                 break;
+            case CameraState.TargetZoomInCutscene:
+                StartMovingToZoomInCutScene();
+                break;
             case CameraState.NoFollowAhead:
                 SetNoFollowAhead();
                 break;
@@ -231,13 +242,13 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    public void SetZoomedValues(float size, float x, float y, bool hideChat, bool sinCanvas)
+    public void SetZoomedValues(float size, float x, float y, bool apagarChat, bool sinCanvas)
     {
         currentState = CameraState.Zoomed;
         thisCamera.orthographicSize = size;
         transform.position = new Vector3(x, y, transform.position.z);
 
-        ToggleChat(hideChat);
+        ToggleChat(apagarChat);
         ToggleCanvas(sinCanvas);
     }
 
@@ -291,6 +302,10 @@ public class CameraController : MonoBehaviour
         currentState = CameraState.FixedY;
     }
 
+    private void StartMovingToZoomInCutScene()
+    {
+        currentState = CameraState.TargetZoomInCutscene;
+    }
     public void SetDefaultValues()
     {
         thisCamera.orthographicSize = initialSize;
@@ -306,23 +321,38 @@ public class CameraController : MonoBehaviour
         globalFreezeTime = 70;
 
         ToggleCanvas(true);
-        ToggleChat(true);
+        ToggleChat(false);
     }
 
-    private void ToggleChat(bool active)
+    public void SetNewTarget(float ortographicSize, float x, float y, bool apagarChat)
     {
+        thisCamera.orthographicSize = ortographicSize;
+        currentState = CameraState.NormalWithDifferentTarget;
 
-        GameObject inputChat = GameObject.Find("PanelInput");
-        GameObject panelChat = GameObject.Find("PanelChat");
+        target = levelManager.GetLocalPlayer();
+        smoothCamera = 3.9f;
+        followAhead = .9f;
+        followUp = 1f;
 
-        if (panelChat)
+        stepsToTarget = 100;
+        initialSize = 2.8f;
+        globalFreezeTime = 70;
+
+        ToggleCanvas(true);
+        ToggleChat(apagarChat);
+    }
+
+    private void ToggleChat(bool apagarChat)
+    {
+        if (apagarChat)
         {
-            panelChat.SetActive(active);
+            panelChat.SetActive(false);
+            inputChat.SetActive(false);
         }
-
-        if (inputChat)
+        else
         {
-            inputChat.SetActive(active);
+            panelChat.SetActive(true);
+            inputChat.SetActive(true);
         }
     }
 
