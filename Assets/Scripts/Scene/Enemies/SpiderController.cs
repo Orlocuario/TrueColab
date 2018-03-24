@@ -121,7 +121,7 @@ public class SpiderController : EnemyController
         }
         if (timesHit >= 30 && timesHit <= 30)
         {
-            levelManager.ActivateSpiderFeedback(thirdMessage);
+            levelManager.ActivateNPCFeedback(thirdMessage);
             timesHit = -15;
         }
     }
@@ -182,7 +182,8 @@ public class SpiderController : EnemyController
     {
         if (other.gameObject.GetComponent<AttackController>() != null)
         {
-            return true; 
+            AttackController aController = other.gameObject.GetComponent<AttackController>();
+            return aController && aController.caster.localPlayer;
         }
 
         else

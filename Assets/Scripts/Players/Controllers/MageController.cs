@@ -82,8 +82,6 @@ public class MageController : PlayerController
 
     protected override AttackController GetAttack()
     {
-        Debug.Log("Im getting my attack");
-
         if (levelManager.GetWarrior().IsWarriored(gameObject))
         {
             var attackType = new PunchController().GetType();

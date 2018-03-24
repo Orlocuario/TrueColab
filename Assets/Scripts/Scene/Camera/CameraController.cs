@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public enum CameraState
 {
@@ -27,7 +28,7 @@ public class CameraController : MonoBehaviour
     public float followUp;
     public int cameraMovementsAsked;
     public int cameraMovementsDone;
-
+    public TriggerCamera.CameraMovementData[] myCameraMovements;
 
     private LevelManager levelManager;
     private Vector3 currentStepPos;
@@ -36,6 +37,7 @@ public class CameraController : MonoBehaviour
     private Camera thisCamera;
     private GameObject inputChat;
     private GameObject panelChat;
+    private GameObject canvas; 
 
     public float stepsToTarget = 100;
     public float initialSize = 2.8f;
@@ -52,10 +54,12 @@ public class CameraController : MonoBehaviour
     {
         levelManager = FindObjectOfType<LevelManager>();
         thisCamera = GetComponent<Camera>();
+        canvas = GameObject.Find("Canvas");
         inputChat = GameObject.Find("PanelInput");
         panelChat = GameObject.Find("PanelChat");
 
-        ChangeState(CameraState.Normal, 10, 0, 0, false, false, false, 100f, 70f);
+        ToggleCanvas(true);
+        ChangeState(CameraState.Normal);
     }
 
     void Update()
@@ -69,6 +73,9 @@ public class CameraController : MonoBehaviour
 
         switch (currentState)
         {
+            case CameraState.NormalWithDifferentTarget:
+                MovableFocusedTarget();
+                break;
 
             case CameraState.Normal:
                 MoveNormal();
@@ -104,7 +111,6 @@ public class CameraController : MonoBehaviour
             case CameraState.NoFollowAhead:
                 MoveNoFollowAhead();
                 break;
-
         }
     }
 
@@ -125,6 +131,20 @@ public class CameraController : MonoBehaviour
 
         transform.position = Vector3.Lerp(transform.position, targetPosition, smoothCamera * Time.deltaTime);
 
+    }
+
+    private void MovableFocusedTarget()
+    {
+        if (target.transform.localScale.x > 0f)
+        {
+            targetPosition = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z);
+        }
+        else
+        {
+            targetPosition = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z);
+        }
+
+        transform.position = Vector3.Lerp(transform.position, targetPosition, smoothCamera * Time.deltaTime);
     }
 
     private void MoveFixedX()
@@ -174,6 +194,7 @@ public class CameraController : MonoBehaviour
             zoomSteps++;
         }
     }
+
     private void MoveNoFollowUp()
     {
         if (target.transform.localScale.x > 0f)
@@ -196,7 +217,7 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            targetPosition = new Vector3(targetPosition.x, targetPosition.y - followUp, targetPosition.z);
+            targetPosition = new Vector3(targetPosition.x, targetPosition.y + followUp, targetPosition.z);
         }
 
         transform.position = Vector3.Lerp(transform.position, targetPosition, smoothCamera * Time.deltaTime);
@@ -205,21 +226,15 @@ public class CameraController : MonoBehaviour
     public void SetTarget(GameObject target)
     {
         this.target = target;
+        targetPosition = new Vector3(target.transform.position.x, target.transform.position.y, transform.position.z);
     }
 
-    public void ChangeState(CameraState state, float ortographicsize, float x, float y, bool apagarChat,
-                            bool playerCantMove, bool sinCanvas, float stepsToTarget, float freezeTime)
+    public void ChangeState(CameraState playerCameraState)
     {
-        switch (state)
+        switch(playerCameraState)
         {
             case CameraState.Normal:
                 SetDefaultValues();
-                break;
-            case CameraState.NormalWithDifferentTarget:
-                SetNewTarget(ortographicsize, x, y, apagarChat);
-                break;
-            case CameraState.Zoomed:
-                SetZoomedValues(ortographicsize, x, y, apagarChat, sinCanvas);
                 break;
             case CameraState.FixedX:
                 SetFixedX();
@@ -227,47 +242,73 @@ public class CameraController : MonoBehaviour
             case CameraState.FixedY:
                 SetFixedY();
                 break;
-            case CameraState.TargetZoom:
-                TargetedZoom(ortographicsize, x, y, playerCantMove, sinCanvas, stepsToTarget, freezeTime);
-                break;
-            case CameraState.TargetZoomInCutscene:
-                StartMovingToZoomInCutScene();
-                break;
             case CameraState.NoFollowAhead:
                 SetNoFollowAhead();
                 break;
             case CameraState.NoFollowUp:
                 SetNofollowUp();
                 break;
+            case CameraState.Backwards:
+                MoveBackwards();
+                break;
+
+            default:
+                return;
         }
     }
 
-    public void SetZoomedValues(float size, float x, float y, bool apagarChat, bool sinCanvas)
+    public void ChangeState(CameraState state, TriggerCamera.CameraMovementData movement)
     {
-        currentState = CameraState.Zoomed;
-        thisCamera.orthographicSize = size;
-        transform.position = new Vector3(x, y, transform.position.z);
+        switch (state)
+        {
+            case CameraState.Normal:
+                SetDefaultValues();
+                break;
+            case CameraState.NormalWithDifferentTarget:
+                SetNewTarget(movement);
+                break;
+            case CameraState.Zoomed:
+                SetZoomedValues(movement);
+                break;
+            case CameraState.TargetZoom:
+                TargetedZoom(movement);
+                break;
 
-        ToggleChat(apagarChat);
-        ToggleCanvas(sinCanvas);
+            case CameraState.TargetZoomInCutscene:
+                SetDataTargetZoomInCutscene(movement);
+
+                break;
+            default:
+                return;
+        }
     }
 
-    private void TargetedZoom(float size, float x, float y, bool playerCantMove, bool sinCanvas, float stepsToTarget, float freezeTime)
+    public void SetZoomedValues(TriggerCamera.CameraMovementData movement)
     {
-        if (playerCantMove == true)
+        currentState = movement.state;
+        thisCamera.orthographicSize = movement.ortographic_size;
+        transform.position = new Vector3(movement.target.transform.position.x, movement.target.transform.position.y, transform.position.z);
+
+        ToggleChat(movement.hideChat);
+        ToggleCanvas(movement.hideCanvas);
+    }
+
+    private void TargetedZoom(TriggerCamera.CameraMovementData movement)
+    {
+        if (movement.playerCantMove == true)
         {
             levelManager.localPlayer.StopMoving();
         }
-        if (sinCanvas)
+        if (movement.hideCanvas)
         {
             ToggleCanvas(false);
         }
-        globalFreezeTime = freezeTime;
-        Vector3 targetPosition = new Vector3(x, y, 0);
+        globalFreezeTime = movement.freezeTime;
+        Vector3 targetPosition = new Vector3(movement.target.transform.position.x, movement.target.transform.position.y, 0);
         currentState = CameraState.TargetZoom;
 
-        currentStepPos = (targetPosition - transform.position) / stepsToTarget;
-        cameraRate = (size - initialSize) / stepsToTarget;
+        currentStepPos = (targetPosition - transform.position) / movement.stepsToTarget;
+        cameraRate = (movement.ortographic_size - initialSize) / movement.stepsToTarget;
         zoomSteps = 0;
     }
 
@@ -302,10 +343,72 @@ public class CameraController : MonoBehaviour
         currentState = CameraState.FixedY;
     }
 
-    private void StartMovingToZoomInCutScene()
+    public IEnumerator StartCutscene(TriggerCamera.CameraMovementData[] cutSceneMovements)
     {
-        currentState = CameraState.TargetZoomInCutscene;
+        for (int i = 0; i< cutSceneMovements.Length; i++)
+        {
+            if (cutSceneMovements[i].playerCantMove == true)
+            {
+                levelManager.localPlayer.StopMoving();
+            }
+            if (cutSceneMovements[i].hideCanvas)
+            {
+                ToggleCanvas(false);
+            }
+            if (cutSceneMovements[i].target != target)
+            {
+                targetPosition = new Vector3(cutSceneMovements[i].target.transform.position.x, cutSceneMovements[i].target.transform.position.y, transform.position.z);
+            }
+
+            currentStepPos = (targetPosition - transform.position) / cutSceneMovements[i].stepsToTarget;
+            cameraRate = (cutSceneMovements[i].ortographic_size - initialSize) / stepsToTarget;
+            zoomSteps = 0;
+
+            ChangeState(cutSceneMovements[i].state, cutSceneMovements[i]);
+
+            if (cutSceneMovements[i].state == CameraState.TargetZoomInCutscene)
+            {
+                yield return new WaitForSeconds(WaitForCamera(cutSceneMovements[i].stepsToTarget, cutSceneMovements[i].freezeTime));
+
+            }
+            else if (cutSceneMovements[i].state == CameraState.TargetZoom)
+            {
+                yield return new WaitForSeconds(WaitForCamera(cutSceneMovements[i].stepsToTarget, cutSceneMovements[i].freezeTime));
+                Debug.Log(WaitForCamera(cutSceneMovements[i].stepsToTarget * 2, cutSceneMovements[i].freezeTime) * Time.deltaTime);
+            }
+            else
+            {
+                yield return new WaitForSeconds(cutSceneMovements[i].timeWaiting);
+                Debug.Log("ImWaiting");
+            }
+
+        }
+
+        SetDefaultValues(); 
+
     }
+
+    public void SetDataTargetZoomInCutscene(TriggerCamera.CameraMovementData cutSceneMovement)
+    {
+          if (cutSceneMovement.playerCantMove == true)
+            {
+                levelManager.localPlayer.StopMoving();
+            }
+            if (cutSceneMovement.hideCanvas)
+            {
+                ToggleCanvas(false);
+            }
+            globalFreezeTime = cutSceneMovement.freezeTime;
+            target = cutSceneMovement.target;
+            Vector3 targetPosition = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z);
+            currentState = cutSceneMovement.state;
+
+            currentStepPos = (targetPosition - transform.position) / cutSceneMovement.stepsToTarget;
+            cameraRate = (cutSceneMovement.ortographic_size - initialSize) / stepsToTarget;
+            zoomSteps = 0;
+            currentState = cutSceneMovement.state;
+    }
+
     public void SetDefaultValues()
     {
         thisCamera.orthographicSize = initialSize;
@@ -324,22 +427,21 @@ public class CameraController : MonoBehaviour
         ToggleChat(false);
     }
 
-    public void SetNewTarget(float ortographicSize, float x, float y, bool apagarChat)
+    public void SetNewTarget(TriggerCamera.CameraMovementData cameraMovement)
     {
-        thisCamera.orthographicSize = ortographicSize;
+        thisCamera.orthographicSize = cameraMovement.ortographic_size;
         currentState = CameraState.NormalWithDifferentTarget;
 
-        target = levelManager.GetLocalPlayer();
+        target = cameraMovement.target;
         smoothCamera = 3.9f;
         followAhead = .9f;
         followUp = 1f;
 
         stepsToTarget = 100;
         initialSize = 2.8f;
-        globalFreezeTime = 70;
 
         ToggleCanvas(true);
-        ToggleChat(apagarChat);
+        ToggleChat(cameraMovement.hideCanvas);
     }
 
     private void ToggleChat(bool apagarChat)
@@ -356,15 +458,14 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    private float WaitForCamera(float stepsToTarget, float freezeTime)
+    {
+        return (stepsToTarget + freezeTime) / 30;
+    }
+
     private void ToggleCanvas(bool active)
     {
-
-        GameObject canvas = GameObject.Find("Canvas");
-
-        if (canvas)
-        {
-            canvas.SetActive(active);
-        }
+        canvas.SetActive(active);        
     }
 
     #endregion

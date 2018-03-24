@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
     protected static float maxAcceleration = 1f;
     protected static float takeDamageRate = 1f;
     protected static float attackRate = .25f;
+    protected static float poweredRare = .25f;
     protected static float maxXSpeed = 3f;
     protected static float maxYSpeed = 8f;
 
@@ -76,14 +77,16 @@ public class PlayerController : MonoBehaviour
     protected string attackAnimName;
     protected bool isTakingDamage;
     protected bool isAttacking;
+    protected bool justPowered;
     protected bool connected;
     protected bool canMove;
     protected float speedX;
     protected float speedY;
+    protected CameraState cameraState;
 
 
     protected int debuger;
-    private CameraState cameraState;
+
 
     #endregion
 
@@ -243,7 +246,6 @@ public class PlayerController : MonoBehaviour
 
     public virtual void CastLocalAttack(Vector2 startPosition)
     {
-        Debug.Log("Im Castingmy local attack");
         isAttacking = true;
 
         AttackController attack = GetAttack();
@@ -332,6 +334,11 @@ public class PlayerController : MonoBehaviour
 
     public void UsePower()
     {
+        if (!localPlayer || justPowered)
+        {
+            return;
+        }
+
         if (localPlayer)
         {
 
@@ -630,7 +637,7 @@ public class PlayerController : MonoBehaviour
         {
             CameraController cameraController = camera.GetComponent<CameraController>();
             float cameraSize = cameraController.initialSize;
-            cameraController.ChangeState(cameraState, cameraSize, transform.position.x, transform.position.y, true, false, false, 100, 70);
+            cameraController.ChangeState(cameraState);
         }
     }
 
@@ -647,6 +654,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetPowerState(bool active)
     {
+        justPowered = true;
         ToggleParticles(active);
         isPowerOn = active;
 
@@ -654,9 +662,17 @@ public class PlayerController : MonoBehaviour
         {
             TogglePowerable(active);
         }
+
+        if (active == false)
+        {
+            TurnPowerablePlayersOff();
+        }
+
+        StartCoroutine(WaitPowerable());
+
     }
 
-    /*protected void TurnPowerablePlayersOff()
+    protected void TurnPowerablePlayersOff()
     {
         GameObject[] players = levelManager.players;
         foreach (GameObject player in players)
@@ -669,7 +685,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-    }*/
+    }
 
     protected void ResetDamagingObjects()
     {
@@ -1051,6 +1067,14 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(attackRate + .5f);
         isAttacking = false;
     }
+
+
+    public IEnumerator WaitPowerable()
+    {
+        yield return new WaitForSeconds(attackRate + .5f);
+        justPowered = false;
+    }
+
 
 
 

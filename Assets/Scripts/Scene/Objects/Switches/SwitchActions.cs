@@ -260,7 +260,9 @@ public class SwitchActions : MonoBehaviour
     private void HandlerGroup2()
     {
         CameraController mainCamera = GameObject.Find("MainCamera").GetComponent<CameraController>();
-        mainCamera.ChangeState(CameraState.TargetZoom, 5, 34.9f, -3.06f, true, false, false, 100, 70);
+        TriggerCamera tCamera = GameObject.Find("TriggerCameraForSwitchGroup2").GetComponent<TriggerCamera>();
+
+        mainCamera.ChangeState(CameraState.TargetZoom, tCamera.movements[0]);
           
 		SlideRock rocaGigante = FindObjectOfType<SlideRock>();
 		rocaGigante.Slide();
@@ -436,7 +438,8 @@ public class SwitchActions : MonoBehaviour
         {
             Debug.Log("it's " + levelManager.GetEngineer().localPlayer + "que tengo un EnginLocal Player");
             CameraController camera = FindObjectOfType<CameraController>();
-            camera.ChangeState(CameraState.TargetZoom, 2.7f, -41.96f, 44.1f, false, false, false, 80f, 80f);
+            TriggerCamera tCamera = GameObject.Find("TriggerCameraForEnginScene3").GetComponent<TriggerCamera>();
+            camera.ChangeState(CameraState.TargetZoom, tCamera.movements[0]);
         }
 
 		levelManager.DestroyObject("CajaSwitchFierro", 2.5f);

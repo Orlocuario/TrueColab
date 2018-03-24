@@ -131,7 +131,10 @@ namespace CnControls
             // We first check the stadard Button behaviour
             var standardInputButtonState = Input.GetButtonDown(buttonName);
             // If the stadard Unity Input button is being pressed, we just retur true
-            if (standardInputButtonState == true) return true;
+            if (standardInputButtonState == true)
+            {
+                return true;
+            }
 
             // If not, we check our virtual buttons
             if (ButtonExists(buttonName))

@@ -19,62 +19,53 @@ public class TriggerCamera : MonoBehaviour
         public float stepsToTarget;
         public float freezeTime;
         public float timeWaiting;
+        public bool playerChangeState;
 
-        public void NewMovement()
-        {
-            GameObject camera = GameObject.Find("MainCamera");
-            CameraController cameraController = camera.GetComponent<CameraController>();
-            cameraController.ChangeState(state, ortographic_size, target.transform.position.x, target.transform.position.y, hideChat, playerCantMove, hideCanvas, stepsToTarget, freezeTime);
-        }
     }
 
     public CameraMovementData[] movements;
     public bool isCutScene;
 
+    protected PlayerController[] playerControllers;
+
+    #endregion
+
+    #region Start
+
+    private void Start()
+    {
+        playerControllers = new PlayerController[3];
+    }
+
     #endregion
 
     #region Common 
 
-    public IEnumerator OnEnter()
+    public void OnEnter()
     {
-        for (int i = 0; i < movements.Length; i++)
-        {
-            movements[i].NewMovement();
-
-
-            if (movements[i].state == CameraState.TargetZoomInCutscene)
-            {
-                yield return new WaitForSeconds(WaitForCamera(movements[i].stepsToTarget, movements[i].freezeTime));
-                Debug.Log(WaitForCamera(movements[i].stepsToTarget, movements[i].freezeTime) * Time.deltaTime);
-            }
-            else if (movements[i].state == CameraState.TargetZoom)
-            {
-                yield return new WaitForSeconds(WaitForCamera(movements[i].stepsToTarget, movements[i].freezeTime));
-                Debug.Log(WaitForCamera(movements[i].stepsToTarget*2, movements[i].freezeTime) * Time.deltaTime);
-            }
-            else
-            {
-                yield return new WaitForSeconds(movements[i].timeWaiting);
-                Debug.Log("ImWaiting");
-            }
-        }
-
+        GameObject camera = GameObject.Find("MainCamera");
+        CameraController cameraController = camera.GetComponent<CameraController>();
         if (isCutScene)
         {
-            Debug.Log("Its a Cutscene, so left");
-            OnExit();
-            Destroy(gameObject, 1f);
+            cameraController.StartCoroutine(cameraController.StartCutscene(movements));
+            return;
         }
-        Debug.Log("Im Not a Cutscene So i just left without restartint Left");
+
+        else if (movements[0].playerChangeState)
+        {
+            cameraController.ChangeState(movements[0].state);
+        }
+
+        else
+        {
+            cameraController.ChangeState(movements[0].state, movements[0]);
+        }
     }
 
     private void OnExit()
     {
-        LevelManager levelManager = FindObjectOfType<LevelManager>();
-        PlayerController playerController = levelManager.GetLocalPlayerController();
-        playerController.ResumeMoving();
 
-        GameObject camera = GameObject.Find("MainCamera"); // TODO: Change this to obj name
+        GameObject camera = GameObject.Find("MainCamera");
         CameraController cameraController = camera.GetComponent<CameraController>();
 
         cameraController.SetDefaultValues();
@@ -89,7 +80,8 @@ public class TriggerCamera : MonoBehaviour
     {
         if (GameObjectIsPlayer(other.gameObject))
         {
-            StartCoroutine(OnEnter());
+            CheckIfPlayerEntered(other.gameObject);
+            OnEnter();
         }
     }
 
@@ -111,11 +103,19 @@ public class TriggerCamera : MonoBehaviour
         return playerController && playerController.localPlayer;
     }
 
-    private float WaitForCamera(float stepsToTarget, float freezeTime)
+    protected void CheckIfPlayerEntered(GameObject playerObject)
     {
-        return (stepsToTarget + freezeTime) / 30;
+        PlayerController player = playerObject.GetComponent<PlayerController>();
+        int i = player.playerId;
+        if (playerControllers[i] == null)
+        {
+            playerControllers[i] = player;
+        }
+        else
+        {
+            return;
+        }
     }
 
-
-    #endregion
 }
+    #endregion
