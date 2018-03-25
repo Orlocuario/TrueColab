@@ -427,6 +427,7 @@ public class PlayerController : MonoBehaviour
     public void HardReset()
     {
         StopMoving();
+        SetPowerState(false);
         ResetTransform();
         SetPowerState(false);
         ResetDamagingObjects();

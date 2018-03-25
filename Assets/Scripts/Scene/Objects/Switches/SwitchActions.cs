@@ -442,12 +442,12 @@ public class SwitchActions : MonoBehaviour
             camera.ChangeState(CameraState.TargetZoom, tCamera.movements[0]);
         }
 
-		levelManager.DestroyObject("CajaSwitchFierro", 2.5f);
-		levelManager.InstantiatePortal("EnginTeleporter", new Vector2(-53.96f, 45.62f), new Vector2(-48.73f, 43.36f));
+        levelManager.DestroyObject("CajaSwitchFierro", 2.5f);
+        levelManager.InstantiatePortal("EnginTeleporter", new Vector2(8.63f, 18.09f), new Vector2(14.1f, 15.7f));
     }
     private void HandlerGroup16()
     {
-		levelManager.InstantiatePortal("MageTeleporter", new Vector2(-50.43f, 47.8f), new Vector2(-37.81f, 26.37f));
+		levelManager.InstantiatePortal("MageTeleporter", new Vector2(12.07f, 20.25f), new Vector2(25.1f, -1.1f));
     }
     private void HandlerGroup17()
     {
@@ -467,13 +467,13 @@ public class SwitchActions : MonoBehaviour
     }
     private void HandlerGroup21()
     {
-		levelManager.InstantiatePrefab("Items/RunaV1", new Vector2(-13.85f, 19.74f));
-		levelManager.InstantiatePrefab("Items/RunaV1", new Vector2(-2.072f, 27.9f));
-		levelManager.InstantiatePrefab("Items/RunaV1", new Vector2(-15.365f, 47.26f));
+		levelManager.InstantiatePrefab("Items/RunaV1", new Vector2(59.71f, 0.42f));
+		levelManager.InstantiatePrefab("Items/RunaV1", new Vector2(49.21f, -7.73f));
+		levelManager.InstantiatePrefab("Items/RunaV1", new Vector2(47.71f, 19.74f));
     }
     private void HandlerGroup22()
     {
-		levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(-19.81f, 15.54f));
+		levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(-19.81f, 15.54f)); // SeemsLike No Switch in scene 3 is Using This
     }
 
     private void HandlerGroup23()
@@ -494,15 +494,15 @@ public class SwitchActions : MonoBehaviour
     }
     private void HandlerGroup27()
     {
-		levelManager.InstantiatePrefab("Items/RunaA1", new Vector2(-14.16f, 19.74f));
-		levelManager.InstantiatePrefab("Items/RunaA1", new Vector2(-2.392f, 27.9f));
-		levelManager.InstantiatePrefab("Items/RunaA1", new Vector2(-15.68f, 47.26f));
+		levelManager.InstantiatePrefab("Items/RunaA1", new Vector2(59.4f, 0.42f));
+		levelManager.InstantiatePrefab("Items/RunaA1", new Vector2(48.89f, -7.73f));
+		levelManager.InstantiatePrefab("Items/RunaA1", new Vector2(47.39f, 19.74f));
     }
     private void HandlerGroup28()
     {
-		levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(-13.54f, 19.74f));
-		levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(-1.767f, 27.9f));
-		levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(-15.054f, 47.26f));
+		levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(60.03f, 0.42f));
+		levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(49.52f, -7.73f));
+		levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(48.02f, 19.74f));
     }
     private void HandlerGroup29()
     {
@@ -522,9 +522,9 @@ public class SwitchActions : MonoBehaviour
     }
     private void HandlerGroup33()
     {
-		levelManager.InstantiatePrefab("Items/RunaA1", new Vector2(-23.14f, 41.59f));
-		levelManager.InstantiatePrefab("Items/RunaV1", new Vector2(-10.75f, 22.567f));
-		levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(-19.81f, 15.54f));
+		levelManager.InstantiatePrefab("Items/RunaA1", new Vector2(39.91f, 13.61f));
+		levelManager.InstantiatePrefab("Items/RunaV1", new Vector2(52.22f, -5.04f));
+		levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(43.32f, -12.53f));
     }
 
     private void HandlerGroup34()
@@ -597,10 +597,10 @@ public class SwitchActions : MonoBehaviour
     }
     private void HandlerGroup49()
     {
-		levelManager.InstantiatePortal("MageTeleporter", new Vector2(12.179f, 22f), new Vector2(23f, 22f)); //Solucionar Vectores}
-		levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(3.37f, 14.82f), new Vector2(24f, 22f)); //Solucionar Vectores}
-		levelManager.InstantiatePortal("EnginTeleporter", new Vector2(0.9f, 41f), new Vector2(25f, 22f)); //Solucionar Vectores}
-		levelManager.TogglePowerableAnimatorsWithTag ("waterFalling", true, "LavaCascade3Final");
+		levelManager.InstantiatePortal("MageTeleporter", new Vector2(75.27f, -5.48f), new Vector2(84f, -5.5f)); //Solucionar Vectores}
+		levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(66.47f, -12.66f), new Vector2(83f, -5.5f)); //Solucionar Vectores}
+		levelManager.InstantiatePortal("EnginTeleporter", new Vector2(63.98f, 13.31f), new Vector2(82f, -5.5f)); //Solucionar Vectores}
+		levelManager.TogglePowerableAnimatorsWithTag ("WaterFalling", true, "LavaCascade3Final");
     }
 
     // Switches Scene 4

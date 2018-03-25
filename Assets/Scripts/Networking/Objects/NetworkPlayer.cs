@@ -46,7 +46,7 @@ public class NetworkPlayer
         pressingJump = false;
         pressingRight = false;
         pressingLeft = false;
-        positionX = 0;
+        positionX = 0;  
         positionY = 0;
         speedX = 0;
         directionX = 1;
