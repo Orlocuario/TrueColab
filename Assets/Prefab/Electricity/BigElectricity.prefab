@@ -82,7 +82,7 @@ ParticleSystem:
   playOnAwake: 1
   autoRandomSeed: 1
   startDelay:
-    scalar: 5
+    scalar: 0
     maxCurve:
       serializedVersion: 2
       m_Curve:

@@ -224,6 +224,9 @@ public class SwitchActions : MonoBehaviour
             case 51:
                 HandlerGroup51();
                 break;
+            case 52:
+                HandlerGroup52();
+                break;
             default:
                 return;
         }
@@ -616,6 +619,11 @@ public class SwitchActions : MonoBehaviour
         levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(-24.416f, -1.56f), new Vector2(-20.7f, 0.5f), true, 1);
         BurnableObject treeToBurn = GameObject.Find("TreeAltarHolder").GetComponent<BurnableObject>();
         treeToBurn.Burn();
+    }
+
+    private void HandlerGroup52()
+    {
+
     }
 
     #endregion

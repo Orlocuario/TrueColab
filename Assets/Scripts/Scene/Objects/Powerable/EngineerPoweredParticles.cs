@@ -10,16 +10,25 @@ public class EngineerPoweredParticles : PoweredParticles
     {
         if (other.GetComponent<PlayerController>())
         {
+            CheckIfPlayerEntered(other.gameObject);
             PlayerController player = other.GetComponent<PlayerController>();
             player.SetPositiveGravity(false);
         }
 
         if (other.GetComponent<MovableObject>())
         {
-            other.GetComponent<Rigidbody2D>().gravityScale *= -1;
             MovableObject movable = other.GetComponent<MovableObject>();
-            GameObject[] particles = movable.particles;
-            movable.ToggleParticles(particles, true);
+            if (movable.GetMovableAlreadyIn())
+            {
+                return;
+            }
+            else
+            {
+                other.GetComponent<Rigidbody2D>().gravityScale *= -1;
+                GameObject[] particles = movable.particles;
+                movable.ToggleParticles(particles, false);
+                movable.SetIfImInOrNot(true);
+            }
         }
 
     }
@@ -28,18 +37,30 @@ public class EngineerPoweredParticles : PoweredParticles
     {
         if (other.GetComponent<PlayerController>())
         {
+            CheckIfPlayerAlreadyLeft(other.gameObject);
             PlayerController player = other.GetComponent<PlayerController>();
             player.SetPositiveGravity(true);
         }
 
         if (other.GetComponent<MovableObject>())
         {
-            other.GetComponent<Rigidbody2D>().gravityScale *= -1;
             MovableObject movable = other.GetComponent<MovableObject>();
-            GameObject[] particles = movable.particles;
-            movable.ToggleParticles(particles, false);
+            if (movable.GetMovableAlreadyIn() == false)
+            {
+                return;
+            }
+            else
+            {
+                other.GetComponent<Rigidbody2D>().gravityScale *= -1;
+                GameObject[] particles = movable.particles;
+                movable.ToggleParticles(particles, false);
+                movable.SetIfImInOrNot(false);
+            }
         }
     }
+
+
+
     #endregion
 
 }

@@ -17,6 +17,7 @@ public class MovableObject : MonoBehaviour
     protected int shutdownFrames;
     protected SceneAnimator sceneAnimator;
     protected Rigidbody2D rgbd;
+    private bool alreadyEnteredParticleZone;
 
     #endregion
 
@@ -29,6 +30,7 @@ public class MovableObject : MonoBehaviour
         rgbd = GetComponent<Rigidbody2D>();
         sceneAnimator = FindObjectOfType<SceneAnimator>();
         InitializeParticles();
+        alreadyEnteredParticleZone = false;
     }
 
     protected virtual void Update()
@@ -125,6 +127,16 @@ public class MovableObject : MonoBehaviour
     #endregion
 
     #region Utils
+
+    public bool GetMovableAlreadyIn()
+    {
+        return alreadyEnteredParticleZone;
+    }
+
+    public void SetIfImInOrNot(bool imIn)
+    {
+        alreadyEnteredParticleZone = imIn;
+    }
 
     protected bool TriggerIsOpener(GameObject trigger)
     {
