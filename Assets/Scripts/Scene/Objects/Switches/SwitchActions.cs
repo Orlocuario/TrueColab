@@ -227,6 +227,9 @@ public class SwitchActions : MonoBehaviour
             case 52:
                 HandlerGroup52();
                 break;
+            case 53:
+                HandlerGroup53();
+                break;
             default:
                 return;
         }
@@ -623,9 +626,19 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup52()
     {
-
+        // This one is for the group of Switches in the warriorGearZone;
     }
 
+    private void HandlerGroup53()
+    {
+        GameObject platEngineer = levelManager.InstantiatePrefab("MovPlatform", new Vector2(-31.76f, 35.69f));
+        levelManager.SetMovingObjectData(platEngineer, new Vector2(-31.76f, 35.69f), new Vector2(-39.76f, 33.45f), 1f, 2f, false);
+
+       // MustAlsoInstantiateAlotOfEXP!
+
+        GameObject platEngineer2 = levelManager.InstantiatePrefab("MovPlatform", new Vector2(-30.14f, 29.64f));
+        levelManager.SetMovingObjectData(platEngineer2, new Vector2(-30.14f, 29.64f), new Vector2(-39.76f, 32.7f), 1f, 2f, false);
+    }
     #endregion
 
     #region Utils

@@ -58,7 +58,11 @@ public class EnemyController : MonoBehaviour
         ignoresCollisions = new Dictionary<string, bool> { { "Mage", false }, { "Warrior", false }, { "Engineer", false } };
 
         currentPatrolPointCount = 0;
-        patrollingSpeed = 0.005f;
+        if (patrollingSpeed.Equals(default(float)))
+        {
+            Debug.LogError("This Enemy has no speed set");
+        }
+        patrollingSpeed = patrollingSpeed * 0.04f;
         directionX = -1;
         hp = maxHp;
 

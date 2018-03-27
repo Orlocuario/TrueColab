@@ -22,7 +22,7 @@ public class PunchController : AttackController
     protected override void Update()
     {
         base.Update();
-        
+
     }
 
     #endregion
@@ -74,6 +74,11 @@ public class PunchController : AttackController
 
         if (caster.localPlayer)
         {
+            if (ColidedWithBurnable(collision.gameObject))
+            {
+                BurnObject(collision.gameObject);
+            }
+
             if (CollidedWithDestroyable(collision.gameObject))
             {
                 DestroyObject(collision.gameObject);
@@ -114,18 +119,36 @@ public class PunchController : AttackController
         }
     }
 
-	protected override float GetSpeed()
-	{
-		if (enhanced) 
-		{
-			return speed * 1.5f;
-		} 
-		else 
-		{
-			return speed;
-		}
-	}
+    protected override float GetSpeed()
+    {
+        if (enhanced)
+        {
+            return speed * 1.5f;
+        }
+        else
+        {
+            return speed;
+        }
+    }
 
+    protected bool ColidedWithBurnable(GameObject otherObject)
+    {
+        if (enhanced)
+        {
+            if (otherObject.GetComponent<BurnableObject>())
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    protected void BurnObject (GameObject burnableObject)
+    {
+        BurnableObject bObject = burnableObject.GetComponent<BurnableObject>();
+        bObject.Burn();
+    }
     protected override float GetDistance()
     {
         if (enhanced)
@@ -138,4 +161,4 @@ public class PunchController : AttackController
         }
     }
 }
-    #endregion
+#endregion
