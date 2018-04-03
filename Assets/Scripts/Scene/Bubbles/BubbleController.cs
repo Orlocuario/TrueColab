@@ -161,9 +161,8 @@ public class BubbleController : MonoBehaviour
         initialized = true;
     }
 
-	public void InitializeNeutralBubble(MoveType _moveType, GameObject[] casters)
+	public void InitializeNeutralBubble(MoveType _moveType)
 	{
-		SetNeutralBubblePowerable (casters);
 		moveType = _moveType;
 		initialized = true;
 	}
@@ -237,7 +236,10 @@ public class BubbleController : MonoBehaviour
     protected void MoveToTarget()
     {
         transform.position = Vector3.MoveTowards(transform.position, targets[targetsReached], GetSpeedToTarget());
-		parasiteParticle.transform.position = gameObject.transform.position;
+        if (parasiteParticle != null)
+        {
+		    parasiteParticle.transform.position = gameObject.transform.position;
+        }
 
         if (transform.position.x == targets[targetsReached].x && transform.position.y == targets[targetsReached].y)
         {

@@ -9,6 +9,7 @@ public class NPCtrigger : MonoBehaviour
     #region Attributes
 
     public bool teleport;
+    public bool musntDie;
     public Vector3 whereToRespawn;
 
     public bool freezesPlayer;
@@ -227,7 +228,14 @@ public class NPCtrigger : MonoBehaviour
         }
 
         levelManager.ShutNPCFeedback(true);
-        Destroy(gameObject);
+        if (musntDie)
+        {
+            return;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     protected bool GameObjectIsPlayer(GameObject other)

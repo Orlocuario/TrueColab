@@ -717,7 +717,7 @@ public class LevelManager : MonoBehaviour
             if (bubbleType == "BurbujaN")
             {
                 BubbleController bController = bubble.GetComponent<BubbleController>();
-                bController.InitializeNeutralBubble(BubbleController.MoveType.Targets, players);
+                bController.InitializeNeutralBubble(BubbleController.MoveType.Targets);
                 bController.SetMovement(initialPosition, targetPositions, movementSpeed, timeToWait, timeToKillBubble);
             }
             else
