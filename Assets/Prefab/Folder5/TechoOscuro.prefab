@@ -100,7 +100,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4044485343030546}
   - component: {fileID: 61418325949120752}
-  - component: {fileID: 61680626528727282}
   m_Layer: 0
   m_Name: TechoOscuro
   m_TagString: Untagged
@@ -415,20 +414,6 @@ BoxCollider2D:
   m_Offset: {x: -0.7732947, y: 0.15880613}
   serializedVersion: 2
   m_Size: {x: 8.326609, y: 0.6823807}
---- !u!61 &61680626528727282
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1403129612988038}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 58c9c2d949caa4a04877fd1bcd8723da, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: -16.426153, y: -7.1745043}
-  serializedVersion: 2
-  m_Size: {x: 5.4735894, y: 1.7417504}
 --- !u!212 &212080203066187756
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -230,6 +230,9 @@ public class SwitchActions : MonoBehaviour
             case 53:
                 HandlerGroup53();
                 break;
+            case 54:
+                HandlerGroup54();
+                break;
             default:
                 return;
         }
@@ -639,6 +642,12 @@ public class SwitchActions : MonoBehaviour
         GameObject platEngineer2 = levelManager.InstantiatePrefab("MovPlatform", new Vector2(-30.14f, 29.64f));
         levelManager.SetMovingObjectData(platEngineer2, new Vector2(-30.14f, 29.64f), new Vector2(-39.76f, 32.7f), 1f, 2f, false);
     }
+
+    private void HandlerGroup54()
+    {
+
+    }
+
     #endregion
 
     #region Utils
