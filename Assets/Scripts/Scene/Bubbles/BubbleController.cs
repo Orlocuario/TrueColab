@@ -250,7 +250,10 @@ public class BubbleController : MonoBehaviour
 				if (targetsReached == targets.Length)
                 {
 					Destroy (gameObject, timetoKillBubble);
-					Destroy (parasiteParticle.gameObject, timetoKillBubble); 
+                    if (parasiteParticle != null)
+                    {
+					    Destroy (parasiteParticle.gameObject, timetoKillBubble); 
+                    }
 
 
 					for (int i = 0; i < playerControllers.Length; i++)
