@@ -12,6 +12,7 @@ public class PlayerTeleporter : MonoBehaviour
     public bool teleportAnyPlayer;
     public bool mustDoSomething;
     public bool itsDone;
+    private bool didMyThing;
     public int id; 
 
     #endregion
@@ -22,6 +23,7 @@ public class PlayerTeleporter : MonoBehaviour
     {
         levelManager = FindObjectOfType<LevelManager>();
         CheckTeleportPositionAndId();
+        didMyThing = false;
     }
 
     #endregion
@@ -34,7 +36,7 @@ public class PlayerTeleporter : MonoBehaviour
         {
             if (other.gameObject.GetComponent<PlayerController>())
             {
-                if (other.gameObject.GetComponent<PlayerController>().localPlayer)
+                if (other.gameObject.GetComponent<PlayerController>())
                 {
                     ActivateTeleporter(other.gameObject);
                 }
@@ -48,7 +50,7 @@ public class PlayerTeleporter : MonoBehaviour
             {
                 if (other.gameObject.name == playerToTeleport)
                 {
-                    if (other.gameObject.GetComponent<PlayerController>().localPlayer)
+                    if (other.gameObject.GetComponent<PlayerController>())
                     {
                         ActivateTeleporter(other.gameObject);
                     }
@@ -63,11 +65,23 @@ public class PlayerTeleporter : MonoBehaviour
 
     protected void ActivateTeleporter(GameObject other)
     {
-        other.GetComponent<PlayerController>().respawnPosition = teleportPosition;
-        levelManager.Respawn();
+        if (other.GetComponent<PlayerController>().localPlayer)
+        {
+            other.GetComponent<PlayerController>().respawnPosition = teleportPosition;
+            levelManager.Respawn();
+        }
+
         if (mustDoSomething)
         {
-            DoYourTeleportedThing(id);
+            if (didMyThing)
+            {
+                return;
+            }
+            else
+            {
+                didMyThing = true;
+                DoYourTeleportedThing(id);
+            }
         }
     }
 
@@ -77,6 +91,9 @@ public class PlayerTeleporter : MonoBehaviour
         {
             case 1:
                 HandleCase1();
+                break;
+            case 2:
+                HandleCase2();
                 break;
             default:
                 return;
@@ -94,6 +111,8 @@ public class PlayerTeleporter : MonoBehaviour
         {
             Debug.LogError("teleport: " + gameObject.name + "needs an Id");
         }
+
+
     }
 
     private void HandleCase1()
@@ -115,6 +134,20 @@ public class PlayerTeleporter : MonoBehaviour
         GameObject switchObject = GameObject.Find("Switch (2)");
         Destroy(switchObject);
         Destroy(gameObject);
+    }
+
+    private void HandleCase2()
+    {
+        GameObject magePathBlocker = GameObject.Find("ParedMetalZonaSecretMage");
+        if (magePathBlocker)
+        {
+            Destroy(magePathBlocker);
+        }
+    }
+
+    public bool CheckIfDidThing()
+    {
+        return didMyThing;
     }
     #endregion
 

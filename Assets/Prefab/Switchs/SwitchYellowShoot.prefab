@@ -84,7 +84,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 1874631185559160}
   m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
@@ -120,10 +120,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3310a335c359959459f1e3899f61242d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPoint: {x: 26.74, y: 4.9}
   endPoint: {x: 26.74, y: 3.6}
+  hasParasite: 0
+  parasiteName: 
   dontCollideWithPlayers: 1
   moveSpeed: 0.8
+  timeToWait: 0
+  isWorking: 0
+  playerHasReturned: 0
 --- !u!114 &114409910228419638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -136,13 +140,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   switchObj: {fileID: 0}
+  particles: {fileID: 1849838662085546}
   activation: 1
   switchColor: 2
   desactivable: 0
   individualId: 1
-  isActivated: 0
   groupId: 1
-  particles: {fileID: 1849838662085546}
+  damageDone: 0
+  damageIfIncorrect: 0
+  isActivated: 0
 --- !u!198 &198069768817848060
 ParticleSystem:
   m_ObjectHideFlags: 1

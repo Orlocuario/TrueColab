@@ -24,6 +24,30 @@ public class GearSystemActions : ActivableSystemActions
 			case "MaquinaEngranajeD":
 				HandleGearSystemD(gearSystem, notifyOthers);
 				break;
+            case "MaquinaEngranajeE":
+                HandleGearSystemE(gearSystem, notifyOthers);
+                break;
+            case "MaquinaEngranajeF":
+                HandleGearSystemF(gearSystem, notifyOthers);
+                break;
+            case "MaquinaEngranajeG":
+                HandleGearSystemG(gearSystem, notifyOthers);
+                break;
+            case "MaquinaEngranajeH":
+                HandleGearSystemH(gearSystem, notifyOthers);
+                break;
+            case "MaquinaEngranajeI":
+                HandleGearSystemI(gearSystem, notifyOthers);
+                break;
+            case "MaquinaEngranajeJ":
+                HandleGearSystemJ(gearSystem, notifyOthers);
+                break;
+            case "MaquinaEngranajeK":
+                HandleGearSystemK(gearSystem, notifyOthers);
+                break;
+            case "MaquinaEngranajeL":
+                HandleGearSystemL(gearSystem, notifyOthers);
+                break;
         }
 
     }
@@ -254,6 +278,407 @@ public class GearSystemActions : ActivableSystemActions
 			SendMessageToServer("ActivateSystem/" + gearSystem.name, true);
 		}
 	}
+
+    private void HandleGearSystemE(GearSystem gearSystem, bool notifyOthers)
+    {
+
+        // Dispose every used gear in case of reconnection
+        for (int i = 0; i < gearSystem.components.Length; i++)
+        {
+            string usedGearName = gearSystem.components[i].sprite.name;
+            GameObject usedGear = GameObject.Find(usedGearName);
+
+            if (usedGear)
+            {
+                DestroyObject(usedGearName, .1f);
+            }
+
+        }
+
+        // Hide every placed gear
+        SpriteRenderer[] componentSlots = gearSystem.GetComponentsInChildren<SpriteRenderer>();
+        for (int i = 0; i < componentSlots.Length; i++)
+        {
+            componentSlots[i].sprite = null;
+        }
+
+        // Change the gearsystem sprite
+
+        SpriteRenderer systemSpriteRenderer = gearSystem.GetComponent<SpriteRenderer>();
+        systemSpriteRenderer.sprite = gearSystem.activatedSprite;
+
+        // Doing Something
+
+        BubbleRotatingInstantiator bInstantiatior = GameObject.Find("BubbleCentralInstatiator").GetComponent<BubbleRotatingInstantiator>();
+        bInstantiatior.GearActivation();
+
+        //  Planner 
+        if (Object.FindObjectOfType<Planner>())
+        {
+            if (gearSystem.switchObj)
+            {
+                gearSystem.switchObj.ActivateSwitch();
+
+                Planner planner = Object.FindObjectOfType<Planner>();
+                planner.Monitor();
+            }
+        }
+
+        if (notifyOthers)
+        {
+            SendMessageToServer("ActivateSystem/" + gearSystem.name, true);
+        }
+    }
+    private void HandleGearSystemF(GearSystem gearSystem, bool notifyOthers)
+    {
+
+        // Dispose every used gear in case of reconnection
+        for (int i = 0; i < gearSystem.components.Length; i++)
+        {
+            string usedGearName = gearSystem.components[i].sprite.name;
+            GameObject usedGear = GameObject.Find(usedGearName);
+
+            if (usedGear)
+            {
+                DestroyObject(usedGearName, .1f);
+            }
+
+        }
+
+        // Hide every placed gear
+        SpriteRenderer[] componentSlots = gearSystem.GetComponentsInChildren<SpriteRenderer>();
+        for (int i = 0; i < componentSlots.Length; i++)
+        {
+            componentSlots[i].sprite = null;
+        }
+
+        // Change the gearsystem sprite
+
+        SpriteRenderer systemSpriteRenderer = gearSystem.GetComponent<SpriteRenderer>();
+        systemSpriteRenderer.sprite = gearSystem.activatedSprite;
+
+        // Doing Something
+
+        BubbleRotatingInstantiator bInstantiatior = GameObject.Find("BubbleCentralInstatiator").GetComponent<BubbleRotatingInstantiator>();
+        bInstantiatior.GearActivation();
+
+        //  Planner 
+        if (Object.FindObjectOfType<Planner>())
+        {
+            if (gearSystem.switchObj)
+            {
+                gearSystem.switchObj.ActivateSwitch();
+
+                Planner planner = Object.FindObjectOfType<Planner>();
+                planner.Monitor();
+            }
+        }
+
+        if (notifyOthers)
+        {
+            SendMessageToServer("ActivateSystem/" + gearSystem.name, true);
+        }
+    }
+    private void HandleGearSystemG(GearSystem gearSystem, bool notifyOthers)
+    {
+
+        // Dispose every used gear in case of reconnection
+        for (int i = 0; i < gearSystem.components.Length; i++)
+        {
+            string usedGearName = gearSystem.components[i].sprite.name;
+            GameObject usedGear = GameObject.Find(usedGearName);
+
+            if (usedGear)
+            {
+                DestroyObject(usedGearName, .1f);
+            }
+
+        }
+
+        // Hide every placed gear
+        SpriteRenderer[] componentSlots = gearSystem.GetComponentsInChildren<SpriteRenderer>();
+        for (int i = 0; i < componentSlots.Length; i++)
+        {
+            componentSlots[i].sprite = null;
+        }
+
+        // Change the gearsystem sprite
+
+        SpriteRenderer systemSpriteRenderer = gearSystem.GetComponent<SpriteRenderer>();
+        systemSpriteRenderer.sprite = gearSystem.activatedSprite;
+
+        // Doing Something
+
+        BubbleRotatingInstantiator bInstantiatior = GameObject.Find("BubbleCentralInstatiator").GetComponent<BubbleRotatingInstantiator>();
+        bInstantiatior.GearActivation();
+
+        //  Planner 
+        if (Object.FindObjectOfType<Planner>())
+        {
+            if (gearSystem.switchObj)
+            {
+                gearSystem.switchObj.ActivateSwitch();
+
+                Planner planner = Object.FindObjectOfType<Planner>();
+                planner.Monitor();
+            }
+        }
+
+        if (notifyOthers)
+        {
+            SendMessageToServer("ActivateSystem/" + gearSystem.name, true);
+        }
+    }
+    private void HandleGearSystemH(GearSystem gearSystem, bool notifyOthers)
+    {
+
+        // Dispose every used gear in case of reconnection
+        for (int i = 0; i < gearSystem.components.Length; i++)
+        {
+            string usedGearName = gearSystem.components[i].sprite.name;
+            GameObject usedGear = GameObject.Find(usedGearName);
+
+            if (usedGear)
+            {
+                DestroyObject(usedGearName, .1f);
+            }
+
+        }
+
+        // Hide every placed gear
+        SpriteRenderer[] componentSlots = gearSystem.GetComponentsInChildren<SpriteRenderer>();
+        for (int i = 0; i < componentSlots.Length; i++)
+        {
+            componentSlots[i].sprite = null;
+        }
+
+        // Change the gearsystem sprite
+
+        SpriteRenderer systemSpriteRenderer = gearSystem.GetComponent<SpriteRenderer>();
+        systemSpriteRenderer.sprite = gearSystem.activatedSprite;
+
+        // Doing Something
+
+        BubbleRotatingInstantiator bInstantiatior = GameObject.Find("BubbleCentralInstatiator").GetComponent<BubbleRotatingInstantiator>();
+        bInstantiatior.GearActivation();
+
+        //  Planner 
+        if (Object.FindObjectOfType<Planner>())
+        {
+            if (gearSystem.switchObj)
+            {
+                gearSystem.switchObj.ActivateSwitch();
+
+                Planner planner = Object.FindObjectOfType<Planner>();
+                planner.Monitor();
+            }
+        }
+
+        if (notifyOthers)
+        {
+            SendMessageToServer("ActivateSystem/" + gearSystem.name, true);
+        }
+    }
+    private void HandleGearSystemI(GearSystem gearSystem, bool notifyOthers)
+    {
+
+        // Dispose every used gear in case of reconnection
+        for (int i = 0; i < gearSystem.components.Length; i++)
+        {
+            string usedGearName = gearSystem.components[i].sprite.name;
+            GameObject usedGear = GameObject.Find(usedGearName);
+
+            if (usedGear)
+            {
+                DestroyObject(usedGearName, .1f);
+            }
+
+        }
+
+        // Hide every placed gear
+        SpriteRenderer[] componentSlots = gearSystem.GetComponentsInChildren<SpriteRenderer>();
+        for (int i = 0; i < componentSlots.Length; i++)
+        {
+            componentSlots[i].sprite = null;
+        }
+
+        // Change the gearsystem sprite
+
+        SpriteRenderer systemSpriteRenderer = gearSystem.GetComponent<SpriteRenderer>();
+        systemSpriteRenderer.sprite = gearSystem.activatedSprite;
+
+        // Doing Something
+
+        BubbleRotatingInstantiator bInstantiatior = GameObject.Find("BubbleCentralInstatiator").GetComponent<BubbleRotatingInstantiator>();
+        bInstantiatior.GearActivation();
+
+        //  Planner 
+        if (Object.FindObjectOfType<Planner>())
+        {
+            if (gearSystem.switchObj)
+            {
+                gearSystem.switchObj.ActivateSwitch();
+
+                Planner planner = Object.FindObjectOfType<Planner>();
+                planner.Monitor();
+            }
+        }
+
+        if (notifyOthers)
+        {
+            SendMessageToServer("ActivateSystem/" + gearSystem.name, true);
+        }
+    }
+    private void HandleGearSystemJ(GearSystem gearSystem, bool notifyOthers)
+    {
+
+        // Dispose every used gear in case of reconnection
+        for (int i = 0; i < gearSystem.components.Length; i++)
+        {
+            string usedGearName = gearSystem.components[i].sprite.name;
+            GameObject usedGear = GameObject.Find(usedGearName);
+
+            if (usedGear)
+            {
+                DestroyObject(usedGearName, .1f);
+            }
+
+        }
+
+        // Hide every placed gear
+        SpriteRenderer[] componentSlots = gearSystem.GetComponentsInChildren<SpriteRenderer>();
+        for (int i = 0; i < componentSlots.Length; i++)
+        {
+            componentSlots[i].sprite = null;
+        }
+
+        // Change the gearsystem sprite
+
+        SpriteRenderer systemSpriteRenderer = gearSystem.GetComponent<SpriteRenderer>();
+        systemSpriteRenderer.sprite = gearSystem.activatedSprite;
+
+        // Doing Something
+
+        BubbleRotatingInstantiator bInstantiatior = GameObject.Find("BubbleCentralInstatiator").GetComponent<BubbleRotatingInstantiator>();
+        bInstantiatior.GearActivation();
+
+        //  Planner 
+        if (Object.FindObjectOfType<Planner>())
+        {
+            if (gearSystem.switchObj)
+            {
+                gearSystem.switchObj.ActivateSwitch();
+
+                Planner planner = Object.FindObjectOfType<Planner>();
+                planner.Monitor();
+            }
+        }
+
+        if (notifyOthers)
+        {
+            SendMessageToServer("ActivateSystem/" + gearSystem.name, true);
+        }
+    }
+    private void HandleGearSystemK(GearSystem gearSystem, bool notifyOthers)
+    {
+
+        // Dispose every used gear in case of reconnection
+        for (int i = 0; i < gearSystem.components.Length; i++)
+        {
+            string usedGearName = gearSystem.components[i].sprite.name;
+            GameObject usedGear = GameObject.Find(usedGearName);
+
+            if (usedGear)
+            {
+                DestroyObject(usedGearName, .1f);
+            }
+
+        }
+
+        // Hide every placed gear
+        SpriteRenderer[] componentSlots = gearSystem.GetComponentsInChildren<SpriteRenderer>();
+        for (int i = 0; i < componentSlots.Length; i++)
+        {
+            componentSlots[i].sprite = null;
+        }
+
+        // Change the gearsystem sprite
+
+        SpriteRenderer systemSpriteRenderer = gearSystem.GetComponent<SpriteRenderer>();
+        systemSpriteRenderer.sprite = gearSystem.activatedSprite;
+
+        // Doing Something
+
+        BubbleRotatingInstantiator bInstantiatior = GameObject.Find("BubbleCentralInstatiator").GetComponent<BubbleRotatingInstantiator>();
+        bInstantiatior.GearActivation();
+
+        //  Planner 
+        if (Object.FindObjectOfType<Planner>())
+        {
+            if (gearSystem.switchObj)
+            {
+                gearSystem.switchObj.ActivateSwitch();
+
+                Planner planner = Object.FindObjectOfType<Planner>();
+                planner.Monitor();
+            }
+        }
+
+        if (notifyOthers)
+        {
+            SendMessageToServer("ActivateSystem/" + gearSystem.name, true);
+        }
+    }
+    private void HandleGearSystemL(GearSystem gearSystem, bool notifyOthers)
+    {
+
+        // Dispose every used gear in case of reconnection
+        for (int i = 0; i < gearSystem.components.Length; i++)
+        {
+            string usedGearName = gearSystem.components[i].sprite.name;
+            GameObject usedGear = GameObject.Find(usedGearName);
+
+            if (usedGear)
+            {
+                DestroyObject(usedGearName, .1f);
+            }
+
+        }
+
+        // Hide every placed gear
+        SpriteRenderer[] componentSlots = gearSystem.GetComponentsInChildren<SpriteRenderer>();
+        for (int i = 0; i < componentSlots.Length; i++)
+        {
+            componentSlots[i].sprite = null;
+        }
+
+        // Change the gearsystem sprite
+
+        SpriteRenderer systemSpriteRenderer = gearSystem.GetComponent<SpriteRenderer>();
+        systemSpriteRenderer.sprite = gearSystem.activatedSprite;
+
+        // Doing Something
+
+        BubbleRotatingInstantiator bInstantiatior = GameObject.Find("BubbleCentralInstatiator").GetComponent<BubbleRotatingInstantiator>();
+        bInstantiatior.GearActivation();
+
+        //  Planner 
+        if (Object.FindObjectOfType<Planner>())
+        {
+            if (gearSystem.switchObj)
+            {
+                gearSystem.switchObj.ActivateSwitch();
+
+                Planner planner = Object.FindObjectOfType<Planner>();
+                planner.Monitor();
+            }
+        }
+
+        if (notifyOthers)
+        {
+            SendMessageToServer("ActivateSystem/" + gearSystem.name, true);
+        }
+    }
 }
 
     #endregion

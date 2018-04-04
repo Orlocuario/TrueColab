@@ -826,8 +826,21 @@ public class LevelManager : MonoBehaviour
         CoordinateMovingObjects();
         CoordinateEnemyControllers();
         CoordinateTriggers();
+        CoordinateTeleporters();
     }
 
+    private void CoordinateTeleporters()
+    {
+        PlayerTeleporter[] pTeleporters = FindObjectsOfType<PlayerTeleporter>();
+        foreach (PlayerTeleporter teleporter in pTeleporters)
+        {
+            if (teleporter.itsDone)
+            {
+                teleporter.DoYourTeleportedThing(teleporter.id);
+            }
+        }
+
+    }
     private void CoordinateTriggers()
     {
         MovableTriggerInstantiator[] mTriggers = FindObjectsOfType<MovableTriggerInstantiator>();

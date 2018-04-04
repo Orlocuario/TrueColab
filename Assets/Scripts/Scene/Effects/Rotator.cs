@@ -6,7 +6,7 @@ public class Rotator : MonoBehaviour
 
     #region Attributes
 
-    public float angle; 
+    public float angle;
     public float asynchronyTime;
     public float rotationTime;
     public float timeToWait;
@@ -19,20 +19,20 @@ public class Rotator : MonoBehaviour
 
     protected virtual void Start()
     {
-        if(angle == 0)
+        if (angle == 0)
         {
             Debug.LogError("Object: " + gameObject.name + " needs an angle to rotate");
         }
 
-		StartRotation ();
+        StartRotation();
     }
 
     #endregion
 
     #region Common
 
-	protected void StartRotation()
-	{
+    protected void StartRotation()
+    {
         //StartCoroutine(StartDelay());
         if (playerHasReturned)
         {
@@ -40,7 +40,7 @@ public class Rotator : MonoBehaviour
             playerHasReturned = false;
         }
         StartCoroutine(RotateObject(angle, new Vector3(0, 0, 1), rotationTime));
-	}
+    }
 
     protected virtual IEnumerator RotateObject(float angle, Vector3 axis, float inTime)
     {
@@ -55,6 +55,7 @@ public class Rotator : MonoBehaviour
             float deltaAngle = 0;
 
             // rotate until reaching angle
+
             while (deltaAngle < angle)
             {
                 deltaAngle += rotationSpeed * Time.deltaTime;
@@ -64,7 +65,6 @@ public class Rotator : MonoBehaviour
 
                 yield return null;
             }
-
             // delay here
             yield return new WaitForSeconds(timeToWait);
         }
