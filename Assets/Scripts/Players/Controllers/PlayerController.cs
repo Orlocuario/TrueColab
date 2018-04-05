@@ -905,11 +905,11 @@ public class PlayerController : MonoBehaviour
         // El radio del groundChecker debe ser menor a la medida del collider del player/2 para que no haga contactos laterales.
         groundCheckRadius = GetComponent<Collider2D>().bounds.extents.x;
 
-        if (Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround))
+        if (Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround) == true)
         {
             return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
         }
-        else if (Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsAlsoGround))
+        else if (Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsAlsoGround) == true)
         {
             return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsAlsoGround);
         }

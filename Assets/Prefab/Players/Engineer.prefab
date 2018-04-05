@@ -252,7 +252,7 @@ MonoBehaviour:
     m_Bits: 512
   whatIsAlsoGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 16384
   particles: []
   groundCheck: {fileID: 4006069394395388}
   parent: {fileID: 0}
