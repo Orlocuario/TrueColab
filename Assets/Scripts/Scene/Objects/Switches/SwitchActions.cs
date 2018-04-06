@@ -661,6 +661,30 @@ public class SwitchActions : MonoBehaviour
         //Unlocks BubbleInstantiator in Zone1 for Mage +Exp
     }
 
+    private void HandlerGroup57()
+    {
+        //MovesObjects and opens path to Altar Engin and instantiatesTeleport
+
+        levelManager.InstantiatePortal("EnginTeleporter", new Vector2(-97.34f, 0.85f), new Vector2(-56.15f, 16.4f));
+        GameObject mBground = GameObject.Find("DarkMovableBackground");
+        if (mBground)
+        {
+            mBground.GetComponent<OneTimeMovingObject>().move = true;
+        }
+
+        GameObject mPlatformThick = GameObject.Find("MovablePlatformThick");
+        if (mPlatformThick)
+        {
+            mPlatformThick.GetComponent<OneTimeMovingObject>().move = true;
+        }
+
+        GameObject mWall = GameObject.Find("MovableWallForEngin");
+        if (mWall)
+        {
+            mWall.GetComponent<OneTimeMovingObject>().move = true;
+        }
+    }
+
     #endregion
 
     #region Utils
