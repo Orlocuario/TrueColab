@@ -47,9 +47,9 @@ public class Chat : MonoBehaviour
 
     public string SetJugador()
     {
-        PlayerController player1 = GameObject.Find("Mage").GetComponent<PlayerController>();
-        PlayerController player2 = GameObject.Find("Warrior").GetComponent<PlayerController>();
-        PlayerController player3 = GameObject.Find("Engineer").GetComponent<PlayerController>();
+        PlayerController player1 = GameObject.Find("Verde").GetComponent<PlayerController>();
+        PlayerController player2 = GameObject.Find("Rojo").GetComponent<PlayerController>();
+        PlayerController player3 = GameObject.Find("Amarillo").GetComponent<PlayerController>();
 
         if (player1.localPlayer)
         {
@@ -227,15 +227,15 @@ public class Chat : MonoBehaviour
         separator[0] = ':';
         string[] msg = message.Split(separator);
 
-        if (msg[0] == "Mage")
+        if (msg[0] == "Verde")
         {
             message = "<color=#64b78e>" + message + "</color>";
         }
-        else if (msg[0] == "Warrior")
+        else if (msg[0] == "Rojo")
         {
             message = "<color=#e67f84>" + message + "</color>";
         }
-        else if (msg[0] == "Engineer")
+        else if (msg[0] == "Amarillo")
         {
             message = "<color=#f9ca45>" + message + "</color>";
         }

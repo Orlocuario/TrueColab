@@ -335,7 +335,7 @@ public class SwitchActions : MonoBehaviour
 
             if (killZoneDestroyer)
             {
-                killZoneDestroyer.SetKillzone(GameObject.Find("Engineer"), killzone);
+                killZoneDestroyer.SetKillzone(GameObject.Find("Amarillo"), killzone);
             }
         }
     }
@@ -643,9 +643,22 @@ public class SwitchActions : MonoBehaviour
         levelManager.SetMovingObjectData(platEngineer2, new Vector2(-30.14f, 29.64f), new Vector2(-39.76f, 32.7f), 1f, 2f, false);
     }
 
+        // For Scene 6
+
     private void HandlerGroup54()
     {
+        //Instantiate Red Rune in Zone 1 for Warrior  +Exp
 
+    }
+
+    private void HandlerGroup55()
+    {
+        //Instantiate YellowRune in Zone1 for Engin +Exp
+    }
+
+    private void HandlerGroup56()
+    {
+        //Unlocks BubbleInstantiator in Zone1 for Mage +Exp
     }
 
     #endregion

@@ -6,7 +6,7 @@ public class EnginTeleporter : PlayerTeleporter
 
     protected override void Start()
     {
-        playerToTeleport = "Engineer";
+        playerToTeleport = "Amarillo";
         base.Start();
     }
     

@@ -246,15 +246,15 @@ public class Client : MonoBehaviour
         switch (playerId)
         {
             case 0:
-                player = GameObject.Find("Mage");
+                player = GameObject.Find("Verde");
                 script = player.GetComponent<MageController>();
                 break;
             case 1:
-                player = GameObject.Find("Warrior");
+                player = GameObject.Find("Rojo");
                 script = player.GetComponent<WarriorController>();
                 break;
             case 2:
-                player = GameObject.Find("Engineer");
+                player = GameObject.Find("Amarillo");
                 script = player.GetComponent<EngineerController>();
                 break;
             default:
@@ -301,9 +301,9 @@ public class Client : MonoBehaviour
 
     public PlayerController GetLocalPlayer()
     {
-        GameObject player1 = GameObject.Find("Mage");
-        GameObject player2 = GameObject.Find("Warrior");
-        GameObject player3 = GameObject.Find("Engineer");
+        GameObject player1 = GameObject.Find("Verde");
+        GameObject player2 = GameObject.Find("Rojo");
+        GameObject player3 = GameObject.Find("Amarillo");
 
         if (player1)
         {
@@ -338,21 +338,21 @@ public class Client : MonoBehaviour
 
     public MageController GetMage()
     {
-        GameObject player = GameObject.Find("Mage");
+        GameObject player = GameObject.Find("Verde");
         MageController magecontroller = player.GetComponent<MageController>();
         return magecontroller;
     }
 
     public WarriorController GetWarrior()
     {
-        GameObject player = GameObject.Find("Warrior");
+        GameObject player = GameObject.Find("Rojo");
         WarriorController script = player.GetComponent<WarriorController>();
         return script;
     }
 
     public EngineerController GetEngineer()
     {
-        GameObject player = GameObject.Find("Engineer");
+        GameObject player = GameObject.Find("Amarillo");
         EngineerController script = player.GetComponent<EngineerController>();
         return script;
     }

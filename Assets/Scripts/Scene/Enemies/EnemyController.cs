@@ -55,7 +55,7 @@ public class EnemyController : MonoBehaviour
         InitializeParticles();
         maged = false;
         deathIsComing = false;
-        ignoresCollisions = new Dictionary<string, bool> { { "Mage", false }, { "Warrior", false }, { "Engineer", false } };
+        ignoresCollisions = new Dictionary<string, bool> { { "Verde", false }, { "Rojo", false }, { "Amarillo", false } };
 
         currentPatrolPointCount = 0;
         if (patrollingSpeed.Equals(default(float)))

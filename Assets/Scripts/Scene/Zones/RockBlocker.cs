@@ -13,9 +13,9 @@ public class RockBlocker : IgnoreCollisionWithAttacks
     {
         Collider2D collider = gameObject.GetComponent<Collider2D>();
 
-        GameObject player1 = GameObject.Find("Mage");
-        GameObject player2 = GameObject.Find("Warrior");
-        GameObject player3 = GameObject.Find("Engineer");
+        GameObject player1 = GameObject.Find("Verde");
+        GameObject player2 = GameObject.Find("Rojo");
+        GameObject player3 = GameObject.Find("Amarillo");
         Physics2D.IgnoreCollision(collider, player1.GetComponent<Collider2D>(), true);
         Physics2D.IgnoreCollision(collider, player2.GetComponent<Collider2D>(), true);
         Physics2D.IgnoreCollision(collider, player3.GetComponent<Collider2D>(), true);

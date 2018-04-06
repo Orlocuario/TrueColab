@@ -293,13 +293,13 @@ public class LevelManager : MonoBehaviour
         switch (playerId)
         {
             case 0:
-                player = GameObject.Find("Mage");
+                player = GameObject.Find("Verde");
                 break;
             case 1:
-                player = GameObject.Find("Warrior");
+                player = GameObject.Find("Rojo");
                 break;
             case 2:
-                player = GameObject.Find("Engineer");
+                player = GameObject.Find("Amarillo");
                 break;
             default:
                 break;
@@ -371,18 +371,18 @@ public class LevelManager : MonoBehaviour
     {
         players = new GameObject[3];
 
-        players[0] = GameObject.Find("Mage");
-        players[1] = GameObject.Find("Warrior");
-        players[2] = GameObject.Find("Engineer");
+        players[0] = GameObject.Find("Verde");
+        players[1] = GameObject.Find("Rojo");
+        players[2] = GameObject.Find("Amarillo");
     }
 
     protected void StorePlayerControllers()
     {
         playerControllers = new PlayerController[3];
 
-        playerControllers[0] = GameObject.Find("Mage").GetComponent<MageController>();
-        playerControllers[1] = GameObject.Find("Warrior").GetComponent<WarriorController>();
-        playerControllers[2] = GameObject.Find("Engineer").GetComponent<EngineerController>();
+        playerControllers[0] = GameObject.Find("Verde").GetComponent<MageController>();
+        playerControllers[1] = GameObject.Find("Rojo").GetComponent<WarriorController>();
+        playerControllers[2] = GameObject.Find("Amarillo").GetComponent<EngineerController>();
     }
 
     public PlayerController[] GetPlayerControllers()
