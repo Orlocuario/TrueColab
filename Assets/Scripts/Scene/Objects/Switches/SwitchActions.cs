@@ -233,6 +233,12 @@ public class SwitchActions : MonoBehaviour
             case 54:
                 HandlerGroup54();
                 break;
+            case 55:
+                HandlerGroup55();
+                break;
+            case 56:
+                HandlerGroup56();
+                break;
             default:
                 return;
         }
@@ -653,7 +659,11 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup55()
     {
-        //Instantiate YellowRune in Zone1 for Engin +Exp
+        levelManager.InstantiatePrefab("Items/RunaA1", new Vector2(-3.43f, -23.78f));
+        levelManager.InstantiatePortal("EnginTeleporter", new Vector2(1.76f, -23.48f), new Vector2(.1f, .1f));
+        levelManager.InstantiatePrefab("Exp/Exp35", new Vector2(0f, -23.76f));
+        levelManager.InstantiatePrefab("Exp/Exp35", new Vector2(-7.8f, -23.76f));
+
     }
 
     private void HandlerGroup56()
