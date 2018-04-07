@@ -136,9 +136,9 @@ public class MovingObject : MonoBehaviour
     {
         Collider2D collider = GetComponent<Collider2D>();
 
-        GameObject player1 = GameObject.Find("Mage");
-        GameObject player2 = GameObject.Find("Warrior");
-        GameObject player3 = GameObject.Find("Engineer");
+        GameObject player1 = GameObject.Find("Verde");
+        GameObject player2 = GameObject.Find("Rojo");
+        GameObject player3 = GameObject.Find("Amarillo");
         Physics2D.IgnoreCollision(collider, player1.GetComponent<Collider2D>(), ignore);
         Physics2D.IgnoreCollision(collider, player2.GetComponent<Collider2D>(), ignore);
         Physics2D.IgnoreCollision(collider, player3.GetComponent<Collider2D>(), ignore);

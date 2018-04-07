@@ -6,7 +6,7 @@ public class WarriorTeleporter : PlayerTeleporter
 
     protected override void Start()
     {
-        playerToTeleport = "Warrior";
+        playerToTeleport = "Rojo";
         base.Start();
     }
 

@@ -267,9 +267,9 @@ public class Switch : MonoBehaviour
     {
         if (activation == TypeOfActivation.Shooting)
         {
-            Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), GameObject.Find("Mage").GetComponent<BoxCollider2D>());
-            Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), GameObject.Find("Warrior").GetComponent<BoxCollider2D>());
-            Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), GameObject.Find("Engineer").GetComponent<BoxCollider2D>());
+            Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), GameObject.Find("Verde").GetComponent<BoxCollider2D>());
+            Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), GameObject.Find("Rojo").GetComponent<BoxCollider2D>());
+            Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), GameObject.Find("Amarillo").GetComponent<BoxCollider2D>());
         }
     }
 

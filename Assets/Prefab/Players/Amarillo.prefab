@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114281067580633786}
   - component: {fileID: 114289011159733798}
   m_Layer: 10
-  m_Name: Engineer
+  m_Name: Amarillo
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

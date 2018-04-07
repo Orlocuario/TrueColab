@@ -367,6 +367,23 @@ public class PowerableObject : MonoBehaviour
             }
         }
 
+        if (collision.GetComponent<WarriorPoweredParticles>())
+        {
+            for (int i = 0; i < powers.Length; i++)
+            {
+                bool activated = ActivatePower(powers[i], collision.gameObject);
+                if (activated)
+                {
+                    // Start shutting down immediatelly if is attack activated
+                    if (powers[i].activationType.Equals(ActivationType.Attack))
+                    {
+                        shutdown = true;
+                    }
+                    break;
+                }
+            }
+        }
+
         if (collision.GetComponent<PlayerController>())
         {
             CheckIfPlayerEntered(collision.gameObject);

@@ -128,7 +128,7 @@ MonoBehaviour:
   - activationType: 2
     attack: {fileID: 0}
     caster: {fileID: 0}
-    expectedParticle: {fileID: 114227177581299252, guid: e87af9ff99675494f992ab975fbb8047,
+    expectedParticle: {fileID: 114913222789128022, guid: ee4d06fdc12144e55a48ddfa8a11a260,
       type: 2}
     particles:
     - {fileID: 0}
@@ -141,7 +141,7 @@ MonoBehaviour:
   - activationType: 2
     attack: {fileID: 0}
     caster: {fileID: 0}
-    expectedParticle: {fileID: 114437524523309886, guid: aad8ec60109673249b56ddbde5a35083,
+    expectedParticle: {fileID: 114473270259803472, guid: 8907ceab1b68b5e4ebab5d42650f2163,
       type: 2}
     particles:
     - {fileID: 0}
@@ -177,7 +177,7 @@ MonoBehaviour:
   diesAtTheEnd: 1
   isPlatform: 0
   timeToWait: 0
-  isAttack: 0
+  needsParticles: 0
 --- !u!212 &212162377598187556
 SpriteRenderer:
   m_ObjectHideFlags: 1

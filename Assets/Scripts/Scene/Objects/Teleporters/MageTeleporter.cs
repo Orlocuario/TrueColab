@@ -6,7 +6,7 @@ public class MageTeleporter : PlayerTeleporter
 
     protected override void Start()
     {
-        playerToTeleport = "Mage";
+        playerToTeleport = "Verde";
         base.Start();
     }
 

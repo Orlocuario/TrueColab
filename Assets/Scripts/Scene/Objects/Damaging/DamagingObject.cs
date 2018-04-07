@@ -21,7 +21,7 @@ public class DamagingObject : MonoBehaviour
 
     protected virtual void Start()
     {
-        ignoresCollisions = new Dictionary<string, bool> { { "Mage", false }, { "Warrior", false }, { "Engineer", false } };
+        ignoresCollisions = new Dictionary<string, bool> { { "Verde", false }, { "Rojo", false }, { "Amarillo", false } };
     }
 
     // Update is called once per frame
