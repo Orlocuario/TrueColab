@@ -239,6 +239,13 @@ public class SwitchActions : MonoBehaviour
             case 56:
                 HandlerGroup56();
                 break;
+            case 57:
+                HandlerGroup57();
+                break;
+            case 58:
+                HandlerGroup58();
+                break;
+
             default:
                 return;
         }
@@ -653,21 +660,27 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup54()
     {
-        //Instantiate Red Rune in Zone 1 for Warrior  +Exp
-
+        levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(-28.91f, -13.54f));
+        levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(-30.2f, -13.54f), new Vector2(.1f, .1f), true, 3);
     }
 
     private void HandlerGroup55()
     {
         levelManager.InstantiatePrefab("Items/RunaA1", new Vector2(-3.43f, -23.78f));
-        levelManager.InstantiatePortal("EnginTeleporter", new Vector2(1.76f, -23.48f), new Vector2(.1f, .1f));
-        levelManager.InstantiatePrefab("Exp/Exp35", new Vector2(0f, -23.76f));
-        levelManager.InstantiatePrefab("Exp/Exp35", new Vector2(-7.8f, -23.76f));
+        levelManager.InstantiatePortal("EnginTeleporter", new Vector2(1.76f, -23.48f), new Vector2(.1f, .1f), true, 4);
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(0f, -23.76f));
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(-7.8f, -23.76f));
 
     }
 
     private void HandlerGroup56()
     {
+        BubbleRotatingInstantiator bInstantiator = GameObject.Find("BubbleInstantiatorMageZone").GetComponent<BubbleRotatingInstantiator>();
+        bInstantiator.GearActivation();
+
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(-46.19f, -4.47f));
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(-44.69f, -4.47f));
+
         //Unlocks BubbleInstantiator in Zone1 for Mage +Exp
     }
 
@@ -693,6 +706,11 @@ public class SwitchActions : MonoBehaviour
         {
             mWall.GetComponent<OneTimeMovingObject>().move = true;
         }
+    }
+
+    private void HandlerGroup58()
+    {
+
     }
 
     #endregion

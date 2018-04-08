@@ -128,8 +128,10 @@ public class BubbleController : MonoBehaviour
 		{
 			if (!levelManager.GetMage ().ProtectedByShield (gameObject)) 
 			{
-				for (int i = 0; i < playerControllers.Length; i++) {
-					if (playerControllers [i] != null) {
+				for (int i = 0; i < playerControllers.Length; i++)
+                {
+					if (playerControllers [i] != null)
+                    {
 						PlayerController playerToRelease =	playerControllers [i];
 						playerToRelease.ResetTransform (); 
 						playerToRelease.parent = null;
@@ -249,24 +251,21 @@ public class BubbleController : MonoBehaviour
 			
 				if (targetsReached == targets.Length)
                 {
-					Destroy (gameObject, timetoKillBubble);
                     if (parasiteParticle != null)
                     {
 					    Destroy (parasiteParticle.gameObject, timetoKillBubble); 
                     }
 
-
 					for (int i = 0; i < playerControllers.Length; i++)
 					{
 						if (playerControllers[i] != null)
 						{
-							playerControllers[i].ResetTransform();
-							if (imNeutral) 
-							{
-								playerControllers[i].TakeDamage (20, new Vector2 (150, 15));
-							}
-						}
+                            PlayerController playerToRelease = playerControllers[i];
+                            playerToRelease.ResetTransform();
+                            playerToRelease.parent = null;
+                        }
                     }
+                    Destroy (gameObject, timetoKillBubble);
 					enabled = false;
                 }
 			

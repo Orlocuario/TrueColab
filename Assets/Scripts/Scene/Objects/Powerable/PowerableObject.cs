@@ -522,9 +522,15 @@ public class PowerableObject : MonoBehaviour
         if (playerControllers[playerID] != null)
         {
             playerControllers[playerID] = null;
-            if (activatedPower.Value.caster.GetType().Equals(pController.GetType()))
+            if (activatedPower != null)
             {
-                shutdown = true; 
+                if (activatedPower.Value.caster != null)
+                {
+                    if (activatedPower.Value.caster.GetType().Equals(pController.GetType()))
+                    {
+                        shutdown = true;
+                    }
+                }
             }
         }
     }

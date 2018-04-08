@@ -697,6 +697,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+
     public void InstantiatePortal(string portalType, Vector2 initialPosition, Vector2 teleportPosition, bool mustDoSomething, int id)
     {
         GameObject portal = (GameObject)Instantiate(Resources.Load("Prefabs/Portals/" + portalType));

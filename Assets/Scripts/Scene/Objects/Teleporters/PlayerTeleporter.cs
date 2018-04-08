@@ -13,7 +13,7 @@ public class PlayerTeleporter : MonoBehaviour
     public bool mustDoSomething;
     public bool itsDone;
     private bool didMyThing;
-    public int id; 
+    public int id;
 
     #endregion
 
@@ -95,6 +95,15 @@ public class PlayerTeleporter : MonoBehaviour
             case 2:
                 HandleCase2();
                 break;
+            case 3:
+                HandleCase3();
+                break;
+            case 4:
+                HandleCase4();
+                break;
+            case 5:
+                HandleCase5();
+                break;
             default:
                 return;
         }
@@ -118,7 +127,7 @@ public class PlayerTeleporter : MonoBehaviour
     private void HandleCase1()
     {
         GameObject pFilter = GameObject.Find("ChangableMageFilter1");
-        if(pFilter)
+        if (pFilter)
         {
             PlayerFilter playerFilter = pFilter.GetComponent<PlayerFilter>();
             playerFilter.allowedPlayers[0] = levelManager.GetMage();
@@ -144,6 +153,30 @@ public class PlayerTeleporter : MonoBehaviour
             Destroy(magePathBlocker);
         }
     }
+
+    private void HandleCase3()
+    {
+        GameObject wSecretBlocker = GameObject.Find("ParedMetalZonaSecretWarrior");
+        if (wSecretBlocker)
+        {
+            Destroy(wSecretBlocker);
+        }
+    }
+
+    private void HandleCase4()
+    {
+        GameObject eSecretBlocker = GameObject.Find("ParedMetalZonaSecretEngin");
+        if (eSecretBlocker)
+        {
+            Destroy(eSecretBlocker);
+        }
+    }
+
+    private void HandleCase5()
+    {
+
+    }
+
 
     public bool CheckIfDidThing()
     {

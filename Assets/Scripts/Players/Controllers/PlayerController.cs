@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
     protected static float maxAcceleration = 1f;
     protected static float takeDamageRate = 1f;
     protected static float attackRate = .25f;
+    protected static float jumpRate = .25f;
     protected static float poweredRare = .25f;
     protected static float maxXSpeed = 3f;
     protected static float maxYSpeed = 8f;
@@ -82,6 +83,7 @@ public class PlayerController : MonoBehaviour
     protected bool canMove;
     protected float speedX;
     protected float speedY;
+    protected bool justJumped;
     protected CameraState cameraState;
 
 
@@ -266,6 +268,8 @@ public class PlayerController : MonoBehaviour
         isGrounded = IsItGrounded();
         if (IsJumping(isGrounded))
         {
+            justJumped = true;
+            StartCoroutine(WaitJumping());
             speedY = maxYSpeed * directionY;
         }
         else
@@ -377,8 +381,9 @@ public class PlayerController : MonoBehaviour
                 // Toggle power button
                 if (powerButtonPressed)
                 {
-                    Debug.Log("Se presionó el botón de poder. El valor de isPowerOn es: " + isPowerOn);
                     SetPowerState(!isPowerOn);
+                    Debug.Log("Se presionó el botón de poder. El valor de isPowerOn es: " + isPowerOn + " y la enviaré al server");
+
                     SendPowerDataToServer();
                 }
 
@@ -427,14 +432,19 @@ public class PlayerController : MonoBehaviour
     public void HardReset()
     {
         StopMoving();
-        SetPowerState(false);
+        if(isPowerOn)
+        {
+            SetPowerState(!isPowerOn);
+            SendPowerDataToServer();
+        }
         ResetTransform();
-        SetPowerState(false);
         ResetDamagingObjects();
         ResetChatZones();
         ResetDamagingTriggers();
         ResetDecisions();
         ResetPowerables();
+        justPowered = false;
+        justJumped = false;
         availablePowerable = null;
         gameObject.SetActive(false);
     }
@@ -921,7 +931,13 @@ public class PlayerController : MonoBehaviour
     {
         if (localPlayer)
         {
+            if (justJumped)
+            {
+                return false;
+            }
+
             bool pressedJump = CnInputManager.GetButtonDown("Jump Button");
+
             bool isJumping = pressedJump && isGrounded;
 
             if (isJumping && !remoteJumping)
@@ -1072,8 +1088,14 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator WaitPowerable()
     {
-        yield return new WaitForSeconds(attackRate + .5f);
+        yield return new WaitForSeconds(attackRate + .1f);
         justPowered = false;
+    }
+
+    public IEnumerator WaitJumping()
+    {
+        yield return new WaitForSeconds(jumpRate);
+        justJumped = false;
     }
 
 
