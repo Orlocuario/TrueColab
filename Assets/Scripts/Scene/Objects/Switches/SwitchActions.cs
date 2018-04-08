@@ -245,6 +245,18 @@ public class SwitchActions : MonoBehaviour
             case 58:
                 HandlerGroup58();
                 break;
+            case 59:
+                HandlerGroup59();
+                break;
+            case 60:
+                HandlerGroup60();
+                break;
+            case 61:
+                HandlerGroup61();
+                break;
+            case 62:
+                HandlerGroup62();
+                break;
 
             default:
                 return;
@@ -709,6 +721,37 @@ public class SwitchActions : MonoBehaviour
     }
 
     private void HandlerGroup58()
+    {
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(57.034f, 15.6f));
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(55.774f, 15.6f));
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(54.69f, 15.6f));
+
+        GameObject caja = GameObject.Find("CajaSwitchFierro");
+        if (caja)
+        {
+            Destroy(caja);
+        }
+
+    }
+
+    private void HandlerGroup59()
+    {
+        levelManager.InstantiatePortal("MageTeleporter", new Vector2(39.87f, 37f), new Vector2(80f, 41f));
+    }
+
+    private void HandlerGroup60()
+    {
+        levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(69.68f, 39.41f), new Vector2(80f, 41f));
+
+    }
+
+    private void HandlerGroup61()
+    {
+        levelManager.InstantiatePortal("EnginTeleporter", new Vector2(80.62f, 31.32f), new Vector2(80f, 41f));
+
+    }
+
+    private void HandlerGroup62()
     {
 
     }
