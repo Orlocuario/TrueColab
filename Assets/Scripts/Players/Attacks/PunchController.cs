@@ -72,25 +72,25 @@ public class PunchController : AttackController
             DealDamage(collision.gameObject);
         }
 
+        if (ColidedWithBurnable(collision.gameObject))
+        {
+            BurnObject(collision.gameObject);
+        }
+
+        if (CollidedWithDestroyable(collision.gameObject))
+        {
+            DestroyObject(collision.gameObject);
+        }
+
         if (caster.localPlayer)
         {
-            if (ColidedWithBurnable(collision.gameObject))
-            {
-                BurnObject(collision.gameObject);
-            }
-
-            if (CollidedWithDestroyable(collision.gameObject))
-            {
-                DestroyObject(collision.gameObject);
-            }
-
-            else if (CollidedWithMovable(collision.gameObject))
+             if (CollidedWithMovable(collision.gameObject))
             {
                 MoveObject(collision.gameObject);
             }
         }
 
-        Destroy(this.gameObject, destroyDelayTime);
+        Destroy(gameObject, destroyDelayTime);
     }
 
     #endregion

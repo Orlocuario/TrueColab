@@ -737,6 +737,7 @@ public class SwitchActions : MonoBehaviour
     private void HandlerGroup59()
     {
         levelManager.InstantiatePortal("MageTeleporter", new Vector2(39.87f, 37f), new Vector2(80f, 41f));
+
     }
 
     private void HandlerGroup60()
@@ -753,6 +754,10 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup62()
     {
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(113f, 42.8f), new Vector2(.1f, .1f));
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(111.53f, 42.8f));
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(110.69f, 42.8f));
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(109.82f, 42.8f));
 
     }
 

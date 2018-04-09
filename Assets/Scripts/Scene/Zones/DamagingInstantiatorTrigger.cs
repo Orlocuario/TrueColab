@@ -41,7 +41,7 @@ public class DamagingInstantiatorTrigger : MonoBehaviour
     public void EnterTrigger()
     {
         numberOfPlayers++;
-        if (numberOfPlayers >= 1)
+        if (numberOfPlayers == 1)
         {
             foreach (GameObject damaging in damagingInstantiators)
             {

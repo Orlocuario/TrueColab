@@ -56,7 +56,6 @@ public class DamagingInstantiator : MonoBehaviour
                     CheckAndSetPowerableData(damagingObject, parasitesForDamaging);
                     CheckAndSetMovingData(damagingObject, parasitesForDamaging);
                     yield return new WaitForSeconds(instantiationRate);
-                    Debug.Log("Instantiated damagingObjects");
                 }
             }
 
@@ -67,7 +66,6 @@ public class DamagingInstantiator : MonoBehaviour
                     damagingObject.transform.position = initialPosition;
                     CheckAndSetMovingData(damagingObject);
                     yield return new WaitForSeconds(instantiationRate);
-                    Debug.Log("Instantiated damagingObjects");
                 }
             }
         }
