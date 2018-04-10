@@ -25,10 +25,10 @@ public class BubbleController : MonoBehaviour
     protected bool isMoving;
     protected bool enhanced;
     protected float speed;
+    protected bool dontAcceptMorePlayers;
     public int targetsReached;
     protected bool yetNeeded; 
-	private bool imNeutral;
-	private float timetoKillBubble; 
+	private float timetoKillBubble;
 	private LevelManager levelManager; 
 
 	private PlayerController[] playerControllers;
@@ -39,7 +39,8 @@ public class BubbleController : MonoBehaviour
     // Use this for initialization
     protected virtual void Start()
     {
-        yetNeeded = true; 
+        yetNeeded = true;
+        dontAcceptMorePlayers = false;
         currentDistance = 0;
         maxDistance = 6f;
         targetsReached = 0;
@@ -58,24 +59,20 @@ public class BubbleController : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D other)
     {
+        if (dontAcceptMorePlayers)
+        {
+            return;
+        }
         if (GameObjectIsPlayer(other.gameObject))
         {
-			PlayerController player = other.gameObject.GetComponent<PlayerController>();
-			int i = player.playerId;
-			playerControllers [i] = player;
-
-			playerControllers[i].parent = gameObject;
-			other.transform.parent = transform;
+            CheckIfPlayerAlreadyEntered(other.gameObject);
         }
     }
     protected virtual void OnCollisionExit2D(Collision2D other)
     {
         if (GameObjectIsPlayer(other.gameObject))
         {
-            PlayerController player = other.gameObject.GetComponent<PlayerController>();
-			int i = player.playerId;
-			player.transform.parent = null;
-			playerControllers [i] = null; 
+            CheckIfPlayerAlreadyLeft(other.gameObject);
         }
     }
 
@@ -214,8 +211,8 @@ public class BubbleController : MonoBehaviour
 					if (playerControllers [i] != null)
                     {
 						PlayerController playerToRelease =	playerControllers [i];
-						playerToRelease.ResetTransform (); 
-						playerToRelease.parent = null;
+						playerToRelease.ResetTransform ();
+                        playerControllers[i] = null;
 					}
 				}
 				Destroy (parasiteParticle.gameObject);
@@ -224,7 +221,41 @@ public class BubbleController : MonoBehaviour
         }
 	}
 
-	public void InitializeColouredBubbles(MoveType _moveType, PlayerController caster, GameObject bubbleParticle)
+    private void CheckIfPlayerAlreadyEntered(GameObject player)
+    {
+        PlayerController myPlayer = player.GetComponent<PlayerController>();
+        int i = myPlayer.playerId;
+        if (playerControllers[i] != null)
+        {
+            return;
+        }
+
+        else
+        {
+            playerControllers[i] = myPlayer;
+            playerControllers[i].parent = gameObject;
+            myPlayer.transform.parent = transform;
+        }
+    }
+
+    private void CheckIfPlayerAlreadyLeft(GameObject player)
+    {
+        PlayerController myPlayer = player.GetComponent<PlayerController>();
+        int i = myPlayer.playerId;
+        if (playerControllers[i] == null)
+        {
+            return;
+        }
+
+        else
+        {
+            myPlayer.ResetTransform();
+            myPlayer.parent = null;
+        }
+    }
+
+
+    public void InitializeColouredBubbles(MoveType _moveType, PlayerController caster, GameObject bubbleParticle)
     {
 		SetPowerableBubbleCaster (caster);
 		SetPowerParticle (bubbleParticle);
@@ -320,11 +351,6 @@ public class BubbleController : MonoBehaviour
 			
 				if (targetsReached == targets.Length)
                 {
-                    if (parasiteParticle != null)
-                    {
-					    Destroy (parasiteParticle.gameObject, timetoKillBubble); 
-                    }
-
 					for (int i = 0; i < playerControllers.Length; i++)
 					{
 						if (playerControllers[i] != null)
@@ -334,10 +360,15 @@ public class BubbleController : MonoBehaviour
                             playerToRelease.parent = null;
                         }
                     }
+
+                    if (parasiteParticle != null)
+                    {
+                        Destroy(parasiteParticle.gameObject, timetoKillBubble);
+                    }
+                    dontAcceptMorePlayers = true;
                     Destroy (gameObject, timetoKillBubble);
 					enabled = false;
                 }
-			
             }
         }
     }
@@ -364,7 +395,6 @@ public class BubbleController : MonoBehaviour
 
 	private void SetNeutralBubblePowerable (GameObject[] casters)
 	{
-		imNeutral = true; 
 		PowerableObject.Power[] bubblePowers = gameObject.GetComponent <PowerableObject> ().powers;
 		for (int i = 0; i<bubblePowers.Length; i++) 
 		{

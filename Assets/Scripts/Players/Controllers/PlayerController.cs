@@ -146,7 +146,7 @@ public class PlayerController : MonoBehaviour
 
 
         // TODO: Remove this or change sound if you want music
-        FindObjectOfType<SoundManager>().PlaySound(gameObject, GameSounds.PlayerAttack, false);
+        //FindObjectOfType<SoundManager>().PlaySound(gameObject, GameSounds.PlayerAttack, false);
     }
 
     #endregion
@@ -250,10 +250,11 @@ public class PlayerController : MonoBehaviour
     public virtual void CastLocalAttack(Vector2 startPosition)
     {
         isAttacking = true;
+        int yAxis = directionY;
 
         AttackController attack = GetAttack();
         attack.Initialize(this, AttackController.MoveType.Direction);
-        attack.SetMovement(startPosition, directionX, attackSpeed);
+        attack.SetMovement(startPosition, directionX, yAxis, attackSpeed);
 
         StartCoroutine(WaitAttacking());
         AnimateAttack();
@@ -651,7 +652,6 @@ public class PlayerController : MonoBehaviour
         {
             directionY = 1;
             rb2d.gravityScale = 2.5f;
-
         }
         else
         {

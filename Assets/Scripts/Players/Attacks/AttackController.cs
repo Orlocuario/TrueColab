@@ -62,7 +62,7 @@ public class AttackController : MonoBehaviour
         initialized = true;
     }
 
-    public void SetMovement(Vector2 startPosition, int _direction, float _speed)
+    public void SetMovement(Vector2 startPosition, int _direction, int _yAxis, float _speed)
     {
         if (!initialized || moveType.Equals(MoveType.Target))
         {
@@ -79,6 +79,11 @@ public class AttackController : MonoBehaviour
         if (direction == -1)
         {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        }
+
+        if (_yAxis == -1)
+        {
+            transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
         }
     }
 

@@ -350,60 +350,10 @@ public class PowerableObject : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<MagePoweredParticles>())
-        {
-            for (int i = 0; i < powers.Length; i++)
-            {
-                bool activated = ActivatePower(powers[i], collision.gameObject);
-                if (activated)
-                {
-                    // Start shutting down immediatelly if is attack activated
-                    if (powers[i].activationType.Equals(ActivationType.Attack))
-                    {
-                        shutdown = true;
-                    }
-                    break;
-                }
-            }
-        }
-
-        if (collision.GetComponent<WarriorPoweredParticles>())
-        {
-            for (int i = 0; i < powers.Length; i++)
-            {
-                bool activated = ActivatePower(powers[i], collision.gameObject);
-                if (activated)
-                {
-                    // Start shutting down immediatelly if is attack activated
-                    if (powers[i].activationType.Equals(ActivationType.Attack))
-                    {
-                        shutdown = true;
-                    }
-                    break;
-                }
-            }
-        }
-
-        if (collision.GetComponent<PlayerController>())
-        {
-            CheckIfPlayerEntered(collision.gameObject);
-
-            for (int i = 0; i < powers.Length; i++)
-            {
-                bool activated = ActivatePower(powers[i], collision.gameObject);
-                if (activated)
-                {
-                    // Start shutting down immediatelly if is attack activated
-                    if (powers[i].activationType.Equals(ActivationType.Attack))
-                    {
-                        shutdown = true;
-                    }
-                    break;
-                }
-            }
-        }
-
-
+        CheckIfMageParticles(collision.gameObject);
+        CheckIfWarriorParticles(collision.gameObject);
+        CheckIfIsPlayer(collision.gameObject);
+        CheckIfIsAttackController(collision.gameObject);
     }
 
 
@@ -548,6 +498,89 @@ public class PowerableObject : MonoBehaviour
             return;
         }
     }
+
+    protected void CheckIfMageParticles(GameObject mParticles)
+    {
+        if (mParticles.GetComponent<MagePoweredParticles>())
+        {
+            for (int i = 0; i < powers.Length; i++)
+            {
+                bool activated = ActivatePower(powers[i], mParticles.gameObject);
+                if (activated)
+                {
+                    // Start shutting down immediatelly if is attack activated
+                    if (powers[i].activationType.Equals(ActivationType.Attack))
+                    {
+                        shutdown = true;
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    protected void CheckIfWarriorParticles(GameObject mParticles)
+    {
+        if (mParticles.GetComponent<WarriorPoweredParticles>())
+        {
+            for (int i = 0; i < powers.Length; i++)
+            {
+                bool activated = ActivatePower(powers[i], mParticles);
+                if (activated)
+                {
+                    // Start shutting down immediatelly if is attack activated
+                    if (powers[i].activationType.Equals(ActivationType.Attack))
+                    {
+                        shutdown = true;
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    protected void CheckIfIsPlayer(GameObject pObject)
+    {
+        if (pObject.GetComponent<PlayerController>())
+        {
+            CheckIfPlayerEntered(pObject);
+
+            for (int i = 0; i < powers.Length; i++)
+            {
+                bool activated = ActivatePower(powers[i], pObject);
+                if (activated)
+                {
+                    // Start shutting down immediatelly if is attack activated
+                    if (powers[i].activationType.Equals(ActivationType.Attack))
+                    {
+                        shutdown = true;
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    protected void CheckIfIsAttackController(GameObject aController)
+    {
+        if (aController.GetComponent<AttackController>())
+        {
+            for (int i = 0; i < powers.Length; i++)
+            {
+                bool activated = ActivatePower(powers[i], aController);
+                if (activated)
+                {
+                    // Start shutting down immediatelly if is attack activated
+                    if (powers[i].activationType.Equals(ActivationType.Attack))
+                    {
+                        shutdown = true;
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
 
     public bool CasterIsWarrior(Power power)
     {
