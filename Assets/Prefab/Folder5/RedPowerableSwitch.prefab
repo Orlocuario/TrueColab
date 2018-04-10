@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4917297909681906}
   - component: {fileID: 199154054670663432}
   - component: {fileID: 198238945702142342}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ParticleRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 61737881169358256}
   - component: {fileID: 50957541568974568}
   - component: {fileID: 114973733426304526}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: RedPowerableSwitch
   m_TagString: SwitchMovingObject
   m_Icon: {fileID: 0}

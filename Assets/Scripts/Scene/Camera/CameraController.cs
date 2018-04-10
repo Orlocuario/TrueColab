@@ -434,8 +434,8 @@ public class CameraController : MonoBehaviour
 
         target = cameraMovement.target;
         smoothCamera = 3.9f;
-        followAhead = .9f;
-        followUp = 1f;
+        followAhead = 0;
+        followUp = 0;
 
         stepsToTarget = 100;
         initialSize = 2.8f;
@@ -443,6 +443,8 @@ public class CameraController : MonoBehaviour
         ToggleCanvas(true);
         ToggleChat(cameraMovement.hideCanvas);
     }
+
+
 
     private void ToggleChat(bool apagarChat)
     {

@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     public GameObject availablePowerable;
     public GameObject availableChatZone;
     public GameObject availableInstantiatorTrigger;
+    public GameObject availableParticleTrigger;
     public string decisionName;
     public bool controlOverEnemies;
     public float groundCheckRadius;
@@ -144,7 +145,7 @@ public class PlayerController : MonoBehaviour
         IgnoreCollisionBetweenPlayers();
 
 
-        // TODO: Remove this. // Really???
+        // TODO: Remove this or change sound if you want music
         FindObjectOfType<SoundManager>().PlaySound(gameObject, GameSounds.PlayerAttack, false);
     }
 
@@ -440,13 +441,25 @@ public class PlayerController : MonoBehaviour
         ResetTransform();
         ResetDamagingObjects();
         ResetChatZones();
+        ResetCamera();                  //For Test
         ResetDamagingTriggers();
+        ResetParticleZones();
         ResetDecisions();
         ResetPowerables();
         justPowered = false;
         justJumped = false;
         availablePowerable = null;
         gameObject.SetActive(false);
+    }
+
+    protected void ResetCamera()
+    {
+        GameObject mCamera = GameObject.Find("MainCamera");
+        if (mCamera)
+        {
+            mCamera.GetComponent<CameraController>().SetDefaultValues();
+            mCamera.transform.position = transform.position;
+        }
     }
 
     public void ResetPowerables()
@@ -472,13 +485,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void ResetParticleZones()
+    {
+        if (availableParticleTrigger != null)
+        {
+            ParticleSetActiveTrigger availableTrigger = availableInstantiatorTrigger.GetComponent<ParticleSetActiveTrigger>();
+            availableTrigger.ExitTrigger(gameObject);
+            availableTrigger = null;
+        }
+    }
+
     public void ResetDamagingTriggers()
     {
         if (availableInstantiatorTrigger != null)
         {
             DamagingInstantiatorTrigger availableTrigger = availableInstantiatorTrigger.GetComponent<DamagingInstantiatorTrigger>();
             availableTrigger.ExitTrigger();
-            availableChatZone = null;
+            availableTrigger = null;
         }
     }
 

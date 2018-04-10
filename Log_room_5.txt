@@ -1,0 +1,8 @@
+23:58:02 Player 0 is going right from (-1.82,-1.221569)
+
+23:58:13 Player 0 is going left from (0.6120284,-1.221569)
+
+23:58:14 Player 0 is going right from (0.1927363,-1.221569)
+
+23:58:35 Player 0 is going right from (1.110712,-1.221569)
+

@@ -36,12 +36,9 @@ public class PlayerTeleporter : MonoBehaviour
         {
             if (other.gameObject.GetComponent<PlayerController>())
             {
-                if (other.gameObject.GetComponent<PlayerController>())
-                {
-                    ActivateTeleporter(other.gameObject);
-                }
-
+                ActivateTeleporter(other.gameObject);
             }
+
         }
 
         else
@@ -69,6 +66,12 @@ public class PlayerTeleporter : MonoBehaviour
         {
             other.GetComponent<PlayerController>().respawnPosition = teleportPosition;
             levelManager.Respawn();
+        }
+
+        else
+        {
+            other.GetComponent<PlayerController>().respawnPosition = teleportPosition;
+
         }
 
         if (mustDoSomething)

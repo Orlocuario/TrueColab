@@ -124,9 +124,90 @@ public class BubbleController : MonoBehaviour
 			}
 		}
 
-		if (other.GetComponent <KillingObject> () && other.GetComponent <KillingObject>().activated) 
+        if (other.GetComponent<BurnableObject>())
+        {
+            if (levelManager.GetWarrior().IsWarriored(gameObject))
+            {
+                BurnableObject burnable = other.GetComponent<BurnableObject>();
+                burnable.Burn();
+            }
+            else
+            {
+                for (int i = 0; i < playerControllers.Length; i++)
+                {
+                    if (playerControllers[i] != null)
+                    {
+                        PlayerController playerToRelease = playerControllers[i];
+                        playerToRelease.ResetTransform();
+                        playerToRelease.TakeDamage(10, new Vector2(150f, 15f));
+                        playerToRelease.parent = null;
+                    }
+                }
+                Destroy(parasiteParticle.gameObject);
+                Destroy(gameObject);
+            }
+        }
+
+        if (other.GetComponent <KillingObject> () && other.GetComponent <KillingObject>().activated) 
 		{
-			if (!levelManager.GetMage ().ProtectedByShield (gameObject)) 
+            if (levelManager.GetMage().ProtectedByShield(gameObject))
+            {
+                if (!other.GetComponent<DarkElectricity>())
+                {
+                    for (int i = 0; i < playerControllers.Length; i++)
+                    {
+                        if (playerControllers[i] != null)
+                        {
+                            PlayerController playerSaved = playerControllers[i];
+                            Physics2D.IgnoreCollision(playerSaved.GetComponent<BoxCollider2D>(), other.GetComponent<Collider2D>(), true);
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < playerControllers.Length; i++)
+                    {
+                        if (playerControllers[i] != null)
+                        {
+                            PlayerController playerToRelease = playerControllers[i];
+                            playerToRelease.ResetTransform();
+                            playerToRelease.parent = null;
+                        }
+                    }
+                    Destroy(parasiteParticle.gameObject);
+                    Destroy(gameObject);
+                }
+            }
+            if (other.GetComponent<DarkElectricity>())
+            {
+                if (levelManager.GetEngineer().IsElectrified(gameObject))
+                {
+                    for (int i = 0; i < playerControllers.Length; i++)
+                    {
+                        if (playerControllers[i] != null)
+                        {
+                            PlayerController playerSaved = playerControllers[i];
+                            Physics2D.IgnoreCollision(playerSaved.GetComponent<BoxCollider2D>(), other.GetComponent<Collider2D>(), true);
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < playerControllers.Length; i++)
+                    {
+                        if (playerControllers[i] != null)
+                        {
+                            PlayerController playerToRelease = playerControllers[i];
+                            playerToRelease.ResetTransform();
+                            playerToRelease.parent = null;
+                        }
+                    }
+                    Destroy(parasiteParticle.gameObject);
+                    Destroy(gameObject);
+                }
+            }
+
+            else
 			{
 				for (int i = 0; i < playerControllers.Length; i++)
                 {
@@ -140,19 +221,7 @@ public class BubbleController : MonoBehaviour
 				Destroy (parasiteParticle.gameObject);
 				Destroy (gameObject); 
 			} 
-			else if (levelManager.GetMage ().ProtectedByShield (gameObject)) 
-			{
-				for (int i = 0; i < playerControllers.Length; i++) 
-				{
-					if (playerControllers [i] != null) 
-					{
-						PlayerController playerSaved = playerControllers [i];
-						Physics2D.IgnoreCollision (playerSaved.GetComponent <BoxCollider2D>(), other.GetComponent<Collider2D>(), true);
-					}
-				}
-				
-			}
-		}
+        }
 	}
 
 	public void InitializeColouredBubbles(MoveType _moveType, PlayerController caster, GameObject bubbleParticle)
