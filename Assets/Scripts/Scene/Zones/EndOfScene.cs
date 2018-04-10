@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EndOfScene : MonoBehaviour
 {
-
+    private PlayerController[] playerControllers;
     #region Attributes
 
     LevelManager levelManager;
@@ -19,6 +19,8 @@ public class EndOfScene : MonoBehaviour
     {
         levelManager = FindObjectOfType<LevelManager>();
         playersWhoArrived = 0;
+
+        playerControllers = new PlayerController[3];
 
         if (playersToArrive == 0)
         {
@@ -43,10 +45,11 @@ public class EndOfScene : MonoBehaviour
     {
         if (GameObjectIsPlayer(other.gameObject))
         {
-
+            CheckIfPlayerEntered(other.gameObject);
             Debug.Log(other.gameObject.name + " reached the end of the scene");
 
-            if (++playersWhoArrived == playersToArrive)
+            playersWhoArrived++;
+            if (playersWhoArrived == playersToArrive)
             {
                 levelManager.GoToNextScene();
             }
@@ -62,10 +65,53 @@ public class EndOfScene : MonoBehaviour
     {
         if (GameObjectIsPlayer(other.gameObject))
         {
+            CheckIfPlayerAlreadyLeft(other.gameObject);
             --playersWhoArrived;
         }
     }
 
     #endregion
 
+    protected void CheckIfPlayerAlreadyLeft(GameObject playerObject)
+    {
+        PlayerController player = playerObject.GetComponent<PlayerController>();
+        int i = player.playerId;
+        if (playerControllers[i] != null)
+        {
+            playerControllers[i] = null;
+            playerControllers[i].availableEndOfScene = null;
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    protected void CheckIfPlayerEntered(GameObject playerObject)
+    {
+        PlayerController player = playerObject.GetComponent<PlayerController>();
+        int i = player.playerId;
+        if (playerControllers[i] == null)
+        {
+            playerControllers[i] = player;
+            player.availableEndOfScene = gameObject;
+        }
+        else
+        {
+            return;
+        }
+    }
+
+
+    public void ErasePlayerInEndOfScene(GameObject player)
+    {
+        PlayerController pController = player.GetComponent<PlayerController>();
+        int playerID = pController.playerId;
+
+        if (playerControllers[playerID] != null)
+        {
+            playerControllers[playerID] = null;
+            playersWhoArrived--;
+        }
+    }
 }

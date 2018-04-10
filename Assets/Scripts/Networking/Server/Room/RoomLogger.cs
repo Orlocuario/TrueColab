@@ -46,16 +46,16 @@ public class RoomLogger
     public void WriteEnterPOI(int playerId, string poiId)
     {
         StreamWriter writer = GetWriter();
-        writer.WriteLine(GetTime() + "Player " + playerId + " entered poi with ID: " + poiId);
+        writer.WriteLine(GetTime() + " Player " + playerId + " entered poi with ID: " + poiId);
         writer.Close();
     }
 
     public void WritePoiIsReady(int playerID, string poiID)
     {
         StreamWriter writer = GetWriter();
-        writer.WriteLine("");
+        WriteNewLine();
         TimeSpan spans = GetTimeAsDateTime().Subtract(lastPOIP);
-        writer.WriteLine(GetTime() +"Poi number: " + poiID + " was reached by all the necessary players. Seconds spent reaching this POI from the last one was: " + spans.TotalSeconds);
+        writer.WriteLine(GetTime() +" Poi number: " + poiID + " was reached by all the necessary players. Seconds spent reaching this POI from the last one was: " + spans.TotalSeconds);
         lastPOIP = GetTimeAsDateTime();
         writer.Close();
     }

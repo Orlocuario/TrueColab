@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     public GameObject availableChatZone;
     public GameObject availableInstantiatorTrigger;
     public GameObject availableParticleTrigger;
+    public GameObject availableEndOfScene;
     public string decisionName;
     public bool controlOverEnemies;
     public float groundCheckRadius;
@@ -440,7 +441,7 @@ public class PlayerController : MonoBehaviour
         ResetTransform();
         ResetDamagingObjects();
         ResetChatZones();
-        ResetCamera();                  //For Test
+        //ResetCamera();                  //For Test // It didnt work
         ResetDamagingTriggers();
         ResetParticleZones();
         ResetDecisions();

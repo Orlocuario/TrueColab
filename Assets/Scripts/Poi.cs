@@ -26,6 +26,7 @@ public class Poi : MonoBehaviour {
                 if (playersArrived == playersNeeded.Length)
                 {
                     pController.SendPoiIsReadyToServer(id);
+                    Destroy(gameObject);
                 }
 
             }
