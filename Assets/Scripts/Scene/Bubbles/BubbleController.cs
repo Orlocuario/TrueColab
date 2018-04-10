@@ -246,7 +246,6 @@ public class BubbleController : MonoBehaviour
         {
             return;
         }
-
         else
         {
             myPlayer.ResetTransform();

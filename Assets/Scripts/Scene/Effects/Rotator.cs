@@ -102,4 +102,4 @@ public class Rotator : MonoBehaviour
             Client.instance.SendMessageToServer(message, secure);
         }
     }
-}
+}   
