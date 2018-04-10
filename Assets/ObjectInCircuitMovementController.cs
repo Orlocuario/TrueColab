@@ -7,27 +7,27 @@ public class ObjectInCircuitMovementController : MonoBehaviour
 
     public bool move;
     private Vector2[] targets;
+    private Transform myTransform;
     private float moveSpeed;
     private float timeToWait;
-    private bool showedTargets;
-    private int placeInArray;
+    private int arrayNumber;
+    public bool playerHasReturned;
 
     // Update is called once per frame
     void Update()
     {
         if (move)
-            if (move)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, targets[placeInArray], moveSpeed * Time.deltaTime);
-            }
+        {
+            transform.position = Vector2.MoveTowards(transform.position, targets[arrayNumber], moveSpeed * Time.deltaTime);
+        }
     }
 
-    public void InitializeCyclicMovements(Vector2[] incomingTargets, float _moveSpeed, float _timeToWait, int arrayNumber)
+    public void InitializeCyclicMovements(Vector2[] incomingTargets, float _moveSpeed, float _timeToWait, int _arrayNumber)
     {
         string name = gameObject.name;
         moveSpeed = _moveSpeed;
         timeToWait = _timeToWait;
-        placeInArray = arrayNumber;
+        arrayNumber = _arrayNumber;
         targets = incomingTargets;
         move = true;
         StartCoroutine(StartMoving());
@@ -37,12 +37,17 @@ public class ObjectInCircuitMovementController : MonoBehaviour
     {
         while (true)
         {
-            if (transform.position.x == targets[placeInArray].x && transform.position.y == targets[placeInArray].y)
+            if (transform.position.x == targets[arrayNumber].x && transform.position.y == targets[arrayNumber].y)
             {
-                placeInArray++;
-                if (placeInArray == targets.Length)
+                arrayNumber++;
+                if (arrayNumber == targets.Length)
                 {
-                    placeInArray = 0;
+                    arrayNumber = 0;
+                }
+                if (playerHasReturned)
+                {
+                    SendObjectInCircuitDataToServer();
+                    playerHasReturned = false;
                 }
             }
             yield return new WaitForSeconds(timeToWait);
@@ -69,6 +74,31 @@ public class ObjectInCircuitMovementController : MonoBehaviour
     protected bool GameObjectIsPlayer(GameObject other)
     {
         return other.GetComponent<PlayerController>();
+    }
+
+    protected void SendObjectInCircuitDataToServer()
+    {
+        Transform transform = gameObject.GetComponent<Transform>();
+        int id = gameObject.GetInstanceID();
+
+        string message = "CoordinateObjectInCircuit/" + id + "/" + transform.position.x + "/" + transform.position.y + "/" + arrayNumber;
+
+        SendMessageToServer(message, true);
+    }
+
+    private void SendMessageToServer(string message, bool secure)
+    {
+        if (Client.instance)
+        {
+            Client.instance.SendMessageToServer(message, secure);
+        }
+    }
+
+    public void HandleMovingInCircuitObjectData(string[] msg)
+    {
+        myTransform.position = new Vector2(float.Parse(msg[2]), float.Parse(msg[3]));
+        arrayNumber = int.Parse(msg[4]);
+        StartMoving();
     }
 
 }

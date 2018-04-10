@@ -13,6 +13,7 @@ public class OneTimeMovingObject : MonoBehaviour
     public bool isPlatform;
     public float timeToWait = 0;
     public bool needsParticles;
+    protected bool noMorePlayers;
 
 
 
@@ -23,6 +24,7 @@ public class OneTimeMovingObject : MonoBehaviour
 
     private void Start()
     {
+        noMorePlayers = false;
         playerControllers = new PlayerController[3];
     }
 
@@ -60,6 +62,7 @@ public class OneTimeMovingObject : MonoBehaviour
                                 playerToRelease.ResetTransform();
                             }
                         }
+                        noMorePlayers = true;
                         Destroy(gameObject, timeToWait);
                         return;
                     }
@@ -90,6 +93,10 @@ public class OneTimeMovingObject : MonoBehaviour
     {
         if (isPlatform)
         {
+            if (noMorePlayers)
+            {
+                return;
+            }
             if (GameObjectIsPlayer(other.gameObject))
             {
                 PlayerController player = other.gameObject.GetComponent<PlayerController>();

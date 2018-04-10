@@ -770,11 +770,6 @@ public class SwitchActions : MonoBehaviour
 
     #region Messaging
 
-    private void AfterCameraHandler()
-	{
-		
-	}
-
     private void SendMessageToServer(string message, bool secure)
     {
         if (Client.instance && Client.instance.GetLocalPlayer() && Client.instance.GetLocalPlayer().controlOverEnemies)

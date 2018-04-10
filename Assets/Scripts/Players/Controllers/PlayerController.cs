@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
         if (!sceneAnimator)
         {
-            Debug.Log(name + " did not found the SceneAnimator");
+            Debug.LogError(name + " did not found the SceneAnimator");
         }
 
         levelManager = FindObjectOfType<LevelManager>();
@@ -350,7 +350,7 @@ public class PlayerController : MonoBehaviour
 
             if (!levelManager.hpAndMp)
             {
-                Debug.Log("Levelmanager HpAndMp is not set");
+                Debug.LogError("Levelmanager HpAndMp is not set");
                 return;
             }
 
@@ -384,8 +384,6 @@ public class PlayerController : MonoBehaviour
                 if (powerButtonPressed)
                 {
                     SetPowerState(!isPowerOn);
-                    Debug.Log("Se presionó el botón de poder. El valor de isPowerOn es: " + isPowerOn + " y la enviaré al server");
-
                     SendPowerDataToServer();
                 }
 
@@ -576,11 +574,8 @@ public class PlayerController : MonoBehaviour
         {
             foreach (IgnoreCollisionWithPlayers objectWhoHatesMe in objectsWhoHateMe)
             {
-                Debug.Log("the " + objectWhoHatesMe.gameObject.name + " will no longer strike me");
                 BoxCollider2D colliderWhoHatesMe = objectWhoHatesMe.GetComponent<BoxCollider2D>();
                 Physics2D.IgnoreCollision(colliderWhoHatesMe, gameObject.GetComponent<BoxCollider2D>(), true);
-
-                Debug.Log("the " + objectWhoHatesMe.gameObject.name + " will no longer strike me for sure?");
             }
 
         }

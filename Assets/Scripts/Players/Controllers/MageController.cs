@@ -26,7 +26,6 @@ public class MageController : PlayerController
         // Check for player proximity to mage with activated shield
         if (isPowerOn)
         {
-            Debug.Log("my shield area is: " + shieldArea);
             if (Vector2.Distance(player.transform.position, transform.position) <= shieldArea)
             {
                 return true;
@@ -104,13 +103,11 @@ public class MageController : PlayerController
     {
         foreach (GameObject particle in particles)
         {
-            Debug.Log("checking radius");
 
             float radius = particle.GetComponent<ParticleSystem>().shape.radius;
             if (shieldArea < radius)
             {
                 shieldArea = radius;
-                Debug.Log("radius is: " + radius);
             }
         }
     }

@@ -170,13 +170,11 @@ public class ChatZone : MonoBehaviour
 
     public void TurnChatZoneOff()
     {
-        Debug.Log("ctm entré a apagar la chatzone");
         regenerationFrame = 0;
         ToggleChatButtons(false);
         ToggleParticles(false);
         activated = false;
         hpAndMp.StopParticles();
-        Debug.Log("ctm terminpe de apagar la chatzone");
 
     }
     #endregion

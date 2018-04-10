@@ -16,7 +16,7 @@ public class MoveTowardsAndDie : MonoBehaviour
 
         if (target.Equals(default(Vector3)))
         {
-            Debug.Log("No target for movetowardanddie");
+            Debug.LogError("No target for moveTowardAndDie");
         }
 
     }

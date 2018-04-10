@@ -14,7 +14,7 @@ public class SceneAnimator : MonoBehaviour
 
         if (!animator)
         {
-            Debug.Log(gameObject.name + " has no animator ");
+            Debug.LogError(gameObject.name + " has no animator ");
             return;
         }
 
@@ -29,7 +29,7 @@ public class SceneAnimator : MonoBehaviour
 
             if (!animator)
             {
-                Debug.Log(animatorGameObject.name + " has no animator ");
+                Debug.LogError(animatorGameObject.name + " has no animator ");
                 return;
             }
 
@@ -43,7 +43,7 @@ public class SceneAnimator : MonoBehaviour
 
         if (!animator)
         {
-            Debug.Log(gameObject.name + " has no animator ");
+            Debug.LogError(gameObject.name + " has no animator ");
             return;
         }
 
@@ -72,12 +72,12 @@ public class SceneAnimator : MonoBehaviour
             }
             else
             {
-                Debug.Log(animName + " animation was not found in " + animator);
+                Debug.LogError(animName + " animation was not found in " + animator);
             }
         }
         else
         {
-            Debug.Log(gameObject.name + " has no animator ");
+            Debug.LogError(gameObject.name + " has no animator ");
 
         }
     }

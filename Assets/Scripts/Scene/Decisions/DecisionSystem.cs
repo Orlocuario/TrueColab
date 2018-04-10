@@ -56,7 +56,6 @@ public class DecisionSystem : MonoBehaviour
     protected void RestartDecision()
     {
         votes = new Choice?[] { null, null, null };
-        Debug.Log("Restarting decision. No Agreement");
         levelManager.RestartVoting();
     }
     protected void ClearVotes()

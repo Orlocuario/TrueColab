@@ -88,9 +88,9 @@ public class ClientMessageHandler
             case "PlayersAreDead":
                 HandlePlayersAreDead(msg);
                 break;
-			case "PlayerVote":
-				HandlePlayerVote (msg);
-				break;
+            case "PlayerVote":
+                HandlePlayerVote(msg);
+                break;
             case "PlayerPreVote":
                 HandlePlayerPreVote(msg);
                 break;
@@ -130,18 +130,22 @@ public class ClientMessageHandler
             case "IgnoreCollisionBetweenObjects":
                 HandleIgnoreCollisionBetweenObjects(msg);
                 break;
-			case "BubbleInstantiatorData":
-				HandlerBubbleInstantiatorData (msg);
-				break;
-			case "PlayerHasReturned":
-				HandlerPlayerReturned ();
-				break;
+            case "BubbleInstantiatorData":
+                HandlerBubbleInstantiatorData(msg);
+                break;
+            case "PlayerHasReturned":
+                HandlerPlayerReturned();
+                break;
             case "CoordinateRotators":
                 HandleRotatorCoordination(msg);
                 break;
             case "CoordinateMovingObject":
                 HandleMovingObjectCoordination(msg);
                 break;
+            case "CoordinateObjectInCircuit":
+                HandlerCircuitObjectsMovementData(msg);
+                break;
+
             default:
                 break;
         }
@@ -748,6 +752,23 @@ public class ClientMessageHandler
 		}
 	}
 
+
+    private void HandlerCircuitObjectsMovementData(string[] msg)
+    {
+        if (NotInClientScene())
+        {
+            int objectId = int.Parse(msg[1]);
+
+            ObjectInCircuitMovementController[] mControllers = GameObject.FindObjectsOfType<ObjectInCircuitMovementController>();
+            foreach (ObjectInCircuitMovementController movingObjects in mControllers)
+            {
+                if (movingObjects.GetInstanceID() == objectId)
+                {
+                    movingObjects.HandleMovingInCircuitObjectData(msg);
+                }
+            }
+        }
+    }
     private void HandleRotatorCoordination(string[] msg)
     {
         if (NotInClientScene())

@@ -825,6 +825,7 @@ public class LevelManager : MonoBehaviour
         CoordinateRotators();
         CoordinatePlatformInstantiators();
         CoordinateMovingObjects();
+        CoordinateCircuitMovingElements();
         CoordinateEnemyControllers();
         CoordinateTriggers();
         CoordinateTeleporters();
@@ -914,6 +915,18 @@ public class LevelManager : MonoBehaviour
             if (rotator.isWorking == true)
             {
                 rotator.playerHasReturned = true;
+            }
+        }
+    }
+
+    private void CoordinateCircuitMovingElements()
+    {
+        ObjectInCircuitMovementController[] mObjects = FindObjectsOfType<ObjectInCircuitMovementController>();
+        foreach(ObjectInCircuitMovementController mController in mObjects)
+        {
+            if (mController.move)
+            {
+                mController.playerHasReturned = true;
             }
         }
     }

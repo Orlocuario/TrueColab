@@ -76,7 +76,7 @@ public class Rotator : MonoBehaviour
     protected virtual IEnumerator StartDelay()
     {
         yield return new WaitForSeconds(asynchronyTime);
-        Debug.Log("did my thing");
+        Debug.Log("Rotator waited Delay");
     }
 
     private void SendRotatingInstantiatorData()

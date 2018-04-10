@@ -4,7 +4,6 @@ public class PoweredParticles : MonoBehaviour
 {
     protected PlayerController[] pControllers;
 
-
     protected void Start()
     {
         pControllers = new PlayerController[3];
