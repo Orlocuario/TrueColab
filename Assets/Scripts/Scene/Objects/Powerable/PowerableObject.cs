@@ -457,6 +457,7 @@ public class PowerableObject : MonoBehaviour
         if (playerControllers[i] == null)
         {
             playerControllers[i] = player;
+            player.availablePowerable = gameObject;
         }
         else
         {
@@ -492,6 +493,7 @@ public class PowerableObject : MonoBehaviour
         if (playerControllers[i] != null)
         {
             playerControllers[i] = null;
+            player.availablePowerable = null;
         }
         else
         {
