@@ -456,8 +456,11 @@ public class PowerableObject : MonoBehaviour
         int i = player.playerId;
         if (playerControllers[i] == null)
         {
-            playerControllers[i] = player;
-            player.availablePowerable = gameObject;
+            for (int j = 0; j <= powers.Length; j++)
+            {
+                CheckPowerActivationType(powers[j].activationType, playerControllers[i]);
+            }
+
         }
         else
         {
@@ -484,6 +487,28 @@ public class PowerableObject : MonoBehaviour
                 }
             }
         }
+    }
+
+    protected void CheckPowerActivationType(ActivationType actioType, PlayerController pController)
+    {
+        switch (actioType)
+        {
+            case ActivationType.Power:
+                {
+                    playerControllers[pController.playerId] = pController;
+                    pController.availablePowerable = gameObject;
+                }
+                break;
+            case ActivationType.ByParticle:
+                {
+                    break;
+                }
+            case ActivationType.Attack:
+                {
+                    break;
+                }
+        }
+
     }
 
     protected void CheckIfPlayerAlreadyLeft(GameObject playerObject)

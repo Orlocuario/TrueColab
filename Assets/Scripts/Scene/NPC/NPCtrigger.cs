@@ -13,11 +13,12 @@ public class NPCtrigger : MonoBehaviour
     public Vector3 whereToRespawn;
 
     public bool freezesPlayer;
-    public bool hasDecision;
+    public bool finishesScene;
     public float feedbackTime;
 
     public bool forOnePlayerOnly;
-    public int requestedID; 
+    public PlayerController FeedBackPlayer;
+
 
 
     [System.Serializable]
@@ -101,12 +102,14 @@ public class NPCtrigger : MonoBehaviour
     {
         if (GameObjectIsPlayer(other.gameObject))
         {
-            CheckIfEndsWithDecision();
-            PlayerFeedBackId(other.gameObject);
+            CheckIfEndsWithEndOfScene();
+            CheckIfForOnePlayerOnly(other.gameObject);
 
             if (freezesPlayer)
             {
                 levelManager.localPlayer.StopMoving();
+                levelManager.localPlayer.SetPowerState(false);
+                levelManager.localPlayer.SendPlayerPowerDataToServer();
             }
 
             DestroyMyCollider();
@@ -118,7 +121,7 @@ public class NPCtrigger : MonoBehaviour
     {
         if (GameObjectIsPlayer(other.gameObject))
         {
-            if (hasDecision)
+            if (finishesScene)
             {
                 playersArrived--;
             }
@@ -133,16 +136,16 @@ public class NPCtrigger : MonoBehaviour
     {
         if (forOnePlayerOnly)
         {
-            if (requestedID.Equals(default(int)))
+            if (FeedBackPlayer.Equals(default(PlayerController)))
             {
-                Debug.LogError("The NPC Trigger named: " + name + " / Needs an entrance ID");
+                Debug.LogError("The NPC Trigger named: " + name + " / Needs a pController Type to filter");
             }
         }
     }
 
     protected void CheckDecisionParameters()
     {
-        if (hasDecision)
+        if (finishesScene)
         {
             if (playersNeeded == 0)
             {
@@ -155,9 +158,9 @@ public class NPCtrigger : MonoBehaviour
         }
     }
 
-    protected void CheckIfEndsWithDecision()
+    protected void CheckIfEndsWithEndOfScene()
     {
-        if (hasDecision)
+        if (finishesScene)
         {
             playersArrived++;
             if (playersArrived == playersNeeded)
@@ -173,15 +176,18 @@ public class NPCtrigger : MonoBehaviour
         }
     }
 
-    protected void PlayerFeedBackId(GameObject player)
+    protected void CheckIfForOnePlayerOnly(GameObject player)
     {
         if (forOnePlayerOnly)
         {
-            int incomingId = player.GetComponent<PlayerController>().playerId;
-            if (incomingId == requestedID)
+            if (player.GetComponent<PlayerController>().GetType().Equals(FeedBackPlayer.GetType())) 
             {
                 DestroyMyCollider();
                 ReadNextFeedback();
+            }
+            else
+            {
+                return;
             }
         }
 
@@ -195,6 +201,16 @@ public class NPCtrigger : MonoBehaviour
             collider.enabled = false;
         }
     }
+
+    protected void UndestroyMyCollider()
+    {
+        Collider2D collider = gameObject.GetComponent<Collider2D>();
+        if (collider.isTrigger)
+        {
+            collider.enabled = true;
+        }
+    }
+
 
     protected void ToggleParticles(bool active)
     {
@@ -222,20 +238,18 @@ public class NPCtrigger : MonoBehaviour
             levelManager.Respawn();
         }
 
-        if (hasDecision)
+        if (finishesScene)
         {
-            dSystem.StartThisVoting();
+            levelManager.GoToNextScene();
         }
 
         levelManager.ShutNPCFeedback(true);
         if (musntDie)
         {
+            UndestroyMyCollider();
             return;
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 
     protected bool GameObjectIsPlayer(GameObject other)

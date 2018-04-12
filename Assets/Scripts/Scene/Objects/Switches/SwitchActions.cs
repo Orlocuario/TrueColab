@@ -272,8 +272,8 @@ public class SwitchActions : MonoBehaviour
     private void HandlerGroup0()
     {
         GameObject platEngineer = levelManager.InstantiatePrefab("MovPlatform", new Vector2(13.3f, -1.6f));
-        levelManager.SetMovingObjectData(platEngineer, new Vector2(13.3f, -1.9f), new Vector2(13.3f, 0.7f), 1f, 1.5f, false);
-        levelManager.ShowFeedbackParticles("FBMageButt", new Vector2(13.2f, -1.3f), 3f);
+        levelManager.SetMovingObjectData(platEngineer, new Vector2(13.3f, -2.1f), new Vector2(13.3f, 0.5f), 1f, 1.5f, false);
+        levelManager.ShowFeedbackParticles("FBMageButt", new Vector2(13.2f, -1.1f), 3f);
     }
 
     private void HandlerGroup1()
@@ -350,19 +350,6 @@ public class SwitchActions : MonoBehaviour
 		levelManager.InstantiatePrefab("PlataformaPastVoladora", new Vector2(39f, 7.5f));
 		levelManager.InstantiatePrefab("PlataformaPastVoladora", new Vector2(35.5f, 7.5f));
 
-		GameObject killzone = levelManager.InstantiatePrefab("KillZones/KillZoneEnginAir", new Vector2(34.6f, 6.15f));
-
-        GameObject destroyer = GameObject.Find("EngKillzoneDestroyer");
-
-        if (destroyer)
-        {
-            KillZoneDestroyer killZoneDestroyer = destroyer.GetComponent<KillZoneDestroyer>();
-
-            if (killZoneDestroyer)
-            {
-                killZoneDestroyer.SetKillzone(GameObject.Find("Amarillo"), killzone);
-            }
-        }
     }
 
     private void HandlerGroup6()

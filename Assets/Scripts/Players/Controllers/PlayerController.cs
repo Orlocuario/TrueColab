@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     public float acceleration;
     public float actualSpeed;
     public int mpUpdateFrame;
+    public int actualFramesForPowerCheck;
     public int sortingOrder;
     public int playerId;
     public bool mpDepleted;
@@ -73,9 +74,10 @@ public class PlayerController : MonoBehaviour
 
     protected static string attackPrefabName = "Prefabs/Attacks/";
 
-    protected static int mpUpdateFrameRate = 30;
+    protected static int mpUpdateFrameRate = 40;
     protected static int mpSpendRate = -1;
     protected static int attackSpeed = 4;
+    protected static int framesForPowerableCheck = 150;
 
     protected string attackAnimName;
     protected bool isTakingDamage;
@@ -83,9 +85,9 @@ public class PlayerController : MonoBehaviour
     protected bool justPowered;
     protected bool connected;
     protected bool canMove;
+    protected bool justJumped;
     protected float speedX;
     protected float speedY;
-    protected bool justJumped;
     protected CameraState cameraState;
 
 
@@ -122,6 +124,7 @@ public class PlayerController : MonoBehaviour
         isPowerOn = false;
         connected = true;
         canMove = true;
+        justJumped = false;
         availableChatZone = null;
         decisionName = null;
         availablePowerable = null;
@@ -133,12 +136,14 @@ public class PlayerController : MonoBehaviour
         remoteLeft = false;
         remoteUp = false;
 
+        actualFramesForPowerCheck = 0;
         mpUpdateFrame = 0;
         acceleration = 0f;
         sortingOrder = 0;
         directionY = 1;
         directionX = 1;
         debuger = 0;
+
 
         SetPositiveGravity(true);
         InitializeParticles();
@@ -174,6 +179,7 @@ public class PlayerController : MonoBehaviour
         Move();
         Attack();
         UsePower();
+        CheckPowerableState();
         UseItem();
     }
 
@@ -265,6 +271,10 @@ public class PlayerController : MonoBehaviour
 
     #region Move
 
+    protected void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.gameObject.name);
+    }
     protected void Move()
     {
 
@@ -338,7 +348,20 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Power
-
+    protected void CheckPowerableState()
+    {
+        actualFramesForPowerCheck++;
+        {
+            if (actualFramesForPowerCheck == framesForPowerableCheck)
+            {
+                actualFramesForPowerCheck = 0;
+                if (!isPowerOn && justPowered)
+                {
+                    justPowered = false;
+                }
+            }
+        }
+    }
     public void UsePower()
     {
         if (!localPlayer || justPowered)
@@ -433,7 +456,7 @@ public class PlayerController : MonoBehaviour
     public void HardReset()
     {
         StopMoving();
-        if(isPowerOn)
+        if (isPowerOn)
         {
             SetPowerState(!isPowerOn);
             SendPowerDataToServer();
@@ -441,7 +464,7 @@ public class PlayerController : MonoBehaviour
         ResetTransform();
         ResetDamagingObjects();
         ResetChatZones();
-        //ResetCamera();                  //For Test // It didnt work
+        //ResetCamera();                  //For Test // ShouldTry Again
         ResetDamagingTriggers();
         ResetParticleZones();
         ResetDecisions();
@@ -458,7 +481,12 @@ public class PlayerController : MonoBehaviour
         if (mCamera)
         {
             mCamera.GetComponent<CameraController>().SetDefaultValues();
-            mCamera.transform.position = transform.position;
+            TriggerCamera[] cTriggers = FindObjectsOfType<TriggerCamera>();
+            foreach (TriggerCamera tCamera in cTriggers)
+            {
+                tCamera.CheckIfPlayerLeft(gameObject);
+            }
+
         }
     }
 
@@ -699,7 +727,6 @@ public class PlayerController : MonoBehaviour
         }
 
         StartCoroutine(WaitPowerable());
-
     }
 
     protected void TurnPowerablePlayersOff()
@@ -743,10 +770,10 @@ public class PlayerController : MonoBehaviour
 
     protected void TogglePowerable(bool activate)
     {
-        GameObject powerableGo = (availablePowerable);
-        if (powerableGo)
+        GameObject availablePowerableObject = (availablePowerable);
+        if (availablePowerableObject)
         {
-            PowerableObject powerable = powerableGo.GetComponent<PowerableObject>();
+            PowerableObject powerable = availablePowerableObject.GetComponent<PowerableObject>();
 
             for (int i = 0; i < powerable.powers.Length; i++)
             {
@@ -1062,6 +1089,11 @@ public class PlayerController : MonoBehaviour
     {
         string message = "PlayerPower/" + playerId + "/" + isPowerOn;
         SendMessageToServer(message);
+    }
+
+    public void SendPlayerPowerDataToServer()
+    {
+        SendPowerDataToServer();
     }
 
     public void SendMPDataToServer()

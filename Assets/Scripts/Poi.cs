@@ -11,17 +11,18 @@ public class Poi : MonoBehaviour {
 
     private void Start()
     {
+        Debug.Log("number of players needed is: " + playersNeeded.Length);
         CheckParameters();
     } 
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (CheckIfIsPlayer(collider.gameObject))
         {
-            PlayerController pController = collider.GetComponent<PlayerController>();
-            pController.SendPoiEnterToServer(id);
-
             if (NotEnteredBefore(collider.gameObject))
             {
+                PlayerController pController = collider.GetComponent<PlayerController>();
+                pController.SendPoiEnterToServer(id);
+
                 playersArrived++;
                 if (playersArrived == playersNeeded.Length)
                 {

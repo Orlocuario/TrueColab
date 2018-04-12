@@ -148,7 +148,7 @@ public class ServerMessageHandler
         RoomLogger log = player.room.log;
         log.WritePoiIsReady(player.id, poiID);
 
-        Debug.Log("POI " + poiID + " reached by " + player.id + " in room " + player.room.id + ".Writed in log.");
+        Debug.Log("POI " + poiID + " reached by all needed players in room " + player.room.id);
 
     }
 
@@ -158,7 +158,7 @@ public class ServerMessageHandler
         NetworkPlayer player = server.GetPlayer(connectionID);
         RoomLogger log = player.room.log;
         log.WriteEnterPOI(player.id, poiID);
-        Debug.Log("POI " + poiID + " reached by " + player.id + " in room " + player.room.id + ".Writed in log.");
+        Debug.Log("POI " + poiID + " reached by " + player.id + " in room " + player.room.id);
     }
 
     private void HandleChangeScene(string[] msg, int connectionId)

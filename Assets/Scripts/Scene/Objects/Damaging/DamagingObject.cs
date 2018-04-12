@@ -13,6 +13,8 @@ public class DamagingObject : MonoBehaviour
 
     public Vector2 force;
     public int damage;
+    int? id;
+    private bool alreadyEntered;
 
 
     #endregion
@@ -120,6 +122,29 @@ public class DamagingObject : MonoBehaviour
         {
             DealDamage(other.gameObject);
         }
+
+        if (GameObjectIsMageParticle(other.gameObject))
+        {
+            if (alreadyEntered == false)
+            {
+                alreadyEntered = true;
+                if (id != null)
+                {
+                    ChangeLavaIntoWater(true);
+                }
+            }
+        }
+    }
+
+    protected virtual void OnTriggerExit2D(Collider2D other)
+    {
+        if (GameObjectIsMageParticle(other.gameObject))
+        {
+            if (id != null)
+            {
+                ChangeLavaIntoWater(false);
+            }
+        }
     }
 
     #endregion
@@ -133,15 +158,30 @@ public class DamagingObject : MonoBehaviour
             {
                 gameObject.GetComponent<OneTimeMovingObject>().DestroyParasiteParticles();
             }
-        } 
+        }
 
         Destroy(gameObject);
+    }
+
+    public void ChangeLavaIntoWater(bool boolValue)
+    {
+        GameObject[] changeableLavas = GameObject.FindGameObjectsWithTag("LavaFalling" + id);
+        foreach (GameObject lava in changeableLavas)
+        {
+            SceneAnimator sAnimator = FindObjectOfType<SceneAnimator>();
+            sAnimator.SetBool("WaterFalling", boolValue, lava);
+        }
     }
 
     protected void GetThisEnemyMaged(GameObject enemy)
     {
         EnemyController eC = enemy.gameObject.GetComponent<EnemyController>();
         eC.GetThisEnemyMaged();
+    }
+
+    protected bool GameObjectIsMageParticle(GameObject gobject)
+    {
+        return gobject.GetComponent<MagePoweredParticles>();
     }
 
     protected void KillEnemy(GameObject enemy)

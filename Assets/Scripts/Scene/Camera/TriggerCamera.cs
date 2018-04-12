@@ -48,17 +48,19 @@ public class TriggerCamera : MonoBehaviour
         if (isCutScene)
         {
             cameraController.StartCoroutine(cameraController.StartCutscene(movements));
-            return;
+            Destroy(gameObject);
         }
 
         else if (movements[0].playerChangeState)
         {
             cameraController.ChangeState(movements[0].state);
+            Destroy(gameObject);
         }
 
         else
         {
             cameraController.ChangeState(movements[0].state, movements[0]);
+            Destroy(gameObject);
         }
     }
 
@@ -89,6 +91,7 @@ public class TriggerCamera : MonoBehaviour
     {
         if (GameObjectIsPlayer(other.gameObject))
         {
+            CheckIfPlayerLeft(other.gameObject);
             OnExit();
         }
     }
@@ -103,7 +106,7 @@ public class TriggerCamera : MonoBehaviour
         return playerController && playerController.localPlayer;
     }
 
-    protected void CheckIfPlayerEntered(GameObject playerObject)
+    public void CheckIfPlayerEntered(GameObject playerObject)
     {
         PlayerController player = playerObject.GetComponent<PlayerController>();
         int i = player.playerId;
@@ -117,5 +120,18 @@ public class TriggerCamera : MonoBehaviour
         }
     }
 
+    public void CheckIfPlayerLeft(GameObject playerObject)
+    {
+        PlayerController player = playerObject.GetComponent<PlayerController>();
+        int i = player.playerId;
+        if (playerControllers[i] != null)
+        {
+            playerControllers[i] = null;
+        }
+        else
+        {
+            return;
+        }
+    }
 }
     #endregion
