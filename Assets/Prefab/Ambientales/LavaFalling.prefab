@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4349249242988598}
   - component: {fileID: 212907256761975618}
   - component: {fileID: 95491421706273232}
+  - component: {fileID: 114380479343063906}
   m_Layer: 0
   m_Name: Cascadas_0
   m_TagString: Untagged
@@ -38,6 +39,7 @@ GameObject:
   - component: {fileID: 4139940661947780}
   - component: {fileID: 212476289157181372}
   - component: {fileID: 95092712279385852}
+  - component: {fileID: 114139843501954730}
   m_Layer: 0
   m_Name: SpashLava
   m_TagString: Untagged
@@ -55,6 +57,7 @@ GameObject:
   - component: {fileID: 4015950324911876}
   - component: {fileID: 212128428501146668}
   - component: {fileID: 95967113330774186}
+  - component: {fileID: 114560539638281528}
   m_Layer: 0
   m_Name: Cascadas_0 (2)
   m_TagString: Untagged
@@ -88,6 +91,7 @@ GameObject:
   - component: {fileID: 4947595945863938}
   - component: {fileID: 212416417116520072}
   - component: {fileID: 95766518046224476}
+  - component: {fileID: 114405772958912984}
   m_Layer: 0
   m_Name: Cascadas_0 (1)
   m_TagString: Untagged
@@ -109,7 +113,7 @@ GameObject:
   - component: {fileID: 50629600886939002}
   m_Layer: 0
   m_Name: LavaFalling
-  m_TagString: Untagged
+  m_TagString: LavaFalling
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -313,6 +317,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114139843501954730
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1262292067184204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e86f9eb4ff18f94e9c632bdb0640f57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
 --- !u!114 &114167679995267102
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -326,6 +342,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: {x: 1500, y: 200}
   damage: 5
+  id: 0
+--- !u!114 &114380479343063906
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1210670938813996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e86f9eb4ff18f94e9c632bdb0640f57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+--- !u!114 &114405772958912984
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1889492863941048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e86f9eb4ff18f94e9c632bdb0640f57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+--- !u!114 &114560539638281528
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1330869299805940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e86f9eb4ff18f94e9c632bdb0640f57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
 --- !u!212 &212128428501146668
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 /** 
  *  This class is for static damaging objects such as a lava
@@ -13,8 +14,9 @@ public class DamagingObject : MonoBehaviour
 
     public Vector2 force;
     public int damage;
-    int? id;
-    private bool alreadyEntered;
+    public int id;
+    protected bool alreadyEntered;
+    protected bool alreadyLeft;
 
 
     #endregion
@@ -128,7 +130,8 @@ public class DamagingObject : MonoBehaviour
             if (alreadyEntered == false)
             {
                 alreadyEntered = true;
-                if (id != null)
+
+                if (id > 0)
                 {
                     ChangeLavaIntoWater(true);
                 }
@@ -140,9 +143,14 @@ public class DamagingObject : MonoBehaviour
     {
         if (GameObjectIsMageParticle(other.gameObject))
         {
-            if (id != null)
+            if (alreadyLeft == false)
             {
-                ChangeLavaIntoWater(false);
+                alreadyLeft = true;
+
+                if (id > 0)
+                {
+                    ChangeLavaIntoWater(false);
+                }
             }
         }
     }
@@ -165,11 +173,16 @@ public class DamagingObject : MonoBehaviour
 
     public void ChangeLavaIntoWater(bool boolValue)
     {
-        GameObject[] changeableLavas = GameObject.FindGameObjectsWithTag("LavaFalling" + id);
-        foreach (GameObject lava in changeableLavas)
+        LavaIntoWaterIdentifier[] changeableLavas = FindObjectsOfType<LavaIntoWaterIdentifier>();
+
+        foreach (LavaIntoWaterIdentifier lava in changeableLavas)
         {
-            SceneAnimator sAnimator = FindObjectOfType<SceneAnimator>();
-            sAnimator.SetBool("WaterFalling", boolValue, lava);
+            if (id == lava.id)
+            {
+                SceneAnimator sAnimator = FindObjectOfType<SceneAnimator>();
+                sAnimator.SetBool("WaterFalling", boolValue, lava.gameObject);
+                StartCoroutine(WaitForLavaAnimator());
+            }
         }
     }
 
@@ -195,6 +208,14 @@ public class DamagingObject : MonoBehaviour
     {
         return other.GetComponent<BurnableObject>();
     }
+
+    protected IEnumerator WaitForLavaAnimator()
+    {
+        yield return new WaitForSeconds(.3f);
+        alreadyEntered = false;
+        alreadyLeft = false;
+    }
+
 
     protected bool GameObjectIsDeactivableKillPlane(GameObject other)
     {

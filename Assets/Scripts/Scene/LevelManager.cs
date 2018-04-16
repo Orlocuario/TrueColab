@@ -274,6 +274,7 @@ public class LevelManager : MonoBehaviour
         string currentSceneNumber = Regex.Match(currentSceneName, @"\d+").Value;
         int nextSceneNumber = int.Parse(currentSceneNumber) + 1;
         string nextSceneName = "Escena" + nextSceneNumber;
+        
 
         Debug.Log("Changing to scene " + nextSceneName);
 
@@ -653,11 +654,11 @@ public class LevelManager : MonoBehaviour
     public void TogglePlayerFilter(string filterName, bool active)
     {
 
-        GameObject mageFilter = GameObject.Find(filterName);
+        GameObject filterObject = GameObject.Find(filterName);
 
-        if (mageFilter)
+        if (filterObject)
         {
-            PlayerFilter playerFilter = mageFilter.GetComponent<PlayerFilter>();
+            PlayerFilter playerFilter = filterObject.GetComponent<PlayerFilter>();
 
             if (playerFilter)
             {

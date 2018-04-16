@@ -45,19 +45,22 @@ public class EndOfScene : MonoBehaviour
     {
         if (GameObjectIsPlayer(other.gameObject))
         {
-            CheckIfPlayerEntered(other.gameObject);
-            Debug.Log(other.gameObject.name + " reached the end of the scene");
-
-            playersWhoArrived++;
-            if (playersWhoArrived == playersToArrive)
+            if (CheckIfPlayerEntered(other.gameObject))
             {
-                levelManager.GoToNextScene();
-            }
+                Debug.Log(other.gameObject.name + " reached the end of the scene");
+                playersWhoArrived++;
 
-            else if (other.gameObject.GetComponent<PlayerController>().localPlayer)
-            {
-                levelManager.ActivateNPCFeedback("Asegúrate de que lleguen todos tus amigos");
+                if (playersWhoArrived == playersToArrive)
+                {
+                    levelManager.GoToNextScene();
+                }
+
+                else if (other.gameObject.GetComponent<PlayerController>().localPlayer)
+                {
+                    levelManager.ActivateNPCFeedback("Asegúrate de que lleguen todos tus amigos");
+                }
             }
+            
         }
     }
 
@@ -65,14 +68,16 @@ public class EndOfScene : MonoBehaviour
     {
         if (GameObjectIsPlayer(other.gameObject))
         {
-            CheckIfPlayerAlreadyLeft(other.gameObject);
-            --playersWhoArrived;
+            if (CheckIfPlayerAlreadyLeft(other.gameObject))
+            {
+               --playersWhoArrived;
+            }
         }
     }
 
     #endregion
 
-    protected void CheckIfPlayerAlreadyLeft(GameObject playerObject)
+    protected bool CheckIfPlayerAlreadyLeft(GameObject playerObject)
     {
         PlayerController player = playerObject.GetComponent<PlayerController>();
         int i = player.playerId;
@@ -80,14 +85,15 @@ public class EndOfScene : MonoBehaviour
         {
             playerControllers[i] = null;
             playerControllers[i].availableEndOfScene = null;
+            return true;
         }
         else
         {
-            return;
+            return false;
         }
     }
 
-    protected void CheckIfPlayerEntered(GameObject playerObject)
+    protected bool CheckIfPlayerEntered(GameObject playerObject)
     {
         PlayerController player = playerObject.GetComponent<PlayerController>();
         int i = player.playerId;
@@ -95,10 +101,11 @@ public class EndOfScene : MonoBehaviour
         {
             playerControllers[i] = player;
             player.availableEndOfScene = gameObject;
+            return true;
         }
         else
         {
-            return;
+            return false;
         }
     }
 

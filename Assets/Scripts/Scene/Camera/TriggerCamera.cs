@@ -54,13 +54,19 @@ public class TriggerCamera : MonoBehaviour
         else if (movements[0].playerChangeState)
         {
             cameraController.ChangeState(movements[0].state);
-            Destroy(gameObject);
+            if (movements[0].state.Equals(CameraState.TargetZoom))
+            {
+                Destroy(gameObject);
+            }
         }
 
         else
         {
             cameraController.ChangeState(movements[0].state, movements[0]);
-            Destroy(gameObject);
+            if (movements[0].state.Equals(CameraState.TargetZoom))
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -82,8 +88,11 @@ public class TriggerCamera : MonoBehaviour
     {
         if (GameObjectIsPlayer(other.gameObject))
         {
-            CheckIfPlayerEntered(other.gameObject);
-            OnEnter();
+            if (CheckIfPlayerEntered(other.gameObject))
+            {
+                OnEnter();
+            }
+            
         }
     }
 
@@ -91,8 +100,10 @@ public class TriggerCamera : MonoBehaviour
     {
         if (GameObjectIsPlayer(other.gameObject))
         {
-            CheckIfPlayerLeft(other.gameObject);
-            OnExit();
+            if (CheckIfPlayerLeft(other.gameObject))
+            {
+                OnExit();
+            }
         }
     }
 
@@ -106,31 +117,33 @@ public class TriggerCamera : MonoBehaviour
         return playerController && playerController.localPlayer;
     }
 
-    public void CheckIfPlayerEntered(GameObject playerObject)
+    public bool CheckIfPlayerEntered(GameObject playerObject)
     {
         PlayerController player = playerObject.GetComponent<PlayerController>();
         int i = player.playerId;
         if (playerControllers[i] == null)
         {
             playerControllers[i] = player;
+            return true;
         }
         else
         {
-            return;
+            return false;
         }
     }
 
-    public void CheckIfPlayerLeft(GameObject playerObject)
+    public bool CheckIfPlayerLeft(GameObject playerObject)
     {
         PlayerController player = playerObject.GetComponent<PlayerController>();
         int i = player.playerId;
         if (playerControllers[i] != null)
         {
             playerControllers[i] = null;
+            return true;
         }
         else
         {
-            return;
+            return false;
         }
     }
 }

@@ -167,6 +167,9 @@ public class ServerMessageHandler
 
         NetworkPlayer player = server.GetPlayer(connectionId);
         Room room = player.room;
+        int totalExp = room.hpManager.currentExp;
+        RoomLogger log = room.log;
+        log.WriteTotalExp(totalExp);
 
         SendChangeScene(scence, room);
     }
@@ -412,14 +415,14 @@ public class ServerMessageHandler
     {
         NetworkPlayer player = server.GetPlayer(connectionId);
         Room room = player.room;
-        room.hpManaGer.ChangeHP(msg[1], connectionId);
+        room.hpManager.ChangeHP(msg[1], connectionId);
     }
 
     private void SendMpHUDToRoom(string[] msg, int connectionId)
     {
         NetworkPlayer player = server.GetPlayer(connectionId);
         Room room = player.room;
-        room.hpManaGer.ChangeMP(msg[1], connectionId);
+        room.hpManager.ChangeMP(msg[1], connectionId);
     }
 
 
@@ -427,21 +430,21 @@ public class ServerMessageHandler
     {
         NetworkPlayer player = server.GetPlayer(connectionId);
         Room room = player.room;
-        room.hpManaGer.StopChangeHpAndMpHUD(connectionId);
+        room.hpManager.StopChangeHpAndMpHUD(connectionId);
     }
 
     private void SendHpHAndMpHUDToRoom(string[] msg, int connectionId)
     {
         NetworkPlayer player = server.GetPlayer(connectionId);
         Room room = player.room;
-        room.hpManaGer.RecieveHpAndMpHUD(msg[1], connectionId);
+        room.hpManager.RecieveHpAndMpHUD(msg[1], connectionId);
     }
 
     private void SendExpToRoom(string[] msg, int connectionId)
     {
         NetworkPlayer player = server.GetPlayer(connectionId);
         Room room = player.room;
-        room.hpManaGer.ChangeExp(msg[1]);
+        room.hpManager.ChangeExp(msg[1]);
     }
 
     private void SendNewFireball(string message, int connectionId, string[] data)

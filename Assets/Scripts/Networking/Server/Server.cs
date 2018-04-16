@@ -177,15 +177,16 @@ public class Server : MonoBehaviour
                 break;
             case NetworkEventType.DisconnectEvent:
                 DeleteConnection(recConnectionId);
-                try
+                RoomManager rm = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>();
+                if (rm)
                 {
-                    RoomManager rm = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>();
-                    rm.DeletePlayerFromRoom(recConnectionId, GetPlayer(recConnectionId).room) ;
+                    rm.DeletePlayerFromRoom(recConnectionId, GetPlayer(recConnectionId).room);
                 }
-                catch
+                else
                 {
                     UnityEngine.Debug.LogError("No se encontró RoomManager en ServerScene. uwu");
                 }
+
                 UnityEngine.Debug.Log("Client " + recConnectionId + " disconnected");
                 break;
         }

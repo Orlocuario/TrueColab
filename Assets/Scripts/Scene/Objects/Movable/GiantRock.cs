@@ -36,11 +36,7 @@ public class GiantRock : MovableObject
         if (numberOfHits == 1 || numberOfHits == 3 || numberOfHits == 5)
         {
             LevelManager lManager = FindObjectOfType<LevelManager>();
-            lManager.ActivateNPCFeedback("Algo está bloqueando la roca... alguien debe poder abrirla");
-            if (numberOfHits == 6)
-            {
-                numberOfHits = 0;
-            }
+            lManager.ActivateNPCFeedback("Algo está bloqueando la roca... debe haber un modo de abrirla");
         }
     }
 }

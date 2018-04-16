@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class AttackTeleporter : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class AttackTeleporter : MonoBehaviour
 
     public Vector2 startPosition;
     public Vector2 targetPosition;
+    protected bool teleporting;
 
     #endregion
 
@@ -24,15 +26,25 @@ public class AttackTeleporter : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-
         AttackController attack = other.GetComponent<AttackController>();
+        if (teleporting)
+        {
+            return;
+        }
 
         if (attack)
         {
+            teleporting = true;
             TeleportAttack(attack);
+            StartCoroutine(WaitTillStopTeleporting());
         }
     }
 
+    private IEnumerator WaitTillStopTeleporting()
+    {
+        yield return new WaitForSeconds(.8f);
+        teleporting = false; 
+    }
     #endregion
 
 }

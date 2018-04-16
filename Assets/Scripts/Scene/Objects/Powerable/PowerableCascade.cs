@@ -7,12 +7,12 @@ public class PowerableCascade : PowerableObject
 
     protected override void DoYourPowerableThing()
     {
-        levelManager.TogglePowerableAnimatorsWithTag("waterFalling", true, "LavaCascade" + numberOfCascadeTag);
+        levelManager.TogglePowerableAnimatorsWithTag("WaterFalling", true, "LavaCascade" + numberOfCascadeTag);
     }
 
     protected override void UndoYourPowerableThing()
     {
-        levelManager.TogglePowerableAnimatorsWithTag("waterFalling", false, "LavaCascade" + numberOfCascadeTag);
+        levelManager.TogglePowerableAnimatorsWithTag("WaterFalling", false, "LavaCascade" + numberOfCascadeTag);
     }
 
     #endregion

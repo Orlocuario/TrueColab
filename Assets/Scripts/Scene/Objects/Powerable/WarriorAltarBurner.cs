@@ -15,7 +15,6 @@ public class WarriorAltarBurner : PowerableObject {
                     bObject.Burn();
                 }
             }
-
         }
 	}
 }

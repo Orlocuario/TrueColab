@@ -14,6 +14,8 @@ public class NPCtrigger : MonoBehaviour
 
     public bool freezesPlayer;
     public bool finishesScene;
+    public bool mustWaitBeforeSceneChange;
+    public float howMuchTimeIMustWait;
     public float feedbackTime;
 
     public bool forOnePlayerOnly;
@@ -51,7 +53,7 @@ public class NPCtrigger : MonoBehaviour
 
         CheckDecisionParameters();
         CheckPlayersNeededParameters();
-        
+
     }
 
     #endregion
@@ -103,8 +105,11 @@ public class NPCtrigger : MonoBehaviour
         if (GameObjectIsPlayer(other.gameObject))
         {
             CheckIfEndsWithEndOfScene();
-            CheckIfForOnePlayerOnly(other.gameObject);
-
+            if (forOnePlayerOnly)
+            {
+                CheckIfForOnePlayerOnly(other.gameObject);
+                return;
+            }
             if (freezesPlayer)
             {
                 levelManager.localPlayer.StopMoving();
@@ -178,19 +183,16 @@ public class NPCtrigger : MonoBehaviour
 
     protected void CheckIfForOnePlayerOnly(GameObject player)
     {
-        if (forOnePlayerOnly)
+        if (player.GetComponent<PlayerController>().GetType().Equals(FeedBackPlayer.GetType()))
         {
-            if (player.GetComponent<PlayerController>().GetType().Equals(FeedBackPlayer.GetType())) 
-            {
-                DestroyMyCollider();
-                ReadNextFeedback();
-            }
-            else
-            {
-                return;
-            }
+            DestroyMyCollider();
+            ReadNextFeedback();
+            return;
         }
-
+        else
+        {
+            return;
+        }
     }
 
     protected void DestroyMyCollider()
@@ -240,6 +242,11 @@ public class NPCtrigger : MonoBehaviour
 
         if (finishesScene)
         {
+            if (mustWaitBeforeSceneChange)
+            {
+                StartCoroutine(WaitBeforeChangeScene());
+            }
+
             levelManager.GoToNextScene();
         }
 
@@ -266,6 +273,12 @@ public class NPCtrigger : MonoBehaviour
     {
         yield return new WaitForSeconds(feedbackTime);
         ReadNextFeedback();
+    }
+
+    private IEnumerator WaitBeforeChangeScene()
+    {
+        yield return new WaitForSeconds(howMuchTimeIMustWait);
+        levelManager.GoToNextScene();
     }
 
     #endregion

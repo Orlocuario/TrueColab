@@ -115,12 +115,6 @@ public class MovableObject : MonoBehaviour
             return;
         }
 
-        // Counter the force of every other game object.
-        if (!GameObjectIsPunch(collision.gameObject))
-        {
-            Rigidbody2D otherRb2d = collision.gameObject.GetComponent<Rigidbody2D>();
-            rgbd.AddForce(-otherRb2d.velocity);
-        }
 
     }
 
@@ -179,6 +173,13 @@ public class MovableObject : MonoBehaviour
     }
 
     #endregion
+
+    protected IEnumerator WaitForAnimation()
+    {
+        yield return new WaitForSeconds(2);
+
+        sceneAnimator.SetBool("Moving", false, gameObject);
+    }
 
     #region Messaging
 

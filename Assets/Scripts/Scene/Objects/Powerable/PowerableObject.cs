@@ -322,9 +322,9 @@ public class PowerableObject : MonoBehaviour
                     ActivatePower(power);
                     return true;
                 }
-
             }
         }
+
         else
         {
             Debug.LogError("This PowerableObject.ActivationType is 'Power' but has no caster set.");
@@ -359,22 +359,24 @@ public class PowerableObject : MonoBehaviour
 
     protected void OnTriggerExit2D(Collider2D collision)
     {
-
         if (collision.GetComponent<MagePoweredParticles>())
         {
-            if (powered)
+            foreach (Power power in powers)
             {
-                shutdown = true;
-                return;
+                if (power.activationType.Equals(ActivationType.ByParticle))
+                {
+                    shutdown = true;
+                    return;
+                }
             }
-        }
 
+        }
         if (collision.GetComponent<PlayerController>())
         {
             CheckIfPlayerAlreadyLeft(collision.gameObject);
 
             PlayerController player = collision.GetComponent<PlayerController>();
-            if (player && player.availablePowerable == gameObject)
+            if (player.availablePowerable == gameObject)
             {
                 player.availablePowerable = null;
                 if (powered)
@@ -383,9 +385,7 @@ public class PowerableObject : MonoBehaviour
                 }
             }
         }
-
     }
-
 
     #endregion
 
@@ -456,9 +456,9 @@ public class PowerableObject : MonoBehaviour
         int i = player.playerId;
         if (playerControllers[i] == null)
         {
-            for (int j = 0; j <= powers.Length; j++)
+            for (int j = 0; j < powers.Length; j++)
             {
-                CheckPowerActivationType(powers[j].activationType, playerControllers[i]);
+                CheckPowerActivationType(powers[j].activationType, player);
             }
 
         }
@@ -495,10 +495,12 @@ public class PowerableObject : MonoBehaviour
         {
             case ActivationType.Power:
                 {
-                    playerControllers[pController.playerId] = pController;
+                    int id = pController.playerId;
+                    playerControllers[id] = pController;
                     pController.availablePowerable = gameObject;
                 }
                 break;
+
             case ActivationType.ByParticle:
                 {
                     break;
@@ -507,8 +509,9 @@ public class PowerableObject : MonoBehaviour
                 {
                     break;
                 }
+            default:
+                break;
         }
-
     }
 
     protected void CheckIfPlayerAlreadyLeft(GameObject playerObject)
@@ -518,7 +521,6 @@ public class PowerableObject : MonoBehaviour
         if (playerControllers[i] != null)
         {
             playerControllers[i] = null;
-            player.availablePowerable = null;
         }
         else
         {

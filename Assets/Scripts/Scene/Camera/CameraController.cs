@@ -82,7 +82,7 @@ public class CameraController : MonoBehaviour
                 break;
 
             case CameraState.Backwards:
-                MoveBackwards();
+                MoveNormal();
                 break;
 
             case CameraState.Zoomed:    // Por qué aquí no hay nada???
@@ -249,7 +249,7 @@ public class CameraController : MonoBehaviour
                 SetNofollowUp();
                 break;
             case CameraState.Backwards:
-                MoveBackwards();
+                SetBackwardsCamera();
                 break;
 
             default:
@@ -289,7 +289,7 @@ public class CameraController : MonoBehaviour
         thisCamera.orthographicSize = movement.ortographic_size;
         transform.position = new Vector3(movement.target.transform.position.x, movement.target.transform.position.y, transform.position.z);
 
-        ToggleChat(movement.hideChat);
+        //ToggleChat(movement.hideChat);
         ToggleCanvas(movement.hideCanvas);
     }
 
@@ -316,7 +316,7 @@ public class CameraController : MonoBehaviour
 
     #region Utils
 
-    private void MoveBackwards()
+    private void SetBackwardsCamera()
     {
         currentState = CameraState.Backwards;
         followUp = -1f;
@@ -414,7 +414,11 @@ public class CameraController : MonoBehaviour
         thisCamera.orthographicSize = initialSize;
         currentState = CameraState.Normal;
 
-        target = levelManager.GetLocalPlayer();
+        if (levelManager.GetLocalPlayer() != null)
+        {
+            target = levelManager.GetLocalPlayer();
+        }
+
         smoothCamera = 3.9f;
         followAhead = .9f;
         followUp = 1f;
@@ -424,7 +428,7 @@ public class CameraController : MonoBehaviour
         globalFreezeTime = 70;
 
         ToggleCanvas(true);
-        ToggleChat(false);
+        //ToggleChat(false);
     }
 
     public void SetNewTarget(TriggerCamera.CameraMovementData cameraMovement)
@@ -441,23 +445,53 @@ public class CameraController : MonoBehaviour
         initialSize = 2.8f;
 
         ToggleCanvas(true);
-        ToggleChat(cameraMovement.hideCanvas);
+        //ToggleChat(cameraMovement.hideCanvas);
     }
 
 
 
-    private void ToggleChat(bool apagarChat)
+    /*private void ToggleChat(bool apagarChat)
     {
         if (apagarChat)
         {
-            panelChat.SetActive(false);
-            inputChat.SetActive(false);
+            if (panelChat.activeInHierarchy)
+            {
+                panelChat.SetActive(false);
+            }
+
+            if (inputChat.activeInHierarchy)
+            {
+                inputChat.SetActive(false);
+            }
         }
+
         else
         {
-            panelChat.SetActive(true);
-            inputChat.SetActive(true);
+            if (!panelChat.activeInHierarchy)
+            {
+                panelChat.SetActive(true);
+            }
+            if (!inputChat.activeInHierarchy)
+            {
+                inputChat.SetActive(true);
+            }
         }
+    }*/
+
+    private GameObject GetLocalPlayerMyself()
+    {
+        GameObject myHero;
+        PlayerController[] pControllers = FindObjectsOfType<PlayerController>();
+        for (int i = 0; i<pControllers.Length; i++)
+        {
+            if (pControllers[i].localPlayer)
+            {
+                myHero = pControllers[i].gameObject;
+                return myHero;
+            }
+        }
+
+        return levelManager.GetLocalPlayer();
     }
 
     private float WaitForCamera(float stepsToTarget, float freezeTime)

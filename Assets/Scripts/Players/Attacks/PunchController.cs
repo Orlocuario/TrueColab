@@ -66,6 +66,7 @@ public class PunchController : AttackController
 
     private new void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Im an Attack and i Collided with : " + collision.gameObject.name);
 
         if (CollidedWithEnemy(collision.gameObject))
         {

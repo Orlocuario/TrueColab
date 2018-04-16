@@ -86,13 +86,15 @@ public class PlayerController : MonoBehaviour
     protected bool connected;
     protected bool canMove;
     protected bool justJumped;
+    protected bool mustIgnoreCollisionWithVerde;
+    protected bool mustIgnoreCollisionWithRojo;
+    protected bool mustIgnoreCollisionWithAmarillo;
     protected float speedX;
     protected float speedY;
     protected CameraState cameraState;
 
 
     protected int debuger;
-
 
     #endregion
 
@@ -176,6 +178,7 @@ public class PlayerController : MonoBehaviour
             SendPowerDataToServer();
             playerHasReturned = false;
         }
+        CheckCollisionWithPlayers();
         Move();
         Attack();
         UsePower();
@@ -270,14 +273,42 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Move
-
-    protected void OnCollisionEnter2D(Collision2D collision)
+    
+    protected void CheckCollisionWithPlayers()
     {
-        Debug.Log(collision.gameObject.name);
+        if (mustIgnoreCollisionWithVerde)
+        {
+            GameObject verde = GameObject.Find("Verde");
+            if (verde)
+            {
+                IgnoreCollisionWithOnePlayerOnly(verde);
+                mustIgnoreCollisionWithVerde = false;
+            }
+        }
+
+        if (mustIgnoreCollisionWithRojo)
+        {
+            GameObject rojo = GameObject.Find("Rojo");
+            if (rojo)
+            {
+                IgnoreCollisionWithOnePlayerOnly(rojo);
+                mustIgnoreCollisionWithRojo = false;
+            }
+        }
+
+        if (mustIgnoreCollisionWithAmarillo)
+        {
+            GameObject amarillo = GameObject.Find("Amarillo");
+            if (amarillo)
+            {
+                IgnoreCollisionWithOnePlayerOnly(amarillo);
+                mustIgnoreCollisionWithRojo = false;
+            }
+        }
     }
+
     protected void Move()
     {
-
         isGrounded = IsItGrounded();
         if (IsJumping(isGrounded))
         {
@@ -616,10 +647,54 @@ public class PlayerController : MonoBehaviour
         GameObject player1 = GameObject.Find("Verde");
         GameObject player2 = GameObject.Find("Rojo");
         GameObject player3 = GameObject.Find("Amarillo");
-        Physics2D.IgnoreCollision(collider, player1.GetComponent<Collider2D>());
-        Physics2D.IgnoreCollision(collider, player2.GetComponent<Collider2D>());
-        Physics2D.IgnoreCollision(collider, player3.GetComponent<Collider2D>());
+
+        if (player1)
+        {
+            Physics2D.IgnoreCollision(collider, player1.GetComponent<Collider2D>());
+        }
+        else
+        {
+            mustIgnoreCollisionWithVerde = true; 
+        }
+
+        if (player2)
+        {
+            Physics2D.IgnoreCollision(collider, player2.GetComponent<Collider2D>());
+        }
+        else
+        {
+            mustIgnoreCollisionWithRojo = true; 
+        }
+        if (player3)
+        {
+            Physics2D.IgnoreCollision(collider, player3.GetComponent<Collider2D>());
+        }
+        else
+        {
+            mustIgnoreCollisionWithAmarillo = true; 
+        }
     }
+
+    public void IgnoreCollisionWithOnePlayerOnly(GameObject otherPlayer)
+    {
+        Collider2D[] myColliders = GetComponents<Collider2D>();
+        Collider2D[] otherColliders = otherPlayer.GetComponents<Collider2D>();
+
+        foreach (Collider2D myCollider in myColliders)
+        {
+            if (myCollider.isTrigger == false)
+            {
+                foreach (Collider2D otherCollider in otherColliders)
+                {
+                    if (otherCollider.isTrigger == false)
+                    {
+                        Physics2D.IgnoreCollision(myCollider, otherCollider, true);
+                    }
+                }
+            }
+        }
+    }
+
 
     #endregion
 
@@ -676,13 +751,21 @@ public class PlayerController : MonoBehaviour
         {
             directionY = 1;
             rb2d.gravityScale = 2.5f;
+            cameraState = CameraState.Normal; 
+            if (localPlayer)
+            {
+                SetCamera();
+            }
         }
         else
         {
             directionY = -1;
             rb2d.gravityScale = -1.5f;
             cameraState = CameraState.Backwards;
-            SetCamera();
+            if(localPlayer)
+            {
+                SetCamera();
+            }
         }
 
         transform.localScale = new Vector3(directionX, directionY, 1f);
@@ -710,7 +793,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void SetPowerState(bool active)
+    public virtual void SetPowerState(bool active)
     {
         justPowered = true;
         ToggleParticles(active);

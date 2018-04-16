@@ -9,7 +9,7 @@ public class KillingObject : MonoBehaviour
 
     protected LevelManager levelManager;
 
-    public ParticleSystem particles;
+    protected ParticleSystem particles;
     public bool activated;
     public int damage;
     public int hitsBeforeKilled;

@@ -178,8 +178,24 @@ public class PlayerTeleporter : MonoBehaviour
     private void HandleCase5()
     {
 
+
     }
 
+    // The ones from scene 2
+
+    private void HandleCase6()
+    {
+        GameObject engineerArrow = GameObject.Find("engineerArrowUp (Clone)");
+        Destroy(engineerArrow);
+        levelManager.InstatiateSprite("Arrows/engineerArrowRight", new Vector2(36.83f, -5.58f));
+    }
+
+    private void HandleCase7()
+    {
+        GameObject enginArrow = GameObject.Find("warriorArrowDown (Clone)");
+        Destroy(enginArrow);
+        levelManager.InstatiateSprite("Arrows/warriorArrowRight", new Vector2(35.95f, -6.3f));
+    }
 
     public bool CheckIfDidThing()
     {

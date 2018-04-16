@@ -15,7 +15,7 @@ public class Room
     public List<NetworkPlayer> players;
     public List<NetworkEnemy> enemies;
     public List<RoomSwitch> switchs;
-    public RoomHpMp hpManaGer;
+    public RoomHpMp hpManager;
     public RoomLogger log;
     public Server server;
 
@@ -49,7 +49,7 @@ public class Room
         players = new List<NetworkPlayer>();
         switchs = new List<RoomSwitch>();
         enemies = new List<NetworkEnemy>();
-        hpManaGer = new RoomHpMp(this);
+        hpManager = new RoomHpMp(this);
         if (logger == null)
         {
             log = new RoomLogger(this.id);
@@ -300,7 +300,7 @@ public class Room
         activatedSwitchGroups = new List<int>();
         enemies = new List<NetworkEnemy>();
         switchs = new List<RoomSwitch>();
-        hpManaGer = new RoomHpMp(this);
+        hpManager = new RoomHpMp(this);
 
     }
 

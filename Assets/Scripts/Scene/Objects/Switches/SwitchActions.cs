@@ -271,9 +271,9 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup0()
     {
-        GameObject platEngineer = levelManager.InstantiatePrefab("MovPlatform", new Vector2(13.3f, -1.6f));
-        levelManager.SetMovingObjectData(platEngineer, new Vector2(13.3f, -2.1f), new Vector2(13.3f, 0.5f), 1f, 1.5f, false);
-        levelManager.ShowFeedbackParticles("FBMageButt", new Vector2(13.2f, -1.1f), 3f);
+        GameObject platEngineer = levelManager.InstantiatePrefab("MovPlatform", new Vector2(13.63f, -1.96f));
+        levelManager.SetMovingObjectData(platEngineer, new Vector2(13.63f, -1.96f), new Vector2(13.63f, 0.5f), 1f, 1.5f, false);
+        levelManager.ShowFeedbackParticles("FBMageButt", new Vector2(13.63f, -1.96f), 3f);
     }
 
     private void HandlerGroup1()
@@ -285,7 +285,8 @@ public class SwitchActions : MonoBehaviour
         levelManager.DestroyObject("CajaSwitchFierro", .1f);
 		levelManager.DestroyObject("RejaEng", .1f);
 		levelManager.DestroyObject("SpikesDead", .1f);
-		levelManager.DestroyObject("LavaPool", .1f);
+        levelManager.DestroyObject("LavaPool", .1f);
+
 
         GameObject sueloMetal = GameObject.Find("SueloMetal");
         sueloMetal.AddComponent<PlatformEffector2D>();
@@ -307,6 +308,10 @@ public class SwitchActions : MonoBehaviour
         BendTree bendTree = FindObjectOfType<BendTree>();
 		bendTree.Fall();
 		Debug.Log ("Got Tree");
+
+        levelManager.InstatiateSprite("Arrows/engineerArrowUp", new Vector2(33.07f, -6.3f));
+        levelManager.InstatiateSprite("Arrows/mageArrowDown", new Vector2(35.16f, -6.3f));
+        levelManager.InstatiateSprite("Arrows/warriorArrowDown", new Vector2(35.95f, -6.3f));
 
     }
 
@@ -332,17 +337,12 @@ public class SwitchActions : MonoBehaviour
 		levelManager.SetMovingObjectData(platparaMage, startPos, endPos, 1f, 1.5f, false);
 
         /* Instantiate Arrow feedback y cambiar arrow de warrior*/
-        ChangeSprite spriteChanger = GameObject.Find("CartelCambiante").GetComponent<ChangeSprite>();
-        spriteChanger.SpriteChanger();
+        GameObject sprite = GameObject.Find("CartelCambiante");
+        Destroy(sprite);
 
-		levelManager.InstantiatePrefab("NPCForWarriorCave", new Vector2(71f, -19.4f));
-		levelManager.InstantiatePrefab("Ambientales/InstantiateCheckPoints", new Vector2(60.94f, -19.9f));
-		levelManager.InstatiateSprite("Arrows/warriorArrowLeft", new Vector2(70.7f, -20f));
-
-		levelManager.ShowFeedbackParticles("FBMageButt", new Vector2(72.86f, -19.3f), 4f);
 		levelManager.ShowFeedbackParticles("warriorFeedbackSmall", new Vector2(70.7f, -20f), 4f);
 
-		levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(82.64f, -18.55f), new Vector2(32.89f, -6.18f));
+		levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(82.64f, -18.55f), new Vector2(37.23f, -5.58f), true, 7);
     }
 
     private void HandlerGroup5()
@@ -746,6 +746,12 @@ public class SwitchActions : MonoBehaviour
         levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(110.69f, 42.8f));
         levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(109.82f, 42.8f));
 
+    }   
+
+    private void HandlerGroup63()       //ThisOneIsForScene3
+    {
+        GameObject burnableBoxes = GameObject.Find("CajasParaMage");
+        burnableBoxes.GetComponent<BurnableObject>().Burn();
     }
 
     #endregion

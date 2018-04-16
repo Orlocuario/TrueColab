@@ -52,6 +52,7 @@ TagManager:
   - ChangableLava2
   - LavaCascade3
   - BurnableBranches2
+  - LavaFalling
   layers:
   - Default
   - TransparentFX

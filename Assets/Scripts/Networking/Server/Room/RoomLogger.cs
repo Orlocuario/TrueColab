@@ -50,6 +50,14 @@ public class RoomLogger
         writer.Close();
     }
 
+    public void WriteTotalExp(int exp)
+    {
+        StreamWriter writer = GetWriter();
+        writer.WriteLine(GetTime() + " The players gathered " + exp + " experience points");
+        writer.Close();
+    }
+
+
     public void WritePoiIsReady(int playerID, string poiID)
     {
         StreamWriter writer = GetWriter();

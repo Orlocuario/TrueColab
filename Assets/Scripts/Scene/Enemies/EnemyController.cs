@@ -201,11 +201,6 @@ public class EnemyController : MonoBehaviour
         Vector2 playerPosition = player.transform.position;
         Vector2 attackForce = force;
 
-        // Only hit local players
-        if (!playerController.localPlayer)
-        {
-            return;
-        }
 
         // Don't hit protected players
         if (mage.ProtectedByShield(player))
@@ -224,11 +219,18 @@ public class EnemyController : MonoBehaviour
             }
         }
 
+        // Only hit local players
+        if (!playerController.localPlayer)
+        {
+            return;
+        }
+
         // If player is at the left side of the enemy push it to the left
         if (playerPosition.x < transform.position.x)
         {
             attackForce.x *= -1;
         }
+
 
         playerController.TakeDamage(damage, attackForce);
     }

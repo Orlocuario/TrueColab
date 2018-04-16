@@ -99,6 +99,23 @@ public class MageController : PlayerController
         }
     }
 
+    public override void SetPowerState(bool active)
+    {
+        base.SetPowerState(active);
+        if (active == false)
+        {
+            DamagingObject[] lavas = FindObjectsOfType<DamagingObject>();
+            foreach(DamagingObject lava in lavas)
+            {
+                if (lava.id > 0)
+                {
+                    lava.ChangeLavaIntoWater(false);
+                }
+            }
+        }
+    }
+
+
     protected void LoadShieldArea()
     {
         foreach (GameObject particle in particles)
