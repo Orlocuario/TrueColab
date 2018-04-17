@@ -257,7 +257,9 @@ public class SwitchActions : MonoBehaviour
             case 62:
                 HandlerGroup62();
                 break;
-
+            case 63:
+                HandlerGroup63();
+                break;
             default:
                 return;
         }
@@ -312,6 +314,7 @@ public class SwitchActions : MonoBehaviour
         levelManager.InstatiateSprite("Arrows/engineerArrowUp", new Vector2(33.07f, -6.3f));
         levelManager.InstatiateSprite("Arrows/mageArrowDown", new Vector2(35.16f, -6.3f));
         levelManager.InstatiateSprite("Arrows/warriorArrowDown", new Vector2(35.95f, -6.3f));
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(34.51f, -3.88f));
 
     }
 
@@ -751,7 +754,7 @@ public class SwitchActions : MonoBehaviour
     private void HandlerGroup63()       //ThisOneIsForScene3
     {
         GameObject burnableBoxes = GameObject.Find("CajasParaMage");
-        burnableBoxes.GetComponent<BurnableObject>().Burn();
+        burnableBoxes.GetComponent<ObjectsToDestroy>().BurnAllThisStuff();
     }
 
     #endregion

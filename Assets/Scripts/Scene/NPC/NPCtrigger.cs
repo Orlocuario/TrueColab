@@ -34,7 +34,6 @@ public class NPCtrigger : MonoBehaviour
 
     private NPCFeedback activeFeedback;
     private LevelManager levelManager;
-    public DecisionSystem dSystem;
 
     private int feedbackCount;
     private int playersArrived;
@@ -62,6 +61,7 @@ public class NPCtrigger : MonoBehaviour
 
     public void ReadNextFeedback()
     {
+
         // Always shut the last particles
         if (activeFeedback.particles && activeFeedback.particles.activeInHierarchy)
         {
@@ -110,6 +110,11 @@ public class NPCtrigger : MonoBehaviour
                 CheckIfForOnePlayerOnly(other.gameObject);
                 return;
             }
+
+            if (levelManager.isPlayingFeedback)
+            {
+                return;
+            }
             if (freezesPlayer)
             {
                 levelManager.localPlayer.StopMoving();
@@ -154,11 +159,7 @@ public class NPCtrigger : MonoBehaviour
         {
             if (playersNeeded == 0)
             {
-                Debug.LogError("this NPC has a decision system after the trigger but no number of players needed before starting");
-            }
-            if (!dSystem)
-            {
-                Debug.LogError("this NPC has needs a decision system to control");
+                Debug.LogError("the NPC system named: " + gameObject.name + "  has a decision system after the trigger but no number of players needed before starting");
             }
         }
     }
@@ -228,7 +229,7 @@ public class NPCtrigger : MonoBehaviour
 
     protected void EndFeedback()
     {
-
+        levelManager.isPlayingFeedback = false;
         if (freezesPlayer)
         {
             levelManager.localPlayer.ResumeMoving();
@@ -253,9 +254,10 @@ public class NPCtrigger : MonoBehaviour
         levelManager.ShutNPCFeedback(true);
         if (musntDie)
         {
-            UndestroyMyCollider();
+            StartCoroutine(WaitToBeActiveAgain());
             return;
         }
+
         Destroy(gameObject);
     }
 
@@ -273,6 +275,13 @@ public class NPCtrigger : MonoBehaviour
     {
         yield return new WaitForSeconds(feedbackTime);
         ReadNextFeedback();
+    }
+
+    private IEnumerator WaitToBeActiveAgain()
+    {
+        yield return new WaitForSeconds (15);
+        UndestroyMyCollider();
+        feedbackCount = 0;
     }
 
     private IEnumerator WaitBeforeChangeScene()

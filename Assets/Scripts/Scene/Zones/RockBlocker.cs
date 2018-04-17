@@ -20,7 +20,6 @@ public class RockBlocker : IgnoreCollisionWithAttacks
         Physics2D.IgnoreCollision(collider, player2.GetComponent<Collider2D>(), true);
         Physics2D.IgnoreCollision(collider, player3.GetComponent<Collider2D>(), true);
 
-        Debug.Log("llegué a esta mierda");
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)

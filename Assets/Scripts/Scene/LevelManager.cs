@@ -32,6 +32,8 @@ public class LevelManager : MonoBehaviour
     private Vector2[] playersLastPosition;
     public float waitToRespawn;
     public bool startsWithCutScene;
+    public bool isPlayingFeedback;
+
 
     private Image playerFaceImage;
     private Text NPCFeedbackText;
@@ -48,6 +50,7 @@ public class LevelManager : MonoBehaviour
         StorePlayers();
         StorePlayerControllers();
         playersLastPosition = new Vector2[3];
+        isPlayingFeedback = false;
 
         _ = new Utils();
 
@@ -140,6 +143,11 @@ public class LevelManager : MonoBehaviour
     {
         if (localPlayer)
         {
+            if (isPlayingFeedback)
+            {
+                return;
+            }
+            isPlayingFeedback = true;
             SetNPCText(message);
             ShutNPCFeedback(false);
         }
@@ -507,7 +515,7 @@ public class LevelManager : MonoBehaviour
         {
             NPCFeedbackText.text = "";
         }
-
+        isPlayingFeedback = false; 
         npcLog.SetActive(false);
     }
 

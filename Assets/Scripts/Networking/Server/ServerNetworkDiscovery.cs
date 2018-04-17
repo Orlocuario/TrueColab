@@ -54,7 +54,6 @@ public class ServerNetworkDiscovery : NetworkDiscovery
         }
 
         return connectionData;
-
     }
 
 }

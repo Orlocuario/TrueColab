@@ -183,7 +183,7 @@ public class PlayerController : MonoBehaviour
         Attack();
         UsePower();
         CheckPowerableState();
-        UseItem();
+        //UseItem();
     }
 
     #endregion
@@ -465,7 +465,7 @@ public class PlayerController : MonoBehaviour
 
     #region Item
 
-    public void UseItem()
+  /*  public void UseItem()
     {
         if (localPlayer)
         {
@@ -473,10 +473,10 @@ public class PlayerController : MonoBehaviour
 
             if (itemButtonPressed)
             {
-                Inventory.instance.UseItem(this);
+                Inventory.instance.SelectItem(this);
             }
         }
-    }
+    }*/
 
     #endregion
 

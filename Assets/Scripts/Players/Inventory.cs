@@ -60,6 +60,9 @@ public class Inventory : MonoBehaviour
     {
         if (selectedItem == null)
         {
+            LevelManager lManager = FindObjectOfType<LevelManager>();
+            lManager.ActivateNPCFeedback("No hay un item en esta casilla");
+            
             return;
         }
 
@@ -145,6 +148,9 @@ public class Inventory : MonoBehaviour
         selectedItemSlot.GetComponent<Image>().sprite = selectedItem.Value.sprite;
 
         ToggleSelectedItemPanel(true);
+        LevelManager lManager = FindObjectOfType<LevelManager>();
+        PlayerController pController = lManager.GetLocalPlayerController();
+        UseItem(pController);
     }
 
     public void UnselectItem()
