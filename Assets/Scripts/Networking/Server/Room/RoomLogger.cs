@@ -61,7 +61,6 @@ public class RoomLogger
     public void WritePoiIsReady(int playerID, string poiID)
     {
         StreamWriter writer = GetWriter();
-        WriteNewLine();
         TimeSpan spans = GetTimeAsDateTime().Subtract(lastPOIP);
         writer.WriteLine(GetTime() +" Poi number: " + poiID + " was reached by all the necessary players. Seconds spent reaching this POI from the last one was: " + spans.TotalSeconds);
         lastPOIP = GetTimeAsDateTime();

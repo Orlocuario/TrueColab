@@ -9,13 +9,15 @@ public class NPCtrigger : MonoBehaviour
     #region Attributes
 
     public bool teleport;
+    public Vector3 teleportTarget;
+
     public bool musntDie;
-    public Vector3 whereToRespawn;
+    public float timeForReactivation;
 
     public bool freezesPlayer;
     public bool finishesScene;
-    public bool mustWaitBeforeSceneChange;
-    public float howMuchTimeIMustWait;
+    public bool waitBeforeSceneChange;
+    public float timeBeforeSceneChange;
     public float feedbackTime;
 
     public bool forOnePlayerOnly;
@@ -159,7 +161,14 @@ public class NPCtrigger : MonoBehaviour
         {
             if (playersNeeded == 0)
             {
-                Debug.LogError("the NPC system named: " + gameObject.name + "  has a decision system after the trigger but no number of players needed before starting");
+                Debug.LogError("the NPC system named: " + gameObject.name + "  finishes Scene but no number of players needed were set before start");
+            }
+        }
+        if (musntDie)
+        {
+            if (timeForReactivation == 0)
+            {
+                Debug.LogError("the NPC system named: " + gameObject.name + "  needs a ReactivationTime");
             }
         }
     }
@@ -233,17 +242,18 @@ public class NPCtrigger : MonoBehaviour
         if (freezesPlayer)
         {
             levelManager.localPlayer.ResumeMoving();
+            freezesPlayer = false;
         }
 
         if (teleport)
         {
-            levelManager.localPlayer.respawnPosition = whereToRespawn;
+            levelManager.localPlayer.respawnPosition = teleportTarget;
             levelManager.Respawn();
         }
 
         if (finishesScene)
         {
-            if (mustWaitBeforeSceneChange)
+            if (waitBeforeSceneChange)
             {
                 StartCoroutine(WaitBeforeChangeScene());
             }
@@ -279,14 +289,14 @@ public class NPCtrigger : MonoBehaviour
 
     private IEnumerator WaitToBeActiveAgain()
     {
-        yield return new WaitForSeconds (15);
+        yield return new WaitForSeconds (timeForReactivation);
         UndestroyMyCollider();
         feedbackCount = 0;
     }
 
     private IEnumerator WaitBeforeChangeScene()
     {
-        yield return new WaitForSeconds(howMuchTimeIMustWait);
+        yield return new WaitForSeconds(timeBeforeSceneChange);
         levelManager.GoToNextScene();
     }
 

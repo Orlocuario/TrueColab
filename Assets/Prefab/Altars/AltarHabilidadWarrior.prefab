@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4686372170264074}
-  - component: {fileID: 60345456659251676}
   - component: {fileID: 58951275294649418}
   - component: {fileID: 114926848594538602}
   m_Layer: 9
@@ -625,27 +624,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.35655212
---- !u!60 &60345456659251676
-PolygonCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1005889111736680}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  m_Points:
-    m_Paths:
-    - - {x: -0.20838165, y: -0.16842318}
-      - {x: 0.18951416, y: -0.16918278}
-      - {x: 0.3873825, y: -0.35845947}
-      - {x: 0.38748932, y: -0.56800413}
-      - {x: -0.4063263, y: -0.5545125}
-      - {x: -0.40117645, y: -0.36467695}
+  m_Radius: 0.4
 --- !u!114 &114926848594538602
 MonoBehaviour:
   m_ObjectHideFlags: 1
