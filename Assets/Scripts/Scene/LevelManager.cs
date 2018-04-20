@@ -742,14 +742,17 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void TogglePowerableAnimatorsWithTag(string parameter, bool value, string tag)
+    public void PowerableToggleLavaIntoWater(string parameter, bool value, int damagingId)
     {
-        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag(tag);
+        LavaIntoWaterIdentifier[] lavas = FindObjectsOfType<LavaIntoWaterIdentifier>();
         SceneAnimator sceneAnimator = FindObjectOfType<SceneAnimator>();
 
-        foreach (GameObject animatedObject in gameObjects)
+        foreach (LavaIntoWaterIdentifier lava in lavas)
         {
-            sceneAnimator.SetBool(parameter, value, animatedObject);
+            if (lava.id == damagingId)
+            {
+                sceneAnimator.SetBool(parameter, value, lava.gameObject);
+            }
         }
     }
 

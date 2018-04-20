@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class PowerableForCascades : PowerableObject {
 
-    public int numberOfCascadeTag;
+    public int lavaId;
 
     protected override void DoYourPowerableThing()
     {
-        levelManager.TogglePowerableAnimatorsWithTag("WaterFalling", true, "LavaCascade" + numberOfCascadeTag);
+        levelManager.PowerableToggleLavaIntoWater("WaterFalling", true, lavaId);
     }
 
     protected override void UndoYourPowerableThing()
     {
-        levelManager.TogglePowerableAnimatorsWithTag("WaterFalling", false, "LavaCascade" + numberOfCascadeTag);
+        levelManager.PowerableToggleLavaIntoWater("WaterFalling", false, lavaId);
     }
 
 }

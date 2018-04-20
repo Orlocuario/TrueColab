@@ -12,6 +12,7 @@ public class PositiveFeedBackInstantiator : MonoBehaviour
     public Vector2[] instantiationVectors;
     public string[] prefabNames;
     public string[] playersNeeded;
+    public bool mustDoSomething;
 
 
     private void Start()
@@ -49,10 +50,36 @@ public class PositiveFeedBackInstantiator : MonoBehaviour
 
                                 beenUsed = true;
                             }
+
+                            if (mustDoSomething)
+                            {
+                                DoYourThing();
+                            }
                         }
                     }
                 }
             }
         }
+    }
+
+    private void DoYourThing()
+    {
+        switch(gameObject.name)
+        {
+            case "PositiveFeedBackForGreenRune":
+                HandleCase1();
+                break;
+            default:
+                return;
+        }
+    }
+
+    private void HandleCase1()
+    {
+        GameObject cartelVerde = GameObject.Find("mageArrowLeft4Others");
+        GameObject helpOthersFeedback = GameObject.Find("ActivateNPCForMage4");
+
+        Destroy(helpOthersFeedback);
+        Destroy(cartelVerde);
     }
 }

@@ -49,6 +49,7 @@ public class EndOfScene : MonoBehaviour
             {
                 Debug.Log(other.gameObject.name + " reached the end of the scene");
                 playersWhoArrived++;
+                Debug.Log("Players who arrived: " + playersWhoArrived);
 
                 if (playersWhoArrived == playersToArrive)
                 {

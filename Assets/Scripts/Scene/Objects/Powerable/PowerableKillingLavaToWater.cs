@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerableForLavaIntoWater : PowerableObject
+public class PowerableKillingLavaToWater : PowerableObject
 {
 
     public int id;

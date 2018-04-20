@@ -178,6 +178,7 @@ public class NPCtrigger : MonoBehaviour
         if (finishesScene)
         {
             playersArrived++;
+            Debug.Log("playersArrived: " + playersArrived);
             if (playersArrived == playersNeeded)
             {
                 DestroyMyCollider();

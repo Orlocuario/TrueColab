@@ -431,6 +431,13 @@ public class SwitchActions : MonoBehaviour
 		GameObject maquinaEngranajesYellow = levelManager.FindGameObject("DesplazarEngranajes");
 		GameObject plataformaBajoEngranajes = levelManager.FindGameObject("PlataformaMovilYellow");
 		GameObject firstSpikesYellow = levelManager.FindGameObject("FirstSpikes");
+        GameObject spikesFeedBack = levelManager.FindGameObject("ActivateNPCSpikes");
+
+        if (spikesFeedBack)
+        {
+            Destroy(spikesFeedBack);
+        }
+
 
         Debug.Log("Getting Movement Controllers");
         OneTimeMovingObject moverEngranajes = maquinaEngranajesYellow.GetComponent<OneTimeMovingObject>();
@@ -624,7 +631,7 @@ public class SwitchActions : MonoBehaviour
 		levelManager.InstantiatePortal("MageTeleporter", new Vector2(75.27f, -5.48f), new Vector2(84f, -5.5f)); //Solucionar Vectores}
 		levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(66.47f, -12.66f), new Vector2(83f, -5.5f)); //Solucionar Vectores}
 		levelManager.InstantiatePortal("EnginTeleporter", new Vector2(63.98f, 13.31f), new Vector2(82f, -5.5f)); //Solucionar Vectores}
-		levelManager.TogglePowerableAnimatorsWithTag ("WaterFalling", true, "LavaCascade3Final");
+		levelManager.PowerableToggleLavaIntoWater ("WaterFalling", true, 4);
     }
 
     // Switches Scene 4
