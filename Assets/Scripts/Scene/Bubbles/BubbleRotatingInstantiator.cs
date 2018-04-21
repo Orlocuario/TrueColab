@@ -26,7 +26,8 @@ public class BubbleRotatingInstantiator : MonoBehaviour
     public bool rotatesInStart;
     public bool playerHasReturned;
     public bool isWorking;
-
+    public bool hasFeedBack;
+    public NPCtrigger feedBack;
 
 
     // Variable Auxiliar, para hacer un swap tenís que tener una variable auxiliar. 
@@ -122,6 +123,10 @@ public class BubbleRotatingInstantiator : MonoBehaviour
 			isWorking = true; 
 			StartRotation ();
 			gearsActivated = 0;
+            if (hasFeedBack)
+            {
+                
+            }
 		}
 	}
     private void ChangeBubbleNamesOrder()

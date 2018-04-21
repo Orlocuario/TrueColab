@@ -272,15 +272,15 @@ public class Server : MonoBehaviour
             string msg;
             if (player.id == 0)
             {
-                msg = "Mage: Has Disconnected";
+                msg = "Verde se ha Desconectado";
             }
             else if (player.id == 1)
             {
-                msg = "Warrior: Has Disconnected";
+                msg = "Rojo se ha Desconectado";
             }
             else
             {
-                msg = "Engineer: Has Disconnected";
+                msg = "Amarillo se ha Desconectado";
             }
 
             if (player.controlOverEnemies == true)

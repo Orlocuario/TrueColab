@@ -58,7 +58,7 @@ public class EndOfScene : MonoBehaviour
 
                 else if (other.gameObject.GetComponent<PlayerController>().localPlayer)
                 {
-                    levelManager.ActivateNPCFeedback("Asegúrate de que lleguen todos tus amigos");
+                    levelManager.ActivateNPCFeedback("Asegúrate de que lleguen los demás");
                 }
             }
             

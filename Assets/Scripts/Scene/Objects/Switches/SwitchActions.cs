@@ -316,6 +316,8 @@ public class SwitchActions : MonoBehaviour
         levelManager.InstatiateSprite("Arrows/warriorArrowDown", new Vector2(35.95f, -6.3f));
         levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(34.51f, -3.88f));
 
+        GameObject sFeedback = GameObject.Find("ActivateNPCForAllSwitches");
+        Destroy(sFeedback);
     }
 
     private void HandlerGroup3()
@@ -472,7 +474,7 @@ public class SwitchActions : MonoBehaviour
             TriggerCamera tCamera = GameObject.Find("TriggerCameraForEnginScene3").GetComponent<TriggerCamera>();
             camera.ChangeState(CameraState.TargetZoom, tCamera.movements[0]);
         }
-
+        levelManager.DestroyObject("ActivateNPCForEnginDestroyabe", .1f);
         levelManager.DestroyObject("CajaSwitchFierro", 2.5f);
         levelManager.InstantiatePortal("EnginTeleporter", new Vector2(8.63f, 18.09f), new Vector2(14.1f, 15.7f));
     }
@@ -647,10 +649,40 @@ public class SwitchActions : MonoBehaviour
         levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(-24.416f, -1.56f), new Vector2(-20.7f, 0.5f), true, 1);
         BurnableObject treeToBurn = GameObject.Find("TreeAltarHolder").GetComponent<BurnableObject>();
         treeToBurn.Burn();
+
+        GameObject mageFeedback = GameObject.Find("ActivateNPCForGreen2");
+        if (mageFeedback)
+        {
+            Destroy(mageFeedback);
+        }
     }
 
     private void HandlerGroup52()
     {
+        GameObject bInstantiator = GameObject.Find("BubbleExitUp");
+        if (bInstantiator)
+        {
+            BubbleRotatingInstantiator bIController = bInstantiator.GetComponent<BubbleRotatingInstantiator>();
+            bIController.GearActivation();
+        }
+
+        GameObject kZone = GameObject.Find("KillZoneForAll");
+        if (kZone)
+        {
+            Destroy(kZone);
+        }
+
+        GameObject kZoneFB = GameObject.Find("ActivateNPCKillingObject");
+        if (kZoneFB)
+        {
+            Destroy(kZoneFB);
+        }
+
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(-32.05f, 7.68f));
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(-32.05f, 7.05f));
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(-32.80f, 7.33f));
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(-31.30f, 7.33f));
+
         // This one is for the group of Switches in the warriorGearZone;
     }
 
