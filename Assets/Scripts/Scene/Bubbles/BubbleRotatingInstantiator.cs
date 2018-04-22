@@ -26,8 +26,8 @@ public class BubbleRotatingInstantiator : MonoBehaviour
     public bool rotatesInStart;
     public bool playerHasReturned;
     public bool isWorking;
-    public bool hasFeedBack;
-    public NPCtrigger feedBack;
+    public bool activatesFeedback;
+    public GameObject feedbackToggle;
 
 
     // Variable Auxiliar, para hacer un swap tenís que tener una variable auxiliar. 
@@ -96,6 +96,10 @@ public class BubbleRotatingInstantiator : MonoBehaviour
 
     protected void StartRotation()
     {
+        if (activatesFeedback)
+        {
+            FeedbackToggle(true);
+        }
         StartCoroutine(RotateObject(angle, new Vector3(0, 0, 1), rotationTime));
     }
 
@@ -123,10 +127,6 @@ public class BubbleRotatingInstantiator : MonoBehaviour
 			isWorking = true; 
 			StartRotation ();
 			gearsActivated = 0;
-            if (hasFeedBack)
-            {
-                feedBack.ReadNextFeedback();
-            }
 		}
 	}
     private void ChangeBubbleNamesOrder()
@@ -183,4 +183,9 @@ public class BubbleRotatingInstantiator : MonoBehaviour
 			Client.instance.SendMessageToServer(message, secure);
 		}
 	}
+
+    private void FeedbackToggle(bool active)
+    {
+        feedbackToggle.GetComponent<FeedbackToggle>().ToggleFeedbacks(active);
+    }
 }
