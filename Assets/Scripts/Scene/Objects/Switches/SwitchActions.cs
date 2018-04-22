@@ -765,19 +765,19 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup59()
     {
-        levelManager.InstantiatePortal("MageTeleporter", new Vector2(39.87f, 37f), new Vector2(80f, 41f));
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(39.87f, 37f), new Vector2(80f, 41f));
 
     }
 
     private void HandlerGroup60()
     {
-        levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(69.68f, 39.41f), new Vector2(80f, 41f));
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(69.68f, 39.41f), new Vector2(80f, 41f));
 
     }
 
     private void HandlerGroup61()
     {
-        levelManager.InstantiatePortal("EnginTeleporter", new Vector2(80.62f, 31.32f), new Vector2(80f, 41f));
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(80.62f, 31.32f), new Vector2(80f, 41f));
 
     }
 

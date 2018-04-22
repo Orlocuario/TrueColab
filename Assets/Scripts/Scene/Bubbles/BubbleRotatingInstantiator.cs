@@ -125,7 +125,7 @@ public class BubbleRotatingInstantiator : MonoBehaviour
 			gearsActivated = 0;
             if (hasFeedBack)
             {
-                
+                feedBack.ReadNextFeedback();
             }
 		}
 	}
