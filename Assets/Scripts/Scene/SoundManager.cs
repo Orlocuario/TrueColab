@@ -12,14 +12,14 @@ public class GameSounds
     public static string PlayerTakeDamage;
 
     // Attacks
-    public static string PlayerAttack = "watersound";
+    public static string PlayerAttack;
     public static string PlayerAttackEnhanced;
     public static string PlayerAttackSuperEnhanced;
 
     // Powers
-    public static string MagePower;
-    public static string WarriorPower;
-    public static string EngineerPower;
+    public static string MagePower = "VerdeMagic";
+    public static string WarriorPower = "RojoMagic";
+    public static string EngineerPower = "AmarilloMagic";
 
     // Items
     public static string GrabItem;
@@ -103,10 +103,9 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySound(GameObject gameObject, string soundName, bool loops)
     {
-
         AudioClip audioClip = Resources.Load("AudioClips/" + soundName) as AudioClip;
 
-        if(audioClip == null)
+        if (audioClip == null)
         {
             Debug.LogError("Sound " + soundName + "does not exist");
             return;
@@ -117,11 +116,29 @@ public class SoundManager : MonoBehaviour
         source.Play();
     }
 
+    public void StopSound(GameObject gameObject, string soundName)
+    {
+        if (gameObject.GetComponent<AudioSource>())
+        {
+            AudioSource[] sSources = gameObject.GetComponents<AudioSource>();
+            foreach (AudioSource aSource in sSources)
+            {
+                if (aSource.clip.name == soundName)
+                {
+                    if (aSource.isPlaying)
+                    {
+                        aSource.Stop();
+                    }
+                }
+            }
+        }
+    }
 
     private AudioSource GetAudioSource(GameObject gameObject, AudioClip audioClip, bool loops)
     {
         AudioSource[] sources = gameObject.GetComponents<AudioSource>();
         AudioSource source = null;
+        bool foundMySource = false;
 
         if (sources != null && sources.Length > 0)
         {
@@ -130,10 +147,16 @@ public class SoundManager : MonoBehaviour
                 if (sources[i].clip.Equals(audioClip))
                 {
                     source = sources[i];
+                    foundMySource = true;
                     break;
                 }
             }
 
+            if (foundMySource == false)
+            {
+                source = gameObject.AddComponent<AudioSource>();
+                source.clip = audioClip;
+            }
         }
         else
         {

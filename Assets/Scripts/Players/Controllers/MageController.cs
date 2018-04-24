@@ -104,6 +104,9 @@ public class MageController : PlayerController
         base.SetPowerState(active);
         if (active == false)
         {
+            SoundManager sManager = FindObjectOfType<SoundManager>();
+            sManager.StopSound(gameObject, GameSounds.MagePower);
+
             DamagingObject[] lavas = FindObjectsOfType<DamagingObject>();
             foreach(DamagingObject lava in lavas)
             {
@@ -115,6 +118,11 @@ public class MageController : PlayerController
                     }
                 }
             }
+        }
+        if (active)
+        {
+            SoundManager sManager = FindObjectOfType<SoundManager>();
+            sManager.PlaySound(gameObject, GameSounds.MagePower, true);
         }
     }
 
