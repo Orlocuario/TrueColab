@@ -265,12 +265,14 @@ public class ClientMessageHandler
             {
                 Debug.Log("Now I Have a Local Player!!!!!");
             }
+
             localPlayer.controlOverEnemies = control;
             
 
             if (control)
             {
                 client.StartFirstPlan();
+                localPlayer.PlayMusic();
             }
 
         }
@@ -622,6 +624,7 @@ public class ClientMessageHandler
             {
                 client.StartFirstPlan();
                 EnemiesRegisterOnRoom();
+                playerController.PlayMusic();
             }
         }
     }

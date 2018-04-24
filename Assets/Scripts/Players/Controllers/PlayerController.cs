@@ -151,7 +151,6 @@ public class PlayerController : MonoBehaviour
         InitializeParticles();
         IgnoreCollisionWithObjectsWhoHateMe();
         IgnoreCollisionBetweenPlayers();
-        CheckIfIPlayerMusic(); // TODO: Remove this or change sound if you want music
 
     }
 
@@ -571,7 +570,7 @@ public class PlayerController : MonoBehaviour
             decisionOff = null;
         }
     }
-
+    
     public void ResetTransform()
     {
         transform.parent = null;
@@ -982,12 +981,9 @@ public class PlayerController : MonoBehaviour
 
     #region Animations
 
-    protected void CheckIfIPlayerMusic()
+    public void PlayMusic()
     {
-        if (controlOverEnemies)
-        {
-            SendMessageToServer("WhichMusicShloudIPlay");
-        }
+        SendMessageToServer("WhichMusicShloudIPlay");
     }
 
     public void HandleMusicAssignment(string sceneName)
