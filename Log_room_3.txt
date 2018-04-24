@@ -1,0 +1,9 @@
+11:51:10 Player 0 entered poi with ID: 23
+11:51:10 Player 0 entered poi with ID: 23
+11:51:10 Player 0 entered poi with ID: 23
+11:51:10 Poi number: 23 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 2.9819819
+11:57:34 Player 0 entered poi with ID: 23
+11:57:34 Player 0 entered poi with ID: 23
+11:57:34 Player 0 entered poi with ID: 23
+11:57:34 Poi number: 23 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 384.527905
+11:57:35 Player 0 entered poi with ID: 2

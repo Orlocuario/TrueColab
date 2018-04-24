@@ -109,7 +109,10 @@ public class MageController : PlayerController
             {
                 if (lava.id > 0)
                 {
-                    lava.ChangeLavaIntoWater(false);
+                    if (lava.turnedIntoWater)
+                    {
+                        lava.ChangeLavaIntoWater(false);
+                    }
                 }
             }
         }

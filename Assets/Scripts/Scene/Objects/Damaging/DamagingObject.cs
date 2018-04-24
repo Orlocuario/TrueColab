@@ -17,6 +17,7 @@ public class DamagingObject : MonoBehaviour
     public int id;
     protected bool alreadyEntered;
     protected bool alreadyLeft;
+    public bool turnedIntoWater;
 
 
     #endregion
@@ -183,6 +184,15 @@ public class DamagingObject : MonoBehaviour
                 sAnimator.SetBool("WaterFalling", boolValue, lava.gameObject);
                 StartCoroutine(WaitForLavaAnimator());
             }
+        }
+
+        if (boolValue)
+        {
+            turnedIntoWater = true;
+        }
+        else if (boolValue == false)
+        {
+            turnedIntoWater = false;
         }
     }
 

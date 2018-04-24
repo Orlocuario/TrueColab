@@ -78,7 +78,7 @@ public class Room
         NetworkPlayer newPlayer = new NetworkPlayer(connectionId, GetPlayerId(), this, address);
         players.Add(newPlayer);
         SetControlEnemies(newPlayer);
-      
+
         if (IsFull())
         {
             Debug.Log("Full room");
@@ -309,6 +309,26 @@ public class Room
     #endregion
 
     #region Utils
+
+    public float[] GetStartPosition()
+    {
+        float[] coordenadas = new float[2];
+        switch (sceneToLoad)
+        {
+            case ("Escena1"):
+                coordenadas[0] = 5.6f;
+                coordenadas[1] = 2;
+                break;
+            case ("Escena2"):
+                coordenadas[0] = 7f;
+                coordenadas[1] = 2;
+                break;
+            default:
+                Debug.Log("No existe escena " + sceneToLoad);
+                break;
+        }
+        return coordenadas;
+    }
 
     private int GetPlayerId()
     {

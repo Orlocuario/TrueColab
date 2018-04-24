@@ -46,8 +46,8 @@ public class NetworkPlayer
         pressingJump = false;
         pressingRight = false;
         pressingLeft = false;
-        positionX = 0;  
-        positionY = 0;
+        positionX = room.GetStartPosition()[0];  
+        positionY = room.GetStartPosition()[1];
         speedX = 0;
         directionX = 1;
         directionY = 1;
@@ -58,6 +58,11 @@ public class NetworkPlayer
     {
         GameObject roomManager = GameObject.FindGameObjectWithTag("RoomManager");
         roomManager.GetComponent<RoomManager>().AddNewPlayerToRoom(getPlayerEnum(), connectionId, room);
+
+        if (!roomManager)
+        {
+            UnityEngine.Debug.LogError("No se encontró RoomManager en ServerScene. uwu 4");
+        }
     }
     #endregion
 

@@ -1,0 +1,135 @@
+11:51:03 Player 0 entered poi with ID: 23
+11:51:03 Player 0 entered poi with ID: 23
+11:51:04 Player 0 entered poi with ID: 23
+11:51:04 Poi number: 23 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 2.899355
+11:51:27 Player 0 is going right from (97.94,-6.293846)
+
+11:51:27 Player 0 jumped from (97.96031,-6.293846)
+
+11:51:27 Player 0 jumped from (98.46208,-5.144769)
+
+11:51:27 Player 0 attacked
+
+11:51:27 Player 0 is going left from (98.46208,-5.830005)
+
+11:51:28 Player 0 is going right from (97.37125,-6.293846)
+
+11:51:28 Player 0 attacked
+
+11:51:29 Player 0 is going left from (99.29861,-6.293846)
+
+11:51:29 Player 0 attacked
+
+11:51:30 Player 0 is going right from (98.661,-6.293846)
+
+11:51:30 Player 0 attacked
+
+11:51:30 Player 0 is going left from (99.63506,-6.293846)
+
+11:51:31 Player 0 is going right from (98.21239,-6.293846)
+
+11:51:31 Player 0 attacked
+
+11:51:32 The players gathered 0 experience points
+11:51:52 Player 0 stopped using his power
+
+11:52:50 Player 0 entered poi with ID: 23
+11:52:50 Player 0 entered poi with ID: 23
+11:52:50 Player 0 entered poi with ID: 23
+11:52:50 Poi number: 23 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 106.592803
+11:56:08 Player 0 entered poi with ID: 23
+11:56:08 Player 0 entered poi with ID: 23
+11:56:08 Player 0 entered poi with ID: 23
+11:56:08 Poi number: 23 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 197.8537193
+11:56:09 Player 0 entered poi with ID: 2
+11:56:11 Player 0 is going right from (7,-1.794024)
+
+11:56:13 Player 0 is going left from (7.242988,-1.794024)
+
+11:56:16 Player 0 is going right from (7.154379,-1.794024)
+
+11:56:18 Player 0 is going left from (7.172608,-1.794024)
+
+11:56:18 Player 0 is going right from (7.126227,-1.794024)
+
+11:56:19 Player 0 is going left from (8.154279,-1.794024)
+
+11:56:19 Player 0 is going left from (8.133975,-1.794024)
+
+11:56:20 Player 0 is going right from (6.403467,-2.971224)
+
+11:56:22 Player 0 attacked
+
+11:56:22 Player 0 attacked
+
+11:56:23 Player 0 attacked
+
+11:56:24 Player 0 attacked
+
+11:56:25 Player 0 attacked
+
+11:56:26 Player 0 attacked
+
+11:56:27 Player 0 attacked
+
+11:56:27 Player 0 attacked
+
+11:56:28 Player 0 attacked
+
+11:56:29 Player 0 attacked
+
+11:56:30 Player 0 is going left from (5.256098,-4.112928)
+
+11:56:31 Player 0 jumped from (5.129643,-4.265079)
+
+11:56:32 Player 0 attacked
+
+11:56:33 Player 0 jumped from (5.129643,-4.265079)
+
+11:56:33 Player 0 attacked
+
+11:56:34 Player 0 jumped from (5.129643,-4.265079)
+
+11:56:34 Player 0 attacked
+
+11:56:35 Player 0 jumped from (5.129643,-4.265079)
+
+11:56:36 Player 0 attacked
+
+11:56:36 Player 0 jumped from (5.129643,-4.265079)
+
+11:56:37 Player 0 attacked
+
+11:56:38 Player 0 is going right from (5.129643,-4.265079)
+
+11:56:40 Player 0 jumped from (5.129643,-4.265079)
+
+11:56:40 Player 0 is going right from (6.009598,-3.077483)
+
+11:56:40 Player 0 jumped from (6.717809,-3.677192)
+
+11:56:41 Player 0 is going right from (7.617808,-2.454392)
+
+11:56:41 Player 0 is going right from (7.617808,-3.677154)
+
+11:57:09 Player 0 entered poi with ID: 23
+11:57:09 Player 0 entered poi with ID: 23
+11:57:09 Player 0 entered poi with ID: 23
+11:57:09 Poi number: 23 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 61.1688344
+11:57:09 Player 0 entered poi with ID: 2
+11:57:34 Player 0 entered poi with ID: 2
+12:06:09 Player 1 entered poi with ID: 23
+12:06:09 Player 1 entered poi with ID: 23
+12:06:09 Player 1 entered poi with ID: 23
+12:06:09 Poi number: 23 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 8.8970357
+12:06:16 Player 1 is going right from (97.94,-6.293846)
+
+12:06:17 Player 1 is going right from (98.40938,-6.293846)
+
+12:06:18 Player 1 is going left from (99.77597,-6.293846)
+
+12:06:19 Player 1 is going right from (98.97014,-6.293846)
+
+12:06:20 Player 1 is going left from (100.1685,-6.293846)
+
+12:06:21 The players gathered 0 experience points

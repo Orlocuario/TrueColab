@@ -136,6 +136,10 @@ public class ServerMessageHandler
             case "ReadyPoi":
                 HandleReadyPoi(msg, connectionId);
                 break;
+            case "IsThisExpEnough":
+                HandleExpQuestion(msg, connectionId);
+                break;
+
             default:
                 break;
         }
@@ -445,6 +449,14 @@ public class ServerMessageHandler
         NetworkPlayer player = server.GetPlayer(connectionId);
         Room room = player.room;
         room.hpManager.ChangeExp(msg[1]);
+    }
+
+    private void HandleExpQuestion(string[] msg, int connectionId)
+    {
+        NetworkPlayer player = server.GetPlayer(connectionId);
+        Room room = player.room;
+        int exp = room.hpManager.currentExp;
+        room.SendMessageToAllPlayers("ExpAnswer/" + exp + "/" + msg[1], true);
     }
 
     private void SendNewFireball(string message, int connectionId, string[] data)

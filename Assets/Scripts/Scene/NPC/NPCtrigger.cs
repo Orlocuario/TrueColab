@@ -23,6 +23,8 @@ public class NPCtrigger : MonoBehaviour
     public bool forOnePlayerOnly;
     public PlayerController FeedBackPlayer;
 
+    public int expRequired;
+    public bool requiresExp;
 
 
     [System.Serializable]
@@ -40,6 +42,7 @@ public class NPCtrigger : MonoBehaviour
     private int feedbackCount;
     private int playersArrived;
     public int playersNeeded;
+    public string whatToDo;
 
     #endregion
 
@@ -52,9 +55,9 @@ public class NPCtrigger : MonoBehaviour
         feedbackCount = 0;
         playersArrived = 0;
 
-        CheckDecisionParameters();
+        CheckFinishSceneParameters();
         CheckPlayersNeededParameters();
-
+        CheckExpParameters();
     }
 
     #endregion
@@ -117,6 +120,13 @@ public class NPCtrigger : MonoBehaviour
             {
                 return;
             }
+
+            if (requiresExp)
+            {
+                CheckIfExpIsEnough();
+                return;
+            }
+
             if (freezesPlayer)
             {
                 levelManager.localPlayer.StopMoving();
@@ -144,6 +154,17 @@ public class NPCtrigger : MonoBehaviour
 
     #region Utils
 
+    protected void CheckExpParameters()
+    {
+        if (requiresExp)
+        {
+            if (expRequired == 0)
+            {
+                Debug.LogError("NPC Trigger named: " + gameObject.name + "requires EXP but has no amount set.");
+            }
+        }
+    }
+
     protected void CheckPlayersNeededParameters()
     {
         if (forOnePlayerOnly)
@@ -155,7 +176,7 @@ public class NPCtrigger : MonoBehaviour
         }
     }
 
-    protected void CheckDecisionParameters()
+    protected void CheckFinishSceneParameters()
     {
         if (finishesScene)
         {
@@ -302,5 +323,47 @@ public class NPCtrigger : MonoBehaviour
     }
 
     #endregion
+
+    protected void CheckIfExpIsEnough()
+    {
+        SendMessageToServer("IsThisExpEnough/" + gameObject.name, true);
+    }
+
+    public void HandleExpQuestion(string[] msg)
+    {
+        int incomingExp = int.Parse(msg[1]);
+        if (incomingExp >= expRequired)
+        {
+            switch (whatToDo)
+            {
+                case "InstanciarEngranaje":
+                    HandleEngInstantation();
+                    break;
+                default:
+                    return;
+            }
+
+        }
+
+        else
+        {
+            levelManager.ActivateNPCFeedback("Traigan 1000 de EXP o mejor sigan buscando los 2 ENGRANAJES.");
+        }
+    }
+
+    protected void HandleEngInstantation()
+    {
+        ReadNextFeedback();
+        levelManager.InstantiatePrefab("Items/EngranajeA", new Vector2(-9.4f, -4f));
+
+    }
+
+    protected void SendMessageToServer(string message, bool secure)
+    {
+        if (Client.instance)
+        {
+            Client.instance.SendMessageToServer(message, secure);
+        }
+    }
 
 }

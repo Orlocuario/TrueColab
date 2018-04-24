@@ -145,7 +145,9 @@ public class ClientMessageHandler
             case "CoordinateObjectInCircuit":
                 HandlerCircuitObjectsMovementData(msg);
                 break;
-
+            case "ExpAnswer":
+                HandlerExpAnswer(msg);
+                break;
             default:
                 break;
         }
@@ -325,6 +327,27 @@ public class ClientMessageHandler
             {
                 enemy.SetPatrollingPoint(directionX, posX, posY, patrolX, patrolY);
             }
+        }
+    }
+
+    private void HandlerExpAnswer(string[] msg)
+    {
+        if (NotInClientScene())
+        {
+            GameObject expConsultant = GameObject.Find(msg[2]);
+
+            if (expConsultant.GetComponent<NPCtrigger>())
+            {
+                NPCtrigger _NpcTrigger = expConsultant.GetComponent<NPCtrigger>();
+                _NpcTrigger.HandleExpQuestion(msg);
+            }
+
+            else if (expConsultant.GetComponent<EndOfScene>())
+            {
+                EndOfScene _EndofScene = expConsultant.GetComponent<EndOfScene>();
+                _EndofScene.HandleExpQuestion(msg);
+            }
+
         }
     }
 
