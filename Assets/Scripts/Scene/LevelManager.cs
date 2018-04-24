@@ -31,7 +31,6 @@ public class LevelManager : MonoBehaviour
     private int?[] currentChoice;
     private Vector2[] playersLastPosition;
     public float waitToRespawn;
-    public bool startsWithCutScene;
     public bool isPlayingFeedback;
 
 
@@ -72,28 +71,6 @@ public class LevelManager : MonoBehaviour
         {
             client = GameObject.Find("ClientObject").GetComponent<Client>();
             client.RequestPlayerIdToServer();
-        }
-
-        if (startsWithCutScene)
-        {
-            if (initialCutsceneController == null)
-            {
-                Debug.LogError("You need an initial cutScene Controller Game Object if you want to start with a cutscene");
-            }
-            else if (initialCutsceneController != null)
-            {
-                if (initialCutsceneController.GetComponent<NPCtrigger>())
-                {
-                    NPCtrigger npcTalk = initialCutsceneController.GetComponent<NPCtrigger>();
-                    npcTalk.ReadNextFeedback();
-                }
-                if (initialCutsceneController.GetComponent<TriggerCamera>())
-                {
-                    TriggerCamera cameraController = initialCutsceneController.GetComponent<TriggerCamera>();
-                    cameraController.OnEnter();
-                }
-
-            }
         }
     }
 

@@ -31,6 +31,16 @@ public class GameSounds
     // XP
     public static string GrabExperience;
 
+    // Music for DifferentScenes
+
+    public static string Escena1 = "mEscena1";
+    public static string Escena2 = "mEscena2";
+    public static string Escena3 = "mEscena3";
+    public static string Escena4 = "mEscena4";
+    public static string Escena5 = "mEscena5";
+    public static string Escena6 = "mEscena6";
+
+
     // Switches
     public static string SwitchOn;
     public static string SwitchOff;
@@ -102,13 +112,13 @@ public class SoundManager : MonoBehaviour
             return;
         }
 
-        AudioSource source = getSource(gameObject, audioClip, loops);
+        AudioSource source = GetAudioSource(gameObject, audioClip, loops);
 
         source.Play();
     }
 
 
-    private AudioSource getSource(GameObject gameObject, AudioClip audioClip, bool loops)
+    private AudioSource GetAudioSource(GameObject gameObject, AudioClip audioClip, bool loops)
     {
         AudioSource[] sources = gameObject.GetComponents<AudioSource>();
         AudioSource source = null;

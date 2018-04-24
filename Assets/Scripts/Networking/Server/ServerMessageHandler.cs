@@ -139,7 +139,9 @@ public class ServerMessageHandler
             case "IsThisExpEnough":
                 HandleExpQuestion(msg, connectionId);
                 break;
-
+            case "WhichMusicShloudIPlay":
+                SendSceneNameForMusic(message, connectionId);
+                break;
             default:
                 break;
         }
@@ -582,6 +584,7 @@ public class ServerMessageHandler
         Room room = player.room;
         room.SendMessageToAllPlayers(message, true);
     }
+
     public void SendChangeScene(string sceneName, Room room)
     {
         string message = "ChangeScene/" + sceneName;
@@ -589,6 +592,15 @@ public class ServerMessageHandler
         room.SendMessageToAllPlayers(message, true);
         room.Reset();
     }
+
+    public void SendSceneNameForMusic(string message, int connectionId)
+    {
+        NetworkPlayer player = server.GetPlayer(connectionId);
+        Room room = player.room;
+        string sceneName = room.sceneToLoad;
+        room.SendMessageToPlayer("SceneNameAnswerForMusic" + "/" + sceneName , connectionId, true);
+    }
+
 
     public void SendAttackState(string message, int connectionId, string[] data)
     {

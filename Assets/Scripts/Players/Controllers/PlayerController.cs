@@ -151,10 +151,8 @@ public class PlayerController : MonoBehaviour
         InitializeParticles();
         IgnoreCollisionWithObjectsWhoHateMe();
         IgnoreCollisionBetweenPlayers();
+        CheckIfIPlayerMusic(); // TODO: Remove this or change sound if you want music
 
-
-        // TODO: Remove this or change sound if you want music
-        //FindObjectOfType<SoundManager>().PlaySound(gameObject, GameSounds.PlayerAttack, false);
     }
 
     #endregion
@@ -827,6 +825,42 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    #region MusicHandlers
+
+    protected void HandlerMusicScene1( )
+    {
+        SoundManager sManager = FindObjectOfType<SoundManager>();
+        sManager.PlaySound(gameObject, GameSounds.Escena1, true);
+    }
+    protected void HandlerMusicScene2( )
+    {
+        SoundManager sManager = FindObjectOfType<SoundManager>();
+        sManager.PlaySound(gameObject, GameSounds.Escena2, true);
+    }
+    protected void HandlerMusicScene3()
+    {
+        SoundManager sManager = FindObjectOfType<SoundManager>();
+        sManager.PlaySound(gameObject, GameSounds.Escena3, true);
+    }
+    protected void HandlerMusicScene4()
+    {
+        SoundManager sManager = FindObjectOfType<SoundManager>();
+        sManager.PlaySound(gameObject, GameSounds.Escena4, true);
+    }
+    protected void HandlerMusicScene5( )
+    {
+        SoundManager sManager = FindObjectOfType<SoundManager>();
+        sManager.PlaySound(gameObject, GameSounds.Escena5, true);
+    }
+    protected void HandlerMusicScene6( )
+    {
+        SoundManager sManager = FindObjectOfType<SoundManager>();
+        sManager.PlaySound(gameObject, GameSounds.Escena6, true);
+    }
+
+    #endregion
+
+
     protected void ResetDamagingObjects()
     {
         DamagingObject[] damagingObjects = FindObjectsOfType<DamagingObject>();
@@ -948,6 +982,38 @@ public class PlayerController : MonoBehaviour
 
     #region Animations
 
+    protected void CheckIfIPlayerMusic()
+    {
+        if (controlOverEnemies)
+        {
+            SendMessageToServer("WhichMusicShloudIPlay");
+        }
+    }
+
+    public void HandleMusicAssignment(string sceneName)
+    {
+        switch (sceneName)
+        {
+            case "Escena1":
+                HandlerMusicScene1();
+                break;
+            case "Escena2":
+                HandlerMusicScene2();
+                break;
+            case "Escena3":
+                HandlerMusicScene3();
+                break;
+            case "Escena4":
+                HandlerMusicScene4();
+                break;
+            case "Escena5":
+                HandlerMusicScene5();
+                break;
+            case "Escena6":
+                HandlerMusicScene6();
+                break;
+        }
+    }
     protected void AnimateAttack()
     {
         if (sceneAnimator && attackAnimName != null)

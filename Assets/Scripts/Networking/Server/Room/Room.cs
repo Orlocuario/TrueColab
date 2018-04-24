@@ -323,6 +323,23 @@ public class Room
                 coordenadas[0] = 7f;
                 coordenadas[1] = 2;
                 break;
+            case ("Escena3"):
+                coordenadas[0] = 1f;
+                coordenadas[1] = 1f;
+                break;
+            case ("Escena4"):
+                coordenadas[0] = 1f;
+                coordenadas[1] = 1f;
+                break;
+            case ("Escena5"):
+                coordenadas[0] = 1f;
+                coordenadas[1] = 1f;
+                break;
+            case ("Escena6"):
+                coordenadas[0] = 1f;
+                coordenadas[1] = 1f;
+                break;
+
             default:
                 Debug.Log("No existe escena " + sceneToLoad);
                 break;

@@ -148,6 +148,9 @@ public class ClientMessageHandler
             case "ExpAnswer":
                 HandlerExpAnswer(msg);
                 break;
+            case "SceneNameAnswerForMusic":
+                HandleMusicForSceneCase(msg);
+                break;
             default:
                 break;
         }
@@ -211,7 +214,6 @@ public class ClientMessageHandler
                 }
                 else
                 {
-
                     Debug.Log("Enemy is null mdfk");
                 }
             }
@@ -362,6 +364,19 @@ public class ClientMessageHandler
             if (enemy)
             {
                 enemy.Die();
+            }
+        }
+    }
+
+    private void HandleMusicForSceneCase(string[] msg)
+    {
+        if(NotInClientScene())
+        {
+            LevelManager lManager = GameObject.FindObjectOfType<LevelManager>();
+            PlayerController pController = lManager.GetLocalPlayerController();
+            if (pController.controlOverEnemies)
+            {
+                pController.HandleMusicAssignment(msg[1]);
             }
         }
     }
