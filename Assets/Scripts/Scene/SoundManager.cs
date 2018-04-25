@@ -8,13 +8,17 @@ public class GameSounds
 
     // Players
     public static string PlayerDie;
-    public static string PlayerJump;
+    public static string PlayerJump = "Salto";
     public static string PlayerTakeDamage;
 
     // Attacks
-    public static string PlayerAttack;
-    public static string PlayerAttackEnhanced;
-    public static string PlayerAttackSuperEnhanced;
+
+    public static string WarriorAttack;
+    public static string WarriorAttackEnhanced;
+    public static string MageAttack;
+    public static string MageAttackEnhanced;
+    public static string EnginAttack;
+    public static string EnginAttackEnhanced;
 
     // Powers
     public static string MagePower = "VerdeMagic";
@@ -113,6 +117,25 @@ public class SoundManager : MonoBehaviour
 
         AudioSource source = GetAudioSource(gameObject, audioClip, loops);
 
+        source.Play();
+    }
+
+    public void PlaySound(GameObject gameObject, string soundName, bool loops, bool isBGMusic)
+    {
+        AudioClip audioClip = Resources.Load("AudioClips/" + soundName) as AudioClip;
+
+        if (audioClip == null)
+        {
+            Debug.LogError("Sound " + soundName + "does not exist");
+            return;
+        }
+
+        AudioSource source = GetAudioSource(gameObject, audioClip, loops);
+
+        if (isBGMusic)
+        {
+            source.volume = .35f;
+        }
         source.Play();
     }
 

@@ -9,6 +9,16 @@ public class FireballController : AttackController
     {
         base.Start();
         maxDistance = 6f;
+        /*if (enhanced == false)
+        {
+            SoundManager sManager = FindObjectOfType<SoundManager>();
+            sManager.PlaySound(gameObject, GameSounds.MageAttackController, false);
+        }
+        else if (enhanced)
+        {
+            SoundManager sManager = FindObjectOfType<SoundManager>();
+            sManager.PlaySound(gameObject, GameSounds.MageAttackController, false);
+        }*/
     }
 
     protected override int GetDamage()
