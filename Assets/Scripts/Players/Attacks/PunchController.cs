@@ -16,16 +16,20 @@ public class PunchController : AttackController
     {
 
         base.Start();
-        /*if (enhanced == false)
+        /*if (IsCasterLocal())
         {
-            SoundManager sManager = FindObjectOfType<SoundManager>();
-            sManager.PlaySound(gameObject, GameSounds.WarriorAttack, false);
-        }
-        else if (enhanced)
-        {
-            SoundManager sManager = FindObjectOfType<SoundManager>();
-            sManager.PlaySound(gameObject, GameSounds.WarriorAttackEnhanced, false);
+            if (enhanced == false)
+            {
+                SoundManager sManager = FindObjectOfType<SoundManager>();
+                sManager.PlaySound(gameObject, GameSounds.WarriorAttack, false);
+            }
+            else if (enhanced)
+            {
+                SoundManager sManager = FindObjectOfType<SoundManager>();
+                sManager.PlaySound(gameObject, GameSounds.WarriorAttackEnhanced, false);
+            }
         }*/
+
         maxDistance = 5f;
     }
 

@@ -9,15 +9,18 @@ public class FireballController : AttackController
     {
         base.Start();
         maxDistance = 6f;
-        /*if (enhanced == false)
+        /*if (IsCasterLocal())
         {
-            SoundManager sManager = FindObjectOfType<SoundManager>();
-            sManager.PlaySound(gameObject, GameSounds.MageAttackController, false);
-        }
-        else if (enhanced)
-        {
-            SoundManager sManager = FindObjectOfType<SoundManager>();
-            sManager.PlaySound(gameObject, GameSounds.MageAttackController, false);
+            if (enhanced == false)
+            {
+                SoundManager sManager = FindObjectOfType<SoundManager>();
+                sManager.PlaySound(gameObject, GameSounds.MageAttack, false);
+            }
+            else if (enhanced)
+            {
+                SoundManager sManager = FindObjectOfType<SoundManager>();
+                sManager.PlaySound(gameObject, GameSounds.MageAttackEnhanced, false);
+            }
         }*/
     }
 

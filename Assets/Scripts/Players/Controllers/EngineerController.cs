@@ -67,13 +67,19 @@ public class EngineerController : PlayerController
 
         if (active)
         {
-            SoundManager sManager = FindObjectOfType<SoundManager>();
-            sManager.PlaySound(gameObject, GameSounds.EngineerPower, true);
+            if (localPlayer)
+            {
+                SoundManager sManager = FindObjectOfType<SoundManager>();
+                sManager.PlaySound(gameObject, GameSounds.EngineerPower, true);
+            }
         }
         else
         {
-            SoundManager sManager = FindObjectOfType<SoundManager>();
-            sManager.StopSound(gameObject, GameSounds.EngineerPower);
+            if (localPlayer)
+            {
+                SoundManager sManager = FindObjectOfType<SoundManager>();
+                sManager.StopSound(gameObject, GameSounds.EngineerPower);
+            }
         }
     }
 

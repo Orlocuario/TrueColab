@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     public GameObject availableInstantiatorTrigger;
     public GameObject availableParticleTrigger;
     public GameObject availableEndOfScene;
+    public GameObject mainCamera;
     public string decisionName;
     public bool controlOverEnemies;
     public float groundCheckRadius;
@@ -111,6 +112,7 @@ public class PlayerController : MonoBehaviour
         }
 
         levelManager = FindObjectOfType<LevelManager>();
+        mainCamera = FindObjectOfType<CameraController>().gameObject;
         rb2d = GetComponent<Rigidbody2D>();
 
         respawnPosition = transform.position;
@@ -310,8 +312,11 @@ public class PlayerController : MonoBehaviour
         if (IsJumping(isGrounded))
         {
             justJumped = true;
-            SoundManager sManager = FindObjectOfType<SoundManager>();
-            sManager.PlaySound(gameObject, GameSounds.PlayerJump, false);
+            if(localPlayer)
+            {
+                SoundManager sManager = FindObjectOfType<SoundManager>();
+                sManager.PlaySound(gameObject, GameSounds.PlayerJump, false);
+            }
             StartCoroutine(WaitJumping());
             speedY = maxYSpeed * directionY;
         }
@@ -831,32 +836,32 @@ public class PlayerController : MonoBehaviour
     protected void HandlerMusicScene1( )
     {
         SoundManager sManager = FindObjectOfType<SoundManager>();
-        sManager.PlaySound(gameObject, GameSounds.Escena1, true, true);
+        sManager.PlaySound(mainCamera, GameSounds.Escena1, true, true);
     }
     protected void HandlerMusicScene2( )
     {
         SoundManager sManager = FindObjectOfType<SoundManager>();
-        sManager.PlaySound(gameObject, GameSounds.Escena2, true, true);
+        sManager.PlaySound(mainCamera, GameSounds.Escena2, true, true);
     }
     protected void HandlerMusicScene3()
     {
         SoundManager sManager = FindObjectOfType<SoundManager>();
-        sManager.PlaySound(gameObject, GameSounds.Escena3, true, true);
+        sManager.PlaySound(mainCamera, GameSounds.Escena3, true, true);
     }
     protected void HandlerMusicScene4()
     {
         SoundManager sManager = FindObjectOfType<SoundManager>();
-        sManager.PlaySound(gameObject, GameSounds.Escena4, true, true);
+        sManager.PlaySound(mainCamera, GameSounds.Escena4, true, true);
     }
     protected void HandlerMusicScene5( )
     {
         SoundManager sManager = FindObjectOfType<SoundManager>();
-        sManager.PlaySound(gameObject, GameSounds.Escena5, true, true);
+        sManager.PlaySound(mainCamera, GameSounds.Escena5, true, true);
     }
     protected void HandlerMusicScene6( )
     {
         SoundManager sManager = FindObjectOfType<SoundManager>();
-        sManager.PlaySound(gameObject, GameSounds.Escena6, true, true);
+        sManager.PlaySound(mainCamera, GameSounds.Escena6, true, true);
     }
 
     #endregion

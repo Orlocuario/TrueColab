@@ -155,6 +155,8 @@ public class GearSystemActions : ActivableSystemActions
         SetAnimatorBool("startMoving", true, gearSystem);
         OneTimeMovingObject altarEngin1 = GameObject.Find("AltarEnginMovable").GetComponent<OneTimeMovingObject>();
         altarEngin1.move = true;
+        DestroyObject("ActivateNPCForGear", .1f);
+
 
         //  Planner 
         if (Object.FindObjectOfType<Planner>())

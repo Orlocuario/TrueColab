@@ -293,7 +293,7 @@ public class ServerMessageHandler
         Room room = player.room;
 
         room.SetSwitchOn(on, groupId, individualId);
-        room.SendMessageToAllPlayersExceptOne(message, connectionId, true);
+        room.SendMessageToAllPlayers(message, true);
     }
 
     private void EnemyChangePosition(string message, string[] msg, int connectionId)
