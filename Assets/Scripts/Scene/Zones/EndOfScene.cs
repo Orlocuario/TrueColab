@@ -67,9 +67,12 @@ public class EndOfScene : MonoBehaviour
                     }
                 }
 
-                else if (other.gameObject.GetComponent<PlayerController>().localPlayer)
+                else 
                 {
-                    levelManager.ActivateNPCFeedback("Asegúrate de que lleguen los demás");
+                    if (other.gameObject.GetComponent<PlayerController>().localPlayer)
+                    {
+                        levelManager.ActivateNPCFeedback("Asegúrate de que lleguen los demás");
+                    }
                 }
             }
             

@@ -355,7 +355,6 @@ public class NPCtrigger : MonoBehaviour
     {
         ReadNextFeedback();
         levelManager.InstantiatePrefab("Items/EngranajeA", new Vector2(-9.4f, -4f));
-
     }
 
     protected void SendMessageToServer(string message, bool secure)
