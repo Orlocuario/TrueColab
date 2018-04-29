@@ -96,15 +96,16 @@ public class MovingObject : MonoBehaviour
 
     #region Common
 
-    public void CoordinateMovingObject()
+    private void CoordinateMovingObject()
     {
         string x = transform.position.x.ToString();
         string y = transform.position.y.ToString();
 
-        string message = "CoordinateMovingObject/" + name + "/" + x + "/" + y + "/" + currentTarget;
+        string message = "CoordinateMovingObject/" + name + "/" + x + "/" + y + "/" + currentTarget.x.ToString() + currentTarget.y.ToString();
         SendMessageToServer(message, true);
         playerHasReturned = false;
     }
+
 
     public void SetData(Vector2 start, Vector2 end, float speed, float timeIllWait, bool ignoreCollisionWithPlayers)
     {
@@ -126,6 +127,12 @@ public class MovingObject : MonoBehaviour
     {
         startPoint = start;
         endPoint = end;
+    }
+
+    public void HandlePlayerReturned(string[] msg)
+    {
+        gameObject.transform.position = new Vector3(float.Parse(msg[2]), float.Parse(msg[3]), transform.position.z);
+        currentTarget = new Vector2(float.Parse(msg[4]), float.Parse(msg[5]));
     }
 
     #endregion
@@ -215,10 +222,7 @@ public class MovingObject : MonoBehaviour
 
     }
 
-    public void HandlePlayerReturned(string[] msg)
-    {
-        Vector3 newVector = new Vector3(float.Parse(msg[2]), float.Parse(msg[3]));
-    }
+
 
     private void SendMessageToServer(string message, bool secure)
     {

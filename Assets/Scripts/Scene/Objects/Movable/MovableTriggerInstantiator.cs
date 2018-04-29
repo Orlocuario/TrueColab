@@ -39,19 +39,27 @@ public class MovableTriggerInstantiator : MonoBehaviour {
 		}		
 	}
 
-    private void InstantiateObjects(GameObject other)
+    public void InstantiateObjects(GameObject other)
     {
         Destroy(other);
         foreach (ObjectToInstantiate instObject in instantiateObjects)
         {
             levelManager.InstantiatePrefab(instObject.name, instObject.position);
         }
-
         jobDone = true; 
     }
 
     public void MustInstantiateAndDestroyAgain()
     {
-        InstantiateObjects(objectNeeded);
+        SendMessageToServer("MustInstantiateAndDestroy" + "/" + gameObject.name + "/" + objectNeeded.name, true);
     }
+
+    private void SendMessageToServer(string message, bool secure)
+    {
+        if (Client.instance)
+        {
+            Client.instance.SendMessageToServer(message, secure);
+        }
+    }
+
 }

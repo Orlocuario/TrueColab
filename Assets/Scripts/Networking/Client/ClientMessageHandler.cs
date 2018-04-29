@@ -145,6 +145,9 @@ public class ClientMessageHandler
             case "CoordinateObjectInCircuit":
                 HandlerCircuitObjectsMovementData(msg);
                 break;
+            case "MustInstantiateAndDestroy":
+                HandlerMovableTriggerCoordinator(msg);
+                break;
             case "ExpAnswer":
                 HandlerExpAnswer(msg);
                 break;
@@ -267,7 +270,7 @@ public class ClientMessageHandler
             }
 
             localPlayer.controlOverEnemies = control;
-            
+
 
             if (control)
             {
@@ -370,9 +373,38 @@ public class ClientMessageHandler
         }
     }
 
+    private void HandlerMovableTriggerCoordinator(string[] msg)
+    {
+        if (NotInClientScene())
+        {
+            GameObject mTrigger = GameObject.Find(msg[1]);
+            GameObject movable = GameObject.Find(msg[2]);
+
+            if (mTrigger && movable)
+            {
+                mTrigger.GetComponent<MovableTriggerInstantiator>().InstantiateObjects(movable);
+            }
+        }
+    }
+
+    private void HandlerTeleporterCoordinator(string[] msg)
+    {
+        if (NotInClientScene())
+        {
+            GameObject teleporter = GameObject.Find(msg[1]);
+            if (teleporter.GetComponent<PlayerTeleporter>())
+            {
+                PlayerTeleporter pTeleporter = teleporter.GetComponent<PlayerTeleporter>();
+                if (pTeleporter.id.Equals(Int32.Parse(msg[2])))
+                {
+                    pTeleporter.DoYourTeleportedThing(Int32.Parse(msg[2]));
+                }
+            }
+        }
+    }
     private void HandleMusicForSceneCase(string[] msg)
     {
-        if(NotInClientScene())
+        if (NotInClientScene())
         {
             LevelManager lManager = GameObject.FindObjectOfType<LevelManager>();
             PlayerController pController = lManager.GetLocalPlayerController();
@@ -645,8 +677,8 @@ public class ClientMessageHandler
                     player.remoteLeft = false;
                 }
             }
-			LevelManager lManager = GameObject.FindObjectOfType<LevelManager> ();
-            
+            LevelManager lManager = GameObject.FindObjectOfType<LevelManager>();
+
         }
     }
 
@@ -711,22 +743,22 @@ public class ClientMessageHandler
         }
     }
 
-	private void HandlePlayerVote(string[] msg)
-	{
-		if (NotInClientScene())
-		{
-			int playerId = Int32.Parse(msg[1]);
-			DecisionSystem.Choice choice = (DecisionSystem.Choice)Enum.Parse(typeof(DecisionSystem.Choice), msg [2]) ;
+    private void HandlePlayerVote(string[] msg)
+    {
+        if (NotInClientScene())
+        {
+            int playerId = Int32.Parse(msg[1]);
+            DecisionSystem.Choice choice = (DecisionSystem.Choice)Enum.Parse(typeof(DecisionSystem.Choice), msg[2]);
 
-			LevelManager levelManager = GameObject.FindObjectOfType<LevelManager> ();
-			string decisionName = levelManager.localPlayer.decisionName;
-			if (decisionName != null) 
-			{
-				DecisionSystem currentDecision = GameObject.Find (decisionName).GetComponent <DecisionSystem> ();
-				currentDecision.ReceiveVote (playerId, choice);
-			}
-		}
-	}
+            LevelManager levelManager = GameObject.FindObjectOfType<LevelManager>();
+            string decisionName = levelManager.localPlayer.decisionName;
+            if (decisionName != null)
+            {
+                DecisionSystem currentDecision = GameObject.Find(decisionName).GetComponent<DecisionSystem>();
+                currentDecision.ReceiveVote(playerId, choice);
+            }
+        }
+    }
 
     private void HandlePlayerPreVote(string[] msg)
     {
@@ -770,28 +802,28 @@ public class ClientMessageHandler
         }
     }
 
-	private void HandlerPlayerReturned()
-	{
-		if (NotInClientScene ()) 
-		{
-			LevelManager levelManager = GameObject.FindObjectOfType<LevelManager>();
-			levelManager.CoordinateReconnectionElements ();
-		}
-	}
+    private void HandlerPlayerReturned()
+    {
+        if (NotInClientScene())
+        {
+            LevelManager levelManager = GameObject.FindObjectOfType<LevelManager>();
+            levelManager.CoordinateReconnectionElements();
+        }
+    }
 
-	private void HandlerBubbleInstantiatorData(string[] msg)
-	{
-		if (NotInClientScene ()) 
-		{
-			string bubbleInstantiatorName = msg [1];
-			GameObject bubbleSystem = GameObject.Find (bubbleInstantiatorName);
-			if (bubbleSystem) 
-			{
-				BubbleRotatingInstantiator bInstantiator = bubbleSystem.GetComponent <BubbleRotatingInstantiator> ();
-				bInstantiator.HandleBubbleInstantiatorData (msg);
-			}
-		}
-	}
+    private void HandlerBubbleInstantiatorData(string[] msg)
+    {
+        if (NotInClientScene())
+        {
+            string bubbleInstantiatorName = msg[1];
+            GameObject bubbleSystem = GameObject.Find(bubbleInstantiatorName);
+            if (bubbleSystem)
+            {
+                BubbleRotatingInstantiator bInstantiator = bubbleSystem.GetComponent<BubbleRotatingInstantiator>();
+                bInstantiator.HandleBubbleInstantiatorData(msg);
+            }
+        }
+    }
 
 
     private void HandlerCircuitObjectsMovementData(string[] msg)
@@ -828,8 +860,7 @@ public class ClientMessageHandler
     {
         if (NotInClientScene())
         {
-            string movingName = msg[1];
-            GameObject mObject = GameObject.Find(movingName);
+            GameObject mObject = GameObject.Find(msg[1]);
             if (mObject)
             {
                 MovingObject mO = mObject.GetComponent<MovingObject>();

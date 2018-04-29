@@ -109,12 +109,13 @@ public class NPCtrigger : MonoBehaviour
     {
         if (GameObjectIsPlayer(other.gameObject))
         {
-            CheckIfEndsWithEndOfScene();
             if (forOnePlayerOnly)
             {
                 CheckIfForOnePlayerOnly(other.gameObject);
                 return;
             }
+
+            DestroyMyCollider();
 
             if (levelManager.isPlayingFeedback)
             {
@@ -134,8 +135,14 @@ public class NPCtrigger : MonoBehaviour
                 levelManager.localPlayer.SendPlayerPowerDataToServer();
             }
 
-            DestroyMyCollider();
-            ReadNextFeedback();
+            if (!finishesScene)
+            {
+                ReadNextFeedback();
+            }
+        }
+        else if (other.gameObject.GetComponent<PlayerController>())
+        {
+            CheckIfEndsWithEndOfScene(other.gameObject);
         }
     }
 
@@ -194,7 +201,7 @@ public class NPCtrigger : MonoBehaviour
         }
     }
 
-    protected void CheckIfEndsWithEndOfScene()
+    protected void CheckIfEndsWithEndOfScene(GameObject other)
     {
         if (finishesScene)
         {
@@ -203,11 +210,15 @@ public class NPCtrigger : MonoBehaviour
             if (playersArrived == playersNeeded)
             {
                 DestroyMyCollider();
+                GameObject.Find("CameraEndOfScene").GetComponent<TriggerCamera>().OnEnter();
                 ReadNextFeedback();
             }
             else
             {
-                levelManager.ActivateNPCFeedback("¿Estás Solo? Así no podrás salir jamás...");
+                if (other.gameObject.GetComponent<PlayerController>().localPlayer)
+                {
+                    levelManager.ActivateNPCFeedback("¿Estás Solo? Así no podrás salir jamás...");
+                }
                 return;
             }
         }

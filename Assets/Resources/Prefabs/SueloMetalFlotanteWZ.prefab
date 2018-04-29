@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 61786503420513470}
   - component: {fileID: 251551964932422330}
   m_Layer: 9
-  m_Name: SueloMetalFlotante4-W1
+  m_Name: SueloMetalFlotanteWZ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -130,6 +130,9 @@ public class ServerMessageHandler
             case "CoordinateMovingObject":
                 SyncMovingObjects(message, connectionId);
                 break;
+            case "MustInstantiateAndDestroy":
+                SyncMovableTriggers(message, connectionId);
+                break;
             case "EnterPOI":
                 HandleEnterPOI(msg, connectionId);
                 break;
@@ -141,6 +144,9 @@ public class ServerMessageHandler
                 break;
             case "WhichMusicShloudIPlay":
                 SendSceneNameForMusic(message, connectionId);
+                break;
+            case "CoordinatePlayerTeleporter":
+                SendTeleporterCoordination(message, connectionId);
                 break;
             default:
                 break;
@@ -389,6 +395,13 @@ public class ServerMessageHandler
         player.room.log.WriteInventory(player.id, message);
     }
 
+    private void SendTeleporterCoordination(string message, int connectionId)
+    {
+        NetworkPlayer player = server.GetPlayer(connectionId);
+        Room room = player.room;
+        room.SendMessageToAllPlayers(message, true);
+    }
+
     private void SendDestroyObject(string message, int connectionId)
     {
         NetworkPlayer player = server.GetPlayer(connectionId);
@@ -565,6 +578,13 @@ public class ServerMessageHandler
     }
 
     private void SendRotatorsData(string message, int connectionId)
+    {
+        NetworkPlayer player = server.GetPlayer(connectionId);
+        Room room = player.room;
+        room.SendMessageToAllPlayers(message, true);
+    }
+
+    private void SyncMovableTriggers(string message, int connectionId)
     {
         NetworkPlayer player = server.GetPlayer(connectionId);
         Room room = player.room;
