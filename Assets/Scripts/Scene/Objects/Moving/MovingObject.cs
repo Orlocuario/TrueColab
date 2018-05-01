@@ -100,8 +100,10 @@ public class MovingObject : MonoBehaviour
     {
         string x = transform.position.x.ToString();
         string y = transform.position.y.ToString();
+        string targetX = currentTarget.x.ToString();
+        string targetY = currentTarget.y.ToString();
 
-        string message = "CoordinateMovingObject/" + name + "/" + x + "/" + y + "/" + currentTarget.x.ToString() + currentTarget.y.ToString();
+        string message = "CoordinateMovingObject/" + name + "/" + x + "/" + y + "/" + targetX + "/" +  targetY;
         SendMessageToServer(message, true);
         playerHasReturned = false;
     }
@@ -131,8 +133,14 @@ public class MovingObject : MonoBehaviour
 
     public void HandlePlayerReturned(string[] msg)
     {
-        gameObject.transform.position = new Vector3(float.Parse(msg[2]), float.Parse(msg[3]), transform.position.z);
-        currentTarget = new Vector2(float.Parse(msg[4]), float.Parse(msg[5]));
+        float _x = float.Parse(msg[2]);
+        float _y = float.Parse(msg[3]);
+
+        float targetX = float.Parse(msg[4]);
+        float targetY = float.Parse(msg[5]);
+
+        gameObject.transform.position = new Vector3(_x, _y, transform.position.z);
+        currentTarget = new Vector2(targetX, targetY);
     }
 
     #endregion

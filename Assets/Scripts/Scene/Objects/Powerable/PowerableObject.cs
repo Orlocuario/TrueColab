@@ -133,6 +133,7 @@ public class PowerableObject : MonoBehaviour
         poweredFrameCount = 0;
         SetShutDownFrames();
         playerControllers = new PlayerController[3];
+        CheckParameters();
     }
 
     protected void Update()
@@ -237,7 +238,38 @@ public class PowerableObject : MonoBehaviour
         }
     }
 
+    protected void CheckParameters()
+    {
+        foreach (Power power in powers)
+        {
+            if (power.activationType == ActivationType.Attack)
+            {
+                if (power.attack == null)
+                {
+                    Debug.LogError("The powerableObject named: " + gameObject.name +
+                        " is Set by Attack but has no attack Set");
+                }
+            }
 
+            if (power.activationType == ActivationType.Power)
+            {
+                if (power.caster == null)
+                {
+                    Debug.LogError("The powerableObject named: " + gameObject.name +
+                        " is by Power but has no Caster Set");
+                }
+            }
+
+            if (power.activationType == ActivationType.ByParticle)
+            {
+                if (power.expectedParticle == null)
+                {
+                    Debug.LogError("The powerableObject named: " + gameObject.name +
+                        " is Set By Particle but has no particleExpected Set");
+                }
+            }
+        }
+    }
     protected void GravityBackToNormal()
     {
         LevelManager levelManager = FindObjectOfType<LevelManager>();
@@ -379,9 +411,20 @@ public class PowerableObject : MonoBehaviour
             if (player.availablePowerable == gameObject)
             {
                 player.availablePowerable = null;
+
                 if (powered)
                 {
-                    DeactivatePower();
+                    foreach (Power power in powers)
+                    {
+                        if (power.activationType.Equals(ActivationType.Power))
+                        {
+                            if (power.caster.GetType() == player.GetType())
+                            {
+                                DeactivatePower();
+                            }
+                        }
+                    }
+
                 }
             }
         }
@@ -682,6 +725,10 @@ public class PowerableObject : MonoBehaviour
         {
             for (int i = 0; i < particles.Length; i++)
             {
+                if (particles[i] == null)
+                {
+                    Debug.LogError("The powerable Object named: " + gameObject.name + "has no particles added");
+                }
                 particles[i].SetActive(activate);
             }
         }

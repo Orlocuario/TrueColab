@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114846413556190794}
   - component: {fileID: 50166641031924282}
   - component: {fileID: 114042441743606064}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DamagingArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,6 +107,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: {x: 500, y: 500}
   damage: 3
+  id: 0
+  turnedIntoWater: 0
 --- !u!114 &114846413556190794
 MonoBehaviour:
   m_ObjectHideFlags: 1

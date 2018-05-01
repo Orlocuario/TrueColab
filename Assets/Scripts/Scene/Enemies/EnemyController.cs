@@ -454,22 +454,20 @@ public class EnemyController : MonoBehaviour
 
     #region Events
 
-   /* protected void OnTriggerStay2D(Collider2D other)
-    {
-        if (GameObjectIsPlayer(other.gameObject))
-        {
-            Attack(other.gameObject);
-        }
-    }*/
+    /* protected void OnTriggerStay2D(Collider2D other)
+     {
+         if (GameObjectIsPlayer(other.gameObject))
+         {
+             Attack(other.gameObject);
+         }
+     }*/
 
     // Attack those who enter the alert zone
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (GameObjectIsPlayer(other.gameObject))
         {
-           
-                Attack(other.gameObject);
-            
+            Attack(other.gameObject);
         }
     }
     // Attack those who collide with me

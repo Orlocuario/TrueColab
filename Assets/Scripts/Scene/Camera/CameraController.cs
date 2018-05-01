@@ -273,10 +273,8 @@ public class CameraController : MonoBehaviour
             case CameraState.TargetZoom:
                 TargetedZoom(movement);
                 break;
-
             case CameraState.TargetZoomInCutscene:
                 SetDataTargetZoomInCutscene(movement);
-
                 break;
             default:
                 return;

@@ -332,7 +332,7 @@ public class Room
                 coordenadas[1] = 4.18f;
                 break;
             case ("Escena5"):
-                coordenadas[0] = .1f;
+                coordenadas[0] = -2.3f;
                 coordenadas[1] = .1f;
                 break;
             case ("Escena6"):

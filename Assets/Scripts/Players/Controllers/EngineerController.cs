@@ -73,7 +73,7 @@ public class EngineerController : PlayerController
                 sManager.PlaySound(gameObject, GameSounds.EngineerPower, true);
             }
         }
-        else
+        else if (active == false)
         {
             if (localPlayer)
             {

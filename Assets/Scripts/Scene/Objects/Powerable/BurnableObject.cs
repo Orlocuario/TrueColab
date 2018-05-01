@@ -5,9 +5,11 @@ using UnityEngine;
 public class BurnableObject : MonoBehaviour {
 
     public GameObject[] particles;
+    public bool burned;
 
     private void Start()
     {
+        burned = false;
         InitializeParticles(); 
     } 
 

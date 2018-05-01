@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
     protected static float maxAcceleration = 1f;
     protected static float takeDamageRate = 1f;
     protected static float attackRate = .25f;
-    protected static float jumpRate = .25f;
+    protected static float jumpRate = .15f;
     protected static float poweredRare = .25f;
     protected static float maxXSpeed = 3f;
     protected static float maxYSpeed = 8f;
