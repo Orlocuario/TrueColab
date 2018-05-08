@@ -130,7 +130,7 @@ public class PlayerTeleporter : MonoBehaviour
 
     }
 
-    private void HandleCase1()
+    private void HandleCase1() //ChangeFilters in Warrior Zone -- Scene4
     {
         GameObject pFilter = GameObject.Find("ChangableMageFilter1");
         if (pFilter)

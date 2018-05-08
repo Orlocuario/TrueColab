@@ -218,6 +218,7 @@ public class NPCtrigger : MonoBehaviour
                 if (other.gameObject.GetComponent<PlayerController>().localPlayer)
                 {
                     levelManager.ActivateNPCFeedback("¿Estás Solo? Así no podrás salir jamás...");
+                    levelManager.localPlayer.ResumeMoving();
                 }
                 return;
             }
@@ -294,6 +295,24 @@ public class NPCtrigger : MonoBehaviour
             levelManager.GoToNextScene();
         }
 
+        if (whatToDo != null)
+        {
+            switch (whatToDo)
+            {
+                case "UnblockMageSecretPath":
+                    UnblockMageSecretPath();
+                    break;
+                case "UnblockWarriorSecretPath":
+                    UnblockWarriorSecretPath();
+                    break;
+                case "UnblockEnginSecretPath":
+                    UnblockEnginSecretPath();
+                    break;
+
+                default:
+                    return;
+            }
+        }
         levelManager.ShutNPCFeedback(true);
         if (musntDie)
         {
@@ -311,6 +330,32 @@ public class NPCtrigger : MonoBehaviour
     }
 
     #endregion
+    private void UnblockMageSecretPath()
+    {
+        GameObject teleportBlocker = GameObject.Find("SueloMetalMageSecretBlocker");
+        if (teleportBlocker)
+        {
+            Destroy(teleportBlocker);
+        }
+    }
+
+    private void UnblockWarriorSecretPath()
+    {
+        GameObject teleportBlocker = GameObject.Find("SueloMetalWarriorSecretBlocker");
+        if (teleportBlocker)
+        {
+            Destroy(teleportBlocker);
+        }
+    }
+
+    private void UnblockEnginSecretPath()
+    {
+        GameObject teleportBlocker = GameObject.Find("SueloMetalEnginSecretBlocker");
+        if (teleportBlocker)
+        {
+            Destroy(teleportBlocker);
+        }
+    }
 
     #region Coroutines
 

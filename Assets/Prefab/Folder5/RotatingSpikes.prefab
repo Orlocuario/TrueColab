@@ -20,8 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4372815464260766}
   - component: {fileID: 212745651222601328}
-  - component: {fileID: 114550507269406266}
-  - component: {fileID: 61208698694553242}
   m_Layer: 0
   m_Name: Spikes (2)
   m_TagString: KillPlane
@@ -38,8 +36,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4288656667585528}
   - component: {fileID: 212855416512643702}
-  - component: {fileID: 114852377939791442}
-  - component: {fileID: 61645421574684810}
   m_Layer: 0
   m_Name: Spikes (1)
   m_TagString: KillPlane
@@ -56,8 +52,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4866141270504160}
   - component: {fileID: 212407691194056744}
-  - component: {fileID: 114705573240203880}
-  - component: {fileID: 61310029434422006}
   m_Layer: 0
   m_Name: Spikes (4)
   m_TagString: KillPlane
@@ -74,8 +68,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4110606366303308}
   - component: {fileID: 212724030940183356}
-  - component: {fileID: 114358329470924200}
-  - component: {fileID: 61698077648190352}
   m_Layer: 0
   m_Name: Spikes (4)
   m_TagString: KillPlane
@@ -92,8 +84,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4818413785660822}
   - component: {fileID: 212545976064473246}
-  - component: {fileID: 114681383920092474}
-  - component: {fileID: 61386310981041144}
   m_Layer: 0
   m_Name: Spikes (3)
   m_TagString: KillPlane
@@ -110,8 +100,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4064711128513354}
   - component: {fileID: 212135547434794014}
-  - component: {fileID: 114690033234444322}
-  - component: {fileID: 61833420110542438}
   m_Layer: 0
   m_Name: Spikes (3)
   m_TagString: KillPlane
@@ -128,8 +116,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4660780722231014}
   - component: {fileID: 212177198280212862}
-  - component: {fileID: 114335127410381182}
-  - component: {fileID: 61327757751786470}
   m_Layer: 0
   m_Name: Spikes (2)
   m_TagString: KillPlane
@@ -146,7 +132,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4246696071461138}
   - component: {fileID: 114038126153251846}
-  - component: {fileID: 114523605431482558}
+  - component: {fileID: 61904981346618752}
+  - component: {fileID: 114713689408599184}
   m_Layer: 0
   m_Name: RotatingSpikes
   m_TagString: Untagged
@@ -163,8 +150,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4573180186556168}
   - component: {fileID: 212558951712026992}
-  - component: {fileID: 61145021784931708}
-  - component: {fileID: 114172172332126548}
   m_Layer: 0
   m_Name: Spikes (1)
   m_TagString: KillPlane
@@ -181,8 +166,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4398334100843216}
   - component: {fileID: 212244838883235296}
-  - component: {fileID: 114831842772414688}
-  - component: {fileID: 61936803186173458}
   m_Layer: 0
   m_Name: Spikes (1)
   m_TagString: KillPlane
@@ -199,8 +182,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4019296245289492}
   - component: {fileID: 212041446824294960}
-  - component: {fileID: 61822297695993470}
-  - component: {fileID: 114899123219927238}
   m_Layer: 0
   m_Name: Spikes
   m_TagString: KillPlane
@@ -258,7 +239,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1651846604111302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -83.06, y: 22.67, z: 0}
+  m_LocalPosition: {x: 69.16876, y: -26.842018, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4019296245289492}
@@ -361,146 +342,20 @@ Transform:
   m_Father: {fileID: 4573180186556168}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61145021784931708
+--- !u!61 &61904981346618752
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1652676948753170}
+  m_GameObject: {fileID: 1651846604111302}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: -0.0060920715, y: 0.010152996}
+  m_Offset: {x: -0.5017319, y: -0.0072727203}
   serializedVersion: 2
-  m_Size: {x: 0.15720508, y: 0.08157182}
---- !u!61 &61208698694553242
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1034199622544726}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: -0.0060920715, y: 0.010152996}
-  serializedVersion: 2
-  m_Size: {x: 0.15720508, y: 0.08157182}
---- !u!61 &61310029434422006
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1068641074485598}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: -0.0060920715, y: 0.010152996}
-  serializedVersion: 2
-  m_Size: {x: 0.15720508, y: 0.08157182}
---- !u!61 &61327757751786470
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1555695313077288}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: -0.0060920715, y: 0.010152996}
-  serializedVersion: 2
-  m_Size: {x: 0.15720508, y: 0.08157182}
---- !u!61 &61386310981041144
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1189525299264300}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: -0.0060920715, y: 0.010152996}
-  serializedVersion: 2
-  m_Size: {x: 0.15720508, y: 0.08157182}
---- !u!61 &61645421574684810
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1047431505295624}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: -0.0060920715, y: 0.010152996}
-  serializedVersion: 2
-  m_Size: {x: 0.15720508, y: 0.08157182}
---- !u!61 &61698077648190352
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1141033586119658}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: -0.0060920715, y: 0.010152996}
-  serializedVersion: 2
-  m_Size: {x: 0.15720508, y: 0.08157182}
---- !u!61 &61822297695993470
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1864508574252200}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: -0.0060920715, y: 0.010152996}
-  serializedVersion: 2
-  m_Size: {x: 0.15720508, y: 0.08157182}
---- !u!61 &61833420110542438
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1418280620152918}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: -0.0060920715, y: 0.010152996}
-  serializedVersion: 2
-  m_Size: {x: 0.15720508, y: 0.08157182}
---- !u!61 &61936803186173458
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1860884707716422}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: -0.0060920715, y: 0.010152996}
-  serializedVersion: 2
-  m_Size: {x: 0.15720508, y: 0.08157182}
+  m_Size: {x: 1.2035928, y: 0.28739244}
 --- !u!114 &114038126153251846
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -518,49 +373,7 @@ MonoBehaviour:
   timeToWait: 0
   playerHasReturned: 0
   isWorking: 0
---- !u!114 &114172172332126548
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1652676948753170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5fb81130ce142f4d843a50d243a2e69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activated: 1
-  damage: 5
-  hitsBeforeKilled: 0
---- !u!114 &114335127410381182
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1555695313077288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5fb81130ce142f4d843a50d243a2e69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activated: 1
-  damage: 8
-  hitsBeforeKilled: 0
---- !u!114 &114358329470924200
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1141033586119658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5fb81130ce142f4d843a50d243a2e69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activated: 1
-  damage: 8
-  hitsBeforeKilled: 0
---- !u!114 &114523605431482558
+--- !u!114 &114713689408599184
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -568,106 +381,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1651846604111302}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 694ff57fc425048449e93076034bfd3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114550507269406266
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1034199622544726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5fb81130ce142f4d843a50d243a2e69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   activated: 1
-  damage: 8
-  hitsBeforeKilled: 0
---- !u!114 &114681383920092474
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1189525299264300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5fb81130ce142f4d843a50d243a2e69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activated: 1
-  damage: 8
-  hitsBeforeKilled: 0
---- !u!114 &114690033234444322
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1418280620152918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5fb81130ce142f4d843a50d243a2e69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activated: 1
-  damage: 8
-  hitsBeforeKilled: 0
---- !u!114 &114705573240203880
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1068641074485598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5fb81130ce142f4d843a50d243a2e69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activated: 1
-  damage: 8
-  hitsBeforeKilled: 0
---- !u!114 &114831842772414688
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1860884707716422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5fb81130ce142f4d843a50d243a2e69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activated: 1
-  damage: 8
-  hitsBeforeKilled: 0
---- !u!114 &114852377939791442
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1047431505295624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5fb81130ce142f4d843a50d243a2e69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activated: 1
-  damage: 8
-  hitsBeforeKilled: 0
---- !u!114 &114899123219927238
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1864508574252200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5fb81130ce142f4d843a50d243a2e69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activated: 1
-  damage: 5
+  damage: 7
   hitsBeforeKilled: 0
 --- !u!212 &212041446824294960
 SpriteRenderer:
