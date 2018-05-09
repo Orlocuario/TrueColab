@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     public GameObject availableParticleTrigger;
     public GameObject availableEndOfScene;
     public GameObject mainCamera;
+    public GameObject availableColliderZone;
     public string decisionName;
     public bool controlOverEnemies;
     public float groundCheckRadius;

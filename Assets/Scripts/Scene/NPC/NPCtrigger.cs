@@ -295,6 +295,8 @@ public class NPCtrigger : MonoBehaviour
             levelManager.GoToNextScene();
         }
 
+        levelManager.ShutNPCFeedback(true);
+
         if (whatToDo != null)
         {
             switch (whatToDo)
@@ -313,7 +315,7 @@ public class NPCtrigger : MonoBehaviour
                     return;
             }
         }
-        levelManager.ShutNPCFeedback(true);
+
         if (musntDie)
         {
             StartCoroutine(WaitToBeActiveAgain());

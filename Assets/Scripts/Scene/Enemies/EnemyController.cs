@@ -58,10 +58,12 @@ public class EnemyController : MonoBehaviour
         ignoresCollisions = new Dictionary<string, bool> { { "Verde", false }, { "Rojo", false }, { "Amarillo", false } };
 
         currentPatrolPointCount = 0;
+
         if (patrollingSpeed.Equals(default(float)))
         {
             Debug.LogError("This Enemy has no speed set");
         }
+
         patrollingSpeed = patrollingSpeed * 0.04f;
         directionX = -1;
         hp = maxHp;
@@ -470,6 +472,7 @@ public class EnemyController : MonoBehaviour
             Attack(other.gameObject);
         }
     }
+    
     // Attack those who collide with me
     protected virtual void OnCollisionEnter2D(Collision2D other)
     {

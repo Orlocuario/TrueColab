@@ -16881,3 +16881,1120 @@
 
 21:01:12 Player 1 is going right from (3.933526,11.08382)
 
+14:54:46 Player 0 used his power
+
+14:54:47 Player 0 is going right from (46.78,26.01268)
+
+14:54:50 Player 0 is going left from (52.40836,26.01268)
+
+14:54:54 Player 0 is going right from (47.50899,26.01268)
+
+14:54:56 Player 1 is going right from (46.25,26.01268)
+
+14:55:01 Player 2 is going right from (46.1,26.01268)
+
+14:55:07 Player 2 jumped from (57.61635,26.01268)
+
+14:55:08 Player 2 jumped from (57.61635,27.2092)
+
+14:55:13 Player 2 jumped from (57.61635,27.2092)
+
+14:55:20 Player 2 jumped from (57.61635,27.2092)
+
+14:55:21 Player 2 jumped from (57.61635,28.05452)
+
+14:55:21 Player 2 is going right from (57.79635,28.41169)
+
+14:55:21 Player 2 used his power
+
+14:55:24 Player 2 jumped from (57.77373,27.2092)
+
+14:55:24 Player 2 jumped from (57.77373,27.51547)
+
+14:55:24 Player 2 jumped from (57.77373,27.21313)
+
+14:55:24 Player 2 jumped from (57.77373,27.51939)
+
+14:55:24 Player 2 jumped from (57.77373,27.21705)
+
+14:55:26 Player 2 is going right from (57.77373,27.64253)
+
+14:55:27 Player 2 jumped from (57.82219,27.64253)
+
+14:55:27 Player 2 jumped from (57.82219,27.93311)
+
+14:55:27 Player 2 is going right from (57.82219,28.85995)
+
+14:55:28 Player 2 is going left from (58.25418,27.2092)
+
+14:55:29 Player 2 jumped from (57.45044,27.2092)
+
+14:55:29 Player 2 is going left from (57.39043,27.35939)
+
+14:55:29 Player 2 jumped from (57.33043,27.51547)
+
+14:55:29 Player 2 is going left from (57.27043,27.36135)
+
+14:55:29 Player 2 jumped from (57.21108,27.20917)
+
+14:55:29 Player 2 is going left from (57.15108,27.35936)
+
+14:55:30 Player 2 is going left from (55.65104,27.67864)
+
+14:55:32 Player 2 is going right from (52.67924,28.89302)
+
+14:55:32 Player 2 stopped using his power
+
+14:55:33 Player 0 stopped using his power
+
+14:55:35 Player 1 stopped using his power
+
+14:55:49 Player 1 is going right from (51.14938,26.01268)
+
+14:55:50 Player 1 jumped from (54.92723,26.01268)
+
+14:55:51 Player 1 is going right from (55.88725,27.23852)
+
+14:55:51 Player 1 jumped from (56.34347,27.2092)
+
+14:55:53 Player 1 is going left from (56.40194,27.2092)
+
+14:55:54 Player 1 jumped from (55.19293,28.42827)
+
+14:55:58 Player 1 is going right from (52.67141,26.01268)
+
+14:56:00 Player 1 is going left from (54.82306,26.01268)
+
+14:56:01 Player 1 is going right from (51.32558,26.01268)
+
+14:56:02 Player 1 jumped from (53.81369,26.01268)
+
+14:56:03 Player 1 is going right from (54.69917,27.23852)
+
+14:56:03 Player 1 jumped from (54.98715,27.2092)
+
+14:56:03 Player 1 is going right from (54.98715,27.82102)
+
+14:56:04 Player 1 is going left from (55.26796,27.67864)
+
+14:56:06 Player 1 is going right from (55.26543,27.2092)
+
+14:56:06 Player 1 jumped from (55.35404,27.2092)
+
+14:56:06 Player 1 is going right from (56.31405,28.3853)
+
+14:56:10 Player 1 jumped from (56.94032,27.58864)
+
+14:56:11 Player 1 is going left from (56.94032,28.56108)
+
+14:56:14 Player 1 jumped from (56.80032,27.2092)
+
+14:56:14 Player 1 is going left from (56.80032,27.58818)
+
+14:56:15 Player 1 used his power
+
+14:56:16 Player 1 is going right from (56.78809,27.58864)
+
+14:56:24 Player 1 is going right from (56.57278,27.58864)
+
+14:56:25 Player 1 is going right from (56.59308,28.61125)
+
+14:56:35 Player 1 is going left from (64.21323,38.55268)
+
+14:56:38 Player 1 is going left from (63.23918,38.55268)
+
+14:56:41 Player 1 is going right from (56.20219,35.84512)
+
+14:56:45 Player 1 is going left from (64.08618,39.05865)
+
+14:56:50 Player 1 is going right from (53.31032,26.01268)
+
+14:56:51 Player 1 jumped from (54.17222,26.01268)
+
+14:56:51 Player 1 is going right from (54.69915,27.23852)
+
+14:56:52 Player 1 jumped from (55.43575,27.2092)
+
+14:56:52 Player 1 is going left from (55.43575,28.41915)
+
+14:56:54 Player 1 is going right from (55.28574,27.2092)
+
+14:56:55 Player 1 jumped from (56.42802,27.2092)
+
+14:56:55 Player 1 is going right from (57.26804,28.41915)
+
+14:56:59 Player 1 stopped using his power
+
+14:57:00 Player 0 stopped using his power
+
+14:57:00 Player 2 stopped using his power
+
+15:08:55 Player 0 used his power
+
+15:08:57 Player 0 is going right from (46.78,26.01268)
+
+15:08:59 Player 0 is going right from (49.29578,26.01268)
+
+15:09:02 Player 0 stopped using his power
+
+15:09:05 Player 0 jumped from (56.57057,26.01268)
+
+15:09:05 Player 0 jumped from (56.57057,26.01268)
+
+15:09:06 Player 0 is going left from (55.53177,27.20793)
+
+15:09:07 Player 0 jumped from (54.77729,27.2092)
+
+15:09:07 Player 0 jumped from (54.77729,27.97791)
+
+15:09:07 Player 0 is going right from (54.99329,28.45349)
+
+15:09:08 Player 0 jumped from (56.06725,27.2092)
+
+15:09:08 Player 0 jumped from (56.06725,27.2092)
+
+15:09:09 Player 0 is going left from (55.25727,28.45584)
+
+15:10:21 Player 0 used his power
+
+15:10:27 Player 0 stopped using his power
+
+15:10:29 Player 0 used his power
+
+15:10:30 Player 0 is going right from (46.78,26.01268)
+
+15:10:32 Player 0 jumped from (53.76461,26.01268)
+
+15:10:33 Player 0 is going right from (55.27652,27.20915)
+
+15:10:34 Player 0 is going left from (56.23413,27.2092)
+
+15:10:34 Player 0 jumped from (55.80768,27.2092)
+
+15:10:35 Player 0 is going left from (54.45773,28.08226)
+
+15:10:36 Player 0 jumped from (54.45773,26.01268)
+
+15:10:36 Player 0 jumped from (54.45773,26.01268)
+
+15:10:37 Player 0 is going right from (54.84914,27.27344)
+
+15:10:38 Player 0 is going left from (55.42815,27.2092)
+
+15:10:39 Player 0 jumped from (54.82759,27.2092)
+
+15:10:41 Player 0 is going right from (54.82759,27.2092)
+
+15:10:42 Player 0 jumped from (55.10895,27.2092)
+
+15:10:46 Player 0 jumped from (55.10895,27.21267)
+
+15:10:47 Player 0 is going right from (55.10895,27.94314)
+
+15:10:48 Player 0 is going left from (55.24594,27.67864)
+
+15:10:51 Player 0 is going right from (55.09167,27.21267)
+
+15:10:53 Player 0 jumped from (56.38666,27.21267)
+
+15:10:53 Player 0 jumped from (56.38666,27.21267)
+
+15:10:53 Player 0 is going left from (55.39669,28.35806)
+
+15:10:55 Player 0 jumped from (54.72459,27.21266)
+
+15:10:55 Player 0 jumped from (54.72459,28.39691)
+
+15:10:55 Player 0 is going right from (55.23457,28.08572)
+
+15:10:56 Player 0 is going left from (55.23457,27.67864)
+
+15:10:59 Player 0 stopped using his power
+
+16:15:34 Player 0 used his power
+
+16:15:36 Player 0 is going right from (46.78,26.01268)
+
+16:15:39 Player 0 stopped using his power
+
+16:15:54 Player 0 is going right from (51.99449,26.01268)
+
+16:15:57 Player 0 is going left from (56.07726,26.01268)
+
+16:16:02 Player 0 is going right from (50.39848,26.01268)
+
+16:16:06 Player 0 is going right from (55.93217,26.01268)
+
+16:16:10 Player 0 is going left from (61.93015,26.01268)
+
+16:16:12 Player 0 is going right from (59.18223,26.01268)
+
+16:16:23 Player 0 is going left from (61.93015,26.01268)
+
+16:16:25 Player 0 jumped from (56.10628,26.01268)
+
+16:16:25 Player 0 jumped from (56.10628,26.01268)
+
+16:16:26 Player 0 jumped from (56.10628,27.2092)
+
+16:16:26 Player 0 jumped from (56.10628,27.2092)
+
+16:16:26 Player 0 is going left from (55.3563,28.46412)
+
+16:16:28 Player 0 jumped from (54.72633,27.2092)
+
+16:16:28 Player 0 jumped from (54.72633,28.45349)
+
+16:16:28 Player 0 is going right from (55.32631,27.71522)
+
+17:01:49 Player 0 stopped using his power
+
+17:02:24 Player 0 is going right from (-2.3,-1.221569)
+
+17:02:24 Player 0 is going left from (-1.40924,-1.221569)
+
+17:02:25 Player 0 used his power
+
+17:02:25 Player 0 is going right from (-1.609544,-1.221569)
+
+17:02:28 Player 0 is going left from (3.080691,-1.221569)
+
+17:02:30 Player 0 stopped using his power
+
+17:02:30 Player 0 jumped from (2.903406,1.027593)
+
+17:02:31 Player 0 attacked
+
+17:02:33 Player 0 attacked
+
+17:02:34 Player 0 attacked
+
+17:02:35 Player 0 is going right from (2.903406,-1.221569)
+
+17:02:37 Player 0 jumped from (7.681664,-1.221569)
+
+17:02:37 Player 0 jumped from (7.680945,-1.038357)
+
+17:02:38 Player 0 jumped from (7.680945,-1.221569)
+
+17:02:38 Player 0 jumped from (7.680945,-0.5961096)
+
+17:02:38 Player 0 is going left from (7.354765,-1.221585)
+
+17:02:39 Player 0 jumped from (5.468538,-1.221569)
+
+17:02:40 Player 0 is going right from (5.468538,-1.221569)
+
+17:02:41 Player 0 jumped from (5.694861,-1.221569)
+
+17:02:43 Player 0 jumped from (5.694861,-1.221569)
+
+17:02:45 Player 0 jumped from (5.694861,-1.221569)
+
+17:02:45 Player 0 jumped from (5.694861,-1.221569)
+
+17:02:45 Player 0 jumped from (6.204862,0.0113854)
+
+17:02:46 Player 0 jumped from (6.204862,-1.221569)
+
+17:02:46 Player 0 jumped from (6.204862,-1.221569)
+
+17:02:46 Player 0 jumped from (6.654863,-0.01863203)
+
+17:02:52 Player 0 is going right from (6.654863,3.857593)
+
+17:02:52 Player 0 jumped from (6.907205,3.857593)
+
+17:02:53 Player 0 is going right from (8.28721,4.886439)
+
+17:02:53 Player 0 jumped from (8.873437,3.762645)
+
+17:02:53 Player 0 is going right from (10.13343,4.908037)
+
+17:02:54 Player 0 jumped from (10.86232,3.762668)
+
+17:02:54 Player 0 is going right from (12.20004,5.022183)
+
+17:02:57 Player 0 jumped from (19.36645,3.762684)
+
+17:02:57 Player 0 is going right from (19.56427,4.160129)
+
+17:02:58 Player 0 is going left from (19.56427,3.762684)
+
+17:02:59 Player 0 jumped from (17.83199,3.762684)
+
+17:02:59 Player 0 is going left from (16.93196,4.245966)
+
+17:03:01 Player 0 is going right from (12.72797,3.762684)
+
+17:03:02 Player 0 is going left from (15.94028,3.762684)
+
+17:03:05 Player 0 jumped from (7.505943,3.762684)
+
+17:03:06 Player 0 is going left from (6.305934,4.908075)
+
+17:03:07 Player 0 jumped from (2.442961,3.762684)
+
+17:03:07 Player 0 is going left from (1.392962,4.019433)
+
+17:03:09 Player 0 jumped from (-3.563177,3.762684)
+
+17:03:09 Player 0 is going left from (-4.432636,3.90907)
+
+17:03:11 Player 0 is going right from (-4.43262,3.762684)
+
+17:03:11 Player 0 jumped from (-2.003845,3.762684)
+
+17:03:12 Player 0 is going right from (-0.8638461,3.85021)
+
+17:03:14 Player 0 jumped from (3.625047,3.762684)
+
+17:03:14 Player 0 jumped from (3.625047,3.762684)
+
+17:03:14 Player 0 jumped from (3.205047,4.925794)
+
+17:03:17 Player 0 is going right from (3.205047,4.562904)
+
+17:03:18 Player 0 jumped from (6.330271,3.765842)
+
+17:03:19 Player 0 is going right from (7.380279,5.001734)
+
+17:03:20 Player 0 jumped from (10.95919,3.762684)
+
+17:03:20 Player 0 is going right from (12.09918,4.985381)
+
+17:03:21 Player 0 is going left from (12.8911,3.762684)
+
+17:03:22 Player 0 jumped from (10.6074,3.762684)
+
+17:03:22 Player 0 jumped from (10.6074,3.762684)
+
+17:03:23 Player 0 is going right from (10.6074,3.762684)
+
+17:03:25 Player 0 jumped from (11.46915,3.762684)
+
+17:03:26 Player 0 jumped from (11.46915,4.562904)
+
+17:03:28 Player 0 is going left from (11.46915,7.643957)
+
+17:03:29 Player 0 jumped from (11.31488,7.79465)
+
+17:03:29 Player 0 is going left from (10.31289,9.055411)
+
+17:03:30 Player 0 is going left from (10.31289,7.010445)
+
+17:03:30 Player 0 jumped from (10.06055,7.010445)
+
+17:03:31 Player 0 jumped from (9.490551,8.064469)
+
+17:03:33 Player 0 is going left from (9.490551,7.006348)
+
+17:03:36 Player 0 is going right from (5.988074,7.006348)
+
+18:13:12 Player 0 entered poi with ID: 1
+18:13:12 Player 0 entered poi with ID: 1
+18:13:13 Player 0 entered poi with ID: 1
+18:13:13 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 3.6777917
+18:13:13 Player 0 stopped using his power
+
+18:13:26 Player 0 is going right from (-21.083,-2.413567)
+
+18:13:27 Player 0 is going left from (-20.83066,-2.413567)
+
+18:13:27 Player 0 is going right from (-21.02894,-2.413567)
+
+18:13:28 Player 0 attacked
+
+18:13:29 Player 0 is going left from (-16.89016,-2.413567)
+
+18:13:30 Player 0 is going right from (-18.39029,-2.413567)
+
+18:13:30 Player 0 attacked
+
+18:13:31 Player 0 attacked
+
+18:13:32 Player 0 attacked
+
+18:13:33 Player 0 attacked
+
+18:13:33 Player 0 attacked
+
+18:13:34 Player 0 is going right from (-18.3101,-2.413567)
+
+18:13:36 Player 0 is going right from (-15.79432,-2.413567)
+
+18:13:42 Player 0 is going left from (-0.9453326,-2.413567)
+
+18:13:42 Player 0 jumped from (-1.07958,-2.413567)
+
+18:13:42 Player 0 jumped from (-1.592579,-1.392945)
+
+18:13:43 Player 0 is going left from (-1.592579,-2.413567)
+
+18:13:43 Player 0 jumped from (-1.706807,-2.413567)
+
+18:13:43 Player 0 jumped from (-1.970807,-1.748454)
+
+18:13:43 Player 0 is going left from (-1.970807,-1.321543)
+
+18:13:44 Player 0 jumped from (-3.47147,-2.413567)
+
+18:13:44 Player 0 is going left from (-4.13147,-1.27405)
+
+18:13:44 Player 0 jumped from (-5.244614,-1.416211)
+
+18:13:44 Player 0 jumped from (-5.544616,-0.7510992)
+
+18:13:45 Player 0 is going right from (-5.544616,-0.1832573)
+
+18:13:45 Player 0 attacked
+
+18:13:46 Player 0 attacked
+
+18:13:46 Player 0 attacked
+
+18:13:47 Player 0 attacked
+
+18:13:48 Player 0 attacked
+
+18:13:49 Player 0 is going right from (-5.469617,-0.6019815)
+
+18:13:49 Player 0 is going right from (-5.217275,-0.6019815)
+
+18:13:49 Player 0 attacked
+
+18:13:50 Player 0 jumped from (-2.179105,-0.6019815)
+
+18:13:51 Player 0 is going right from (-1.519106,0.5375354)
+
+18:13:51 Player 0 jumped from (0.3485282,0.178472)
+
+18:13:51 Player 0 is going right from (0.9785287,1.291944)
+
+18:13:52 Player 0 entered poi with ID: 2
+18:13:52 Player 0 is going right from (1.728528,-0.410121)
+
+18:13:53 Player 0 is going right from (1.944528,-4.265079)
+
+18:13:53 Player 0 is going left from (3.299597,-4.265079)
+
+18:13:53 Player 0 attacked
+
+18:13:54 Player 0 jumped from (3.185369,-4.265079)
+
+18:13:55 Player 0 attacked
+
+18:13:55 Player 0 is going right from (3.185369,-4.265079)
+
+18:13:56 Player 0 is going right from (5.133834,-4.262471)
+
+18:13:57 Player 0 jumped from (5.133834,-4.262471)
+
+18:13:57 Player 0 is going right from (5.601836,-3.122954)
+
+18:13:57 Player 0 is going left from (5.992986,-3.676871)
+
+18:13:58 Player 0 is going left from (5.993023,-3.676841)
+
+18:13:58 Player 0 is going left from (5.966193,-3.675167)
+
+18:13:59 Player 0 attacked
+
+18:14:00 Player 0 attacked
+
+18:14:02 Player 0 attacked
+
+18:14:03 Player 0 attacked
+
+18:14:03 Player 0 is going right from (5.517662,-3.935906)
+
+18:14:04 Player 0 is going left from (7.217032,-3.677154)
+
+18:14:04 Player 0 attacked
+
+18:14:05 Player 0 is going right from (7.150861,-3.677154)
+
+18:14:06 Player 0 is going right from (7.285108,-3.677154)
+
+18:14:06 Player 0 jumped from (7.419355,-3.677154)
+
+18:14:06 Player 0 jumped from (7.692357,-3.012041)
+
+18:14:06 Player 0 is going right from (7.692357,-2.55722)
+
+18:14:07 Player 0 is going right from (7.908356,-3.677154)
+
+18:14:07 Player 0 is going right from (7.974528,-3.677154)
+
+18:14:08 Player 0 is going right from (9.926249,-4.961649)
+
+18:14:09 Player 0 used his power
+
+18:14:09 Player 0 is going right from (10.17859,-4.961649)
+
+18:14:10 Player 0 is going left from (11.93994,-4.961649)
+
+18:14:10 Player 0 attacked
+
+18:14:11 Player 0 attacked
+
+18:14:12 Player 0 attacked
+
+18:14:13 Player 0 attacked
+
+18:14:13 Player 0 is going left from (11.82571,-4.961649)
+
+18:14:14 Player 0 is going right from (11.80361,-4.961649)
+
+18:14:14 Player 0 attacked
+
+18:14:15 Player 0 is going right from (11.88381,-4.961649)
+
+18:14:16 Player 0 jumped from (12.03807,-4.961649)
+
+18:14:16 Player 0 jumped from (12.03807,-4.598436)
+
+18:14:16 Player 0 is going right from (12.25407,-3.848177)
+
+18:14:16 Player 0 is going right from (12.39807,-4.366062)
+
+18:14:16 Player 0 jumped from (12.40713,-4.366062)
+
+18:14:17 Player 0 is going right from (12.84513,-3.252589)
+
+18:14:17 Player 0 jumped from (13.97949,-3.676224)
+
+18:14:17 Player 0 is going right from (13.97949,-2.513115)
+
+18:14:18 Player 0 jumped from (14.53676,-2.726061)
+
+18:14:19 Player 0 jumped from (14.53676,-1.557665)
+
+18:14:19 Player 0 attacked
+
+18:14:20 Player 0 is going left from (14.53676,-1.558639)
+
+18:14:20 Player 0 jumped from (14.31044,-1.558639)
+
+18:14:20 Player 0 is going left from (13.65344,-0.4191217)
+
+18:14:22 Player 0 jumped from (9.639691,-4.961649)
+
+18:14:22 Player 0 is going left from (9.341413,-3.876674)
+
+18:14:22 Player 0 jumped from (8.346418,-4.32096)
+
+18:14:23 Player 0 jumped from (8.346694,-3.655848)
+
+18:14:23 Player 0 is going right from (8.346697,-3.677154)
+
+18:14:25 Player 0 is going right from (11.78753,-4.961649)
+
+18:14:25 Player 0 jumped from (11.79659,-4.961649)
+
+18:14:25 Player 0 is going right from (12.23459,-3.848177)
+
+18:14:26 Player 0 jumped from (12.93348,-4.366077)
+
+18:14:26 Player 0 jumped from (12.93348,-3.312052)
+
+18:14:26 Player 0 is going right from (12.95148,-3.181827)
+
+18:14:26 Player 0 jumped from (14.08902,-3.676224)
+
+18:14:27 Player 0 is going right from (14.65901,-2.6222)
+
+18:14:27 Player 0 jumped from (14.65901,-2.726061)
+
+18:14:28 Player 0 jumped from (14.65901,-1.557665)
+
+18:14:28 Player 0 jumped from (14.65901,-0.6951777)
+
+18:14:28 Player 0 is going right from (14.70701,-0.418148)
+
+18:14:28 Player 0 attacked
+
+18:14:29 Player 0 attacked
+
+18:14:31 Player 0 attacked
+
+18:14:32 Player 0 attacked
+
+18:14:33 Player 0 attacked
+
+18:14:34 Player 0 attacked
+
+18:14:35 Player 0 is going left from (14.98901,-1.113894)
+
+18:14:35 Player 0 attacked
+
+18:14:36 Player 0 attacked
+
+18:14:37 Player 0 attacked
+
+18:14:38 Player 0 attacked
+
+18:14:38 Player 0 attacked
+
+18:14:39 Player 0 attacked
+
+18:14:40 Player 0 is going left from (14.92284,-1.113894)
+
+18:14:40 Player 0 is going left from (14.36616,-1.558639)
+
+18:14:42 Player 0 jumped from (10.70191,-4.961649)
+
+18:14:42 Player 0 is going left from (10.10192,-3.876674)
+
+18:14:42 Player 0 jumped from (8.880826,-4.320962)
+
+18:14:42 Player 0 is going left from (8.160832,-3.136712)
+
+18:14:43 Player 0 jumped from (6.973922,-3.677154)
+
+18:14:43 Player 0 jumped from (6.67392,-3.012042)
+
+18:14:43 Player 0 is going right from (6.67392,-2.413595)
+
+18:14:44 Player 0 jumped from (7.213922,-3.677154)
+
+18:14:44 Player 0 jumped from (7.213922,-2.656532)
+
+18:14:44 Player 0 is going right from (7.231921,-2.514044)
+
+18:14:45 Player 0 jumped from (10.79683,-4.961649)
+
+18:14:45 Player 0 is going right from (11.42682,-3.848177)
+
+18:14:46 Player 0 jumped from (12.55596,-4.366071)
+
+18:14:46 Player 0 is going right from (13.27595,-3.181822)
+
+18:14:46 Player 0 jumped from (14.32032,-3.676228)
+
+18:14:46 Player 0 jumped from (14.74031,-2.813741)
+
+18:14:47 Player 0 is going left from (14.74031,-2.726061)
+
+18:23:58 Player 0 is going right from (4.7,30.75958)
+
+18:24:02 Player 0 is going left from (6.925626,30.75958)
+
+18:24:06 Player 0 is going left from (0.5212587,30.75958)
+
+18:24:10 Player 0 is going right from (1.17,30.759)
+
+18:24:13 Player 0 used his power
+
+18:24:15 Player 0 stopped using his power
+
+18:24:15 Player 0 is going left from (6.065382,30.759)
+
+18:24:16 Player 0 jumped from (1.895474,30.759)
+
+18:24:17 Player 0 is going left from (0.7254742,31.96605)
+
+18:24:18 Player 0 jumped from (0.065474,30.37625)
+
+18:24:21 Player 0 attacked
+
+18:24:29 Player 0 is going left from (0.065474,30.37625)
+
+18:24:31 Player 0 is going left from (-2.104494,28.96211)
+
+18:24:32 Player 0 is going left from (-3.024276,28.96211)
+
+18:24:32 Player 0 jumped from (-3.158523,28.96211)
+
+18:24:32 Player 0 is going left from (-4.091523,30.22719)
+
+18:24:33 Player 0 jumped from (-4.541526,29.95569)
+
+18:24:33 Player 0 is going left from (-5.411532,31.20885)
+
+18:24:37 Player 0 is going right from (1.17,30.759)
+
+18:24:42 Player 0 is going right from (9.120225,20.04433)
+
+18:24:46 Player 0 is going left from (12.61,15.6489)
+
+18:24:49 Player 0 is going left from (8.666905,9.744329)
+
+18:25:06 Player 0 jumped from (1.138231,5.759161)
+
+18:25:08 Player 0 jumped from (1.138231,5.759161)
+
+18:25:10 Player 0 jumped from (1.138231,5.759161)
+
+18:25:11 Player 0 is going left from (1.138231,5.759161)
+
+18:25:14 Player 0 used his power
+
+18:25:15 Player 0 is going left from (-1.501225,4.374999)
+
+18:25:17 Player 0 stopped using his power
+
+18:25:17 Player 0 is going left from (-3.856184,1.029765)
+
+18:25:19 Player 0 is going left from (-5.216571,-2.041668)
+
+18:25:21 Player 0 jumped from (-7.803251,-4.532466)
+
+18:25:24 Player 0 is going right from (-7.803251,-4.532466)
+
+18:25:25 Player 0 jumped from (-5.751739,-4.532466)
+
+18:25:25 Player 0 jumped from (-5.751739,-4.532466)
+
+18:25:34 Player 0 is going right from (0,0.1)
+
+18:25:36 Player 0 is going right from (0,0.1)
+
+18:25:38 Player 0 is going right from (0,0.1)
+
+18:25:41 Player 0 is going left from (0,0.1)
+
+18:25:43 Player 0 is going left from (0,0.1)
+
+18:38:42 Player 0 is going left from (46.78,26.18402)
+
+18:38:44 Player 0 is going left from (45.25005,28.69048)
+
+18:38:46 Player 0 is going right from (38.62032,1.206771)
+
+18:42:02 Player 0 stopped using his power
+
+18:42:21 Player 0 is going right from (-1.37,-1.221569)
+
+18:42:22 Player 0 jumped from (1.465033,-1.221569)
+
+18:42:23 Player 0 is going right from (2.065032,-0.5825168)
+
+18:42:24 Player 0 is going left from (3.301584,0.3025621)
+
+18:42:25 Player 0 is going right from (1.927717,1.028416)
+
+18:42:28 Player 0 is going right from (2.441231,-0.7323504)
+
+18:42:30 Player 0 jumped from (6.524075,-1.221569)
+
+18:42:30 Player 0 jumped from (6.524075,-1.221569)
+
+18:42:30 Player 0 is going right from (6.524075,-0.1697058)
+
+18:42:31 Player 0 is going left from (7.020684,-1.142407)
+
+18:42:31 Player 0 attacked
+
+18:42:32 Player 0 jumped from (6.954513,-1.142407)
+
+18:42:32 Player 0 jumped from (6.954513,-0.915445)
+
+18:42:34 Player 0 used his power
+
+18:42:37 Player 0 jumped from (6.954513,3.857593)
+
+18:42:37 Player 0 jumped from (6.954513,4.626297)
+
+18:42:37 Player 0 is going right from (7.062512,5.020702)
+
+18:42:40 Player 0 is going left from (14.99422,3.762684)
+
+18:42:43 Player 0 jumped from (6.616477,3.711181)
+
+18:42:44 Player 0 is going left from (5.776471,4.955466)
+
+18:42:47 Player 0 jumped from (-2.810615,3.762684)
+
+18:42:47 Player 0 stopped using his power
+
+18:42:50 Player 0 attacked
+
+18:42:51 Player 0 jumped from (-20.6,-1.157513)
+
+18:42:51 Player 0 is going right from (-20.6,-0.0179957)
+
+18:42:51 Player 0 is going left from (-19.28142,-0.1817928)
+
+18:42:56 Player 0 is going right from (-0.2894356,-1.221569)
+
+20:57:31 Player 2 stopped using his power
+
+20:57:31 Player 0 stopped using his power
+
+20:57:56 Player 2 is going left from (4.1,30.759)
+
+20:57:59 Player 2 is going right from (2.251606,30.759)
+
+20:58:04 Player 2 is going right from (9.608122,20.04433)
+
+20:58:09 Player 0 is going right from (4.7,30.75958)
+
+20:58:14 Player 0 is going right from (9.716765,20.04433)
+
+20:58:18 Player 2 is going left from (12.61,15.6489)
+
+20:58:22 Player 0 is going left from (12.61,15.6489)
+
+20:58:25 Player 2 is going left from (9.596897,9.744329)
+
+20:58:27 Player 0 is going left from (8.906903,9.744329)
+
+20:58:31 Player 0 jumped from (6.471372,9.552683)
+
+20:58:34 Player 2 is going left from (6.47166,9.553034)
+
+20:58:36 Player 2 is going left from (6.47166,9.553034)
+
+20:58:37 Player 2 jumped from (6.47166,9.553034)
+
+20:58:38 Player 2 jumped from (6.471119,9.552598)
+
+20:58:39 Player 2 jumped from (6.471372,9.552683)
+
+20:58:39 Player 2 jumped from (6.471372,9.552683)
+
+20:58:39 Player 2 is going right from (7.265715,9.597772)
+
+20:58:40 Player 2 is going left from (7.64247,9.55499)
+
+20:58:42 Player 2 jumped from (6.471372,9.552683)
+
+20:58:42 Player 2 is going left from (6.47136,9.552682)
+
+20:58:42 Player 2 is going right from (6.471372,9.552683)
+
+20:58:43 Player 2 is going left from (7.64247,9.552683)
+
+20:58:44 Player 2 jumped from (7.041901,9.552683)
+
+20:58:44 Player 2 is going left from (6.691977,10.38638)
+
+21:37:30 Player 0 stopped using his power
+
+21:37:30 Player 1 stopped using his power
+
+21:37:33 Player 2 is going right from (-2.07,-1.221569)
+
+21:37:36 Player 2 jumped from (5.582188,-1.221569)
+
+21:37:36 Player 2 is going right from (6.302193,-0.0373195)
+
+21:37:41 Player 2 is going right from (7.172199,3.857593)
+
+21:37:42 Player 2 used his power
+
+21:37:43 Player 2 is going left from (9.201363,3.762684)
+
+21:37:43 Player 2 jumped from (8.774904,3.762684)
+
+21:37:43 Player 2 is going left from (8.744905,3.840231)
+
+21:37:43 Player 2 jumped from (8.714905,3.915326)
+
+21:37:43 Player 2 is going left from (8.684905,3.992874)
+
+21:37:44 Player 2 jumped from (6.592601,3.706386)
+
+21:37:44 Player 2 is going left from (6.592601,3.783933)
+
+21:37:44 Player 2 jumped from (6.562601,3.859028)
+
+21:37:44 Player 2 is going left from (6.532601,3.936576)
+
+21:37:45 Player 2 jumped from (4.508773,3.762674)
+
+21:37:45 Player 2 is going left from (4.478773,3.840221)
+
+21:37:45 Player 2 jumped from (4.448772,3.915316)
+
+21:37:45 Player 2 is going left from (4.418772,3.992864)
+
+21:37:46 Player 2 jumped from (4.328772,3.762659)
+
+21:37:46 Player 2 jumped from (4.328772,3.915302)
+
+21:37:46 Player 2 jumped from (4.328772,3.762678)
+
+21:37:46 Player 2 jumped from (4.328772,3.91532)
+
+21:37:47 Player 2 jumped from (4.328772,3.77284)
+
+21:37:47 Player 2 is going right from (4.328772,4.635328)
+
+21:38:02 Player 2 is going left from (-2.798923,3.727593)
+
+21:38:04 Player 2 is going right from (-3.286361,1.028905)
+
+21:38:09 Player 2 jumped from (-3.267045,1.028905)
+
+21:38:10 Player 2 jumped from (-3.267045,2.168422)
+
+21:38:10 Player 2 is going right from (-2.757045,1.944591)
+
+21:38:12 Player 2 is going left from (-1.996564,1.080095)
+
+21:38:14 Player 2 used his power
+
+21:38:17 Player 2 is going left from (-3.206537,1.080095)
+
+21:38:19 Player 2 jumped from (-4.245337,-2.131393)
+
+21:38:19 Player 2 jumped from (-4.245337,-2.131393)
+
+21:38:19 Player 2 is going left from (-4.245337,-2.053845)
+
+21:38:19 Player 2 jumped from (-4.248336,-1.97875)
+
+21:38:19 Player 2 is going left from (-4.251336,-1.901203)
+
+21:38:20 Player 2 jumped from (-6.148384,4.906734)
+
+21:38:20 Player 2 is going left from (-6.178384,4.828205)
+
+21:38:20 Player 2 jumped from (-6.688387,3.71836)
+
+21:38:20 Player 2 jumped from (-6.688387,3.71836)
+
+21:38:22 Player 2 is going left from (-6.688387,4.906695)
+
+21:38:23 Player 2 stopped using his power
+
+21:38:23 Player 2 used his power
+
+21:38:25 Player 2 stopped using his power
+
+21:38:25 Player 2 used his power
+
+21:38:25 Player 2 is going right from (-8.402352,3.973775)
+
+21:38:28 Player 0 stopped using his power
+
+21:38:28 Player 2 stopped using his power
+
+21:38:29 Player 1 stopped using his power
+
+21:38:32 Player 2 is going right from (-2.63,1.080095)
+
+21:38:36 Player 2 is going left from (-2.63,1.080095)
+
+21:38:41 Player 2 jumped from (-2.882342,3.271733)
+
+21:38:41 Player 2 jumped from (-2.882342,3.271733)
+
+21:38:42 Player 2 is going left from (-3.782342,4.478782)
+
+21:38:42 Player 2 used his power
+
+21:38:42 Player 2 jumped from (-4.952348,2.626581)
+
+21:38:42 Player 2 is going left from (-4.982348,2.548053)
+
+21:38:46 Player 2 stopped using his power
+
+21:38:48 Player 2 is going left from (-6.332358,-2.041668)
+
+21:38:50 Player 2 stopped using his power
+
+21:39:20 Player 2 jumped from (-8.882016,-4.531978)
+
+21:39:22 Player 2 is going right from (-8.882016,-4.532466)
+
+21:39:24 Player 2 jumped from (-5.785814,-4.532466)
+
+22:47:37 Player 0 jumped from (-2.024056,1.080095)
+
+22:47:47 Player 0 is going right from (-2.024056,0.9789608)
+
+22:47:51 Player 0 is going left from (-2.03,1.08311)
+
+22:47:54 Player 0 is going right from (-5.638593,-2.041668)
+
+22:47:55 Player 0 jumped from (-5.009005,-2.041668)
+
+22:47:55 Player 0 is going right from (-3.988998,-0.7809062)
+
+22:47:57 Player 0 is going left from (-3.478999,-1.281095)
+
+22:47:59 Player 0 is going left from (-5.370336,-2.041668)
+
+22:47:59 Player 0 jumped from (-5.738754,-2.041668)
+
+22:47:59 Player 0 is going left from (-6.788761,-0.7867438)
+
+22:48:00 Player 0 is going left from (-7.088763,-2.179118)
+
+22:48:01 Player 0 is going left from (-7.185973,-2.31737)
+
+22:48:03 Player 0 is going right from (-7.55439,-1.431286)
+
+22:48:03 Player 0 is going left from (-7.502238,-0.9953699)
+
+22:48:04 Player 0 jumped from (-7.955693,-0.9953699)
+
+22:48:04 Player 0 is going left from (-8.915686,0.2697092)
+
+22:48:07 Player 0 is going left from (-15.41662,-0.03531614)
+
+22:48:08 Player 0 is going right from (-16.58897,-0.03531614)
+
+22:48:11 Player 0 jumped from (-10.91002,-0.07731617)
+
+22:48:13 Player 1 is going right from (-3.03,2.566118)
+
+22:48:17 Player 0 is going right from (-10.91002,-0.07731617)
+
+22:48:18 Player 0 is going left from (-9.641997,-0.07731617)
+
+22:48:20 Player 0 is going right from (-13.75391,-0.07731617)
+
+22:48:21 Player 0 jumped from (-8.844749,-0.3348287)
+
+22:48:22 Player 0 is going right from (-7.974757,0.918333)
+
+22:48:23 Player 0 is going right from (-7.554754,-2.31737)
+
+22:48:23 Player 0 jumped from (-7.027345,-2.308341)
+
+22:48:24 Player 0 is going right from (-6.037338,-1.044194)
+
+22:48:28 Player 0 is going right from (-2.5,1.080095)
+
+22:48:29 Player 0 jumped from (-2.299696,1.080095)
+
+22:48:29 Player 0 is going right from (-1.135697,2.287143)
+
+22:48:32 Player 0 jumped from (-2.5,1.080095)
+
+22:48:40 Player 0 is going right from (-2.5,3.568104)
+
+22:48:40 Player 0 jumped from (-2.073543,3.568104)
+
+22:48:41 Player 0 is going right from (-1.173544,4.827691)
+
+22:48:42 Player 0 is going right from (-0.05581657,4.374999)
+
+22:48:44 Player 0 used his power
+
+22:48:45 Player 0 is going right from (3.038065,1.084748)
+
+22:48:49 Player 0 stopped using his power
+
+22:48:50 Player 0 is going right from (9.732633,1.084748)
+
+22:48:50 Player 0 jumped from (10.59438,1.084748)
+
+22:48:51 Player 0 is going right from (11.52437,2.348307)
+
+22:48:52 Player 0 is going left from (14.30171,1.068113)
+
+22:48:56 Player 0 used his power
+
+22:48:56 Player 0 is going left from (14.04937,1.068113)
+
+22:49:00 Player 0 is going right from (12.52017,1.068113)
+
+22:49:01 Player 0 is going left from (13.38192,1.068113)
+
+22:49:03 Player 0 is going right from (12.72331,1.068113)
+
