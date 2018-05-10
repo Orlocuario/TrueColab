@@ -71,7 +71,7 @@ public class ServerMessageHandler
                 EnemiesStartPatrolling(connectionId);
                 break;
             case "PlayerRequestId":
-                SendPlayerIdAndControl(connectionId);
+                SendALlData(connectionId); //Manda todo para manejar mejor reconexiones. Inclusive información de playerId.
                 break;
             case "PlayerAttack":
                 SendAttackState(message, connectionId, msg);
@@ -185,7 +185,7 @@ public class ServerMessageHandler
     //Usado para sincronizar estado del servidor con un cliente que se está reconectando
     public void SendAllData(int connectionId, Room room)
     {
-
+        SendPlayerIdAndControl(connectionId);
         foreach (NetworkPlayer player in room.players)
         {
             room.SendMessageToPlayer(player.GetReconnectData(), connectionId, true);
