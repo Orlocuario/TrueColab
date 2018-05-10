@@ -238,7 +238,6 @@ public class Server : MonoBehaviour
 					break;
 				}	
 			}
-
             messageHandler.SendAllData(recAddress, player.room);
             player.room.SendControlEnemiesToClient(player, false);
             player.SendDataToRoomBoxManager();
