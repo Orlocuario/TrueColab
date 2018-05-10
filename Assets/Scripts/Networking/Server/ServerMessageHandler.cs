@@ -71,7 +71,7 @@ public class ServerMessageHandler
                 EnemiesStartPatrolling(connectionId);
                 break;
             case "PlayerRequestId":
-                SendALlData(connectionId); //Manda todo para manejar mejor reconexiones. Inclusive información de playerId.
+                SendAllData(connectionId,Server.instance.GetPlayer(connectionId).room); //Manda todo para manejar mejor reconexiones. Inclusive información de playerId.
                 break;
             case "PlayerAttack":
                 SendAttackState(message, connectionId, msg);

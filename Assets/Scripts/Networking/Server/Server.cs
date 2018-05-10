@@ -136,7 +136,12 @@ public class Server : MonoBehaviour
         byte[] recBuffer = new byte[NetworkConsts.bufferSize];
         int dataSize;
         byte error;
+        string recAddress;
+        byte recError;
         NetworkEventType recNetworkEvent = NetworkTransport.Receive(out recSocketId, out recConnectionId, out recChannelId, recBuffer, NetworkConsts.bufferSize, out dataSize, out error);
+        UnityEngine.Networking.Types.NetworkID recNetId;
+        UnityEngine.Networking.Types.NodeID recNodeId;
+        NetworkTransport.GetConnectionInfo(socketId, recConnectionId, out recAddress, out port, out recNetId, out recNodeId, out recError);
         NetworkError Error = (NetworkError)error;
         if (Error == NetworkError.MessageToLong)
         {
@@ -180,7 +185,7 @@ public class Server : MonoBehaviour
                 RoomManager rm = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>();
                 if (rm)
                 {
-                    rm.DeletePlayerFromRoom(recConnectionId, GetPlayer(recConnectionId).room);
+                    rm.DeletePlayerFromRoom(recAddress, GetPlayer(recConnectionId).room);
                 }
                 else
                 {
