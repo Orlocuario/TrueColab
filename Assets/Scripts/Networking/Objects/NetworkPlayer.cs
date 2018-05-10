@@ -57,7 +57,7 @@ public class NetworkPlayer
     public void SendDataToRoomBoxManager()
     {
         GameObject roomManager = GameObject.FindGameObjectWithTag("RoomManager");
-        roomManager.GetComponent<RoomManager>().AddNewPlayerToRoom(getPlayerEnum(), connectionId, room);
+        roomManager.GetComponent<RoomManager>().AddNewPlayerToRoom(getPlayerEnum(), ipAddress, room);
     }
     #endregion
 

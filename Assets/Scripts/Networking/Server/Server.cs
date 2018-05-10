@@ -155,7 +155,7 @@ public class Server : MonoBehaviour
                 break;
             case NetworkEventType.ConnectEvent:
                 AddConnection(recConnectionId);
-                UnityEngine.Debug.Log("Client " + recConnectionId + " connected");
+                UnityEngine.Debug.Log("Client " + recAddress + " connected");
                 break;
             case NetworkEventType.DataEvent:
                 Stream stream = new MemoryStream(recBuffer);
@@ -165,7 +165,7 @@ public class Server : MonoBehaviour
                 if (recChannelId == channelId || recChannelId == secureChannel)
                 {
                     //Mensaje corto normal
-                    messageHandler.HandleMessage(message, recConnectionId);
+                    messageHandler.HandleMessage(message, recAddress);
 
                 }
                 if (recChannelId == bigChannelId)
@@ -176,23 +176,23 @@ public class Server : MonoBehaviour
 
                 if (debug)
                 {
-                    UnityEngine.Debug.Log(HoraMinuto() + " - from(" + recConnectionId + "): " + message);
+                    UnityEngine.Debug.Log(HoraMinuto() + " - from(" + recAddress + "): " + message);
                 }
 
                 break;
             case NetworkEventType.DisconnectEvent:
-                DeleteConnection(recConnectionId);
+                DeleteConnection(recAddress);
                 RoomManager rm = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>();
                 if (rm)
                 {
-                    rm.DeletePlayerFromRoom(recAddress, GetPlayer(recConnectionId).room);
+                    rm.DeletePlayerFromRoom(recAddress, GetPlayer(recAddress).room);
                 }
                 else
                 {
                     UnityEngine.Debug.LogError("No se encontró RoomManager en ServerScene. uwu");
                 }
 
-                UnityEngine.Debug.Log("Client " + recConnectionId + " disconnected");
+                UnityEngine.Debug.Log("Client " + recAddress + " disconnected");
                 break;
         }
     }
@@ -239,10 +239,10 @@ public class Server : MonoBehaviour
 				}	
 			}
 
-            messageHandler.SendAllData(connectionId, player.room);
+            messageHandler.SendAllData(recAddress, player.room);
             player.room.SendControlEnemiesToClient(player, false);
             player.SendDataToRoomBoxManager();
-            UnityEngine.Debug.Log("Client " + connectionId + " reconnected");
+            UnityEngine.Debug.Log("Client " + recAddress + " reconnected");
             return;
         }
 
@@ -266,9 +266,9 @@ public class Server : MonoBehaviour
         room.AddPlayer(connectionId, recAddress);
     }
 
-    private void DeleteConnection(int connectionId)
+    private void DeleteConnection(string ip)
     {
-        NetworkPlayer player = GetPlayer(connectionId);
+        NetworkPlayer player = GetPlayer(ip);
 
         if (player != null)
         {
@@ -295,7 +295,7 @@ public class Server : MonoBehaviour
 
             
             player.room.SendMessageToAllPlayers("NewChatMessage/" + msg, false);
-            player.room.SendMessageToAllPlayersExceptOne("PlayerDisconnected/" + player.id, connectionId, false);
+            player.room.SendMessageToAllPlayersExceptOne("PlayerDisconnected/" + player.id, ip, false);
         }
 
     }
@@ -303,19 +303,6 @@ public class Server : MonoBehaviour
     #endregion
 
     #region Utils
-
-    public NetworkPlayer GetPlayer(int connectionId)
-    {
-        foreach (Room room in rooms)
-        {
-            NetworkPlayer player = room.FindPlayerInRoom(connectionId);
-            if (player != null)
-            {
-                return room.FindPlayerInRoom(connectionId);
-            }
-        }
-        return null;
-    }
 
     public NetworkPlayer GetPlayer(string address)
     {
