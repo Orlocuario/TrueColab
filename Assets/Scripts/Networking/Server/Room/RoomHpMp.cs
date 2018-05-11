@@ -41,18 +41,18 @@ public class RoomHpMp
 
     #region Common
 
-    public void StopChangeHpAndMpHUD(int player)
+    public void StopChangeHpAndMpHUD(string ip)
     {
-        room.SendMessageToAllPlayersExceptOne("DisplayStopChangeHPMPToClient/", player, false);
+        room.SendMessageToAllPlayersExceptOne("DisplayStopChangeHPMPToClient/", ip, false);
     }
 
-    public void RecieveHpAndMpHUD(string changeRate, int player)
+    public void RecieveHpAndMpHUD(string changeRate, string ip)
     {
-        ChangeHP(changeRate, player);
-        ChangeMP(changeRate, player);
+        ChangeHP(changeRate, ip);
+        ChangeMP(changeRate, ip);
     }
 
-    public void ChangeHP(string deltaHP, int player)
+    public void ChangeHP(string deltaHP, string ip)
     {
         float valueDeltaHP = float.Parse(deltaHP);
         if (valueDeltaHP == 0)
@@ -75,16 +75,16 @@ public class RoomHpMp
         }
 
         percentageHP = currentHP / maxHP;
-        room.SendMessageToAllPlayersExceptOne("DisplayChangeHPToClient/" + percentageHP, player, false);
+        room.SendMessageToAllPlayersExceptOne("DisplayChangeHPToClient/" + percentageHP, ip, false);
     }
 
-    public void ChangeMaxHP(string NewMaxHP, int player)
+    public void ChangeMaxHP(string NewMaxHP, string ip)
     {
         maxHP = float.Parse(NewMaxHP);
-        ChangeHP(NewMaxHP, player);
+        ChangeHP(NewMaxHP, ip);
     }
 
-    public void ChangeMP(string deltaMP, int player)
+    public void ChangeMP(string deltaMP, string ip)
     {
         float valueDeltaMP = float.Parse(deltaMP);
 
@@ -114,13 +114,13 @@ public class RoomHpMp
             mpAtLimit = false;
         }
 
-        room.SendMessageToAllPlayersExceptOne("DisplayChangeMPToClient/" + percentageMP, player, false);
+        room.SendMessageToAllPlayersExceptOne("DisplayChangeMPToClient/" + percentageMP, ip, false);
     }
 
-    public void ChangeMaxMP(string NewMaxMP, int player)
+    public void ChangeMaxMP(string NewMaxMP, string ip)
     {
         maxMP = float.Parse(NewMaxMP);
-        ChangeMP(NewMaxMP, player);
+        ChangeMP(NewMaxMP, ip);
     }
 
     public void ChangeExp(string deltaExp)
