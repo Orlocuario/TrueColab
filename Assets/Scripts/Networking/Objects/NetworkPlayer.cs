@@ -46,8 +46,8 @@ public class NetworkPlayer
         pressingJump = false;
         pressingRight = false;
         pressingLeft = false;
-        positionX = 0;  
-        positionY = 0;
+        positionX = room.GetStartPosition()[0];  
+        positionY = room.GetStartPosition()[1];
         speedX = 0;
         directionX = 1;
         directionY = 1;

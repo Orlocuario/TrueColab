@@ -87,6 +87,7 @@ public class BubbleController : MonoBehaviour
                     if (playerControllers[i] != null)
                     {
                         PlayerController playerToRelease = playerControllers[i];
+                        playerControllers[i] = null;
                         playerToRelease.ResetTransform();
                         playerToRelease.TakeDamage(10, new Vector2(150f, 15f));
                         playerToRelease.parent = null;
@@ -111,6 +112,7 @@ public class BubbleController : MonoBehaviour
                     if (playerControllers[i] != null)
                     {
                         PlayerController playerToRelease = playerControllers[i];
+                        playerControllers[i] = null;
                         playerToRelease.ResetTransform();
                         playerToRelease.TakeDamage(10, new Vector2(150f, 15f));
                         playerToRelease.parent = null;
@@ -135,6 +137,7 @@ public class BubbleController : MonoBehaviour
                     if (playerControllers[i] != null)
                     {
                         PlayerController playerToRelease = playerControllers[i];
+                        playerControllers[i] = null;
                         playerToRelease.ResetTransform();
                         playerToRelease.TakeDamage(10, new Vector2(150f, 15f));
                         playerToRelease.parent = null;
@@ -168,6 +171,7 @@ public class BubbleController : MonoBehaviour
                         if (playerControllers[i] != null)
                         {
                             PlayerController playerToRelease = playerControllers[i];
+                            playerControllers[i] = null;
                             playerToRelease.ResetTransform();
                             playerToRelease.parent = null;
                         }
@@ -196,8 +200,10 @@ public class BubbleController : MonoBehaviour
                         if (playerControllers[i] != null)
                         {
                             PlayerController playerToRelease = playerControllers[i];
-                            playerToRelease.ResetTransform();
+                            playerControllers[i] = null;
                             playerToRelease.parent = null;
+                            playerToRelease.ResetTransform();
+
                         }
                     }
                     Destroy(parasiteParticle.gameObject);
@@ -350,6 +356,7 @@ public class BubbleController : MonoBehaviour
                     {
                         Destroy(parasiteParticle.gameObject, timetoKillBubble);
                     }
+
                     dontAcceptMorePlayers = true;
                     Destroy(gameObject, timetoKillBubble);
                     enabled = false;

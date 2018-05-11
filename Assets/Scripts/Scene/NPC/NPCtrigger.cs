@@ -23,6 +23,8 @@ public class NPCtrigger : MonoBehaviour
     public bool forOnePlayerOnly;
     public PlayerController FeedBackPlayer;
 
+    public int expRequired;
+    public bool requiresExp;
 
 
     [System.Serializable]
@@ -40,6 +42,7 @@ public class NPCtrigger : MonoBehaviour
     private int feedbackCount;
     private int playersArrived;
     public int playersNeeded;
+    public string whatToDo;
 
     #endregion
 
@@ -52,9 +55,9 @@ public class NPCtrigger : MonoBehaviour
         feedbackCount = 0;
         playersArrived = 0;
 
-        CheckDecisionParameters();
+        CheckFinishSceneParameters();
         CheckPlayersNeededParameters();
-
+        CheckExpParameters();
     }
 
     #endregion
@@ -106,17 +109,25 @@ public class NPCtrigger : MonoBehaviour
     {
         if (GameObjectIsPlayer(other.gameObject))
         {
-            CheckIfEndsWithEndOfScene();
             if (forOnePlayerOnly)
             {
                 CheckIfForOnePlayerOnly(other.gameObject);
                 return;
             }
 
+            DestroyMyCollider();
+
             if (levelManager.isPlayingFeedback)
             {
                 return;
             }
+
+            if (requiresExp)
+            {
+                CheckIfExpIsEnough();
+                return;
+            }
+
             if (freezesPlayer)
             {
                 levelManager.localPlayer.StopMoving();
@@ -124,8 +135,14 @@ public class NPCtrigger : MonoBehaviour
                 levelManager.localPlayer.SendPlayerPowerDataToServer();
             }
 
-            DestroyMyCollider();
-            ReadNextFeedback();
+            if (!finishesScene)
+            {
+                ReadNextFeedback();
+            }
+        }
+        else if (other.gameObject.GetComponent<PlayerController>())
+        {
+            CheckIfEndsWithEndOfScene(other.gameObject);
         }
     }
 
@@ -144,6 +161,17 @@ public class NPCtrigger : MonoBehaviour
 
     #region Utils
 
+    protected void CheckExpParameters()
+    {
+        if (requiresExp)
+        {
+            if (expRequired == 0)
+            {
+                Debug.LogError("NPC Trigger named: " + gameObject.name + "requires EXP but has no amount set.");
+            }
+        }
+    }
+
     protected void CheckPlayersNeededParameters()
     {
         if (forOnePlayerOnly)
@@ -155,7 +183,7 @@ public class NPCtrigger : MonoBehaviour
         }
     }
 
-    protected void CheckDecisionParameters()
+    protected void CheckFinishSceneParameters()
     {
         if (finishesScene)
         {
@@ -173,7 +201,7 @@ public class NPCtrigger : MonoBehaviour
         }
     }
 
-    protected void CheckIfEndsWithEndOfScene()
+    protected void CheckIfEndsWithEndOfScene(GameObject other)
     {
         if (finishesScene)
         {
@@ -182,11 +210,16 @@ public class NPCtrigger : MonoBehaviour
             if (playersArrived == playersNeeded)
             {
                 DestroyMyCollider();
+                GameObject.Find("CameraEndOfScene").GetComponent<TriggerCamera>().OnEnter();
                 ReadNextFeedback();
             }
             else
             {
-                levelManager.ActivateNPCFeedback("¿Estás Solo? Así no podrás salir jamás...");
+                if (other.gameObject.GetComponent<PlayerController>().localPlayer)
+                {
+                    levelManager.ActivateNPCFeedback("¿Estás Solo? Así no podrás salir jamás...");
+                    levelManager.localPlayer.ResumeMoving();
+                }
                 return;
             }
         }
@@ -263,6 +296,26 @@ public class NPCtrigger : MonoBehaviour
         }
 
         levelManager.ShutNPCFeedback(true);
+
+        if (whatToDo != null)
+        {
+            switch (whatToDo)
+            {
+                case "UnblockMageSecretPath":
+                    UnblockMageSecretPath();
+                    break;
+                case "UnblockWarriorSecretPath":
+                    UnblockWarriorSecretPath();
+                    break;
+                case "UnblockEnginSecretPath":
+                    UnblockEnginSecretPath();
+                    break;
+
+                default:
+                    return;
+            }
+        }
+
         if (musntDie)
         {
             StartCoroutine(WaitToBeActiveAgain());
@@ -279,6 +332,32 @@ public class NPCtrigger : MonoBehaviour
     }
 
     #endregion
+    private void UnblockMageSecretPath()
+    {
+        GameObject teleportBlocker = GameObject.Find("SueloMetalMageSecretBlocker");
+        if (teleportBlocker)
+        {
+            Destroy(teleportBlocker);
+        }
+    }
+
+    private void UnblockWarriorSecretPath()
+    {
+        GameObject teleportBlocker = GameObject.Find("SueloMetalWarriorSecretBlocker");
+        if (teleportBlocker)
+        {
+            Destroy(teleportBlocker);
+        }
+    }
+
+    private void UnblockEnginSecretPath()
+    {
+        GameObject teleportBlocker = GameObject.Find("SueloMetalEnginSecretBlocker");
+        if (teleportBlocker)
+        {
+            Destroy(teleportBlocker);
+        }
+    }
 
     #region Coroutines
 
@@ -302,5 +381,46 @@ public class NPCtrigger : MonoBehaviour
     }
 
     #endregion
+
+    protected void CheckIfExpIsEnough()
+    {
+        SendMessageToServer("IsThisExpEnough/" + gameObject.name, true);
+    }
+
+    public void HandleExpQuestion(string[] msg)
+    {
+        int incomingExp = int.Parse(msg[1]);
+        if (incomingExp >= expRequired)
+        {
+            switch (whatToDo)
+            {
+                case "InstanciarEngranaje":
+                    HandleEngInstantation();
+                    break;
+                default:
+                    return;
+            }
+
+        }
+
+        else
+        {
+            levelManager.ActivateNPCFeedback("Traigan 1000 de EXP o mejor sigan buscando los 2 ENGRANAJES.");
+        }
+    }
+
+    protected void HandleEngInstantation()
+    {
+        ReadNextFeedback();
+        levelManager.InstantiatePrefab("Items/EngranajeA", new Vector2(-9.4f, -4f));
+    }
+
+    protected void SendMessageToServer(string message, bool secure)
+    {
+        if (Client.instance)
+        {
+            Client.instance.SendMessageToServer(message, secure);
+        }
+    }
 
 }

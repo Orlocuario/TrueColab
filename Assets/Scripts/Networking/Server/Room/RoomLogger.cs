@@ -97,10 +97,6 @@ public class RoomLogger
 
     }
 
-    public void WriteEmptyLine()
-    {
-        StreamWriter writer = GetWriter();
-    }
 
     public void WriteNewPosition(int playerId, float positionX, float positionY, bool pressingJump, bool pressingLeft, bool pressingRight)
     {

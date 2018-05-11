@@ -10,6 +10,10 @@ public class EndOfScene : MonoBehaviour
 
     private int playersWhoArrived;
     public int playersToArrive;
+    public bool needsExp;
+    public int expRequired;
+    public string whatToDo;
+    public NPCtrigger feedback;
 
     #endregion
 
@@ -45,7 +49,7 @@ public class EndOfScene : MonoBehaviour
     {
         if (GameObjectIsPlayer(other.gameObject))
         {
-            if (CheckIfPlayerEntered(other.gameObject))
+            if (CheckIfPlayerHasntEntered(other.gameObject))
             {
                 Debug.Log(other.gameObject.name + " reached the end of the scene");
                 playersWhoArrived++;
@@ -53,12 +57,22 @@ public class EndOfScene : MonoBehaviour
 
                 if (playersWhoArrived == playersToArrive)
                 {
-                    levelManager.GoToNextScene();
+                    if (needsExp)
+                    {
+                        CheckIfExpIsEnough();
+                    }
+                    else
+                    {
+                        levelManager.GoToNextScene();
+                    }
                 }
 
-                else if (other.gameObject.GetComponent<PlayerController>().localPlayer)
+                else 
                 {
-                    levelManager.ActivateNPCFeedback("Asegúrate de que lleguen los demás");
+                    if (other.gameObject.GetComponent<PlayerController>().localPlayer)
+                    {
+                        levelManager.ActivateNPCFeedback("Asegúrate de que lleguen los demás");
+                    }
                 }
             }
             
@@ -94,20 +108,46 @@ public class EndOfScene : MonoBehaviour
         }
     }
 
-    protected bool CheckIfPlayerEntered(GameObject playerObject)
+    protected void CheckIfExpIsEnough()
+    {
+        SendMessageToServer("IsThisExpEnough", true);
+    }
+
+    public void HandleExpQuestion(string[] msg)
+    {
+        int incomingExp = int.Parse(msg[1]);
+        if (incomingExp >= expRequired)
+        {
+            switch (whatToDo)
+            {
+                case "InstanciarEngranaje":
+                    HandleEngInstantation();
+                    break;
+                default:
+                    return;
+            }
+            
+        }
+    }
+
+    protected bool CheckIfPlayerHasntEntered(GameObject playerObject)
     {
         PlayerController player = playerObject.GetComponent<PlayerController>();
         int i = player.playerId;
+
+        if (playerControllers[i] != null)
+        {
+            return false;
+        }
+
         if (playerControllers[i] == null)
         {
             playerControllers[i] = player;
             player.availableEndOfScene = gameObject;
             return true;
         }
-        else
-        {
-            return false;
-        }
+
+        return false;
     }
 
 
@@ -122,4 +162,19 @@ public class EndOfScene : MonoBehaviour
             playersWhoArrived--;
         }
     }
+
+    protected void HandleEngInstantation()
+    {
+        feedback.ReadNextFeedback();
+        levelManager.InstantiatePrefab("Items/EngranajeA", new Vector2(-4f, -4f));
+    }
+
+    protected void SendMessageToServer(string message, bool secure)
+    {
+        if (Client.instance)
+        {
+            Client.instance.SendMessageToServer(message, secure);
+        }
+    }
+
 }

@@ -32,11 +32,20 @@ public class RuneSystemActions : ActivableSystemActions
 
         // Change the door sprite
         SpriteRenderer systemSpriteRenderer = runeSystem.GetComponent<SpriteRenderer>();
-        systemSpriteRenderer.sprite = runeSystem.activatedSprite;
+        if (runeSystem.activatedSprite != null)
+        {
+            systemSpriteRenderer.sprite = runeSystem.activatedSprite;
+        }
 
         // Allow players to pass through the door
-        Collider2D collider = runeSystem.GetComponent<Collider2D>();
-        collider.enabled = false;
+        if (runeSystem.GetComponent<Collider2D>())
+        {
+            Collider2D collider = runeSystem.GetComponent<Collider2D>();
+            if (collider)
+            {
+                collider.enabled = false;
+            }
+        }
 
         if (Object.FindObjectOfType<Planner>())
         {

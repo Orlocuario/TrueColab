@@ -104,14 +104,25 @@ public class MageController : PlayerController
         base.SetPowerState(active);
         if (active == false)
         {
+            SoundManager sManager = FindObjectOfType<SoundManager>();
+            sManager.StopSound(gameObject, GameSounds.MagePower);
+
             DamagingObject[] lavas = FindObjectsOfType<DamagingObject>();
             foreach(DamagingObject lava in lavas)
             {
                 if (lava.id > 0)
                 {
-                    lava.ChangeLavaIntoWater(false);
+                    if (lava.turnedIntoWater)
+                    {
+                        lava.ChangeLavaIntoWater(false);
+                    }
                 }
             }
+        }
+        if (active)
+        {
+            SoundManager sManager = FindObjectOfType<SoundManager>();
+            sManager.PlaySound(gameObject, GameSounds.MagePower, true);
         }
     }
 

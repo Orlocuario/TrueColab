@@ -250,6 +250,8 @@ MonoBehaviour:
   availablePowerable: {fileID: 0}
   availableChatZone: {fileID: 0}
   availableInstantiatorTrigger: {fileID: 0}
+  availableParticleTrigger: {fileID: 0}
+  availableEndOfScene: {fileID: 0}
   decisionName: 
   controlOverEnemies: 0
   groundCheckRadius: 0.25
@@ -257,6 +259,7 @@ MonoBehaviour:
   acceleration: 0
   actualSpeed: 0
   mpUpdateFrame: 0
+  actualFramesForPowerCheck: 0
   sortingOrder: 0
   playerId: 0
   mpDepleted: 0

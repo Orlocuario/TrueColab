@@ -11,7 +11,6 @@ public class PlayerTeleporter : MonoBehaviour
     protected string playerToTeleport;
     public bool teleportAnyPlayer;
     public bool mustDoSomething;
-    public bool itsDone;
     private bool didMyThing;
     public int id;
 
@@ -60,6 +59,11 @@ public class PlayerTeleporter : MonoBehaviour
 
     #region Utils
 
+    public bool DidYourThing()
+    {
+        return didMyThing;
+    }
+
     protected void ActivateTeleporter(GameObject other)
     {
         if (other.GetComponent<PlayerController>().localPlayer)
@@ -71,7 +75,6 @@ public class PlayerTeleporter : MonoBehaviour
         else
         {
             other.GetComponent<PlayerController>().respawnPosition = teleportPosition;
-
         }
 
         if (mustDoSomething)
@@ -127,7 +130,7 @@ public class PlayerTeleporter : MonoBehaviour
 
     }
 
-    private void HandleCase1()
+    private void HandleCase1() //ChangeFilters in Warrior Zone -- Scene4
     {
         GameObject pFilter = GameObject.Find("ChangableMageFilter1");
         if (pFilter)
@@ -200,6 +203,19 @@ public class PlayerTeleporter : MonoBehaviour
     public bool CheckIfDidThing()
     {
         return didMyThing;
+    }
+
+    public void PlayerReturned()
+    {
+        SendMessageToServer("CoordinatePlayerTeleporter" + "/" + gameObject.name + "/" + id, true);
+    }
+
+    private void SendMessageToServer(string message, bool secure)
+    {
+        if (Client.instance)
+        {
+            Client.instance.SendMessageToServer(message, secure);
+        }
     }
     #endregion
 

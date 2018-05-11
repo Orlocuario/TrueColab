@@ -8,18 +8,22 @@ public class GameSounds
 
     // Players
     public static string PlayerDie;
-    public static string PlayerJump;
+    public static string PlayerJump = "Salto";
     public static string PlayerTakeDamage;
 
     // Attacks
-    public static string PlayerAttack = "watersound";
-    public static string PlayerAttackEnhanced;
-    public static string PlayerAttackSuperEnhanced;
+
+    public static string WarriorAttack;
+    public static string WarriorAttackEnhanced;
+    public static string MageAttack;
+    public static string MageAttackEnhanced;
+    public static string EnginAttack;
+    public static string EnginAttackEnhanced;
 
     // Powers
-    public static string MagePower;
-    public static string WarriorPower;
-    public static string EngineerPower;
+    public static string MagePower = "VerdeMagic";
+    public static string WarriorPower = "RojoMagic";
+    public static string EngineerPower = "AmarilloMagic";
 
     // Items
     public static string GrabItem;
@@ -30,6 +34,16 @@ public class GameSounds
 
     // XP
     public static string GrabExperience;
+
+    // Music for DifferentScenes
+
+    public static string Escena1 = "mEscena1";
+    public static string Escena2 = "mEscena2";
+    public static string Escena3 = "mEscena3";
+    public static string Escena4 = "mEscena4";
+    public static string Escena5 = "mEscena5";
+    public static string Escena6 = "mEscena6";
+
 
     // Switches
     public static string SwitchOn;
@@ -93,25 +107,61 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySound(GameObject gameObject, string soundName, bool loops)
     {
-
         AudioClip audioClip = Resources.Load("AudioClips/" + soundName) as AudioClip;
 
-        if(audioClip == null)
+        if (audioClip == null)
         {
             Debug.LogError("Sound " + soundName + "does not exist");
             return;
         }
 
-        AudioSource source = getSource(gameObject, audioClip, loops);
+        AudioSource source = GetAudioSource(gameObject, audioClip, loops);
 
         source.Play();
     }
 
+    public void PlaySound(GameObject gameObject, string soundName, bool loops, bool isBGMusic)
+    {
+        AudioClip audioClip = Resources.Load("AudioClips/" + soundName) as AudioClip;
 
-    private AudioSource getSource(GameObject gameObject, AudioClip audioClip, bool loops)
+        if (audioClip == null)
+        {
+            Debug.LogError("Sound " + soundName + "does not exist");
+            return;
+        }
+
+        AudioSource source = GetAudioSource(gameObject, audioClip, loops);
+
+        if (isBGMusic)
+        {
+            source.volume = .35f;
+        }
+        source.Play();
+    }
+
+    public void StopSound(GameObject gameObject, string soundName)
+    {
+        if (gameObject.GetComponent<AudioSource>())
+        {
+            AudioSource[] sSources = gameObject.GetComponents<AudioSource>();
+            foreach (AudioSource aSource in sSources)
+            {
+                if (aSource.clip.name == soundName)
+                {
+                    if (aSource.isPlaying)
+                    {
+                        aSource.Stop();
+                    }
+                }
+            }
+        }
+    }
+
+    private AudioSource GetAudioSource(GameObject gameObject, AudioClip audioClip, bool loops)
     {
         AudioSource[] sources = gameObject.GetComponents<AudioSource>();
         AudioSource source = null;
+        bool foundMySource = false;
 
         if (sources != null && sources.Length > 0)
         {
@@ -120,10 +170,16 @@ public class SoundManager : MonoBehaviour
                 if (sources[i].clip.Equals(audioClip))
                 {
                     source = sources[i];
+                    foundMySource = true;
                     break;
                 }
             }
 
+            if (foundMySource == false)
+            {
+                source = gameObject.AddComponent<AudioSource>();
+                source.clip = audioClip;
+            }
         }
         else
         {

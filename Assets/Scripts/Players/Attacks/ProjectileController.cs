@@ -9,6 +9,19 @@ public class ProjectileController : AttackController
     {
         base.Start();
         maxDistance = GetDistance();
+        /*if (IsCasterLocal())
+        {
+            if (enhanced == false)
+                {
+                    SoundManager sManager = FindObjectOfType<SoundManager>();
+                    sManager.PlaySound(gameObject, GameSounds.EnginAttack, false);
+                }
+            else if (enhanced)
+                {
+                    SoundManager sManager = FindObjectOfType<SoundManager>();
+                    sManager.PlaySound(gameObject, GameSounds.EnginAttackEnhanced, false);
+                }
+        }*/
     }
 
     protected override int GetDamage()

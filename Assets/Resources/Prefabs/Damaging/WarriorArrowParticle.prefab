@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 58538970183607130}
   - component: {fileID: 114437524523309886}
   - component: {fileID: 50779898196845414}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: WarriorArrowParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

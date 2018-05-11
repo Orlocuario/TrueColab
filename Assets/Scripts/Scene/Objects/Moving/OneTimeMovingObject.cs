@@ -63,7 +63,8 @@ public class OneTimeMovingObject : MonoBehaviour
                             }
                         }
                         noMorePlayers = true;
-                        Destroy(gameObject, timeToWait);
+                        //Destroy(gameObject, timeToWait);
+                        gameObject.SetActive(false);
                         return;
                     }
                     if (needsParticles)

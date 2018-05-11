@@ -61,6 +61,28 @@ public class EngineerController : PlayerController
         return attackController;
     }
 
+    public override void SetPowerState(bool active)
+    {
+        base.SetPowerState(active);
+
+        if (active)
+        {
+            if (localPlayer)
+            {
+                SoundManager sManager = FindObjectOfType<SoundManager>();
+                sManager.PlaySound(gameObject, GameSounds.EngineerPower, true);
+            }
+        }
+        else if (active == false)
+        {
+            if (localPlayer)
+            {
+                SoundManager sManager = FindObjectOfType<SoundManager>();
+                sManager.StopSound(gameObject, GameSounds.EngineerPower);
+            }
+        }
+    }
+
     protected override bool IsJumping(bool isGrounded)
     {
         if (localPlayer)

@@ -25,6 +25,7 @@ public class Server : MonoBehaviour
 
     public List<Room> rooms;
     public Room lastDestroyedRoom; //Almacena una referencia al ultimo room que se ha destruido para quue el siguiente room en crearse use el mismo logger que el anterior.
+    private RoomManager rm;
 
     private ServerNetworkDiscovery serverNetworkDiscovery;
     public ServerMessageHandler messageHandler;
@@ -72,6 +73,7 @@ public class Server : MonoBehaviour
 
         ConnectionConfig config = new ConnectionConfig();
 
+        rm = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>();
         channelId = config.AddChannel(QosType.Unreliable);
         bigChannelId = config.AddChannel(QosType.ReliableFragmented);
         secureChannel = config.AddChannel(QosType.Reliable);
@@ -258,6 +260,10 @@ public class Server : MonoBehaviour
             }
             room = new Room(roomCounter, this, messageHandler, maxPlayers,logger);
             RoomManager rm = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>();
+            if (!rm)
+            {
+                UnityEngine.Debug.LogError("No se encontró RoomManager en ServerScene. uwu 1");
+            }
             rm.AddNewRoom(room);
             rooms.Add(room);
         }
@@ -521,7 +527,5 @@ public class Server : MonoBehaviour
             }
         }
     }
-
     #endregion
-
 }

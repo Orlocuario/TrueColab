@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4277902499116656}
   - component: {fileID: 212569226116267886}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Build Your Tree_25 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4977660489015962}
   - component: {fileID: 212145600924909048}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Build Your Tree_21 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4727418481042136}
   - component: {fileID: 212268597745207256}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Build Your Tree_17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4991980682196244}
   - component: {fileID: 212850481050760374}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Build Your Tree_21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 60017098845865454}
   - component: {fileID: 114736352237133878}
   - component: {fileID: 50239875634168850}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: BurnableBranches
   m_TagString: BurnableBranches1
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 4745090317095366}
   - component: {fileID: 198877676724008776}
   - component: {fileID: 199333026195365164}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Llama
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4926960395647822}
   - component: {fileID: 212119653132487132}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Build Your Tree_27
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,6 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particles:
   - {fileID: 1755833508665980}
+  burned: 0
 --- !u!198 &198877676724008776
 ParticleSystem:
   m_ObjectHideFlags: 1

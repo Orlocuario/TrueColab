@@ -26,7 +26,6 @@ public class RockBlocker : IgnoreCollisionWithAttacks
     {
         if (collision.gameObject.GetComponent<MovableObject>())
         {
-
             PushOtherObject(collision.gameObject);
             StopOtherObjectIfNeeded(collision.gameObject);
         }

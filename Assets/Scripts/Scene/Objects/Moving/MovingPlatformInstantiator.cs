@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MovingPlatformInstantiator : MonoBehaviour {
 
+
+    GameObject[] platforms;
     public Vector2 initialPosition;
     public Vector2 targetPosition;
     public float instantiationRate;
@@ -34,7 +36,6 @@ public class MovingPlatformInstantiator : MonoBehaviour {
     // Update is called once per frame
     private IEnumerator InstantiatePlatform()
     {
-
         while (true)
         {
             GameObject movingPlatform = (GameObject)Instantiate(Resources.Load("Prefabs/" + objectName));

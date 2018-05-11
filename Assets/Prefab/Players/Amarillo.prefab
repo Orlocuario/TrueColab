@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114960681359633366}
   - component: {fileID: 114281067580633786}
   - component: {fileID: 114289011159733798}
+  - component: {fileID: 58267599389192382}
   m_Layer: 10
   m_Name: Amarillo
   m_TagString: Player
@@ -102,8 +103,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1208380953250652}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.877476, y: -12.827766, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -21.32, y: 0.12, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4006069394395388}
@@ -119,7 +120,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1662031621283924}
   m_LocalRotation: {x: 1, y: 0.000000029802319, z: 0.000000043711392, w: 1.7763566e-15}
-  m_LocalPosition: {x: 0.010000229, y: 0.077, z: 238.0967}
+  m_LocalPosition: {x: 0.010000229, y: 0.077, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4241744157508284}
@@ -132,7 +133,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1911732162238106}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.007, y: 0.068, z: -1}
+  m_LocalPosition: {x: 0.007, y: 0.068, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4241744157508284}
@@ -158,6 +159,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!58 &58267599389192382
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1208380953250652}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.11338258
 --- !u!58 &58661916667533464
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -270,6 +285,9 @@ MonoBehaviour:
   availablePowerable: {fileID: 0}
   availableChatZone: {fileID: 0}
   availableInstantiatorTrigger: {fileID: 0}
+  availableParticleTrigger: {fileID: 0}
+  availableEndOfScene: {fileID: 0}
+  mainCamera: {fileID: 0}
   decisionName: 
   controlOverEnemies: 0
   groundCheckRadius: 0.25
@@ -277,6 +295,7 @@ MonoBehaviour:
   acceleration: 0
   actualSpeed: 0
   mpUpdateFrame: 0
+  actualFramesForPowerCheck: 0
   sortingOrder: 0
   playerId: 0
   mpDepleted: 0

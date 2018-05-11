@@ -58,10 +58,12 @@ public class EnemyController : MonoBehaviour
         ignoresCollisions = new Dictionary<string, bool> { { "Verde", false }, { "Rojo", false }, { "Amarillo", false } };
 
         currentPatrolPointCount = 0;
+
         if (patrollingSpeed.Equals(default(float)))
         {
             Debug.LogError("This Enemy has no speed set");
         }
+
         patrollingSpeed = patrollingSpeed * 0.04f;
         directionX = -1;
         hp = maxHp;
@@ -454,24 +456,23 @@ public class EnemyController : MonoBehaviour
 
     #region Events
 
-   /* protected void OnTriggerStay2D(Collider2D other)
-    {
-        if (GameObjectIsPlayer(other.gameObject))
-        {
-            Attack(other.gameObject);
-        }
-    }*/
+    /* protected void OnTriggerStay2D(Collider2D other)
+     {
+         if (GameObjectIsPlayer(other.gameObject))
+         {
+             Attack(other.gameObject);
+         }
+     }*/
 
     // Attack those who enter the alert zone
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (GameObjectIsPlayer(other.gameObject))
         {
-           
-                Attack(other.gameObject);
-            
+            Attack(other.gameObject);
         }
     }
+    
     // Attack those who collide with me
     protected virtual void OnCollisionEnter2D(Collision2D other)
     {

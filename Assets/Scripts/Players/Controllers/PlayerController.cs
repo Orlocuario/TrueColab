@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
     public GameObject availableInstantiatorTrigger;
     public GameObject availableParticleTrigger;
     public GameObject availableEndOfScene;
+    public GameObject mainCamera;
+    public GameObject availableColliderZone;
     public string decisionName;
     public bool controlOverEnemies;
     public float groundCheckRadius;
@@ -67,7 +69,7 @@ public class PlayerController : MonoBehaviour
     protected static float maxAcceleration = 1f;
     protected static float takeDamageRate = 1f;
     protected static float attackRate = .25f;
-    protected static float jumpRate = .25f;
+    protected static float jumpRate = .15f;
     protected static float poweredRare = .25f;
     protected static float maxXSpeed = 3f;
     protected static float maxYSpeed = 8f;
@@ -111,6 +113,7 @@ public class PlayerController : MonoBehaviour
         }
 
         levelManager = FindObjectOfType<LevelManager>();
+        mainCamera = FindObjectOfType<CameraController>().gameObject;
         rb2d = GetComponent<Rigidbody2D>();
 
         respawnPosition = transform.position;
@@ -152,9 +155,6 @@ public class PlayerController : MonoBehaviour
         IgnoreCollisionWithObjectsWhoHateMe();
         IgnoreCollisionBetweenPlayers();
 
-
-        // TODO: Remove this or change sound if you want music
-        //FindObjectOfType<SoundManager>().PlaySound(gameObject, GameSounds.PlayerAttack, false);
     }
 
     #endregion
@@ -313,6 +313,11 @@ public class PlayerController : MonoBehaviour
         if (IsJumping(isGrounded))
         {
             justJumped = true;
+            if(localPlayer)
+            {
+                SoundManager sManager = FindObjectOfType<SoundManager>();
+                sManager.PlaySound(gameObject, GameSounds.PlayerJump, false);
+            }
             StartCoroutine(WaitJumping());
             speedY = maxYSpeed * directionY;
         }
@@ -573,7 +578,7 @@ public class PlayerController : MonoBehaviour
             decisionOff = null;
         }
     }
-
+    
     public void ResetTransform()
     {
         transform.parent = null;
@@ -827,6 +832,42 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    #region MusicHandlers
+
+    protected void HandlerMusicScene1( )
+    {
+        SoundManager sManager = FindObjectOfType<SoundManager>();
+        sManager.PlaySound(mainCamera, GameSounds.Escena1, true, true);
+    }
+    protected void HandlerMusicScene2( )
+    {
+        SoundManager sManager = FindObjectOfType<SoundManager>();
+        sManager.PlaySound(mainCamera, GameSounds.Escena2, true, true);
+    }
+    protected void HandlerMusicScene3()
+    {
+        SoundManager sManager = FindObjectOfType<SoundManager>();
+        sManager.PlaySound(mainCamera, GameSounds.Escena3, true, true);
+    }
+    protected void HandlerMusicScene4()
+    {
+        SoundManager sManager = FindObjectOfType<SoundManager>();
+        sManager.PlaySound(mainCamera, GameSounds.Escena4, true, true);
+    }
+    protected void HandlerMusicScene5( )
+    {
+        SoundManager sManager = FindObjectOfType<SoundManager>();
+        sManager.PlaySound(mainCamera, GameSounds.Escena5, true, true);
+    }
+    protected void HandlerMusicScene6( )
+    {
+        SoundManager sManager = FindObjectOfType<SoundManager>();
+        sManager.PlaySound(mainCamera, GameSounds.Escena6, true, true);
+    }
+
+    #endregion
+
+
     protected void ResetDamagingObjects()
     {
         DamagingObject[] damagingObjects = FindObjectsOfType<DamagingObject>();
@@ -948,6 +989,35 @@ public class PlayerController : MonoBehaviour
 
     #region Animations
 
+    public void PlayMusic()
+    {
+        SendMessageToServer("WhichMusicShloudIPlay");
+    }
+
+    public void HandleMusicAssignment(string sceneName)
+    {
+        switch (sceneName)
+        {
+            case "Escena1":
+                HandlerMusicScene1();
+                break;
+            case "Escena2":
+                HandlerMusicScene2();
+                break;
+            case "Escena3":
+                HandlerMusicScene3();
+                break;
+            case "Escena4":
+                HandlerMusicScene4();
+                break;
+            case "Escena5":
+                HandlerMusicScene5();
+                break;
+            case "Escena6":
+                HandlerMusicScene6();
+                break;
+        }
+    }
     protected void AnimateAttack()
     {
         if (sceneAnimator && attackAnimName != null)

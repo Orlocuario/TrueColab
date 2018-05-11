@@ -160,7 +160,7 @@ public class Client : MonoBehaviour
 
     }
 
-    private void Reconnecting()
+    private void Reconnecting() //REVISAR ESTE CóDIGO
     {
         if (NotInClientScene())
         {

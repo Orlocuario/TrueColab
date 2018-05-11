@@ -42,6 +42,10 @@ public class ActionPanel : MonoBehaviour {
     public void KillRoom(int boxId)
     {
         RoomManager roomManager = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>();
+        if (!roomManager)
+        {
+            UnityEngine.Debug.LogError("No se encontró RoomManager en ServerScene. uwu 3");
+        }
         Server.instance.DestroyRoom(roomManager.GetRoomFromRoomBox(boxId));
         roomManager.FreeSpace(boxId);
     }
@@ -52,6 +56,10 @@ public class ActionPanel : MonoBehaviour {
         string sceneName = "Escena" + inputText.text;
 
         RoomManager roomManager = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>();
+        if (!roomManager)
+        {
+            UnityEngine.Debug.LogError("No se encontró RoomManager en ServerScene. uwu 2");
+        }
         Server.instance.ChangeRoomScene(roomManager.GetRoomFromRoomBox(boxId), sceneName);
     }
     #endregion

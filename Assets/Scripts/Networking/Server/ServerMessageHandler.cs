@@ -130,11 +130,23 @@ public class ServerMessageHandler
             case "CoordinateMovingObject":
                 SyncMovingObjects(message, ip);
                 break;
+            case "MustInstantiateAndDestroy":
+                SyncMovableTriggers(message, connectionId);
+                break;
             case "EnterPOI":
                 HandleEnterPOI(msg, ip);
                 break;
             case "ReadyPoi":
                 HandleReadyPoi(msg, ip);
+                break;
+            case "IsThisExpEnough":
+                HandleExpQuestion(msg, connectionId);
+                break;
+            case "WhichMusicShloudIPlay":
+                SendSceneNameForMusic(message, connectionId);
+                break;
+            case "CoordinatePlayerTeleporter":
+                SendTeleporterCoordination(message, connectionId);
                 break;
             default:
                 break;
@@ -287,7 +299,7 @@ public class ServerMessageHandler
         Room room = player.room;
 
         room.SetSwitchOn(on, groupId, individualId);
-        room.SendMessageToAllPlayersExceptOne(message, ip, true);
+        room.SendMessageToAllPlayers(message, true);
     }
 
     private void EnemyChangePosition(string message, string[] msg, string ip)
@@ -383,6 +395,13 @@ public class ServerMessageHandler
         player.room.log.WriteInventory(player.id, message);
     }
 
+    private void SendTeleporterCoordination(string message, int connectionId)
+    {
+        NetworkPlayer player = server.GetPlayer(connectionId);
+        Room room = player.room;
+        room.SendMessageToAllPlayers(message, true);
+    }
+
     private void SendDestroyObject(string message, string ip)
     {
         NetworkPlayer player = server.GetPlayer(ip);
@@ -445,6 +464,14 @@ public class ServerMessageHandler
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         room.hpManager.ChangeExp(msg[1]);
+    }
+
+    private void HandleExpQuestion(string[] msg, int connectionId)
+    {
+        NetworkPlayer player = server.GetPlayer(connectionId);
+        Room room = player.room;
+        int exp = room.hpManager.currentExp;
+        room.SendMessageToAllPlayers("ExpAnswer/" + exp + "/" + msg[1], true);
     }
 
     private void SendNewFireball(string message, string ip, string[] data)
@@ -557,6 +584,13 @@ public class ServerMessageHandler
         room.SendMessageToAllPlayers(message, true);
     }
 
+    private void SyncMovableTriggers(string message, int connectionId)
+    {
+        NetworkPlayer player = server.GetPlayer(connectionId);
+        Room room = player.room;
+        room.SendMessageToAllPlayers(message, true);
+    }
+
     private void SyncPlatformInstantiators(string message, string ip)
     {
         NetworkPlayer player = server.GetPlayer(ip);
@@ -570,12 +604,21 @@ public class ServerMessageHandler
         Room room = player.room;
         room.SendMessageToAllPlayers(message, true);
     }
+
     public void SendChangeScene(string sceneName, Room room)
     {
         string message = "ChangeScene/" + sceneName;
         room.sceneToLoad = sceneName;
         room.SendMessageToAllPlayers(message, true);
         room.Reset();
+    }
+
+    public void SendSceneNameForMusic(string message, int connectionId)
+    {
+        NetworkPlayer player = server.GetPlayer(connectionId);
+        Room room = player.room;
+        string sceneName = room.sceneToLoad;
+        room.SendMessageToPlayer("SceneNameAnswerForMusic" + "/" + sceneName , connectionId, true);
     }
 
     public void SendAttackState(string message, string ip, string[] data)
