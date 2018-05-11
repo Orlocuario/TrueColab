@@ -131,7 +131,7 @@ public class ServerMessageHandler
                 SyncMovingObjects(message, ip);
                 break;
             case "MustInstantiateAndDestroy":
-                SyncMovableTriggers(message, connectionId);
+                SyncMovableTriggers(message, ip);
                 break;
             case "EnterPOI":
                 HandleEnterPOI(msg, ip);
@@ -140,13 +140,13 @@ public class ServerMessageHandler
                 HandleReadyPoi(msg, ip);
                 break;
             case "IsThisExpEnough":
-                HandleExpQuestion(msg, connectionId);
+                HandleExpQuestion(msg, ip);
                 break;
             case "WhichMusicShloudIPlay":
-                SendSceneNameForMusic(message, connectionId);
+                SendSceneNameForMusic(message, ip);
                 break;
             case "CoordinatePlayerTeleporter":
-                SendTeleporterCoordination(message, connectionId);
+                SendTeleporterCoordination(message, ip);
                 break;
             default:
                 break;
@@ -395,9 +395,9 @@ public class ServerMessageHandler
         player.room.log.WriteInventory(player.id, message);
     }
 
-    private void SendTeleporterCoordination(string message, int connectionId)
+    private void SendTeleporterCoordination(string message, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         room.SendMessageToAllPlayers(message, true);
     }
@@ -466,9 +466,9 @@ public class ServerMessageHandler
         room.hpManager.ChangeExp(msg[1]);
     }
 
-    private void HandleExpQuestion(string[] msg, int connectionId)
+    private void HandleExpQuestion(string[] msg, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         int exp = room.hpManager.currentExp;
         room.SendMessageToAllPlayers("ExpAnswer/" + exp + "/" + msg[1], true);
@@ -584,9 +584,9 @@ public class ServerMessageHandler
         room.SendMessageToAllPlayers(message, true);
     }
 
-    private void SyncMovableTriggers(string message, int connectionId)
+    private void SyncMovableTriggers(string message, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         room.SendMessageToAllPlayers(message, true);
     }
@@ -613,12 +613,12 @@ public class ServerMessageHandler
         room.Reset();
     }
 
-    public void SendSceneNameForMusic(string message, int connectionId)
+    public void SendSceneNameForMusic(string message, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         string sceneName = room.sceneToLoad;
-        room.SendMessageToPlayer("SceneNameAnswerForMusic" + "/" + sceneName , connectionId, true);
+        room.SendMessageToPlayer("SceneNameAnswerForMusic" + "/" + sceneName , ip, true);
     }
 
     public void SendAttackState(string message, string ip, string[] data)
