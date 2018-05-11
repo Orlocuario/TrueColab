@@ -299,11 +299,7 @@ public class ServerMessageHandler
         Room room = player.room;
 
         room.SetSwitchOn(on, groupId, individualId);
-<<<<<<< HEAD
         room.SendMessageToAllPlayers(message, true);
-=======
-        room.SendMessageToAllPlayersExceptOne(message, ip, true);
->>>>>>> origin/fix_starting_player_reconnect
     }
 
     private void EnemyChangePosition(string message, string[] msg, string ip)
@@ -399,7 +395,6 @@ public class ServerMessageHandler
         player.room.log.WriteInventory(player.id, message);
     }
 
-<<<<<<< HEAD
     private void SendTeleporterCoordination(string message, int connectionId)
     {
         NetworkPlayer player = server.GetPlayer(connectionId);
@@ -407,10 +402,7 @@ public class ServerMessageHandler
         room.SendMessageToAllPlayers(message, true);
     }
 
-    private void SendDestroyObject(string message, int connectionId)
-=======
     private void SendDestroyObject(string message, string ip)
->>>>>>> origin/fix_starting_player_reconnect
     {
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
@@ -474,7 +466,6 @@ public class ServerMessageHandler
         room.hpManager.ChangeExp(msg[1]);
     }
 
-<<<<<<< HEAD
     private void HandleExpQuestion(string[] msg, int connectionId)
     {
         NetworkPlayer player = server.GetPlayer(connectionId);
@@ -483,10 +474,7 @@ public class ServerMessageHandler
         room.SendMessageToAllPlayers("ExpAnswer/" + exp + "/" + msg[1], true);
     }
 
-    private void SendNewFireball(string message, int connectionId, string[] data)
-=======
     private void SendNewFireball(string message, string ip, string[] data)
->>>>>>> origin/fix_starting_player_reconnect
     {
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
@@ -596,7 +584,6 @@ public class ServerMessageHandler
         room.SendMessageToAllPlayers(message, true);
     }
 
-<<<<<<< HEAD
     private void SyncMovableTriggers(string message, int connectionId)
     {
         NetworkPlayer player = server.GetPlayer(connectionId);
@@ -604,10 +591,7 @@ public class ServerMessageHandler
         room.SendMessageToAllPlayers(message, true);
     }
 
-    private void SyncPlatformInstantiators(string message, int connectionId)
-=======
     private void SyncPlatformInstantiators(string message, string ip)
->>>>>>> origin/fix_starting_player_reconnect
     {
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
@@ -629,7 +613,6 @@ public class ServerMessageHandler
         room.Reset();
     }
 
-<<<<<<< HEAD
     public void SendSceneNameForMusic(string message, int connectionId)
     {
         NetworkPlayer player = server.GetPlayer(connectionId);
@@ -638,11 +621,7 @@ public class ServerMessageHandler
         room.SendMessageToPlayer("SceneNameAnswerForMusic" + "/" + sceneName , connectionId, true);
     }
 
-
-    public void SendAttackState(string message, int connectionId, string[] data)
-=======
     public void SendAttackState(string message, string ip, string[] data)
->>>>>>> origin/fix_starting_player_reconnect
     {
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;

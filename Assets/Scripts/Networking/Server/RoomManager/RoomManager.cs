@@ -66,13 +66,8 @@ public class RoomManager : MonoBehaviour {
         RoomBox roomBox = GetRoomBoxFromRoom(room);
         if (roomBox != null)
         {
-<<<<<<< HEAD
-           // occupiedRooms[roomBox.boxId] = false;
-            roomBox.DeletePlayer(connectionId);
-=======
-            occupiedRooms[roomBox.boxId] = false;
+            //occupiedRooms[roomBox.boxId] = false;
             roomBox.DeletePlayer(ip);
->>>>>>> origin/fix_starting_player_reconnect
             UpdateGUI(roomBox);
             return true;
         }

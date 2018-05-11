@@ -57,16 +57,7 @@ public class NetworkPlayer
     public void SendDataToRoomBoxManager()
     {
         GameObject roomManager = GameObject.FindGameObjectWithTag("RoomManager");
-<<<<<<< HEAD
-        roomManager.GetComponent<RoomManager>().AddNewPlayerToRoom(getPlayerEnum(), connectionId, room);
-
-        if (!roomManager)
-        {
-            UnityEngine.Debug.LogError("No se encontró RoomManager en ServerScene. uwu 4");
-        }
-=======
         roomManager.GetComponent<RoomManager>().AddNewPlayerToRoom(getPlayerEnum(), ipAddress, room);
->>>>>>> origin/fix_starting_player_reconnect
     }
     #endregion
 
