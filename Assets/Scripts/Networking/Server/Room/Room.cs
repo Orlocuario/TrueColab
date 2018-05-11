@@ -92,18 +92,6 @@ public class Room
         return true;
     }
 
-    public NetworkPlayer FindPlayerInRoom(int id)
-    {
-        foreach (NetworkPlayer player in players)
-        {
-            if (player.connectionId == id)
-            {
-                return player;
-            }
-        }
-        return null;
-    }
-
     public NetworkPlayer FindPlayerInRoom(string address)
     {
         foreach (NetworkPlayer player in players)
@@ -395,22 +383,22 @@ public class Room
         }
     }
 
-    public void SendMessageToAllPlayersExceptOne(string message, int connectionId, bool secure)
+    public void SendMessageToAllPlayersExceptOne(string message, string ip, bool secure)
     {
         foreach (NetworkPlayer player in players)
         {
-            if (player.connected && player.connectionId != connectionId)
+            if (player.connected && player.ipAddress != ip)
             {
                 server.SendMessageToClient(player.connectionId, message, secure);
             }
         }
     }
 
-    public void SendMessageToPlayer(string message, int connectionId, bool secure)
+    public void SendMessageToPlayer(string message, string ip, bool secure)
     {
         foreach (NetworkPlayer player in players)
         {
-            if (player.connected && player.connectionId == connectionId)
+            if (player.connected && player.ipAddress == ip)
             {
                 server.SendMessageToClient(player.connectionId, message, secure);
             }

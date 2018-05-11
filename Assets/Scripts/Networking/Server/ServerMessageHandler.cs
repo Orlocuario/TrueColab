@@ -12,7 +12,7 @@ public class ServerMessageHandler
         this.server = server;
     }
 
-    public void HandleMessage(string message, int connectionId)
+    public void HandleMessage(string message, string ip)
     {
         char[] separator = new char[1] { '/' };
         string[] msg = message.Split(separator);
@@ -20,124 +20,124 @@ public class ServerMessageHandler
         switch (msg[0])
         {
             case "ChangeScene":
-                HandleChangeScene(msg, connectionId);
+                HandleChangeScene(msg, ip);
                 break;
             case "ObjectMoved":
-                SendObjectMoved(message, connectionId);
+                SendObjectMoved(message, ip);
                 break;
             case "ObjectDestroyed":
-                SendObjectDestroyed(message, connectionId);
+                SendObjectDestroyed(message, ip);
                 break;
             case "ObstacleDestroyed":
-                HandleObstacleDestroyed(msg, connectionId);
+                HandleObstacleDestroyed(msg, ip);
                 break;
             case "ChangeObjectPosition":
-                SendUpdatedObjectPosition(message, connectionId);
+                SendUpdatedObjectPosition(message, ip);
                 break;
             case "InstantiateObject":
-                SendInstantiation(message, connectionId);
+                SendInstantiation(message, ip);
                 break;
             case "NewChatMessage":
-                SendNewChatMessage(message, connectionId);
+                SendNewChatMessage(message, ip);
                 break;
             case "ChangeHpHUDToRoom":
-                SendHpHUDToRoom(msg, connectionId);
+                SendHpHUDToRoom(msg, ip);
                 break;
             case "ChangeMpHUDToRoom":
-                SendMpHUDToRoom(msg, connectionId);
+                SendMpHUDToRoom(msg, ip);
                 break;
             case "StopChangeHpAndMpHUDToRoom":
-                StopChangeHPMpHUDToRoom(msg, connectionId);
+                StopChangeHPMpHUDToRoom(msg, ip);
                 break;
             case "ChangeHpAndMpHUDToRoom": //Necessary coz' ChatZone changes both at the same rate
-                SendHpHAndMpHUDToRoom(msg, connectionId);
+                SendHpHAndMpHUDToRoom(msg, ip);
                 break;
             case "GainExp":
-                SendExpToRoom(msg, connectionId);
+                SendExpToRoom(msg, ip);
                 break;
             case "EnemyRegisterId":
-                NewEnemy(msg, connectionId);
+                NewEnemy(msg, ip);
                 break;
             case "EnemyDied":
-                EnemyDied(message, msg, connectionId);
+                EnemyDied(message, msg, ip);
                 break;
             case "EnemyChangePosition":
-                EnemyChangePosition(message, msg, connectionId);
+                EnemyChangePosition(message, msg, ip);
                 break;
             case "EnemyPatrollingPoint":
-                SendEnemyPatrollingPoint(message, msg, connectionId);
+                SendEnemyPatrollingPoint(message, msg, ip);
                 break;
             case "EnemiesStartPatrolling":
-                EnemiesStartPatrolling(connectionId);
+                EnemiesStartPatrolling(ip);
                 break;
             case "PlayerRequestId":
-                SendPlayerIdAndControl(connectionId);
+                SendAllData(ip, Server.instance.GetPlayer(ip).room); //Manda todo para manejar mejor reconexiones. Inclusive información de playerId.
                 break;
             case "PlayerAttack":
-                SendAttackState(message, connectionId, msg);
+                SendAttackState(message, ip, msg);
                 break;
             case "PlayerPower":
-                SendPowerState(message, connectionId, msg);
+                SendPowerState(message, ip, msg);
                 break;
             case "PlayerChangePosition":
-                SendUpdatedPosition(message, connectionId, msg);
+                SendUpdatedPosition(message, ip, msg);
                 break;
             case "PlayerTookDamage":
-                SendPlayerTookDamage(message, connectionId);
+                SendPlayerTookDamage(message, ip);
                 break;
             case "PlayerVote":
-                SendPlayerVoted(message, connectionId);
+                SendPlayerVoted(message, ip);
                 break;
             case "PlayerPreVote":
-                SendPlayerPreVoted(message, connectionId);
+                SendPlayerPreVoted(message, ip);
                 break;
             case "CreateGameObject":
-                SendNewGameObject(message, connectionId);
+                SendNewGameObject(message, ip);
                 break;
             case "DestroyObject":
-                SendDestroyObject(message, connectionId);
+                SendDestroyObject(message, ip);
                 break;
             case "OthersDestroyObject":
-                SendOthersDestroyObject(message, connectionId);
+                SendOthersDestroyObject(message, ip);
                 break;
             case "InventoryUpdate":
-                SendInventoryUpdate(message, connectionId);
+                SendInventoryUpdate(message, ip);
                 break;
             case "ChangeSwitchStatus":
-                SendChangeSwitchStatus(message, msg, connectionId);
+                SendChangeSwitchStatus(message, msg, ip);
                 break;
             case "SwitchGroupReady":
-                SendSwitchGroupAction(message, msg, connectionId);
+                SendSwitchGroupAction(message, msg, ip);
                 break;
             case "ActivateSystem":
-                SendActivateSystem(message, connectionId, msg);
+                SendActivateSystem(message, ip, msg);
                 break;
             case "ActivateNPCLog": // No se si es necesario o no, ya que puedes llamar el metodo desde afuera (start o script)
-                SendActivationNPC(msg, connectionId);
+                SendActivationNPC(msg, ip);
                 break;
             case "IgnoreCollisionBetweenObjects":
-                SendIgnoreCollisionBetweenObjects(message, connectionId);
+                SendIgnoreCollisionBetweenObjects(message, ip);
                 break;
             case "BubbleInstantiatorData":
-                SendBubbleInstantiatorDaTa(message, connectionId);
+                SendBubbleInstantiatorDaTa(message, ip);
                 break;
             case "CoordinateRotators":
-                SendRotatorsData(message, connectionId);
+                SendRotatorsData(message, ip);
                 break;
             case "CoordinateInstantiators":
-                SyncPlatformInstantiators(message, connectionId);
+                SyncPlatformInstantiators(message, ip);
                 break;
             case "CoordinateMovingObject":
-                SyncMovingObjects(message, connectionId);
+                SyncMovingObjects(message, ip);
                 break;
             case "MustInstantiateAndDestroy":
                 SyncMovableTriggers(message, connectionId);
                 break;
             case "EnterPOI":
-                HandleEnterPOI(msg, connectionId);
+                HandleEnterPOI(msg, ip);
                 break;
             case "ReadyPoi":
-                HandleReadyPoi(msg, connectionId);
+                HandleReadyPoi(msg, ip);
                 break;
             case "IsThisExpEnough":
                 HandleExpQuestion(msg, connectionId);
@@ -153,10 +153,10 @@ public class ServerMessageHandler
         }
     }
 
-    private void HandleReadyPoi(string[] msg, int connectionId)
+    private void HandleReadyPoi(string[] msg, string ip)
     {
         string poiID = msg[1].ToString();
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         RoomLogger log = player.room.log;
         log.WritePoiIsReady(player.id, poiID);
 
@@ -164,20 +164,20 @@ public class ServerMessageHandler
 
     }
 
-    private void HandleEnterPOI(string[] msg, int connectionID)
+    private void HandleEnterPOI(string[] msg, string ip)
     {
         string poiID = msg[1].ToString();
-        NetworkPlayer player = server.GetPlayer(connectionID);
+        NetworkPlayer player = server.GetPlayer(ip);
         RoomLogger log = player.room.log;
         log.WriteEnterPOI(player.id, poiID);
         Debug.Log("POI " + poiID + " reached by " + player.id + " in room " + player.room.id);
     }
 
-    private void HandleChangeScene(string[] msg, int connectionId)
+    private void HandleChangeScene(string[] msg, string ip)
     {
         string scence = msg[1];
 
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         int totalExp = room.hpManager.currentExp;
         RoomLogger log = room.log;
@@ -187,59 +187,59 @@ public class ServerMessageHandler
     }
 
 
-    private void EnemiesStartPatrolling(int connectionId)
+    private void EnemiesStartPatrolling(string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         room.EnemiesStartPatrolling();
     }
 
     //Usado para sincronizar estado del servidor con un cliente que se está reconectando
-    public void SendAllData(int connectionId, Room room)
+    public void SendAllData(string ip, Room room)
     {
-
+        SendPlayerIdAndControl(ip);
         foreach (NetworkPlayer player in room.players)
         {
-            room.SendMessageToPlayer(player.GetReconnectData(), connectionId, true);
+            room.SendMessageToPlayer(player.GetReconnectData(), ip, true);
         }
 
         foreach (RoomSwitch switchi in room.switchs)
         {
-            room.SendMessageToPlayer(switchi.GetReconnectData(), connectionId, true);
+            room.SendMessageToPlayer(switchi.GetReconnectData(), ip, true);
         }
 
         foreach (string doorMessage in room.systemsManager.GetSystemsMessages())
         {
-            room.SendMessageToPlayer(doorMessage, connectionId, true);
+            room.SendMessageToPlayer(doorMessage, ip, true);
         }
 
         foreach (string obstacleMessage in room.obstacleManager.GetObstaclesMessages())
         {
-            room.SendMessageToPlayer(obstacleMessage, connectionId, true);
+            room.SendMessageToPlayer(obstacleMessage, ip, true);
         }
 
     }
 
-    private void SendIgnoreCollisionBetweenObjects(string message, int connectionId)
+    private void SendIgnoreCollisionBetweenObjects(string message, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         room.SendMessageToAllPlayers(message, true);
     }
 
-    public void SendActivationNPC(string[] msg, int connectionId) // Manda un mensaje a un solo jugador
+    public void SendActivationNPC(string[] msg, string ip) // Manda un mensaje a un solo jugador
     {
         string message = msg[1];
         int playerId = int.Parse(msg[2]);
-        int newConnectionId = 0;
+        string newIpAddress = "";
 
-        Room room = server.GetPlayer(connectionId).room;
+        Room room = server.GetPlayer(ip).room;
 
         foreach (NetworkPlayer jugador in room.players)
         {
             if (playerId == jugador.id)
             {
-                newConnectionId = jugador.connectionId;
+                newIpAddress = jugador.ipAddress;
                 break;
             }
         }
@@ -250,37 +250,37 @@ public class ServerMessageHandler
         }
 
         server.NPCsLastMessage = message;
-        room.SendMessageToPlayer(message, newConnectionId, true); // Message es el texto a mostrar en el NPC Log
+        room.SendMessageToPlayer(message, newIpAddress, true); // Message es el texto a mostrar en el NPC Log
         room.WriteFeedbackRecord(message + "/" + playerId);
     }
 
-    private void SendActivateSystem(string message, int connectionId, string[] msg)
+    private void SendActivateSystem(string message, string ip, string[] msg)
     {
         string systemName = msg[1];
 
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
 
-        room.SendMessageToAllPlayersExceptOne(message, connectionId, true);
+        room.SendMessageToAllPlayersExceptOne(message, ip, true);
         room.systemsManager.AddSystem(systemName);
     }
 
-    private void HandleObstacleDestroyed(string[] msg, int connectionId)
+    private void HandleObstacleDestroyed(string[] msg, string ip)
     {
         string obstacleName = msg[1];
 
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
 
         room.obstacleManager.AddObstacle(obstacleName);
     }
 
-    private void SendSwitchGroupAction(string message, string[] msg, int connectionId)
+    private void SendSwitchGroupAction(string message, string[] msg, string ip)
     {
         // OBSOLETO <- por qué?
         int groupId = Int32.Parse(msg[1]);
 
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
 
         if (!room.activatedSwitchGroups.Contains(groupId))
@@ -289,37 +289,41 @@ public class ServerMessageHandler
         }
     }
 
-    private void SendChangeSwitchStatus(string message, string[] msg, int connectionId)
+    private void SendChangeSwitchStatus(string message, string[] msg, string ip)
     {
         int groupId = Int32.Parse(msg[1]);
         int individualId = Int32.Parse(msg[2]);
         bool on = bool.Parse(msg[3]);
 
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
 
         room.SetSwitchOn(on, groupId, individualId);
+<<<<<<< HEAD
         room.SendMessageToAllPlayers(message, true);
+=======
+        room.SendMessageToAllPlayersExceptOne(message, ip, true);
+>>>>>>> origin/fix_starting_player_reconnect
     }
 
-    private void EnemyChangePosition(string message, string[] msg, int connectionId)
+    private void EnemyChangePosition(string message, string[] msg, string ip)
     {
         int enemyId = Int32.Parse(msg[1]);
         int directionX = Int32.Parse(msg[2]);
         float posX = float.Parse(msg[3]);
         float posY = float.Parse(msg[4]);
 
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         NetworkEnemy enemy = player.room.GetEnemy(enemyId);
 
         if (enemy != null)
         {
             enemy.SetPosition(directionX, posX, posY);
-            player.room.SendMessageToAllPlayersExceptOne(message, connectionId, false);
+            player.room.SendMessageToAllPlayersExceptOne(message, ip, false);
         }
     }
 
-    private void SendEnemyPatrollingPoint(string message, string[] msg, int connectionId)
+    private void SendEnemyPatrollingPoint(string message, string[] msg, string ip)
     {
         int enemyId = Int32.Parse(msg[1]);
         int directionX = Int32.Parse(msg[2]);
@@ -328,21 +332,21 @@ public class ServerMessageHandler
         float patrolX = float.Parse(msg[5]);
         float patrolY = float.Parse(msg[6]);
 
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         NetworkEnemy enemy = player.room.GetEnemy(enemyId);
 
         if (enemy != null)
         {
             enemy.SetPatrollingPoint(directionX, posX, posY, patrolX, patrolY);
-            player.room.SendMessageToAllPlayersExceptOne(message, connectionId, true);
+            player.room.SendMessageToAllPlayersExceptOne(message, ip, true);
         }
     }
 
-    private void EnemyDied(string message, string[] msg, int connectionId)
+    private void EnemyDied(string message, string[] msg, string ip)
     {
         int enemyId = Int32.Parse(msg[1]);
 
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         NetworkEnemy enemy = player.room.GetEnemy(enemyId);
 
         if (enemy != null)
@@ -351,7 +355,7 @@ public class ServerMessageHandler
         }
     }
 
-    private void NewEnemy(string[] msg, int connectionId)
+    private void NewEnemy(string[] msg, string ip)
     {
         int instanceId = Int32.Parse(msg[1]);
         int id = Int32.Parse(msg[2]);
@@ -363,7 +367,7 @@ public class ServerMessageHandler
 
         string message = "EnemyRegistered/" + instanceId + "/" + id + "/" + directionX + "/" + posX + "/" + posY;
 
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         NetworkEnemy enemy = room.AddEnemy(instanceId, id, hp); ;
 
@@ -381,20 +385,21 @@ public class ServerMessageHandler
         room.SendMessageToAllPlayers(message, true);
     }
 
-    private void SendNewGameObject(string message, int connectionId)
+    private void SendNewGameObject(string message, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         room.SendMessageToAllPlayers(message + "/" + player.id, true);
     }
 
-    private void SendInventoryUpdate(string message, int connectionId)
+    private void SendInventoryUpdate(string message, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         player.InventoryUpdate(message);
         player.room.log.WriteInventory(player.id, message);
     }
 
+<<<<<<< HEAD
     private void SendTeleporterCoordination(string message, int connectionId)
     {
         NetworkPlayer player = server.GetPlayer(connectionId);
@@ -403,69 +408,73 @@ public class ServerMessageHandler
     }
 
     private void SendDestroyObject(string message, int connectionId)
+=======
+    private void SendDestroyObject(string message, string ip)
+>>>>>>> origin/fix_starting_player_reconnect
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         room.SendMessageToAllPlayers(message, true);
     }
 
-    private void SendOthersDestroyObject(string message, int connectionId)
+    private void SendOthersDestroyObject(string message, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.SendMessageToAllPlayersExceptOne(message, connectionId, true);
+        room.SendMessageToAllPlayersExceptOne(message, ip, true);
     }
 
-    private void SendPlayerVoted(string message, int connectionId)
+    private void SendPlayerVoted(string message, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.SendMessageToAllPlayersExceptOne(message, connectionId, true);
+        room.SendMessageToAllPlayersExceptOne(message, ip, true);
     }
 
-    private void SendPlayerPreVoted(string message, int connectionId)
+    private void SendPlayerPreVoted(string message, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.SendMessageToAllPlayersExceptOne(message, connectionId, true);
+        room.SendMessageToAllPlayersExceptOne(message, ip, true);
     }
 
-    private void SendHpHUDToRoom(string[] msg, int connectionId)
+    private void SendHpHUDToRoom(string[] msg, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.hpManager.ChangeHP(msg[1], connectionId);
+        room.hpManager.ChangeHP(msg[1], ip);
     }
 
-    private void SendMpHUDToRoom(string[] msg, int connectionId)
+    private void SendMpHUDToRoom(string[] msg, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.hpManager.ChangeMP(msg[1], connectionId);
+        room.hpManager.ChangeMP(msg[1], ip);
     }
 
 
-    private void StopChangeHPMpHUDToRoom(string[] msg, int connectionId)
+    private void StopChangeHPMpHUDToRoom(string[] msg, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.hpManager.StopChangeHpAndMpHUD(connectionId);
+        room.hpManager.StopChangeHpAndMpHUD(ip);
     }
 
-    private void SendHpHAndMpHUDToRoom(string[] msg, int connectionId)
+    private void SendHpHAndMpHUDToRoom(string[] msg, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.hpManager.RecieveHpAndMpHUD(msg[1], connectionId);
+        room.hpManager.RecieveHpAndMpHUD(msg[1], ip);
     }
 
-    private void SendExpToRoom(string[] msg, int connectionId)
+    private void SendExpToRoom(string[] msg, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         room.hpManager.ChangeExp(msg[1]);
     }
 
+<<<<<<< HEAD
     private void HandleExpQuestion(string[] msg, int connectionId)
     {
         NetworkPlayer player = server.GetPlayer(connectionId);
@@ -475,37 +484,40 @@ public class ServerMessageHandler
     }
 
     private void SendNewFireball(string message, int connectionId, string[] data)
+=======
+    private void SendNewFireball(string message, string ip, string[] data)
+>>>>>>> origin/fix_starting_player_reconnect
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.SendMessageToAllPlayersExceptOne(message, connectionId, false);
+        room.SendMessageToAllPlayersExceptOne(message, ip, false);
     }
 
-    private void SendNewProjectile(string message, int connectionId, string[] data)
+    private void SendNewProjectile(string message, string ip, string[] data)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.SendMessageToAllPlayersExceptOne(message, connectionId, false);
+        room.SendMessageToAllPlayersExceptOne(message, ip, false);
     }
 
-    private void SendNewChatMessage(string chatMessage, int connectionID)
+    private void SendNewChatMessage(string chatMessage, string ip)
     {
 
-        NetworkPlayer player = server.GetPlayer(connectionID);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         room.SendMessageToAllPlayers(chatMessage, false);
     }
 
-    private void SendPlayerTookDamage(string message, int connectionID)
+    private void SendPlayerTookDamage(string message, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionID);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.SendMessageToAllPlayersExceptOne(message, connectionID, false);
+        room.SendMessageToAllPlayersExceptOne(message, ip, false);
     }
 
-    private void SendUpdatedPosition(string message, int connectionID, string[] data)
+    private void SendUpdatedPosition(string message, string ip, string[] data)
     {
-        NetworkPlayer player = server.GetPlayer(connectionID);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
 
         int charId = Int32.Parse(data[1]);
@@ -529,61 +541,62 @@ public class ServerMessageHandler
         player.pressingLeft = pressingLeft;
         player.pressingRight = pressingRight;
 
-        room.SendMessageToAllPlayersExceptOne(message, connectionID, false);
+        room.SendMessageToAllPlayersExceptOne(message, ip, false);
         room.log.WriteNewPosition(player.id, positionX, positionY, pressingJump, pressingLeft, pressingRight);
     }
 
-    private void SendObjectMoved(string message, int connectionId)
+    private void SendObjectMoved(string message, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.SendMessageToAllPlayersExceptOne(message, connectionId, true);
+        room.SendMessageToAllPlayersExceptOne(message, ip, true);
     }
 
-    private void SendObjectDestroyed(string message, int connectionId)
+    private void SendObjectDestroyed(string message, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.SendMessageToAllPlayersExceptOne(message, connectionId, true);
+        room.SendMessageToAllPlayersExceptOne(message, ip, true);
     }
 
-    private void SendUpdatedObjectPosition(string message, int connectionId)
+    private void SendUpdatedObjectPosition(string message, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.SendMessageToAllPlayersExceptOne(message, connectionId, false);
+        room.SendMessageToAllPlayersExceptOne(message, ip, false);
     }
 
-    private void SendInstantiation(string message, int connectionId)
+    private void SendInstantiation(string message, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         room.SendMessageToAllPlayers(message, true);
     }
 
-    private void SendPlayerIdAndControl(int connectionId)
+    private void SendPlayerIdAndControl(string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
 
         string message = "PlayerSetId/" + player.id + "/" + player.controlOverEnemies;
 
-        server.SendMessageToClient(connectionId, message, true);
+        server.SendMessageToClient(player.connectionId, message, true);
     }
 
-    private void SendBubbleInstantiatorDaTa(string message, int connectionId)
+    private void SendBubbleInstantiatorDaTa(string message, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         room.SendMessageToAllPlayers(message, true);
     }
 
-    private void SendRotatorsData(string message, int connectionId)
+    private void SendRotatorsData(string message, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         room.SendMessageToAllPlayers(message, true);
     }
 
+<<<<<<< HEAD
     private void SyncMovableTriggers(string message, int connectionId)
     {
         NetworkPlayer player = server.GetPlayer(connectionId);
@@ -592,15 +605,18 @@ public class ServerMessageHandler
     }
 
     private void SyncPlatformInstantiators(string message, int connectionId)
+=======
+    private void SyncPlatformInstantiators(string message, string ip)
+>>>>>>> origin/fix_starting_player_reconnect
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         room.SendMessageToAllPlayers(message, true);
     }
 
-    private void SyncMovingObjects(string message, int connectionId)
+    private void SyncMovingObjects(string message, string ip)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         room.SendMessageToAllPlayers(message, true);
     }
@@ -613,6 +629,7 @@ public class ServerMessageHandler
         room.Reset();
     }
 
+<<<<<<< HEAD
     public void SendSceneNameForMusic(string message, int connectionId)
     {
         NetworkPlayer player = server.GetPlayer(connectionId);
@@ -623,19 +640,22 @@ public class ServerMessageHandler
 
 
     public void SendAttackState(string message, int connectionId, string[] data)
+=======
+    public void SendAttackState(string message, string ip, string[] data)
+>>>>>>> origin/fix_starting_player_reconnect
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.SendMessageToAllPlayersExceptOne(message, connectionId, false);
+        room.SendMessageToAllPlayersExceptOne(message, ip, false);
         room.log.WriteAttack(player.id);
     }
 
-    public void SendPowerState(string message, int connectionId, string[] data)
+    public void SendPowerState(string message, string ip, string[] data)
     {
-        NetworkPlayer player = server.GetPlayer(connectionId);
+        NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         player.power = bool.Parse(data[2]);
-        room.SendMessageToAllPlayersExceptOne(message, connectionId, false);
+        room.SendMessageToAllPlayersExceptOne(message, ip, false);
         room.log.WritePower(player.id, player.power);
     }
 }
