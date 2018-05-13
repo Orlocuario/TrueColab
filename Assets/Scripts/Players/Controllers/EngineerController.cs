@@ -98,10 +98,12 @@ public class EngineerController : PlayerController
                 jumpedInAir = false;
             }
 
-            bool pressedJump = CnInputManager.GetButtonDown("Jump Button");
+            bool pressedJump = CnInputManager.GetButtonDown("Jump Button") && !justJumped;
 
             if (pressedJump && isGrounded && !remoteJumping)
             {
+                Debug.LogError("I'll Do My First Jump");
+
                 remoteJumping = true;
                 SendPlayerDataToServer();
                 return true;
@@ -109,6 +111,7 @@ public class EngineerController : PlayerController
 
             if (pressedJump && !isGrounded && !jumpedInAir && !remoteJumping)
             {
+                Debug.LogError("Gonna Jump Twice");
                 remoteJumping = true;
                 jumpedInAir = true;
                 SendPlayerDataToServer();

@@ -310,6 +310,7 @@ public class PlayerController : MonoBehaviour
     protected void Move()
     {
         isGrounded = IsItGrounded();
+
         if (IsJumping(isGrounded))
         {
             justJumped = true;
@@ -318,8 +319,8 @@ public class PlayerController : MonoBehaviour
                 SoundManager sManager = FindObjectOfType<SoundManager>();
                 sManager.PlaySound(gameObject, GameSounds.PlayerJump, false);
             }
-            StartCoroutine(WaitJumping());
             speedY = maxYSpeed * directionY;
+            StartCoroutine(WaitJumping());
         }
         else
         {
@@ -1135,7 +1136,7 @@ public class PlayerController : MonoBehaviour
                 return false;
             }
 
-            bool pressedJump = CnInputManager.GetButtonDown("Jump Button");
+            bool pressedJump = CnInputManager.GetButtonDown("Jump Button") && !justJumped;
 
             bool isJumping = pressedJump && isGrounded;
 
@@ -1183,7 +1184,7 @@ public class PlayerController : MonoBehaviour
 
     #region Events
 
-    protected void OnTriggerStay2D(Collider2D other)
+   /* protected void OnTriggerStay2D(Collider2D other)
     {
         if (GameObjectIsPOI(other.gameObject))
         {
@@ -1205,7 +1206,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
+    */
     #endregion
 
     #region Messaging
@@ -1300,6 +1301,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(jumpRate);
         justJumped = false;
+        Debug.Log("Changed JustJumped");
     }
 
 
