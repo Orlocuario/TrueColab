@@ -714,7 +714,6 @@ public class LevelManager : MonoBehaviour
                 BubbleController bController = bubble.GetComponent<BubbleController>();
                 bController.InitializeColouredBubbles(BubbleController.MoveType.Targets, powerCaster, bubbleParticle);
                 bController.SetMovement(initialPosition, targetPositions, movementSpeed, timeToWait, timeToKillBubble);
-
             }
         }
     }
