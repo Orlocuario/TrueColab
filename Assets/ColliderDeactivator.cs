@@ -7,11 +7,19 @@ public class ColliderDeactivator : MonoBehaviour {
     public GameObject[] gObjects;
     public int numberOfPlayersIn;
     PlayerController[] pControllers;
+    public bool setCompleteObject;
 	// Use this for initialization
 
 	void Start ()
     {
-        SetCollidersActive(false);
+        if (setCompleteObject)
+        {
+            SetCompleteObjectActive(false);
+        }
+        else
+        {
+            SetCollidersActive(false);
+        }
         numberOfPlayersIn = 0;
         pControllers = new PlayerController[3];
     }
@@ -28,6 +36,14 @@ public class ColliderDeactivator : MonoBehaviour {
                     collider.enabled = active;
                 }
             }
+        }
+    }
+
+    public void SetCompleteObjectActive(bool active)
+    {
+        foreach (GameObject gObject in gObjects)
+        {
+            gObject.SetActive(active);
         }
     }
 
@@ -64,6 +80,10 @@ public class ColliderDeactivator : MonoBehaviour {
 
         if (numberOfPlayersIn == 0)
         {
+            if (setCompleteObject)
+            {
+                SetCompleteObjectActive(false);
+            }
             SetCollidersActive(false);
         }
     }
@@ -83,7 +103,14 @@ public class ColliderDeactivator : MonoBehaviour {
         }
         if (numberOfPlayersIn >= 1)
         {
-            SetCollidersActive(true);
+            if (setCompleteObject)
+            {
+                SetCompleteObjectActive(true);
+            }
+            else
+            {
+                SetCollidersActive(true);
+            }
         }
     }
 }
