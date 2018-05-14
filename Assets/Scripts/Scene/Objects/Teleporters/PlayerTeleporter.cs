@@ -94,6 +94,15 @@ public class PlayerTeleporter : MonoBehaviour
     {
         switch (id)
         {
+            case 2:
+                HandleCase2(player);
+                break;
+            case 3:
+                HandleCase3(player);
+                break;
+            case 4:
+                HandleCase4(player);
+                break;
             case 9:
                 HandleCase9(player);
                 break;
@@ -124,15 +133,7 @@ public class PlayerTeleporter : MonoBehaviour
             case 1:
                 HandleCase1();
                 break;
-            case 2:
-                HandleCase2();
-                break;
-            case 3:
-                HandleCase3();
-                break;
-            case 4:
-                HandleCase4();
-                break;
+
             case 5:
                 HandleCase5();
                 break;
@@ -185,31 +186,40 @@ public class PlayerTeleporter : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void HandleCase2()
+    private void HandleCase2(GameObject player)
     {
         GameObject magePathBlocker = GameObject.Find("ParedMetalZonaSecretMage");
         if (magePathBlocker)
         {
             Destroy(magePathBlocker);
         }
+
+        ColliderDeactivator cDeactivatorZone1 = GameObject.Find("Zone1Intro").GetComponent<ColliderDeactivator>();
+        cDeactivatorZone1.OnExitPlayer(player);
+        Debug.LogError("Must Implement ExitPlayer Zone 1");
     }
 
-    private void HandleCase3()
+    private void HandleCase3(GameObject player)
     {
         GameObject wSecretBlocker = GameObject.Find("ParedMetalZonaSecretWarrior");
         if (wSecretBlocker)
         {
             Destroy(wSecretBlocker);
         }
+
+        ColliderDeactivator cDeactivatorZone1 = GameObject.Find("Zone1Intro").GetComponent<ColliderDeactivator>();
+        cDeactivatorZone1.OnExitPlayer(player);
     }
 
-    private void HandleCase4()
+    private void HandleCase4(GameObject player)
     {
         GameObject eSecretBlocker = GameObject.Find("ParedMetalZonaSecretEngin");
         if (eSecretBlocker)
         {
             Destroy(eSecretBlocker);
         }
+        ColliderDeactivator cDeactivatorZone1 = GameObject.Find("Zone1Intro").GetComponent<ColliderDeactivator>();
+        cDeactivatorZone1.OnExitPlayer(player);
     }
 
     private void HandleCase5()
@@ -233,6 +243,9 @@ public class PlayerTeleporter : MonoBehaviour
         Destroy(enginArrow);
         levelManager.InstatiateSprite("Arrows/warriorArrowRight", new Vector2(35.95f, -6.3f));
     }
+
+    // Scene 5 Deactivators 
+
 
     private void HandleCase8()
     {
@@ -301,22 +314,44 @@ public class PlayerTeleporter : MonoBehaviour
 
     private void HandleCase17(GameObject player) //Return Zone Colliders 
     {
-
+        //ReturnFrom1
+        ColliderDeactivator cDeactivatorZone1 = GameObject.Find("Zone1Intro").GetComponent<ColliderDeactivator>();
+        cDeactivatorZone1.OnEnterPlayer(player);
     }
 
     private void HandleCase18(GameObject player)
     {
-
+        //ReturnFrom2
+        ColliderDeactivator cDeactivator2 = GameObject.Find("Zone2").GetComponent<ColliderDeactivator>();
+        cDeactivator2.OnEnterPlayer(player);
     }
 
     private void HandlerCase19(GameObject player)
     {
-
+        //ReturnFrom3
+        ColliderDeactivator cDeactivator3 = GameObject.Find("Zone3").GetComponent<ColliderDeactivator>();
+        cDeactivator3.OnEnterPlayer(player);
     }
 
     private void HandlerCase20(GameObject player)
     {
+        //Return From 4
+        ColliderDeactivator cDeactivator4 = GameObject.Find("Zone4").GetComponent<ColliderDeactivator>();
+        cDeactivator4.OnExitPlayer(player);
+    }
 
+    private void HandlerCase21(GameObject player)
+    {
+        //Return From 5
+        ColliderDeactivator cDeactivator5 = GameObject.Find("Zone5").GetComponent<ColliderDeactivator>();
+        cDeactivator5.OnExitPlayer(player);
+    }
+
+    private void HandlerCase22(GameObject player)
+    {
+        //Return From 6
+        ColliderDeactivator cDeactivator6 = GameObject.Find("Zone6").GetComponent<ColliderDeactivator>();
+        cDeactivator6.OnExitPlayer(player);
     }
 
     public bool CheckIfDidThing()

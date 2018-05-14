@@ -67,15 +67,21 @@ public class ColliderDeactivator : MonoBehaviour {
     {
         PlayerController pController = player.GetComponent<PlayerController>();
         int playerId = pController.playerId;
+
         if (pControllers[playerId] == null)
         {
             return;
         }
+
         else
         {
-
             pControllers[playerId] = null;
             numberOfPlayersIn--;
+        }
+
+        if (numberOfPlayersIn > 0) // Just to make Sure
+        {
+            numberOfPlayersIn = 0;
         }
 
         if (numberOfPlayersIn == 0)
@@ -100,6 +106,10 @@ public class ColliderDeactivator : MonoBehaviour {
         {
             pControllers[playerId] = pController;
             numberOfPlayersIn++;
+            if (numberOfPlayersIn > 3)
+            {
+                numberOfPlayersIn = 3;
+            }
         }
         if (numberOfPlayersIn >= 1)
         {

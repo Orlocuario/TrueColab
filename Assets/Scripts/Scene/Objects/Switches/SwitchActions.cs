@@ -718,18 +718,18 @@ public class SwitchActions : MonoBehaviour
         levelManager.SetMovingObjectData(platEngineer2, new Vector2(-30.14f, 29.64f), new Vector2(-39.76f, 32.7f), 1f, 2f, false);
     }
 
-        // For Scene 5
+    // For Scene 5
 
     private void HandlerGroup54() // Switch For ForLoop Destroyer 1: Check // End Of Zone1 in Scene 6
     {
-        levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(-30.2f, -13.54f), new Vector2(.1f, .1f), true, 3);
+        levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(-29.76f, -13.44f), new Vector2(-2f, .1f), true, 3);
         SwitchForLoopDestroyer swDestroyer = GameObject.Find("SwitchBoxDestroyer1").GetComponent<SwitchForLoopDestroyer>();
         swDestroyer.SwitchReady("Rojo");
     }
 
     private void HandlerGroup55() // Switch For ForLoop Destroyer 1 // End Of Zone1 in Scene 6
     {
-        levelManager.InstantiatePortal("EnginTeleporter", new Vector2(1.76f, -23.48f), new Vector2(.1f, .1f), true, 4);
+        levelManager.InstantiatePortal("EnginTeleporter", new Vector2(1.76f, -23.48f), new Vector2(-2f, .1f), true, 4);
         levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(0f, -23.76f));
         levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(-7.8f, -23.76f));
         SwitchForLoopDestroyer swDestroyer = GameObject.Find("SwitchBoxDestroyer1").GetComponent<SwitchForLoopDestroyer>();
@@ -810,7 +810,7 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup62() //End of Zone 6 in Scene 5
     {
-        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(113f, 42.8f), new Vector2(.1f, .1f));
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(113f, 42.8f), new Vector2(.1f, .1f), true, 22);
         levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(111.53f, 42.8f));
         levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(110.69f, 42.8f));
         levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(109.82f, 42.8f));
@@ -829,7 +829,7 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup65() //  End Of Zone 4 in Scene 5
     {
-        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(34.03f, 6.26f), new Vector2(-2f, .1f));
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(34.03f, 6.26f), new Vector2(-2f, .1f), true, 20);
         levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(33.73f, 6.26f));
         levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(33.43f, 6.26f));
         levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(33.13f, 6.26f));
