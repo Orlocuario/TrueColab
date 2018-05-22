@@ -7,6 +7,7 @@ public class Poi : MonoBehaviour {
     public int id;
     public PlayerController[] playersNeeded;
     private int playersArrived;
+    public bool poiReady;
 
 
     private void Start()
@@ -17,6 +18,10 @@ public class Poi : MonoBehaviour {
     } 
     private void OnTriggerEnter2D(Collider2D collider)
     {
+        if (poiReady)
+        {
+            return;
+        }
         if (CheckIfIsPlayer(collider.gameObject))
         {
             if (NotEnteredBefore(collider.gameObject))
@@ -28,7 +33,7 @@ public class Poi : MonoBehaviour {
                 if (playersArrived == playersNeeded.Length)
                 {
                     pController.SendPoiIsReadyToServer(id);
-                    Destroy(gameObject);
+                    poiReady = true;
                 }
 
             }

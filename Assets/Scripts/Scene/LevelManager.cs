@@ -213,6 +213,7 @@ public class LevelManager : MonoBehaviour
             case 0:
                 localPlayer = players[0].GetComponent<MageController>();
                 Debug.Log("Activating Mage local player");
+                client.SendMessageToServer("CoordinatePlayerId" + "/" + id, true);
                 if (playerFaceImage != null)
                 {
                     playerFaceImage.color = new Color32(255, 255, 255, 255);
@@ -222,6 +223,8 @@ public class LevelManager : MonoBehaviour
             case 1:
                 Debug.Log("Activating Warrior local player");
                 localPlayer = players[1].GetComponent<WarriorController>();
+                client.SendMessageToServer("CoordinatePlayerId" + "/" + id, true);
+
                 if (playerFaceImage != null)
                 {
                     playerFaceImage.color = new Color32(255, 255, 255, 255);
@@ -231,6 +234,8 @@ public class LevelManager : MonoBehaviour
             case 2:
                 Debug.Log("Activating Engineer local player");
                 localPlayer = players[2].GetComponent<EngineerController>();
+                client.SendMessageToServer("CoordinatePlayerId" + "/" + id, true);
+
                 if (playerFaceImage != null)
                 {
                     playerFaceImage.color = new Color32(255, 255, 255, 255);

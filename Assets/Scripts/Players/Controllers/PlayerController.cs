@@ -1301,7 +1301,6 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(jumpRate);
         justJumped = false;
-        Debug.Log("Changed JustJumped");
     }
 
 

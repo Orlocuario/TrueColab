@@ -67,6 +67,7 @@ public class ColliderDeactivator : MonoBehaviour {
     {
         PlayerController pController = player.GetComponent<PlayerController>();
         int playerId = pController.playerId;
+        Debug.Log("Ther Player Id is Equal to: " + playerId);
 
         if (pControllers[playerId] == null)
         {
@@ -79,7 +80,7 @@ public class ColliderDeactivator : MonoBehaviour {
             numberOfPlayersIn--;
         }
 
-        if (numberOfPlayersIn > 0) // Just to make Sure
+        if (numberOfPlayersIn < 0) // Just to make Sure
         {
             numberOfPlayersIn = 0;
         }
@@ -88,9 +89,14 @@ public class ColliderDeactivator : MonoBehaviour {
         {
             if (setCompleteObject)
             {
+                Debug.Log("El jugador " + player.name + " me voy a pitear los collider porque somos " + numberOfPlayersIn);
                 SetCompleteObjectActive(false);
             }
-            SetCollidersActive(false);
+            else
+            {
+                Debug.Log("El jugador " + player.name + " me voy a pitear los collider porque somos " + numberOfPlayersIn);
+                SetCollidersActive(false);
+            }
         }
     }
 

@@ -148,11 +148,21 @@ public class ServerMessageHandler
             case "CoordinatePlayerTeleporter":
                 SendTeleporterCoordination(message, ip);
                 break;
+            case "CoordinatePlayerId":
+                SendPlayerIdCoordination(message, ip);
+                break;
             default:
                 break;
         }
     }
 
+
+    private void SendPlayerIdCoordination(string msg, string ip)
+    {
+        NetworkPlayer player = server.GetPlayer(ip);
+        Room room = player.room;
+        room.SendMessageToAllPlayers(msg, true);
+    }
     private void HandleReadyPoi(string[] msg, string ip)
     {
         string poiID = msg[1].ToString();

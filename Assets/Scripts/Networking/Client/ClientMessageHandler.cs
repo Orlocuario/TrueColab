@@ -154,6 +154,9 @@ public class ClientMessageHandler
             case "SceneNameAnswerForMusic":
                 HandleMusicForSceneCase(msg);
                 break;
+            case "CoordinatePlayerId":
+                HandlePlayerIdCoordination(msg);
+                break;
             default:
                 break;
         }
@@ -250,6 +253,46 @@ public class ClientMessageHandler
         }
     }
 
+    private void HandlePlayerIdCoordination(string[] msg)
+    {
+        if (NotInClientScene())
+        {
+            int incomingId = Int32.Parse(msg[1]);
+            Debug.LogError("Incoming ID is: " + incomingId);
+            switch (incomingId)
+            {
+                case 0:
+                    {
+                        LevelManager lManager = GameObject.FindObjectOfType<LevelManager>();
+                        MageController mage = lManager.GetMage();
+                        mage.playerId = incomingId;
+                        Debug.LogError("Now Mage has the ID: " + incomingId);
+                    }
+                    break;
+
+                case 1:
+                    {
+                        LevelManager lManager = GameObject.FindObjectOfType<LevelManager>();
+                        WarriorController warrior = lManager.GetWarrior();
+                        warrior.playerId = incomingId;
+                        Debug.LogError("Now Warrior has the ID: " + incomingId);
+                    }
+                    break;
+
+                case 2:
+                    {
+                        LevelManager lManager = GameObject.FindObjectOfType<LevelManager>();
+                        EngineerController engin = lManager.GetEngineer();
+                        engin.playerId = incomingId;
+                        Debug.LogError("Now Engineer has the ID: " + incomingId);
+                    }
+                    break;
+
+                default:
+                    return;
+            }
+        }
+    }
     private void EnemiesSetControl(string[] msg)
     {
         bool control = bool.Parse(msg[1]);
@@ -654,7 +697,7 @@ public class ClientMessageHandler
 
             if (controlOverEnemies)
             {
-                client.StartFirstPlan();
+                //client.StartFirstPlan();
                 EnemiesRegisterOnRoom();
                 playerController.PlayMusic();
             }
