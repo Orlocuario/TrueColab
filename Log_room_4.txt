@@ -1,0 +1,28 @@
+10:15:34 Player 1 stopped using his power
+
+10:15:34 Player 1 stopped using his power
+
+10:15:34 Player 1 stopped using his power
+
+10:15:39 Player 1 is going right from (-1.24,-1.254101)
+
+10:15:42 Player 1 is going right from (-0.3782591,-1.254101)
+
+10:15:45 Player 1 stopped using his power
+
+10:15:54 Player 1 is going right from (0.1,-13.92887)
+
+10:15:56 Player 1 is going right from (2.49975,-13.92887)
+
+10:15:56 Player 1 attacked
+
+10:15:57 Player 1 attacked
+
+10:15:57 Player 1 is going right from (3.239077,-13.92887)
+
+10:15:58 Player 1 attacked
+
+10:15:59 Player 1 attacked
+
+10:16:03 Player 1 attacked
+

@@ -949,6 +949,7 @@ public class LevelManager : MonoBehaviour
         localPlayer.gameObject.SetActive(true);
         localPlayer.ResetTransform();
         localPlayer.SendPlayerDataToServer();
+        Debug.Log("THIS IS WHERE IM SENDING DATA: " + this.name);
         localPlayer.ResumeMoving();
     }
 

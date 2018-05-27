@@ -172,6 +172,7 @@ public class PlayerController : MonoBehaviour
         {
             parent = transform.parent.gameObject;
         }
+
         if (playerHasReturned)
         {
             SendPlayerDataToServer();

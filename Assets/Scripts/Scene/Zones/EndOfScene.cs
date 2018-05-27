@@ -51,7 +51,6 @@ public class EndOfScene : MonoBehaviour
         {
             if (CheckIfPlayerHasntEntered(other.gameObject))
             {
-                Debug.Log(other.gameObject.name + " reached the end of the scene");
                 playersWhoArrived++;
                 Debug.Log("Players who arrived: " + playersWhoArrived);
 
@@ -63,7 +62,10 @@ public class EndOfScene : MonoBehaviour
                     }
                     else
                     {
-                        levelManager.GoToNextScene();
+                        if (levelManager.GetLocalPlayerController().controlOverEnemies)
+                        {
+                            levelManager.GoToNextScene();
+                        }
                     }
                 }
 
@@ -96,16 +98,19 @@ public class EndOfScene : MonoBehaviour
     {
         PlayerController player = playerObject.GetComponent<PlayerController>();
         int i = player.playerId;
+
         if (playerControllers[i] != null)
         {
-            playerControllers[i] = null;
             playerControllers[i].availableEndOfScene = null;
+            playerControllers[i] = null;
             return true;
         }
-        else
+        else if (playerControllers[i] == null)
         {
             return false;
         }
+
+        return false;
     }
 
     protected void CheckIfExpIsEnough()
@@ -140,10 +145,11 @@ public class EndOfScene : MonoBehaviour
             return false;
         }
 
-        if (playerControllers[i] == null)
+        else if (playerControllers[i] == null)
         {
             playerControllers[i] = player;
             player.availableEndOfScene = gameObject;
+            Debug.Log(playerObject.name + " reached the end of the scene With an ID of: " + i);
             return true;
         }
 

@@ -87,7 +87,6 @@ public class ChatZone : MonoBehaviour
         chatButtonOn = GameObject.Find("ToggleChatOn");
         chatButtonOff = GameObject.Find("ToggleChatOff");
 
-        Debug.Log("Getting the ToggleChats");
         if (chatButtonOn != null)
         {
             chatButtonOn.SetActive(false);

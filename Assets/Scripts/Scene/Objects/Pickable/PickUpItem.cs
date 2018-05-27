@@ -41,7 +41,7 @@ public class PickUpItem : MonoBehaviour
     public void OnCollisionEnter2D(Collision2D other)
     {
         if (GameObjectIsPlayer(other.gameObject))
-        {
+        {   
             PickUp();
         }
     }
