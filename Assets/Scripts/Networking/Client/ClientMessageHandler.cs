@@ -673,6 +673,11 @@ public class ClientMessageHandler
 
         if (!(currentScene.name == scene))
         {
+            if (GetLocalPlayerData() != null)
+            {
+                string message = GetLocalPlayerData();
+                client.SendMessageToServer("PlayerChangePositionForNewScene" + "/" + message, true);
+            }
             SceneManager.LoadScene(scene);
         }
 
@@ -927,6 +932,37 @@ public class ClientMessageHandler
     {
         return client.GetLocalPlayer() && client.GetLocalPlayer().controlOverEnemies;
     }
+
+    private string GetLocalPlayerData()
+    {
+        PlayerController pController = client.GetLocalPlayer();
+        if (pController)
+        {
+            int playerId = pController.playerId;
+            int directionX = pController.directionX;
+            int directionY = pController.directionY;
+            float speedX = pController.actualSpeed;
+            bool isGrounded = pController.isGrounded;
+            bool pressingJump = pController.jumpPressed;
+            bool pressingLeft = pController.leftPressed;
+            bool pressingRight = pController.rightPressed;
+
+            string message =      playerId + "/" +
+                                  directionX + "/" +
+                                  directionY + "/" +
+                                  speedX + "/" +
+                                  isGrounded + "/" +
+                                  pressingJump + "/" +
+                                  pressingLeft + "/" +
+                                  pressingRight;
+            return message;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
 
     #endregion
 }

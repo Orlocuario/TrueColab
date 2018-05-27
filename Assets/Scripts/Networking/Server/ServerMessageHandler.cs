@@ -82,6 +82,9 @@ public class ServerMessageHandler
             case "PlayerChangePosition":
                 SendUpdatedPosition(message, ip, msg);
                 break;
+            case "PlayerChangePositionForNewScene":
+                UpdatePositionForNewScene(message, ip, msg);
+                break;
             case "PlayerTookDamage":
                 SendPlayerTookDamage(message, ip);
                 break;
@@ -540,6 +543,37 @@ public class ServerMessageHandler
         player.pressingRight = pressingRight;
 
         room.SendMessageToAllPlayersExceptOne(message, ip, false);
+        room.log.WriteNewPosition(player.id, positionX, positionY, pressingJump, pressingLeft, pressingRight);
+    }
+
+    private void UpdatePositionForNewScene(string message, string ip, string[] data)
+    {
+        NetworkPlayer player = server.GetPlayer(ip);
+        Room room = player.room;
+        float [] coordenadas = player.room.GetStartPosition();
+
+        int charId = Int32.Parse(data[1]);
+        float positionX = coordenadas[0]; //Cambiar Aquí 
+        float positionY = coordenadas[1]; 
+        int directionX = Int32.Parse(data[2]);
+        int directionY = Int32.Parse(data[3]);
+        float speedX = float.Parse(data[4]);
+        bool isGrounded = bool.Parse(data[5]);
+        bool pressingJump = bool.Parse(data[6]);
+        bool pressingLeft = bool.Parse(data[7]);
+        bool pressingRight = bool.Parse(data[8]);
+
+        player.positionX = positionX;
+        player.positionY = positionY;
+        player.directionX = directionX;
+        player.directionY = directionY;
+        player.speedX = speedX;
+        player.isGrounded = isGrounded;
+        player.pressingJump = pressingJump;
+        player.pressingLeft = pressingLeft;
+        player.pressingRight = pressingRight;
+
+        room.SendMessageToAllPlayers(message, false);
         room.log.WriteNewPosition(player.id, positionX, positionY, pressingJump, pressingLeft, pressingRight);
     }
 
