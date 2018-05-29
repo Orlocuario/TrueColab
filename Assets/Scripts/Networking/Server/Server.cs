@@ -295,7 +295,7 @@ public class Server : MonoBehaviour
             RoomManager rm = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>();
             if (rm)
             {
-                //rm.DeletePlayerFromRoom(recAddress, GetPlayer(recAddress).room);
+                rm.DeletePlayerFromRoom(connectionId, GetPlayer(connectionId).room);
             }
             else
             {

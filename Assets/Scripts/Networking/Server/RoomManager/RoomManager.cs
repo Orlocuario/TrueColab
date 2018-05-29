@@ -49,25 +49,25 @@ public class RoomManager : MonoBehaviour {
         UpdateGUI(newRoom);
     }
 
-    public bool AddNewPlayerToRoom(RoomBox.PlayersID player, string ip, Room room)
+    public bool AddNewPlayerToRoom(RoomBox.PlayersID player, int connectionId, Room room)
     {
         RoomBox roomBox = GetRoomBoxFromRoom(room);
         if (roomBox != null)
         {
-            roomBox.AddPlayer(player, ip);
+            roomBox.AddPlayer(player,connectionId);
             UpdateGUI(roomBox);
             return true;
         }
         return false;
     }
 
-    public bool DeletePlayerFromRoom(string ip, Room room)
+    public bool DeletePlayerFromRoom(int connectionId, Room room)
     {
         RoomBox roomBox = GetRoomBoxFromRoom(room);
         if (roomBox != null)
         {
             //occupiedRooms[roomBox.boxId] = false;
-            roomBox.DeletePlayer(ip);
+            roomBox.DeletePlayer(connectionId);
             UpdateGUI(roomBox);
             return true;
         }
