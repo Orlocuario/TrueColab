@@ -183,17 +183,7 @@ public class Server : MonoBehaviour
 
                 break;
             case NetworkEventType.DisconnectEvent:
-                DeleteConnection(recAddress);
-                RoomManager rm = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>();
-                if (rm)
-                {
-                    rm.DeletePlayerFromRoom(recAddress, GetPlayer(recAddress).room);
-                }
-                else
-                {
-                    UnityEngine.Debug.LogError("No se encontró RoomManager en ServerScene. uwu");
-                }
-
+                DeleteConnection(recConnectionId);
                 UnityEngine.Debug.Log("Client " + recAddress + " disconnected");
                 break;
         }
@@ -271,9 +261,16 @@ public class Server : MonoBehaviour
         room.AddPlayer(connectionId, recAddress);
     }
 
-    private void DeleteConnection(string ip)
+    private void DeleteConnection(int connectionId)
     {
-        NetworkPlayer player = GetPlayer(ip);
+        int port;
+        byte recError;
+        string recAddress;
+        UnityEngine.Networking.Types.NodeID recNodeId;
+        UnityEngine.Networking.Types.NetworkID recNetId;
+
+        NetworkTransport.GetConnectionInfo(socketId, connectionId, out recAddress, out port, out recNetId, out recNodeId, out recError);
+        NetworkPlayer player = GetPlayer(recAddress);
 
         if (player != null)
         {
@@ -298,9 +295,18 @@ public class Server : MonoBehaviour
                 player.room.ChangeControlEnemies();
             }
 
-            
             player.room.SendMessageToAllPlayers("NewChatMessage/" + msg, false);
-            player.room.SendMessageToAllPlayersExceptOne("PlayerDisconnected/" + player.id, ip, false);
+            player.room.SendMessageToAllPlayersExceptOne("PlayerDisconnected/" + player.id, recAddress, false);
+
+            RoomManager rm = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>();
+            if (rm)
+            {
+                rm.DeletePlayerFromRoom(recAddress, GetPlayer(recAddress).room);
+            }
+            else
+            {
+                UnityEngine.Debug.LogError("No se encontró RoomManager en ServerScene. uwu");
+            }
         }
 
     }

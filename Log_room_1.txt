@@ -4612,3 +4612,57 @@
 22:45:25 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 8.8467882
 22:46:07 Player 1 jumped from (-21.32,-2.409443)
 
+23:18:55 Player 0 entered poi with ID: 1
+23:18:55 Player 0 entered poi with ID: 1
+23:18:55 Player 0 stopped using his power
+
+23:18:55 Player 2 entered poi with ID: 1
+23:18:55 Player 0 entered poi with ID: 1
+23:18:55 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 11.2952578
+23:18:55 Player 1 entered poi with ID: 1
+23:18:55 Player 2 entered poi with ID: 1
+23:18:55 Player 1 entered poi with ID: 1
+23:18:55 Player 2 entered poi with ID: 1
+23:18:55 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 0.2148225
+23:18:55 Player 1 entered poi with ID: 1
+23:18:55 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 0.0664983
+23:18:55 Player 2 stopped using his power
+
+23:18:55 Player 1 stopped using his power
+
+23:22:36 Player 1 entered poi with ID: 1
+23:22:36 Player 1 entered poi with ID: 1
+23:22:36 Player 1 entered poi with ID: 1
+23:22:36 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 6.8745267
+23:22:36 Player 2 entered poi with ID: 1
+23:22:36 Player 2 entered poi with ID: 1
+23:22:36 Player 1 stopped using his power
+
+23:22:36 Player 2 entered poi with ID: 1
+23:22:36 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 0.2485358
+23:22:36 Player 2 stopped using his power
+
+23:22:36 Player 0 entered poi with ID: 1
+23:22:36 Player 0 stopped using his power
+
+23:22:36 Player 0 entered poi with ID: 1
+23:22:37 Player 0 entered poi with ID: 1
+23:22:37 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 0.5792877
+23:25:54 Player 0 entered poi with ID: 1
+23:25:54 Player 1 entered poi with ID: 1
+23:25:54 Player 0 entered poi with ID: 1
+23:25:54 Player 0 stopped using his power
+
+23:25:54 Player 0 entered poi with ID: 1
+23:25:54 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 8.2493378
+23:25:54 Player 1 entered poi with ID: 1
+23:25:54 Player 1 entered poi with ID: 1
+23:25:54 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 0.0991999
+23:25:54 Player 1 stopped using his power
+
+23:25:54 Player 2 entered poi with ID: 1
+23:25:54 Player 2 entered poi with ID: 1
+23:25:55 Player 2 entered poi with ID: 1
+23:25:55 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 0.5644177
+23:25:55 Player 2 stopped using his power
+
