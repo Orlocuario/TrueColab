@@ -104,6 +104,18 @@ public class Room
         return null;
     }
 
+    public NetworkPlayer FindPlayerInRoom(int id)
+    {
+        foreach (NetworkPlayer player in players)
+        {
+            if (player.connectionId == id)
+            {
+                return player;
+            }
+        }
+        return null;
+    }
+
     #endregion
 
     #region Enemies

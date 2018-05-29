@@ -263,14 +263,8 @@ public class Server : MonoBehaviour
 
     private void DeleteConnection(int connectionId)
     {
-        int port;
-        byte recError;
-        string recAddress;
-        UnityEngine.Networking.Types.NodeID recNodeId;
-        UnityEngine.Networking.Types.NetworkID recNetId;
 
-        NetworkTransport.GetConnectionInfo(socketId, connectionId, out recAddress, out port, out recNetId, out recNodeId, out recError);
-        NetworkPlayer player = GetPlayer(recAddress);
+        NetworkPlayer player = GetPlayer(connectionId);
 
         if (player != null)
         {
@@ -296,12 +290,12 @@ public class Server : MonoBehaviour
             }
 
             player.room.SendMessageToAllPlayers("NewChatMessage/" + msg, false);
-            player.room.SendMessageToAllPlayersExceptOne("PlayerDisconnected/" + player.id, recAddress, false);
+            player.room.SendMessageToAllPlayers("PlayerDisconnected/" + player.id, false);
 
             RoomManager rm = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>();
             if (rm)
             {
-                rm.DeletePlayerFromRoom(recAddress, GetPlayer(recAddress).room);
+                //rm.DeletePlayerFromRoom(recAddress, GetPlayer(recAddress).room);
             }
             else
             {
@@ -327,6 +321,20 @@ public class Server : MonoBehaviour
         }
         return null;
     }
+
+    public NetworkPlayer GetPlayer(int id)
+    {
+        foreach (Room room in rooms)
+        {
+            NetworkPlayer player = room.FindPlayerInRoom(id);
+            if (player != null)
+            {
+                return player;
+            }
+        }
+        return null;
+    }
+
     //Retorna la sala con la mayor cantidad de jugadores que no esté llena.
     private Room SearchRoom()
     {
