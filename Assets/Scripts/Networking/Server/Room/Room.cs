@@ -324,10 +324,10 @@ public class Room
                 coordenadas[1] = 0.33f;
                 break;
             case ("Escena3"):
-                coordenadas[0] = 80.81f;
-                coordenadas[1] = -4.94f; 
-                //coordenadas[0] = -1.24f;
-                //coordenadas[1] = 0f;
+        //        coordenadas[0] = 80.81f;
+         //       coordenadas[1] = -4.94f; 
+                coordenadas[0] = -1.24f;
+                coordenadas[1] = 0f;
                 break;
             case ("Escena4"):
                 coordenadas[0] = -2.04f;
