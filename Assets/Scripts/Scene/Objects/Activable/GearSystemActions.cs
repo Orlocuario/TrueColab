@@ -209,8 +209,8 @@ public class GearSystemActions : ActivableSystemActions
 
         // Doing Something
 
-        BubbleRotatingInstantiator bInstantiatior = GameObject.Find ("BubbleCentralInstatiator").GetComponent<BubbleRotatingInstantiator>();
-		bInstantiatior.GearActivation ();
+        TeleportersEndOfScene tEndOfScene = GameObject.Find ("TeleportersEndOfScene").GetComponent<TeleportersEndOfScene>();
+		tEndOfScene.GearActivation ();
 
         //  Planner 
         if (Object.FindObjectOfType<Planner>())
@@ -258,10 +258,10 @@ public class GearSystemActions : ActivableSystemActions
 		SpriteRenderer systemSpriteRenderer = gearSystem.GetComponent<SpriteRenderer>();
 		systemSpriteRenderer.sprite = gearSystem.activatedSprite;
 
-		// Doing Something
+        // Doing Something
 
-		BubbleRotatingInstantiator bInstantiatior = GameObject.Find ("BubbleCentralInstatiator").GetComponent<BubbleRotatingInstantiator>();
-		bInstantiatior.GearActivation ();
+        TeleportersEndOfScene tEndOfScene = GameObject.Find("TeleportersEndOfScene").GetComponent<TeleportersEndOfScene>();
+        tEndOfScene.GearActivation();
 
         //  Planner 
         if (Object.FindObjectOfType<Planner>())

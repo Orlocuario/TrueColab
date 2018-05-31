@@ -355,7 +355,7 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup4()
     {
-		
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(17.86f, -9.7f), new Vector2(6.9f, -13.82f));
     }
 
     private void HandlerGroup5()
