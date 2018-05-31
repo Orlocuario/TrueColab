@@ -343,10 +343,10 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup3()
     {
-        GameObject platLadder = levelManager.InstantiatePrefab("MovPlatform", new Vector2(43f, -16.46f));
+        GameObject platLadder = levelManager.InstantiatePrefab("MovPlatform", new Vector2(42.8f, -16.6f));
 
         Vector2 startPos = platLadder.transform.position;
-        Vector2 endPos = new Vector2(startPos.x, startPos.y + 4.2f);
+        Vector2 endPos = new Vector2(startPos.x, -11.9f);
         levelManager.SetMovingObjectData(platLadder, startPos, endPos, 0.8f, 1f, false);
 
         levelManager.ShowFeedbackParticles("FBMageButt", new Vector2(41.4f, -16.3f), 3f);
@@ -355,20 +355,7 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup4()
     {
-		GameObject platparaMage = levelManager.InstantiatePrefab("MovPlatform", new Vector2(61f, -9.5f));
-
-        Vector2 startPos = platparaMage.transform.position;
-        Vector2 endPos = new Vector2(startPos.x, startPos.y + 1.3f);
-
-		levelManager.SetMovingObjectData(platparaMage, startPos, endPos, 1f, 1.5f, false);
-
-        /* Instantiate Arrow feedback y cambiar arrow de warrior*/
-        GameObject sprite = GameObject.Find("CartelCambiante");
-        Destroy(sprite);
-
-		levelManager.ShowFeedbackParticles("warriorFeedbackSmall", new Vector2(70.7f, -20f), 4f);
-
-		levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(82.64f, -18.55f), new Vector2(37.23f, -5.58f), true, 7);
+		
     }
 
     private void HandlerGroup5()
@@ -407,7 +394,24 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup8()
     {
-		levelManager.InstantiatePrefab("Ambientales/Exp", new Vector2(80.45f, -18.52f));
+        GameObject platparaMage = levelManager.InstantiatePrefab("MovPlatform", new Vector2(61.2f, -9.5f));
+
+        Vector2 startPos = platparaMage.transform.position;
+        Vector2 endPos = new Vector2(startPos.x, startPos.y + 1.3f);
+
+        levelManager.SetMovingObjectData(platparaMage, startPos, endPos, 1f, 1.5f, false);
+
+        /* Instantiate Arrow feedback y cambiar arrow de warrior*/
+        GameObject sprite = GameObject.Find("CartelCambiante");
+        Destroy(sprite);
+
+        levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(82.64f, -18.55f), new Vector2(37.23f, -5.58f), true, 7);
+
+        // EXP
+
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(80.95f, -18.52f));
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(79.95f, -18.52f));
+
     }
 
     // Switches Escena 1
@@ -521,9 +525,27 @@ public class SwitchActions : MonoBehaviour
     }
     private void HandlerGroup21()
     {
-		levelManager.InstantiatePrefab("Items/RunaV1", new Vector2(59.71f, 0.42f));
-		levelManager.InstantiatePrefab("Items/RunaV1", new Vector2(49.21f, -7.73f));
-		levelManager.InstantiatePrefab("Items/RunaV1", new Vector2(47.71f, 19.74f));
+		GameObject runaVMage = levelManager.InstantiatePrefab("Items/RunaV1", new Vector2(59.71f, 0.42f));
+        if (runaVMage)
+        {
+            string nameForRune = "runaVMage";
+            runaVMage.name = nameForRune;
+        }
+
+		GameObject runaVWarrior = levelManager.InstantiatePrefab("Items/RunaV1", new Vector2(49.21f, -7.73f));
+        if (runaVWarrior)
+        {
+            string nameForRune = "runaVWarrior";
+            runaVWarrior.name = nameForRune;
+        }
+
+		GameObject runaVEngin = levelManager.InstantiatePrefab("Items/RunaV1", new Vector2(47.71f, 19.74f));
+        if (runaVEngin)
+        {
+            string nameForRune = "runaVEngin";
+            runaVEngin.name = nameForRune;
+        }
+
     }
     private void HandlerGroup22()
     {
@@ -548,15 +570,52 @@ public class SwitchActions : MonoBehaviour
     }
     private void HandlerGroup27()
     {
-		levelManager.InstantiatePrefab("Items/RunaA1", new Vector2(59.4f, 0.42f));
-		levelManager.InstantiatePrefab("Items/RunaA1", new Vector2(48.89f, -7.73f));
-		levelManager.InstantiatePrefab("Items/RunaA1", new Vector2(47.39f, 19.74f));
+		GameObject runaAMage = levelManager.InstantiatePrefab("Items/RunaA1", new Vector2(59.4f, 0.42f));
+        if (runaAMage)
+        {
+            string nameForRune = "runaAMage";
+            runaAMage.name = nameForRune;
+
+        }
+
+        GameObject runaAWarrior = levelManager.InstantiatePrefab("Items/RunaA1", new Vector2(48.89f, -7.73f));
+        if (runaAWarrior)
+        {
+            string nameForRune = "runaAWarrior";
+            runaAWarrior.name = nameForRune;
+        }
+
+        GameObject runaAEngin = levelManager.InstantiatePrefab("Items/RunaA1", new Vector2(47.39f, 19.74f));
+        if(runaAEngin)
+        {
+            string nameForRune = "runaAEngin";
+            runaAEngin.name = nameForRune;
+        }
+
     }
     private void HandlerGroup28()
     {
-		levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(60.03f, 0.42f));
-		levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(49.52f, -7.73f));
-		levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(48.02f, 19.74f));
+        GameObject runaRMage = levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(60.03f, 0.42f));
+        if (runaRMage)
+        {
+            string nameForRune = "runaRMage";
+            runaRMage.name = nameForRune;
+        }
+
+        GameObject runaRWarrior = levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(49.52f, -7.73f));
+        if (runaRWarrior)
+        {
+            string nameForRune = "runaRWarrior";
+            runaRWarrior.name = nameForRune;
+        }
+
+        GameObject runaREngin = levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(48.02f, 19.74f));
+        if (runaREngin)
+        {
+            string nameForRune = "runaREngin";
+            runaREngin.name = nameForRune;
+        }
+
     }
     private void HandlerGroup29()
     {

@@ -140,10 +140,7 @@ public class NPCtrigger : MonoBehaviour
                 ReadNextFeedback();
             }
         }
-        else if (other.gameObject.GetComponent<PlayerController>())
-        {
-            CheckIfEndsWithEndOfScene(other.gameObject);
-        }
+
     }
 
     public void OnTriggerExit2D(Collider2D other)

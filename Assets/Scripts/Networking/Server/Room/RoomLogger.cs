@@ -53,7 +53,7 @@ public class RoomLogger
     public void WriteTotalExp(int exp)
     {
         StreamWriter writer = GetWriter();
-        writer.WriteLine(GetTime() + " CHANGING SCENE! The players gathered " + exp + " experience points");
+        writer.WriteLine(GetTime() + " CHANGING SCENE!  The players gathered " + exp + " experience points");
         writer.Close();
     }
 
