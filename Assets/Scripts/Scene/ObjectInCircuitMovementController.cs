@@ -30,7 +30,10 @@ public class ObjectInCircuitMovementController : MonoBehaviour
         arrayNumber = _arrayNumber;
         targets = incomingTargets;
         move = true;
-        StartCoroutine(StartMoving());
+        if(gameObject.activeInHierarchy)
+        {
+            StartCoroutine(StartMoving());
+        }
     }
 
     protected virtual IEnumerator StartMoving()

@@ -11,6 +11,7 @@ public class MovingPlatformInstantiator : MonoBehaviour {
     public float instantiationRate;
     public float moveSpeed;
     public float timeBeforeKill;
+    public bool onStart;
 
     public bool isWorking;
     public bool playerHasReturned;
@@ -25,7 +26,10 @@ public class MovingPlatformInstantiator : MonoBehaviour {
         playerHasReturned = false;
         initialPosition = gameObject.transform.position;
         CheckParameters();
-        StartTheCoRoutine();
+        if (onStart)
+        {
+            StartTheCoRoutine();
+        }
     }
 
     public void StartTheCoRoutine()
