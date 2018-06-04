@@ -432,7 +432,7 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup11()
     {
-		levelManager.InstantiatePrefab("SueloMetalFlotante", new Vector2(26.11f, -40.40f));
+		levelManager.InstantiatePrefab("SueloMetalFlotanteX2", new Vector2(26.17f, -40.34f));
     }
 
     private void HandlerGroup12()

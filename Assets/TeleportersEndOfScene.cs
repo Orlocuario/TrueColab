@@ -16,7 +16,6 @@ public class TeleportersEndOfScene : MonoBehaviour
 
     public InstantiatedPortal[] portals;
     public int gearsNeeded;
-    public GameObject[] objectsToDestroy;
     private int currentGears;
 
     // Use this for initialization
