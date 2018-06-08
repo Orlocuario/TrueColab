@@ -509,188 +509,106 @@ public class SwitchActions : MonoBehaviour
     }
     private void HandlerGroup17()
     {
-		levelManager.DamageAllPlayers(true);
     }
     private void HandlerGroup18()
     {
-		levelManager.DamageAllPlayers(true);
     }
     private void HandlerGroup19()
     {
-		levelManager.DamageAllPlayers(true);
     }
     private void HandlerGroup20()
     {
-		levelManager.DamageAllPlayers(true);
     }
     private void HandlerGroup21()
     {
-		GameObject runaVMage = levelManager.InstantiatePrefab("Items/RunaV1", new Vector2(59.71f, 0.42f));
-        if (runaVMage)
-        {
-            string nameForRune = "runaVMage";
-            runaVMage.name = nameForRune;
-        }
 
-		GameObject runaVWarrior = levelManager.InstantiatePrefab("Items/RunaV1", new Vector2(49.21f, -7.73f));
-        if (runaVWarrior)
-        {
-            string nameForRune = "runaVWarrior";
-            runaVWarrior.name = nameForRune;
-        }
-
-		GameObject runaVEngin = levelManager.InstantiatePrefab("Items/RunaV1", new Vector2(47.71f, 19.74f));
-        if (runaVEngin)
-        {
-            string nameForRune = "runaVEngin";
-            runaVEngin.name = nameForRune;
-        }
 
     }
     private void HandlerGroup22()
     {
-		levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(-19.81f, 15.54f)); // SeemsLike No Switch in scene 3 is Using This
+
     }
 
     private void HandlerGroup23()
     {
-		levelManager.DamageAllPlayers(true);
     }
     private void HandlerGroup24()
     {
-		levelManager.DamageAllPlayers(true);
+
     }
     private void HandlerGroup25()
     {
-		levelManager.DamageAllPlayers(true);
+
     }
     private void HandlerGroup26()
     {
-		levelManager.DamageAllPlayers(true);
+
     }
     private void HandlerGroup27()
     {
-		GameObject runaAMage = levelManager.InstantiatePrefab("Items/RunaA1", new Vector2(59.4f, 0.42f));
-        if (runaAMage)
-        {
-            string nameForRune = "runaAMage";
-            runaAMage.name = nameForRune;
-
-        }
-
-        GameObject runaAWarrior = levelManager.InstantiatePrefab("Items/RunaA1", new Vector2(48.89f, -7.73f));
-        if (runaAWarrior)
-        {
-            string nameForRune = "runaAWarrior";
-            runaAWarrior.name = nameForRune;
-        }
-
-        GameObject runaAEngin = levelManager.InstantiatePrefab("Items/RunaA1", new Vector2(47.39f, 19.74f));
-        if(runaAEngin)
-        {
-            string nameForRune = "runaAEngin";
-            runaAEngin.name = nameForRune;
-        }
 
     }
+
     private void HandlerGroup28()
     {
-        GameObject runaRMage = levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(60.03f, 0.42f));
-        if (runaRMage)
-        {
-            string nameForRune = "runaRMage";
-            runaRMage.name = nameForRune;
-        }
-
-        GameObject runaRWarrior = levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(49.52f, -7.73f));
-        if (runaRWarrior)
-        {
-            string nameForRune = "runaRWarrior";
-            runaRWarrior.name = nameForRune;
-        }
-
-        GameObject runaREngin = levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(48.02f, 19.74f));
-        if (runaREngin)
-        {
-            string nameForRune = "runaREngin";
-            runaREngin.name = nameForRune;
-        }
 
     }
     private void HandlerGroup29()
     {
-		levelManager.DamageAllPlayers(true);
     }
     private void HandlerGroup30()
     {
-		levelManager.DamageAllPlayers(true);
     }
     private void HandlerGroup31()
     {
-		levelManager.DamageAllPlayers(true);
     }
     private void HandlerGroup32()
     {
-		levelManager.DamageAllPlayers(true);
     }
     private void HandlerGroup33()
     {
-		levelManager.InstantiatePrefab("Items/RunaA1", new Vector2(39.91f, 13.61f));
-		levelManager.InstantiatePrefab("Items/RunaV1", new Vector2(52.22f, -5.04f));
-		levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(43.32f, -12.53f));
+
     }
 
     private void HandlerGroup34()
     {
-		levelManager.DamageAllPlayers(true);
     }
     private void HandlerGroup35()
     {
-		levelManager.DamageAllPlayers(true);
     }
 
     private void HandlerGroup36()
     {
-		levelManager.DamageAllPlayers(true);
     }
 
     private void HandlerGroup37()
     {
-		levelManager.DamageAllPlayers(true);
     }
     private void HandlerGroup38()
     {
-		levelManager.DamageAllPlayers(true);
     }
 
     private void HandlerGroup39()
     {
-		levelManager.DamageAllPlayers(true);
     }
 
     private void HandlerGroup40()
     {
-		levelManager.DamageAllPlayers(true);
     }
     private void HandlerGroup41()
     {
-		levelManager.DamageAllPlayers(true);
     }
     private void HandlerGroup42()
     {
-		levelManager.DamageAllPlayers(true);
     }
     private void HandlerGroup43()
     {
-		levelManager.DamageAllPlayers(true);
     }
     private void HandlerGroup44()
     {
-		levelManager.DamageAllPlayers(true);
     }
     private void HandlerGroup45()
     {
-        levelManager.DamageAllPlayers(true);
     }
     private void HandlerGroup46()
     {
