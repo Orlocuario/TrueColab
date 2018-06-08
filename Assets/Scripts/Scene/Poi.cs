@@ -22,6 +22,7 @@ public class Poi : MonoBehaviour {
         {
             return;
         }
+
         if (CheckIfIsPlayer(collider.gameObject))
         {
             if (NotEnteredBefore(collider.gameObject))
@@ -32,7 +33,11 @@ public class Poi : MonoBehaviour {
                 playersArrived++;
                 if (playersArrived == playersNeeded.Length)
                 {
-                    pController.SendPoiIsReadyToServer(id);
+                    LevelManager lManager = FindObjectOfType<LevelManager>();
+                    if (lManager.GetLocalPlayerController().controlOverEnemies)
+                    {
+                        pController.SendPoiIsReadyToServer(id);
+                    }
                     poiReady = true;
                 }
 

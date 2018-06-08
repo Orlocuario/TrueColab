@@ -612,19 +612,13 @@ public class SwitchActions : MonoBehaviour
     }
     private void HandlerGroup46()
     {
-        GameObject cajaEngin = GameObject.Find("CajaSwitchFierroEngin");
-        cajaEngin.SetActive(false);
     }
 
     private void HandlerGroup47()
     {
-        GameObject cajaEngin = GameObject.Find("CajaSwitchFierroWarrior");
-        cajaEngin.SetActive(false);
     }
     private void HandlerGroup48()
     {
-        GameObject cajaEngin = GameObject.Find("CajaSwitchFierroMage");
-        cajaEngin.SetActive(false);
     }
     private void HandlerGroup49()
     {
