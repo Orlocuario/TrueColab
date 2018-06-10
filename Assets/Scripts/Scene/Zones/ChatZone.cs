@@ -10,8 +10,8 @@ public class ChatZone : MonoBehaviour
     private GameObject[] particles;
     private HUDDisplay hpAndMp;
 
-    private static float regenerationUnits = 4;
-    private static int regenerationFrameRate = 20;
+    private static float regenerationUnits = 6;
+    private static int regenerationFrameRate = 17;
 
     private int regenerationFrame;
     private bool activated;
@@ -68,7 +68,6 @@ public class ChatZone : MonoBehaviour
         }
 
         ToggleParticles(false);
-
     }
 
     protected void ToggleParticles(bool activate)
@@ -103,7 +102,7 @@ public class ChatZone : MonoBehaviour
     {
         if (!hpAndMp)
         {
-            hpAndMp = GameObject.FindObjectOfType<LevelManager>().hpAndMp;
+            hpAndMp = FindObjectOfType<LevelManager>().hpAndMp;
         }
 
         return hpAndMp.hpCurrentPercentage < 1f || hpAndMp.mpCurrentPercentage < 1f;
@@ -117,6 +116,7 @@ public class ChatZone : MonoBehaviour
         {
             return playerController && playerController.localPlayer;
         }
+
         else
         {
             return playerController;
@@ -143,7 +143,6 @@ public class ChatZone : MonoBehaviour
     {
         if (GameObjectIsPlayer(other.gameObject, true))
         {
-
             TurnChatZoneOff();
             PlayerController player = other.gameObject.GetComponent<PlayerController>();
             player.availableChatZone = null;

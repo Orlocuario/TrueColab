@@ -454,7 +454,6 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup14()
     {
-        Debug.Log("Getting Game Objects");
 		GameObject maquinaEngranajesYellow = levelManager.FindGameObject("DesplazarEngranajes");
 		GameObject plataformaBajoEngranajes = levelManager.FindGameObject("PlataformaMovilYellow");
 		GameObject firstSpikesYellow = levelManager.FindGameObject("FirstSpikes");
@@ -466,20 +465,15 @@ public class SwitchActions : MonoBehaviour
         }
 
 
-        Debug.Log("Getting Movement Controllers");
         OneTimeMovingObject moverEngranajes = maquinaEngranajesYellow.GetComponent<OneTimeMovingObject>();
         OneTimeMovingObject movePlataformaBajoEngranajes = plataformaBajoEngranajes.GetComponent<OneTimeMovingObject>();
         OneTimeMovingObject spikesMover = firstSpikesYellow.GetComponent<OneTimeMovingObject>();
 
-        Debug.Log("Setting Bool in Movement Controllers");
 
         moverEngranajes.move = true;
         movePlataformaBajoEngranajes.move = true;
         spikesMover.move = true;
 
-        Debug.Log("I performed my task with " + moverEngranajes.gameObject.name);
-        Debug.Log("I performed my task with " + movePlataformaBajoEngranajes.gameObject.name);
-        Debug.Log("I performed my task with " + spikesMover.gameObject.name);
 
         GameObject maquina1Engin = GameObject.Find("MaqEngranaje1");
         GameObject maquina2Engin = GameObject.Find("MaqEngranaje2");
@@ -494,18 +488,21 @@ public class SwitchActions : MonoBehaviour
 
         if (levelManager.GetEngineer().localPlayer)
         {
-            Debug.Log("it's " + levelManager.GetEngineer().localPlayer + "que tengo un EnginLocal Player");
             CameraController camera = FindObjectOfType<CameraController>();
             TriggerCamera tCamera = GameObject.Find("TriggerCameraForEnginScene3").GetComponent<TriggerCamera>();
             camera.ChangeState(CameraState.TargetZoom, tCamera.movements[0]);
         }
         levelManager.DestroyObject("ActivateNPCForEnginDestroyabe", .1f);
-        levelManager.DestroyObject("CajaSwitchFierro", 2.5f);
-        levelManager.InstantiatePortal("EnginTeleporter", new Vector2(8.63f, 18.09f), new Vector2(14.1f, 15.7f));
+        levelManager.DestroyObject("CajaSwitchFierro", 2.9f);
+        levelManager.InstantiatePortal("EnginTeleporter", new Vector2(-11.3f, 17.5f), new Vector2(14.1f, 15.7f));
+        levelManager.InstantiatePortal("MageTeleporter", new Vector2(-11.3f, 22.05f), new Vector2(25.1f, -1.1f));
+        levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(-21.77f, 17.2f), new Vector2(25.1f, -1.1f));
+
+
     }
     private void HandlerGroup16()
     {
-		levelManager.InstantiatePortal("MageTeleporter", new Vector2(12.07f, 20.25f), new Vector2(25.1f, -1.1f));
+        levelManager.InstantiatePrefab("RunaR1", new Vector2(-39.35f, 16f));
     }
     private void HandlerGroup17()
     {
