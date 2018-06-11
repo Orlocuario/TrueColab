@@ -39,7 +39,7 @@ public class GameSounds
 
     public static string Escena1 = "mEscena1";
     public static string Escena2 = "mEscena2";
-    public static string Escena3 = "mEscena3";
+    public static string Escena3 = "mEscena5";
     public static string Escena4 = "mEscena4";
     public static string Escena5 = "mEscena5";
     public static string Escena6 = "mEscena6";

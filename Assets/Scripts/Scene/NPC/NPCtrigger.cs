@@ -402,7 +402,7 @@ public class NPCtrigger : MonoBehaviour
 
         else
         {
-            levelManager.ActivateNPCFeedback("Traigan 1000 de EXP o mejor sigan buscando los 2 ENGRANAJES.");
+            levelManager.ActivateNPCFeedback("Traigan " + expRequired.ToString() + " de EXP o mejor sigan buscando los 2 ENGRANAJES.");
         }
     }
 
