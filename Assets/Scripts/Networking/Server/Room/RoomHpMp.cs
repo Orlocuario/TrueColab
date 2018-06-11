@@ -128,7 +128,7 @@ public class RoomHpMp
         int valueDeltaExp = Int32.Parse(deltaExp);
         currentExp += valueDeltaExp;
 
-        room.SendMessageToAllPlayers("DisplayChangeExpToClient/" + currentExp, false);
+        room.SendMessageToAllPlayers("DisplayChangeExpToClient/" + currentExp, true);
     }
 
     public float GetExp()

@@ -50,6 +50,7 @@ public class Room
         switchs = new List<RoomSwitch>();
         enemies = new List<NetworkEnemy>();
         hpManager = new RoomHpMp(this);
+
         if (logger == null)
         {
             log = new RoomLogger(this.id);
