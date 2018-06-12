@@ -19,7 +19,7 @@ public class ObjectsToDestroy : MonoBehaviour {
         {
             if (gObject.GetComponent<DestroyableObject>())
             {
-                gObject.GetComponent<DestroyableObject>().DestroyMe(false);
+                gObject.GetComponent<DestroyableObject>().DestroyMe(true);
             }
         }
     }

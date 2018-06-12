@@ -11,10 +11,12 @@ public class Room
     public List<int> activatedSwitchGroups; //guarda los numeros de los grupos de switchs activados
     public RoomSystems systemsManager;
     public RoomObstacles obstacleManager;
+    public RoomDestroyedObjects objectManager;
     public ServerMessageHandler sender;
     public List<NetworkPlayer> players;
     public List<NetworkEnemy> enemies;
     public List<RoomSwitch> switchs;
+    public List<string> deathGameObject;
     public RoomHpMp hpManager;
     public RoomLogger log;
     public Server server;
@@ -46,9 +48,12 @@ public class Room
         activatedSwitchGroups = new List<int>();
         systemsManager = new RoomSystems();
         obstacleManager = new RoomObstacles();
+        objectManager = new RoomDestroyedObjects();
         players = new List<NetworkPlayer>();
         switchs = new List<RoomSwitch>();
         enemies = new List<NetworkEnemy>();
+        deathGameObject = new List<string>();
+
         hpManager = new RoomHpMp(this);
 
         if (logger == null)
@@ -297,6 +302,7 @@ public class Room
 
         systemsManager.Reset();
         obstacleManager.Reset();
+        objectManager.Reset();
 
         activatedSwitchGroups = new List<int>();
         enemies = new List<NetworkEnemy>();

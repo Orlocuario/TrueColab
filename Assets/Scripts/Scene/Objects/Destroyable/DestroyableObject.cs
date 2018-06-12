@@ -35,6 +35,7 @@ public class DestroyableObject : MonoBehaviour
         {
             gameObject.GetComponent<ParticleSystem>().Play();
         }
+
         Destroy(gameObject, destroyDelayTime);
     }
 

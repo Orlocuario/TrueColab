@@ -26,7 +26,7 @@ public class ServerMessageHandler
                 SendObjectMoved(message, ip);
                 break;
             case "ObjectDestroyed":
-                SendObjectDestroyed(message, ip);
+                SendObjectDestroyed(message, msg, ip);
                 break;
             case "ObstacleDestroyed":
                 HandleObstacleDestroyed(msg, ip);
@@ -229,6 +229,11 @@ public class ServerMessageHandler
         foreach (string obstacleMessage in room.obstacleManager.GetObstaclesMessages())
         {
             room.SendMessageToPlayer(obstacleMessage, ip, true);
+        }
+
+        foreach (string objectMessage in room.objectManager.GetObjectMessages())
+        {
+            room.SendMessageToPlayer(objectMessage, ip, true);
         }
 
     }
@@ -584,11 +589,13 @@ public class ServerMessageHandler
         room.SendMessageToAllPlayersExceptOne(message, ip, true);
     }
 
-    private void SendObjectDestroyed(string message, string ip)
+    private void SendObjectDestroyed(string theMessage, string[] message, string ip)
     {
+        string objectName = message[1];
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.SendMessageToAllPlayersExceptOne(message, ip, true);
+        room.objectManager.AddObjectDestroyed(objectName);
+        room.SendMessageToAllPlayersExceptOne(theMessage, ip, true);
     }
 
     private void SendUpdatedObjectPosition(string message, string ip)
