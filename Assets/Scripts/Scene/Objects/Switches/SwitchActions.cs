@@ -496,7 +496,7 @@ public class SwitchActions : MonoBehaviour
         levelManager.DestroyObject("CajaSwitchFierro", 2.9f);
         levelManager.InstantiatePortal("EnginTeleporter", new Vector2(-11.3f, 17.5f), new Vector2(14.1f, 15.7f));
         levelManager.InstantiatePortal("MageTeleporter", new Vector2(-11.3f, 22.05f), new Vector2(25.1f, -1.1f));
-        levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(-21.77f, 17.2f), new Vector2(25.1f, -1.1f));
+        levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(-21.77f, 17.2f), new Vector2(26.06f, -12.9f));
 
 
     }
@@ -565,7 +565,9 @@ public class SwitchActions : MonoBehaviour
     }
     private void HandlerGroup33()
     {
-
+        levelManager.InstantiatePrefab("Items/RunaA1", new Vector2(39.91f, 13.61f));
+        levelManager.InstantiatePrefab("Items/RunaV1", new Vector2(52.22f, -5.04f));
+        levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(43.32f, -12.53f));
     }
 
     private void HandlerGroup34()
@@ -620,9 +622,9 @@ public class SwitchActions : MonoBehaviour
     }
     private void HandlerGroup49()
     {
-		levelManager.InstantiatePortal("MageTeleporter", new Vector2(75.27f, -5.48f), new Vector2(84f, -5.5f)); //Solucionar Vectores}
-		levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(66.47f, -12.66f), new Vector2(83f, -5.5f)); //Solucionar Vectores}
-		levelManager.InstantiatePortal("EnginTeleporter", new Vector2(63.98f, 13.31f), new Vector2(82f, -5.5f)); //Solucionar Vectores}
+		levelManager.InstantiatePortal("MageTeleporter", new Vector2(75.27f, -5.48f), new Vector2(84f, -5.5f)); 
+		levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(66.47f, -12.66f), new Vector2(83f, -5.5f)); 
+		levelManager.InstantiatePortal("EnginTeleporter", new Vector2(63.98f, 13.31f), new Vector2(82f, -5.5f)); 
 		levelManager.PowerableToggleLavaIntoWater ("WaterFalling", true, 4);
     }
 
