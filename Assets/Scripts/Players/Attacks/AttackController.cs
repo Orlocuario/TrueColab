@@ -235,7 +235,7 @@ public class AttackController : MonoBehaviour
             DealDamage(collision.gameObject);
         }
 
-        Destroy(this.gameObject, destroyDelayTime);
+        Destroy(gameObject);
     }
 
     protected virtual float GetSpeed()
