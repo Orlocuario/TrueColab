@@ -11,12 +11,12 @@ public class KillingZonesDeactivatorPowerable : PowerableObject {
     { 
         foreach (KillingObject kObject in killingObjects)
         {
-            kObject.SetActive(false);
             Collider2D[] colliders = kObject.GetComponents<Collider2D>();
             foreach (Collider2D collider in colliders)
             {
                 collider.enabled = false; 
             }
+            kObject.SetActive(false);
         }
 
         foreach (EnemyController eController in enemies)
@@ -50,6 +50,4 @@ public class KillingZonesDeactivatorPowerable : PowerableObject {
             }
         }
     }
-
-
 }

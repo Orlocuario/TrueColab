@@ -622,9 +622,9 @@ public class SwitchActions : MonoBehaviour
     }
     private void HandlerGroup49()
     {
-		levelManager.InstantiatePortal("MageTeleporter", new Vector2(75.27f, -5.48f), new Vector2(84f, -5.5f)); 
-		levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(66.47f, -12.66f), new Vector2(83f, -5.5f)); 
-		levelManager.InstantiatePortal("EnginTeleporter", new Vector2(63.98f, 13.31f), new Vector2(82f, -5.5f)); 
+		levelManager.InstantiatePortal("MageTeleporter", new Vector2(62.03f, -5.48f), new Vector2(83f, -5.5f)); 
+		levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(50.07f, -12.6f), new Vector2(82.5f, -5.5f)); 
+		levelManager.InstantiatePortal("EnginTeleporter", new Vector2(49.66f, 13.25f), new Vector2(82f, -5.5f)); 
 		levelManager.PowerableToggleLavaIntoWater ("WaterFalling", true, 4);
     }
 
