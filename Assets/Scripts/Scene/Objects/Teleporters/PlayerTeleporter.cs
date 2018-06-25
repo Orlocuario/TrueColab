@@ -386,14 +386,20 @@ public class PlayerTeleporter : MonoBehaviour
 
     private void HandleCase23(GameObject player)
     {
-        ColliderDeactivator cDeactivator3 = GameObject.Find("WarriorGearDeactivator").GetComponent<ColliderDeactivator>();
-        cDeactivator3.OnEnterPlayer(player);
+        ColliderDeactivator[] cDeactivators23 = GameObject.Find("WarriorGearDeactivator").GetComponents<ColliderDeactivator>();
+        foreach(ColliderDeactivator cDeactivator in cDeactivators23)
+        {
+            cDeactivator.OnEnterPlayer(player);
+        }   
     }
 
     private void HandleCase24(GameObject player)
     {
-        ColliderDeactivator cDeactivator3 = GameObject.Find("WarriorGearDeactivator").GetComponent<ColliderDeactivator>();
-        cDeactivator3.OnExitPlayer(player);
+        ColliderDeactivator[] cDeactivators23 = GameObject.Find("WarriorGearDeactivator").GetComponents<ColliderDeactivator>();
+        foreach (ColliderDeactivator cDeactivator in cDeactivators23)
+        {
+            cDeactivator.OnExitPlayer(player);
+        }
     }
 
     public bool CheckIfDidThing()
