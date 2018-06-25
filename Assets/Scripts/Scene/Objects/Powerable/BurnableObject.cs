@@ -16,6 +16,7 @@ public class BurnableObject : MonoBehaviour {
     public void Burn()
     {
         ToggleParticles(true);           
+        SendDestroyDataToServer();
         Destroy(gameObject);
     }
 
@@ -49,5 +50,13 @@ public class BurnableObject : MonoBehaviour {
 
         ToggleParticles(false);
 
+    }
+
+    protected void SendDestroyDataToServer()
+    {
+        if (Client.instance)
+        {
+            Client.instance.SendMessageToServer("ObjectDestroyed/" + gameObject.name + "/", true);
+        }
     }
 }

@@ -831,7 +831,7 @@ public class LevelManager : MonoBehaviour
         {
             if (mInstantiator.jobDone)
             {
-                mInstantiator.MustInstantiateAndDestroyAgain();
+                mInstantiator.InstantiateObjects(mInstantiator.objectNeeded);
             }
         }
     }

@@ -121,6 +121,36 @@ public class PlayerTeleporter : MonoBehaviour
             case 14:
                 HandleCase14(player);
                 break;
+            case 15:
+                HandleCase15(player);
+                break;
+            case 16:
+                HandleCase16(player);
+                break;
+            case 17:
+                HandleCase17(player);
+                break;
+            case 18:
+                HandleCase18(player);
+                break;
+            case 19:
+                HandleCase19(player);
+                break;
+            case 20:
+                HandleCase20(player);
+                break;
+            case 21:
+                HandleCase21(player);
+                break;
+            case 22:
+                HandleCase22(player);
+                break;
+            case 23:
+                HandleCase23(player);
+                break;
+            case 24:
+                HandleCase24(player);
+                break;
             default:
                 return;
         }
@@ -326,32 +356,44 @@ public class PlayerTeleporter : MonoBehaviour
         cDeactivator2.OnEnterPlayer(player);
     }
 
-    private void HandlerCase19(GameObject player)
+    private void HandleCase19(GameObject player)
     {
         //ReturnFrom3
         ColliderDeactivator cDeactivator3 = GameObject.Find("Zone3").GetComponent<ColliderDeactivator>();
         cDeactivator3.OnEnterPlayer(player);
     }
 
-    private void HandlerCase20(GameObject player)
+    private void HandleCase20(GameObject player)
     {
         //Return From 4
         ColliderDeactivator cDeactivator4 = GameObject.Find("Zone4").GetComponent<ColliderDeactivator>();
         cDeactivator4.OnExitPlayer(player);
     }
 
-    private void HandlerCase21(GameObject player)
+    private void HandleCase21(GameObject player)
     {
         //Return From 5
         ColliderDeactivator cDeactivator5 = GameObject.Find("Zone5").GetComponent<ColliderDeactivator>();
         cDeactivator5.OnExitPlayer(player);
     }
 
-    private void HandlerCase22(GameObject player)
+    private void HandleCase22(GameObject player)
     {
         //Return From 6
         ColliderDeactivator cDeactivator6 = GameObject.Find("Zone6").GetComponent<ColliderDeactivator>();
         cDeactivator6.OnExitPlayer(player);
+    }
+
+    private void HandleCase23(GameObject player)
+    {
+        ColliderDeactivator cDeactivator3 = GameObject.Find("WarriorGearDeactivator").GetComponent<ColliderDeactivator>();
+        cDeactivator3.OnEnterPlayer(player);
+    }
+
+    private void HandleCase24(GameObject player)
+    {
+        ColliderDeactivator cDeactivator3 = GameObject.Find("WarriorGearDeactivator").GetComponent<ColliderDeactivator>();
+        cDeactivator3.OnExitPlayer(player);
     }
 
     public bool CheckIfDidThing()

@@ -48,18 +48,4 @@ public class MovableTriggerInstantiator : MonoBehaviour {
         }
         jobDone = true; 
     }
-
-    public void MustInstantiateAndDestroyAgain()
-    {
-        SendMessageToServer("MustInstantiateAndDestroy" + "/" + gameObject.name + "/" + objectNeeded.name, true);
-    }
-
-    private void SendMessageToServer(string message, bool secure)
-    {
-        if (Client.instance)
-        {
-            Client.instance.SendMessageToServer(message, secure);
-        }
-    }
-
 }

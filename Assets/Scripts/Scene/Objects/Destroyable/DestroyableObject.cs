@@ -9,6 +9,7 @@ public class DestroyableObject : MonoBehaviour
 
     public float destroyDelayTime;
     public bool reinforced;
+    public GameObject particle;
 
     #endregion
 
@@ -17,6 +18,11 @@ public class DestroyableObject : MonoBehaviour
     protected virtual void Start()
     {
         destroyDelayTime = .4f;
+
+        if (particle != null)
+        {
+            particle.SetActive(false);
+        }
     }
 
     #endregion
@@ -25,6 +31,10 @@ public class DestroyableObject : MonoBehaviour
 
     public virtual void DestroyMe(bool destroyedFromLocal)
     {
+        if (particle != null)
+        {
+            particle.SetActive(true);
+        }
 
         if (destroyedFromLocal)
         {
@@ -49,7 +59,6 @@ public class DestroyableObject : MonoBehaviour
         {
             Client.instance.SendMessageToServer("ObjectDestroyed/" + name + "/", true);
         }
-
     }
 
     #endregion

@@ -308,6 +308,7 @@ public class Room
         enemies = new List<NetworkEnemy>();
         switchs = new List<RoomSwitch>();
         hpManager = new RoomHpMp(this);
+        objectManager = new RoomDestroyedObjects();
 
     }
 
