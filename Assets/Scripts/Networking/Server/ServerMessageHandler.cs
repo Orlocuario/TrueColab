@@ -100,9 +100,6 @@ public class ServerMessageHandler
             case "DestroyObject":
                 SendDestroyObject(message, ip);
                 break;
-            case "OthersDestroyObject":
-                SendOthersDestroyObject(message, ip);
-                break;
             case "InventoryUpdate":
                 SendInventoryUpdate(message, ip);
                 break;
@@ -166,12 +163,18 @@ public class ServerMessageHandler
         Room room = player.room;
         room.SendMessageToAllPlayers(msg, true);
     }
+
     private void HandleReadyPoi(string[] msg, string ip)
     {
         string poiID = msg[1].ToString();
         NetworkPlayer player = server.GetPlayer(ip);
+        Room room = player.room;
         RoomLogger log = player.room.log;
         log.WritePoiIsReady(player.id, poiID);
+
+        room.poisHandler.AddPoiReady(poiID);
+        room.SendMessageToAllPlayersExceptOne("ReadyPoi" + "/" + poiID, ip, true);
+
 
         Debug.Log("POI " + poiID + " reached by all needed players in room " + player.room.id);
 
@@ -180,10 +183,15 @@ public class ServerMessageHandler
     private void HandleEnterPOI(string[] msg, string ip)
     {
         string poiID = msg[1].ToString();
+        string incomingPlayer = msg[2].ToString();
+
         NetworkPlayer player = server.GetPlayer(ip);
+        Room room = player.room;
         RoomLogger log = player.room.log;
         log.WriteEnterPOI(player.id, poiID);
         Debug.Log("POI " + poiID + " reached by " + player.id + " in room " + player.room.id);
+
+        room.SendMessageToAllPlayersExceptOne("PoiReached" + "/" + poiID + "/" + incomingPlayer, ip, true);
     }
 
     private void HandleChangeScene(string[] msg, string ip)
@@ -234,6 +242,11 @@ public class ServerMessageHandler
         foreach (string objectMessage in room.objectManager.GetObjectMessages())
         {
             room.SendMessageToPlayer(objectMessage, ip, true);
+        }
+
+        foreach (string poiMessages in room.poisHandler.GetPoiMessages())
+        {
+            room.SendMessageToPlayer(poiMessages, ip, true);
         }
 
     }

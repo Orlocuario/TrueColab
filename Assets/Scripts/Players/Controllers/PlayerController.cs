@@ -1256,16 +1256,6 @@ public class PlayerController : MonoBehaviour
         SendMessageToServer("ChangeMpHUDToRoom/" + mpSpendRate);
     }
 
-    public void SendPoiEnterToServer(int poiId)
-    {
-        Client.instance.SendMessageToServer("EnterPOI/" + poiId, true);
-    }
-
-    public void SendPoiIsReadyToServer(int poiId)
-    {
-        Client.instance.SendMessageToServer("ReadyPoi/" + poiId, true);
-    }
-
     protected void SendMessageToServer(string message)
     {
         if (Client.instance)

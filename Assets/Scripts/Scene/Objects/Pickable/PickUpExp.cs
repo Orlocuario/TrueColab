@@ -22,7 +22,7 @@ public class PickUpExp : MonoBehaviour
     public void PickUp()
     {
         string expAmount = expGranted.ToString();
-        SendMessageToServer("OthersDestroyObject/" + name, true);
+        SendDestroyDataToServer();
         SendMessageToServer("GainExp/" + expAmount, true);
         Destroy(gameObject);
     }
@@ -46,6 +46,14 @@ public class PickUpExp : MonoBehaviour
         if (Client.instance)
         {
             Client.instance.SendMessageToServer(message, secure);
+        }
+    }
+
+    protected void SendDestroyDataToServer()
+    {
+        if (Client.instance)
+        {
+            Client.instance.SendMessageToServer("ObjectDestroyed/" + name + "/", true);
         }
     }
 

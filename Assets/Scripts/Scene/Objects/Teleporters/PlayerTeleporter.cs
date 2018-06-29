@@ -65,28 +65,19 @@ public class PlayerTeleporter : MonoBehaviour
 
     protected void ActivateTeleporter(GameObject other)
     {
+        if (mustDoSomething)
+        {
+            DoYourTeleportedThing(id, other.gameObject);
+        }
+
         if (other.GetComponent<PlayerController>().localPlayer)
         {
             other.GetComponent<PlayerController>().respawnPosition = teleportPosition;
             levelManager.Respawn();
         }
-
         else
         {
             other.GetComponent<PlayerController>().respawnPosition = teleportPosition;
-        }
-
-        if (mustDoSomething)
-        {
-            if (didMyThing)
-            {
-                return;
-            }
-            else
-            {
-                didMyThing = true;
-                DoYourTeleportedThing(id, other.gameObject);
-            }
         }
     }
 
@@ -102,6 +93,9 @@ public class PlayerTeleporter : MonoBehaviour
                 break;
             case 4:
                 HandleCase4(player);
+                break;
+            case 8:
+                HandleCase8(player);
                 break;
             case 9:
                 HandleCase9(player);
@@ -173,10 +167,6 @@ public class PlayerTeleporter : MonoBehaviour
             case 7:
                 HandleCase7();
                 break;
-            case 8:
-                HandleCase8();
-                break;
-
             default:
                 return;
         }
@@ -189,9 +179,12 @@ public class PlayerTeleporter : MonoBehaviour
             Debug.Log("you need a teleport position");
         }
 
-        if (teleportPosition.Equals(default(int)))
+        if (mustDoSomething)
         {
-            Debug.LogError("teleport: " + gameObject.name + "needs an Id");
+            if (id.Equals(default(int)))
+            {
+                Debug.LogError("teleport: " + gameObject.name + "needs an Id");
+            }
         }
     }
 
@@ -277,8 +270,10 @@ public class PlayerTeleporter : MonoBehaviour
     // Scene 5 Deactivators 
 
 
-    private void HandleCase8()
+    private void HandleCase8(GameObject player)
     {
+        ColliderDeactivator cDeactivatorZone2 = GameObject.Find("Zone1Intro").GetComponent<ColliderDeactivator>();
+        cDeactivatorZone2.OnEnterPlayer(player);
         //Activate Zone 1 Colliders
     }
 
@@ -289,7 +284,7 @@ public class PlayerTeleporter : MonoBehaviour
         cDeactivatorZone2.OnEnterPlayer(player);
     }
 
-    private void HandleCase10 (GameObject player)
+    private void HandleCase10(GameObject player)
     {
         //Activate Zone 3 Colliders
         ColliderDeactivator cDeactivatorZone3 = GameObject.Find("Zone3").GetComponent<ColliderDeactivator>();
@@ -387,10 +382,10 @@ public class PlayerTeleporter : MonoBehaviour
     private void HandleCase23(GameObject player)
     {
         ColliderDeactivator[] cDeactivators23 = GameObject.Find("WarriorGearDeactivator").GetComponents<ColliderDeactivator>();
-        foreach(ColliderDeactivator cDeactivator in cDeactivators23)
+        foreach (ColliderDeactivator cDeactivator in cDeactivators23)
         {
             cDeactivator.OnEnterPlayer(player);
-        }   
+        }
     }
 
     private void HandleCase24(GameObject player)

@@ -874,6 +874,23 @@ public class SwitchActions : MonoBehaviour
 
     }
 
+    private void HandlerGroup71()
+    {
+        GameObject sueloMetalicoWarrior = GameObject.Find("SueloMetalWarriorSecretBlocker");
+        Destroy(sueloMetalicoWarrior);
+    }
+
+    private void HandlerGroup72()
+    {
+        GameObject sueloMetalicoMage = GameObject.Find("SueloMetalMageSecretBlocker");
+        Destroy(sueloMetalicoMage);
+    }
+
+    private void HandlerGroup73()
+    {
+        GameObject sueloMetalicoEngin = GameObject.Find("SueloMetalEnginSecretBlocker");
+        Destroy(sueloMetalicoEngin);
+    }
 
 
     #endregion

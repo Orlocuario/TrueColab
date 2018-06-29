@@ -264,7 +264,7 @@ public class LevelManager : MonoBehaviour
         string currentSceneNumber = Regex.Match(currentSceneName, @"\d+").Value;
         int nextSceneNumber = int.Parse(currentSceneNumber) + 1;
         string nextSceneName = "Escena" + nextSceneNumber;
-        
+
 
         Debug.Log("Changing to scene " + nextSceneName);
 
@@ -497,7 +497,7 @@ public class LevelManager : MonoBehaviour
         {
             NPCFeedbackText.text = "";
         }
-        isPlayingFeedback = false; 
+        isPlayingFeedback = false;
         npcLog.SetActive(false);
     }
 
@@ -677,6 +677,24 @@ public class LevelManager : MonoBehaviour
         }
 
         return prefab;
+    }
+
+    public void HandleIncomingPoiReached(string poiId, string playerName)
+    {
+        Poi poiActivated = GameObject.Find("poi" + poiId).GetComponent<Poi>();
+        GameObject player = GameObject.Find(playerName);
+
+        poiActivated.HandlePoiEnterFromServer(poiId, player);
+    }
+
+    public void HandlePoiReady(string poiId)
+    {
+        Debug.Log("Me llegó un poi Ready. El: " + poiId);
+        Poi poiActivated = GameObject.Find("poi" + poiId).GetComponent<Poi>();
+        Debug.Log("TENGO EL SCRIPT DEL POI Y ME LO VoY A ECHAR!");
+
+        poiActivated.HandlePoiReadyFromServer();
+
     }
     public void InstantiatePortal(string portalType, Vector2 initialPosition, Vector2 teleportPosition)
     {

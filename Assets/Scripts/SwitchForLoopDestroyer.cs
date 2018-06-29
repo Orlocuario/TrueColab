@@ -17,6 +17,8 @@ public class SwitchForLoopDestroyer : MonoBehaviour {
 
     public void SwitchReady(string incomingSwitch)
     {
+        // Este código se llama desde los SwitchActions de la escena. 
+
         for (int i = 0; i<switchesNeeded.Length;i++)
         {
             if (switchesNeeded[i] == incomingSwitch)

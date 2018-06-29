@@ -46,7 +46,7 @@ public class RoomLogger
     public void WriteEnterPOI(int playerId, string poiId)
     {
         StreamWriter writer = GetWriter();
-        writer.WriteLine(GetTime() + " Player " + playerId + " entered poi with ID: " + poiId);
+        writer.WriteLine(GetTime() + " Poi number: " + poiId + " was reached by Player" + playerId);
         writer.Close();
     }
 

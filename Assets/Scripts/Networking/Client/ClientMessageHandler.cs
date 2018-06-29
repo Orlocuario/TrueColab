@@ -31,6 +31,12 @@ public class ClientMessageHandler
 
         switch (msg[0])
         {
+            case "ReadyPoi":
+                HandlePoiReady(msg);
+                break;
+            case "PoiReached":
+                HandlePoiReached(msg);
+                break;
             case "ChangeScene":
                 HandleChangeScene(msg);
                 break;
@@ -110,9 +116,6 @@ public class ClientMessageHandler
                 HandleCreateGameObject(msg);
                 break;
             case "DestroyObject":
-                HandleDestroyObject(msg);
-                break;
-            case "OthersDestroyObject":
                 HandleDestroyObject(msg);
                 break;
             case "ChangeSwitchStatus":
@@ -648,15 +651,17 @@ public class ClientMessageHandler
                 return;
             }
 
-            DestroyableObject destroyableController = destroyableObject.GetComponent<DestroyableObject>();
-
-            if (!destroyableController)
+            else
             {
-                Debug.Log(name + " is not destroyable");
-                return;
-            }
+                DestroyableObject destroyableController = destroyableObject.GetComponent<DestroyableObject>();
+                if (!destroyableController)
+                {
+                    Debug.Log(name + " is not destroyable");
+                    return;
+                }
 
-            destroyableController.DestroyMe(false);
+                destroyableController.DestroyMe(false);
+            }
         }
     }
 
@@ -665,6 +670,21 @@ public class ClientMessageHandler
     #endregion
 
     #region Scene
+
+    private void HandlePoiReached(string[] msg)
+    {
+        LevelManager lManager = GameObject.FindObjectOfType<LevelManager>();
+        string poiId = msg[1];
+        string player = msg[2];
+        lManager.HandleIncomingPoiReached(poiId, player);
+    }
+
+    private void HandlePoiReady(string[] msg)
+    {
+        LevelManager lManager = GameObject.FindObjectOfType<LevelManager>();
+        string poiId = msg[1];
+        lManager.HandlePoiReady(poiId);
+    }
 
     private void HandleChangeScene(string[] msg)
     {
