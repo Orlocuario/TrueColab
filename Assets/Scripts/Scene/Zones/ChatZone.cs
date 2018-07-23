@@ -12,6 +12,7 @@ public class ChatZone : MonoBehaviour
 
     private float regenerationUnits = 6;
     private int regenerationFrameRate = 17;
+    private int numberOfPlayersInside;
 
     private int regenerationFrame;
     private bool activated;
@@ -22,6 +23,7 @@ public class ChatZone : MonoBehaviour
 
     private void Start()
     {
+        numberOfPlayersInside = 0;
         regenerationFrame = 0;
         activated = false;
 
@@ -35,13 +37,14 @@ public class ChatZone : MonoBehaviour
         {
             if (CanRegenerateHPorMP())
             {
+                regenerationFrameRate = regenerationFrameRate /= numberOfPlayersInside;
                 regenerationFrame++;
 
                 if (regenerationFrame == regenerationFrameRate)
                 {
                     regenerationFrame = 0;
                     hpAndMp.ChangeHPAndMP(regenerationUnits);
-                    SendMessageToServer("ChangeHpAndMpHUDToRoom/" + regenerationUnits);
+                    //SendMessageToServer("ChangeHpAndMpHUDToRoom/" + regenerationUnits);
                 }
             }
         }
@@ -111,17 +114,7 @@ public class ChatZone : MonoBehaviour
     protected bool GameObjectIsPlayer(GameObject other, bool isLocal)
     {
         PlayerController playerController = other.GetComponent<PlayerController>();
-
-        if (isLocal)
-        {
-            return playerController && playerController.localPlayer;
-        }
-        
-        // this code could be deprecated
-        else
-        {
-            return playerController;
-        }
+        return playerController && playerController.localPlayer;        
     }
 
     #endregion
@@ -136,7 +129,8 @@ public class ChatZone : MonoBehaviour
             player.availableChatZone = gameObject;
             ToggleParticles(true);
             activated = true;
-            //SendMessageToServer("EnteredChatZone" + "/" + gameObject.name);
+            numberOfPlayersInside++;
+            SendMessageToServer("EnteredChatZone" + "/" + gameObject.name);
         }
     }
 
@@ -147,6 +141,29 @@ public class ChatZone : MonoBehaviour
             TurnChatZoneOff();
             PlayerController player = other.gameObject.GetComponent<PlayerController>();
             player.availableChatZone = null;
+            numberOfPlayersInside--;
+            SendMessageToServer("LeftChatZone" + "/" + gameObject.name);
+        }
+    }
+
+    public void HandlePlayerEnteringChatZone()
+    {
+        numberOfPlayersInside++;
+        if (numberOfPlayersInside >= 1)
+        {
+            ToggleParticles(true);
+            activated = true;
+        }
+    }
+
+    public void HandlePlayerLeftChatZone()
+    {
+        numberOfPlayersInside--;
+        if (numberOfPlayersInside <= 0)
+        {
+            ToggleParticles(false);
+            numberOfPlayersInside = 0;
+            activated = false;
         }
     }
 

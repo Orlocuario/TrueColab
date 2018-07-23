@@ -52,6 +52,12 @@ public class ServerMessageHandler
             case "ChangeHpAndMpHUDToRoom": //Necessary coz' ChatZone changes both at the same rate
                 SendHpHAndMpHUDToRoom(msg, ip);
                 break;
+            case "EnteredChatZone":
+                SendPlayerEnteredChatZoneSignal(message, ip);
+                break;
+            case "LeftChatZone":
+                SendPlayerLeftChatZoneSignal(message, ip);
+                break;
             case "GainExp":
                 SendExpToRoom(msg, ip);
                 break;
@@ -488,6 +494,20 @@ public class ServerMessageHandler
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         room.hpManager.RecieveHpAndMpHUD(msg[1], ip);
+    }
+
+    private void SendPlayerEnteredChatZoneSignal(string msg, string ip)
+    {
+        NetworkPlayer player = server.GetPlayer(ip);
+        Room room = player.room;
+        room.SendMessageToAllPlayersExceptOne(msg, ip, true);
+    }
+
+    private void SendPlayerLeftChatZoneSignal(string msg, string ip)
+    {
+        NetworkPlayer player = server.GetPlayer(ip);
+        Room room = player.room;
+        room.SendMessageToAllPlayersExceptOne(msg, ip, true);
     }
 
     private void SendExpToRoom(string[] msg, string ip)
