@@ -57,6 +57,19 @@ public class RoomLogger
         writer.Close();
     }
 
+    public void WritePlayerIsCharging(int playerId)
+    {
+        StreamWriter writer = GetWriter();
+        writer.WriteLine(GetTime() + "Player " + playerId + " is Charging");
+        writer.Close();
+    }
+
+    public void WritePlayernotCharging(int playerId)
+    {
+        StreamWriter writer = GetWriter();
+        writer.WriteLine(GetTime() + "Player " + playerId + " Stoped Charging");
+        writer.Close();
+    }
 
     public void WritePoiIsReady(int playerID, string poiID)
     {

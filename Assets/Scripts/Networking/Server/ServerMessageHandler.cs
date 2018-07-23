@@ -53,7 +53,7 @@ public class ServerMessageHandler
                 SendHpHAndMpHUDToRoom(msg, ip);
                 break;
             case "EnteredChatZone":
-                SendPlayerEnteredChatZoneSignal(message, ip);
+                PlayerEnteredChatZone(message, ip);
                 break;
             case "LeftChatZone":
                 SendPlayerLeftChatZoneSignal(message, ip);
@@ -181,9 +181,6 @@ public class ServerMessageHandler
         room.poisHandler.AddPoiReady(poiID);
         room.SendMessageToAllPlayersExceptOne("ReadyPoi" + "/" + poiID, ip, true);
 
-
-        Debug.Log("POI " + poiID + " reached by all needed players in room " + player.room.id);
-
     }
 
     private void HandleEnterPOI(string[] msg, string ip)
@@ -195,7 +192,6 @@ public class ServerMessageHandler
         Room room = player.room;
         RoomLogger log = player.room.log;
         log.WriteEnterPOI(player.id, poiID);
-        Debug.Log("POI " + poiID + " reached by " + player.id + " in room " + player.room.id);
 
         room.SendMessageToAllPlayersExceptOne("PoiReached" + "/" + poiID + "/" + incomingPlayer, ip, true);
     }
@@ -496,18 +492,20 @@ public class ServerMessageHandler
         room.hpManager.RecieveHpAndMpHUD(msg[1], ip);
     }
 
-    private void SendPlayerEnteredChatZoneSignal(string msg, string ip)
+    private void PlayerEnteredChatZone(string msg, string ip)
     {
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.SendMessageToAllPlayersExceptOne(msg, ip, true);
+        RoomLogger log = room.log;
+        log.WritePlayerIsCharging(player.id);
     }
 
     private void SendPlayerLeftChatZoneSignal(string msg, string ip)
     {
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.SendMessageToAllPlayersExceptOne(msg, ip, true);
+        RoomLogger log = room.log;
+        log.WritePlayernotCharging(player.id);
     }
 
     private void SendExpToRoom(string[] msg, string ip)
