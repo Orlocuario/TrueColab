@@ -43,7 +43,7 @@ public class RoomHpMp
 
     public void StopChangeHpAndMpHUD(string ip)
     {
-        room.SendMessageToAllPlayersExceptOne("DisplayStopChangeHPMPToClient/", ip, false);
+        room.SendMessageToAllPlayersExceptOne("DisplayStopChangeHPMPToClient/", ip, true);
     }
 
     public void RecieveHpAndMpHUD(string changeRate, string ip)
@@ -68,7 +68,7 @@ public class RoomHpMp
         else if (currentHP <= 0)
         {
             currentHP = 0;
-            room.SendMessageToAllPlayers("PlayersAreDead/" + Server.instance.sceneToLoad,false);
+            room.SendMessageToAllPlayers("PlayersAreDead/" + Server.instance.sceneToLoad, true);
             currentHP = maxHP;
             currentMP = maxMP;
             room.SendMessageToAllPlayers("NewChatMessage/" + room.actualChat,false);

@@ -10,8 +10,8 @@ public class ChatZone : MonoBehaviour
     private GameObject[] particles;
     private HUDDisplay hpAndMp;
 
-    private static float regenerationUnits = 6;
-    private static int regenerationFrameRate = 17;
+    private float regenerationUnits = 6;
+    private int regenerationFrameRate = 17;
 
     private int regenerationFrame;
     private bool activated;
@@ -116,7 +116,8 @@ public class ChatZone : MonoBehaviour
         {
             return playerController && playerController.localPlayer;
         }
-
+        
+        // this code could be deprecated
         else
         {
             return playerController;
@@ -127,7 +128,6 @@ public class ChatZone : MonoBehaviour
 
     #region Events
 
-    // Attack those who enter the alert zone
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (GameObjectIsPlayer(other.gameObject, true))
@@ -136,6 +136,7 @@ public class ChatZone : MonoBehaviour
             player.availableChatZone = gameObject;
             ToggleParticles(true);
             activated = true;
+            //SendMessageToServer("EnteredChatZone" + "/" + gameObject.name);
         }
     }
 
