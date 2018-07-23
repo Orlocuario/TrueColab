@@ -67,9 +67,6 @@ public class ClientMessageHandler
             case "DisplayStopChangeHPMPToClient":
                 StopChangeHPMPToClient(msg);
                 break;
-            case "EnteredChatZone":
-                HandlePlayerEnteredChatZone(msg);
-                break;
             case "EnemyDie":
                 EnemyDie(msg);
                 break;
@@ -492,34 +489,6 @@ public class ClientMessageHandler
         {
             HUDDisplay hpAndMp = GameObject.FindObjectOfType<LevelManager>().hpAndMp;
             hpAndMp.StopLocalParticles(); // Only stop local particles
-        }
-    }
-
-    private void HandlePlayerEnteredChatZone(string[] msg)
-    {
-        if (NotInClientScene())
-        {
-            string chatZoneName = msg[1];
-            GameObject chatZone = GameObject.Find(chatZoneName);
-            if (chatZone)
-            {
-                ChatZone chatZoneScript = chatZone.GetComponent<ChatZone>();
-                chatZoneScript.HandlePlayerEnteringChatZone();
-            }
-        }
-    }
-
-    private void HandlePlayerLeftChatZone(string[] msg)
-    {
-        if (NotInClientScene())
-        {
-            string chatZoneName = msg[1];
-            GameObject chatZone = GameObject.Find(chatZoneName);
-            if (chatZone)
-            {
-                ChatZone chatZoneScript = chatZone.GetComponent<ChatZone>();
-                chatZoneScript.HandlePlayerLeftChatZone();
-            }
         }
     }
 

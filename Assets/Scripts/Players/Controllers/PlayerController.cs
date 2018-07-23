@@ -447,9 +447,6 @@ public class PlayerController : MonoBehaviour
                 {
                     SetPowerState(!isPowerOn);
                     SendPowerDataToServer();
-                    if (isPowerOn == false)
-                    {
-                    }
                 }
 
                 if (isPowerOn)
