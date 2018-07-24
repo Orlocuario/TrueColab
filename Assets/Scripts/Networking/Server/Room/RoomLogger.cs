@@ -80,6 +80,12 @@ public class RoomLogger
         writer.Close();
     }
 
+    public void WritePlayersAreDead()
+    {
+        StreamWriter writer = GetWriter();
+        writer.WriteLine(GetTime() + " PLAYERS ARE DEAD!!");
+        writer.Close();
+    }
     public void WriteNewLine()
     {
         StreamWriter writer = GetWriter();

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Poi : MonoBehaviour {
 
-    public int id;
+    public float id;
     public PlayerController[] playersNeeded;
     private int playersArrived;
     public bool poiReady;
@@ -19,10 +19,8 @@ public class Poi : MonoBehaviour {
     } 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log(collider.gameObject.name + " Just Entered this Poi: " + id);
         if (poiReady)
         {
-            Debug.Log("Poi is ready so FuckOf!!");
             return;
         }
 
@@ -34,8 +32,6 @@ public class Poi : MonoBehaviour {
                 string pName = pController.gameObject.name;
                 string messageId = id.ToString();
 
-                Debug.Log("from Poi " + id + ": IM GONNA TELL Y'ALL SOMEONEENTERED");
-
                 SendPoiEnterToServer(messageId, pName);
 
                 playersArrived++;
@@ -44,17 +40,15 @@ public class Poi : MonoBehaviour {
                     LevelManager lManager = FindObjectOfType<LevelManager>();
                     if (lManager.GetLocalPlayerController().controlOverEnemies)
                     {
-                        Debug.Log("from Poi " + id + ":THIS SHIT IS READY!");
-
                         SendPoiIsReadyToServer(messageId);
                     }
+
                     poiReady = true;
                 }
 
             }
         }
     }
-
 
     public void HandlePoiEnterFromServer(string poiId, GameObject incomingPlayer)
     {

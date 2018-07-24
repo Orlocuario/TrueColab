@@ -26,17 +26,20 @@ public class AttackTeleporter : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        AttackController attack = other.GetComponent<AttackController>();
-        if (teleporting)
+        if (other.GetComponent<AttackController>())
         {
-            return;
-        }
+            AttackController attack = other.GetComponent<AttackController>();
+            if (teleporting)
+            {
+                return;
+            }
 
-        if (attack)
-        {
-            teleporting = true;
-            TeleportAttack(attack);
-            StartCoroutine(WaitTillStopTeleporting());
+            if (attack)
+            {
+                teleporting = true;
+                TeleportAttack(attack);
+                StartCoroutine(WaitTillStopTeleporting());
+            }
         }
     }
 

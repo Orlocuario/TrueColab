@@ -69,6 +69,7 @@ public class RoomHpMp
         {
             currentHP = 0;
             room.SendMessageToAllPlayers("PlayersAreDead/" + Server.instance.sceneToLoad,false);
+            room.log.WritePlayersAreDead();
             currentHP = maxHP;
             currentMP = maxMP;
             room.SendMessageToAllPlayers("NewChatMessage/" + room.actualChat,false);

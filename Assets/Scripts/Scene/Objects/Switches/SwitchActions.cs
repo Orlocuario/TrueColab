@@ -497,9 +497,8 @@ public class SwitchActions : MonoBehaviour
         levelManager.InstantiatePortal("EnginTeleporter", new Vector2(-11.3f, 17.5f), new Vector2(14.1f, 15.7f));
         levelManager.InstantiatePortal("MageTeleporter", new Vector2(-11.3f, 22.05f), new Vector2(25.1f, -1.1f));
         levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(-21.77f, 17.2f), new Vector2(26.06f, -12.9f));
-
-
     }
+
     private void HandlerGroup16()
     {
         levelManager.InstantiatePrefab("RunaR1", new Vector2(-39.35f, 16f));
@@ -891,7 +890,6 @@ public class SwitchActions : MonoBehaviour
         GameObject sueloMetalicoEngin = GameObject.Find("SueloMetalEnginSecretBlocker");
         Destroy(sueloMetalicoEngin);
     }
-
 
     #endregion
 
