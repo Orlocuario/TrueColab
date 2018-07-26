@@ -157,7 +157,6 @@ public class PlayerTeleporter : MonoBehaviour
             case 1:
                 HandleCase1();
                 break;
-
             case 5:
                 HandleCase5();
                 break;
@@ -186,6 +185,11 @@ public class PlayerTeleporter : MonoBehaviour
                 Debug.LogError("teleport: " + gameObject.name + "needs an Id");
             }
         }
+    }
+
+    private void SetWithTeleportPositionController()
+    {
+
     }
 
     private void HandleCase1() //ChangeFilters in Warrior Zone -- Scene4
