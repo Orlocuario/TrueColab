@@ -40,7 +40,6 @@ public class VectorTeleportAssigner : MonoBehaviour {
                 Vector2 vector = destination.GetComponent<Transform>().position;
 
                 teleporterDestiny.Add(nameOfDestiny, vector);
-                Destroy(destination);
             }
         }
     }

@@ -350,8 +350,8 @@ public class Room
                 coordenadas[1] = .1f;
                 break;
             case ("Escena6"):
-                coordenadas[0] = 1f;
-                coordenadas[1] = 1f;
+                coordenadas[0] = -8.3f;
+                coordenadas[1] = 11.43f;
                 break;
 
             default:

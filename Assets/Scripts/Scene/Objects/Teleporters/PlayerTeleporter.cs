@@ -439,11 +439,14 @@ public class PlayerTeleporter : MonoBehaviour
 
     private void DeactivateOriginColliders(GameObject player)
     {
-        GameObject origin = GameObject.Find(groveStreet);
-        if (origin)
+        if (GameObject.Find(groveStreet))
         {
-            ColliderDeactivator cDeactivator = origin.GetComponent<ColliderDeactivator>();
-            cDeactivator.OnExitPlayer(player);
+            GameObject origin = GameObject.Find(groveStreet);
+            if (origin.GetComponent<ColliderDeactivator>())
+            {
+                ColliderDeactivator cDeactivator = origin.GetComponent<ColliderDeactivator>();
+                cDeactivator.OnExitPlayer(player);
+            }
         }
     }
 
