@@ -38,7 +38,6 @@ public class VectorTeleportAssigner : MonoBehaviour {
             {
                 GameObject destination = GameObject.Find(nameOfDestiny);
                 Vector2 vector = destination.GetComponent<Transform>().position;
-
                 teleporterDestiny.Add(nameOfDestiny, vector);
             }
         }
