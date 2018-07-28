@@ -5,26 +5,49 @@ using UnityEngine;
 public class VectorTeleportAssigner : MonoBehaviour {
 
 
-    public struct VectorizedTeleporter
-    {
-        public Transform destinyObject;
-        public PlayerTeleporter teleporter;
-    }
-
-    public VectorizedTeleporter[] teleporters;
-
+    public string[] destinies; 
+    public Dictionary<string, Vector2> teleporterDestiny;
 
 	// Use this for initialization
 	void Start () {
 
-        for (int i = 0; i < teleporters.Length; i++)
+        teleporterDestiny = new Dictionary<string, Vector2>();
+
+        for (int i = 0; i < destinies.Length; i++)
         {
-            
+            GameObject destiny = GameObject.Find(destinies[i]);
+            if (destiny != null)
+            {
+                AssignVectorValue(destinies[i]);
+            }
         }
-	}
+    }
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    public void AssignVectorValue(string nameOfDestiny)
+    {
+        if (GameObject.Find(nameOfDestiny))
+        {
+            if (teleporterDestiny.ContainsKey(nameOfDestiny))
+            {
+                return;
+            }
+
+            else
+            {
+                GameObject destination = GameObject.Find(nameOfDestiny);
+                Vector2 vector = destination.GetComponent<Transform>().position;
+
+                teleporterDestiny.Add(nameOfDestiny, vector);
+                Destroy(destination);
+            }
+        }
+    }
+
+    public Vector2 WhereAmIGoing(string teleportDestination)
+    {
+        Vector2 v2 = teleporterDestiny[teleportDestination];
+        return v2;
+    }
 }

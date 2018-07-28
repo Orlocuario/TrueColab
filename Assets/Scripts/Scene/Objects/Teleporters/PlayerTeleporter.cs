@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class PlayerTeleporter : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class PlayerTeleporter : MonoBehaviour
     public bool mustDoSomething;
     private bool didMyThing;
     public int id;
+    public string groveStreet;
+    public string placeToGo;
 
     #endregion
 
@@ -145,6 +148,9 @@ public class PlayerTeleporter : MonoBehaviour
             case 24:
                 HandleCase24(player);
                 break;
+            case 25:
+                HandleCase25(player);
+                break;
             default:
                 return;
         }
@@ -178,6 +184,16 @@ public class PlayerTeleporter : MonoBehaviour
             Debug.Log("you need a teleport position");
         }
 
+        if (placeToGo.Equals(default(string)))
+        {
+            Debug.LogError("The Teleporter named: " + gameObject.name + "doesnt have a Destiny Assigned");
+        }
+
+        else
+        {
+            StartCoroutine(WaitTillKnow());
+        }
+
         if (mustDoSomething)
         {
             if (id.Equals(default(int)))
@@ -187,11 +203,14 @@ public class PlayerTeleporter : MonoBehaviour
         }
     }
 
-    private void SetWithTeleportPositionController()
+    public IEnumerator WaitTillKnow()
     {
+        yield return new WaitForSeconds(2f);
+
+        VectorTeleportAssigner vAssigner = FindObjectOfType<VectorTeleportAssigner>();
+        teleportPosition = vAssigner.WhereAmIGoing(placeToGo);
 
     }
-
     private void HandleCase1() //ChangeFilters in Warrior Zone -- Scene4
     {
         GameObject pFilter = GameObject.Find("ChangableMageFilter1");
@@ -401,6 +420,35 @@ public class PlayerTeleporter : MonoBehaviour
         }
     }
 
+    private void HandleCase25(GameObject player)    //  Stage 6
+    {
+        ActivateDestinyColliders(player);
+        DeactivateOriginColliders(player);
+        SendMessageToServer("PlayerIsInZone" + "/" + placeToGo, true);
+    }
+
+    private void ActivateDestinyColliders(GameObject player)
+    {
+        GameObject destination = GameObject.Find(placeToGo);
+        if (destination)
+        {
+            ColliderDeactivator cDeactivator = destination.GetComponent<ColliderDeactivator>();
+            cDeactivator.OnEnterPlayer(player);
+        }
+    }
+
+    private void DeactivateOriginColliders(GameObject player)
+    {
+        GameObject origin = GameObject.Find(groveStreet);
+        if (origin)
+        {
+            ColliderDeactivator cDeactivator = origin.GetComponent<ColliderDeactivator>();
+            cDeactivator.OnExitPlayer(player);
+        }
+    }
+
+
+
     public bool CheckIfDidThing()
     {
         return didMyThing;
@@ -419,5 +467,4 @@ public class PlayerTeleporter : MonoBehaviour
         }
     }
     #endregion
-
 }
