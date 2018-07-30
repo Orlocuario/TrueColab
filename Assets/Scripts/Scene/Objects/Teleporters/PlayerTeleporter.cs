@@ -432,8 +432,11 @@ public class PlayerTeleporter : MonoBehaviour
         GameObject destination = GameObject.Find(placeToGo);
         if (destination)
         {
-            ColliderDeactivator cDeactivator = destination.GetComponent<ColliderDeactivator>();
-            cDeactivator.OnEnterPlayer(player);
+            if (destination.GetComponent<ColliderDeactivator>())
+            {
+                ColliderDeactivator cDeactivator = destination.GetComponent<ColliderDeactivator>();
+                cDeactivator.OnEnterPlayer(player);
+            }
         }
     }
 

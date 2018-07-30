@@ -205,6 +205,7 @@ public class ServerMessageHandler
         int totalExp = room.hpManager.currentExp;
         RoomLogger log = room.log;
         log.WriteTotalExp(totalExp);
+        log.WriteChangeScene(scence);
 
         SendChangeScene(scence, room);
     }

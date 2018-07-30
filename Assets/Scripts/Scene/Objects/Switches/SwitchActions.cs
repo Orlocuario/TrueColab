@@ -503,47 +503,86 @@ public class SwitchActions : MonoBehaviour
     {
         levelManager.InstantiatePrefab("RunaR1", new Vector2(-39.35f, 16f));
     }
-    private void HandlerGroup17()
-    {
 
+
+    private void HandlerGroup17()  //   Handlers Scene 6 //
+    {
+        Vector2 startPosition = new Vector2(38.54f, -7.97f);
+        Vector2 endPosition = new Vector2(38.54f, -10.94f);
+
+        GameObject mPlatform = levelManager.InstantiatePrefab("MovPlatform", startPosition);
+        levelManager.SetMovingObjectData(mPlatform, startPosition, endPosition, 1f, .8f, false);
     }
+
     private void HandlerGroup18()
     {
+        GameObject cajaFierro = GameObject.Find("CajaSwitchFierro2RR");
+        if (cajaFierro)
+        {
+            Destroy(cajaFierro);
+        }
     }
+
     private void HandlerGroup19()
     {
+        // Set Active Mucha EXP por todos los Switch
+        
     }
+
     private void HandlerGroup20()
     {
+        Vector2 expZone = FindObjectOfType<VectorTeleportAssigner>().WhereAmIGoing("4C");
+        Vector2 c2Zone = new Vector2(-5.3f, -6.8f);
+        Vector2 l2Zone = new Vector2(-13.47f, -6.8f);
+
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", c2Zone, expZone, true, 25, "2C", "4C");
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", l2Zone, expZone, true, 25, "2L", "4C");
     }
+
     private void HandlerGroup21()
     {
-
-
+        GameObject obstacle = GameObject.Find("SueloMetal3LLL");
+        if (obstacle)
+        {
+            Destroy(obstacle);
+        }
     }
+
     private void HandlerGroup22()
     {
-
+        Vector2 v2c6 = FindObjectOfType<VectorTeleportAssigner>().WhereAmIGoing("6C");
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(-55f, -22.86f), v2c6, true, 25, "3LLL", "6C"); 
     }
 
     private void HandlerGroup23()
     {
+        //  Mucha exp en la zona 
     }
+
     private void HandlerGroup24()
     {
-
+        Vector2 v2c6 = FindObjectOfType<VectorTeleportAssigner>().WhereAmIGoing("6C");
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(-64.25f, -21.74f), v2c6, true, 25, "3RRR", "6C");
     }
+
     private void HandlerGroup25()
     {
-
+        Vector2 v2c6 = FindObjectOfType<VectorTeleportAssigner>().WhereAmIGoing("6C");
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(50.41f, -30.85f), v2c6, true, 25, "3RRR", "6C");
     }
+
     private void HandlerGroup26()
     {
-
+        GameObject cajaFierro = GameObject.Find("CajaSwitchFierro4RR");
+        if (cajaFierro)
+        {
+            Destroy(cajaFierro);
+        }
     }
     private void HandlerGroup27()
     {
-
+        Vector2 v2c6 = FindObjectOfType<VectorTeleportAssigner>().WhereAmIGoing("7C");
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(39.9f, -56.75f), v2c6, true, 25, "5C", "7C");
     }
 
     private void HandlerGroup28()

@@ -86,6 +86,13 @@ public class RoomLogger
         writer.WriteLine(GetTime() + " PLAYERS ARE DEAD!!");
         writer.Close();
     }
+
+    public void WriteChangeScene(string sceneName)
+    {
+        StreamWriter writer = GetWriter();
+        writer.WriteLine(GetTime() + " PLAYERS ARE STARTING SCENE: " + sceneName);
+        writer.Close();
+    }
     public void WriteNewLine()
     {
         StreamWriter writer = GetWriter();

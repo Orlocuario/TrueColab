@@ -719,6 +719,22 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void InstantiatePortal(string portalType, Vector2 initialPosition, Vector2 teleportPosition, bool mustDoSomething, int id, string _groveStreet, string _whereToGo)
+    {
+        GameObject portal = (GameObject)Instantiate(Resources.Load("Prefabs/Portals/" + portalType));
+        if (portal)
+        {
+            portal.GetComponent<Transform>().position = initialPosition;
+            portal.GetComponent<PlayerTeleporter>().teleportPosition = teleportPosition;
+            portal.GetComponent<PlayerTeleporter>().mustDoSomething = mustDoSomething;
+            portal.GetComponent<PlayerTeleporter>().id = id;
+            portal.GetComponent<PlayerTeleporter>().groveStreet = _groveStreet;
+            portal.GetComponent<PlayerTeleporter>().placeToGo = _whereToGo;
+
+
+        }
+    }
+
     public void InstantiateBubbleWithTargets(string bubbleType, Vector2 initialPosition, Vector2[] targetPositions, float movementSpeed, float timeToWait, float timeToKillBubble)
     {
         GameObject bubble = (GameObject)Instantiate(Resources.Load("Prefabs/Bubbles/" + bubbleType));
