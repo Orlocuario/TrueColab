@@ -50,6 +50,13 @@ public class RoomLogger
         writer.Close();
     }
 
+    public void WriteEnterPOIButDontCare(int playerId, string poiId)
+    {
+        StreamWriter writer = GetWriter();
+        writer.WriteLine(GetTime() + " Player: " + playerId +  "reached Poi number: " + poiId + ". Not relevant or Already Entered to Poi");
+        writer.Close();
+    }
+
     public void WriteTotalExp(int exp)
     {
         StreamWriter writer = GetWriter();

@@ -19,15 +19,16 @@ public class Poi : MonoBehaviour {
     } 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (poiReady)
-        {
-            return;
-        }
 
         if (CheckIfIsLocalPlayer(collider.gameObject))
         {
             if (IsPlayerNeeded(collider.gameObject))
             {
+                if (poiReady)
+                {
+                    return;
+                }
+
                 PlayerController pController = collider.GetComponent<PlayerController>();
                 string pName = pController.gameObject.name;
                 string messageId = id.ToString();
@@ -73,12 +74,10 @@ public class Poi : MonoBehaviour {
     {
         if (poiReady)
         {
-            Debug.Log("me llegó tu mensaje pero ya estoy listo. Server ql LENTO!");
             return;
         }
         else
         {
-            Debug.Log("ME VOY A PITEAR AL POI PORQUE ME DIJERON DEL SERVER. El POI: " + id);
             poiReady = true;
         }
     }
@@ -111,6 +110,11 @@ public class Poi : MonoBehaviour {
                     return true;
                 }
             }
+
+            else if (pController.localPlayer)
+            {
+                SendPoiEnterButNobodyCaresToServer(id.ToString(), pController.gameObject.name);
+            }
         }
 
         return false;
@@ -119,6 +123,11 @@ public class Poi : MonoBehaviour {
     public void SendPoiEnterToServer(string poiId, string playerWhoEntered)
     {
         Client.instance.SendMessageToServer("EnterPOI/" + poiId + "/" + playerWhoEntered, true);
+    }
+
+    public void SendPoiEnterButNobodyCaresToServer(string poiId, string playerWhoEntered)
+    {
+        Client.instance.SendMessageToServer("EnterButDontCare/" + poiId + "/" + playerWhoEntered, true);
     }
 
     public void SendPoiIsReadyToServer(string poiId)

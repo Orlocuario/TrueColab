@@ -3,6 +3,7 @@ using System.Collections;
 using System;
 using System.Globalization;
 
+
 public class ServerMessageHandler
 {
     Server server;
@@ -142,6 +143,9 @@ public class ServerMessageHandler
             case "EnterPOI":
                 HandleEnterPOI(msg, ip);
                 break;
+            case "EnterButDontCare":
+                HandleEnterButDontCare(msg, ip);
+                break;
             case "ReadyPoi":
                 HandleReadyPoi(msg, ip);
                 break;
@@ -191,9 +195,22 @@ public class ServerMessageHandler
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         RoomLogger log = player.room.log;
+
         log.WriteEnterPOI(player.id, poiID);
 
         room.SendMessageToAllPlayersExceptOne("PoiReached" + "/" + poiID + "/" + incomingPlayer, ip, true);
+    }
+
+    private void HandleEnterButDontCare(string[] msg, string ip)
+    {
+        string poiID = msg[1].ToString();
+        string incomingPlayer = msg[2].ToString();
+
+        NetworkPlayer player = server.GetPlayer(ip);
+        Room room = player.room;
+        RoomLogger log = player.room.log;
+
+        log.WriteEnterPOIButDontCare(player.id, poiID);
     }
 
     private void HandleChangeScene(string[] msg, string ip)

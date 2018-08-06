@@ -301,8 +301,9 @@ public class CameraController : MonoBehaviour
         {
             ToggleCanvas(false);
         }
+
         globalFreezeTime = movement.freezeTime;
-        Vector3 targetPosition = new Vector3(movement.target.transform.position.x, movement.target.transform.position.y, 0);
+        Vector3 targetPosition = new Vector3(movement.target.transform.position.x, movement.target.transform.position.y, -10);
         currentState = CameraState.TargetZoom;
 
         currentStepPos = (targetPosition - transform.position) / movement.stepsToTarget;

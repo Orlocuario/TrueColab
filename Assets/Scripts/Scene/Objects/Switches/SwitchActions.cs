@@ -601,6 +601,7 @@ public class SwitchActions : MonoBehaviour
     private void HandlerGroup32()
     {
     }
+
     private void HandlerGroup33()
     {
         levelManager.InstantiatePrefab("Items/RunaA1", new Vector2(39.91f, 13.61f));
@@ -622,6 +623,7 @@ public class SwitchActions : MonoBehaviour
     private void HandlerGroup37()
     {
     }
+
     private void HandlerGroup38()
     {
     }
