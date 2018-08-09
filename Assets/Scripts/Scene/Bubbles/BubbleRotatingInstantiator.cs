@@ -36,6 +36,7 @@ public class BubbleRotatingInstantiator : MonoBehaviour
     private LevelManager levelManager;
 
     // Use this for initialization
+
     private void Start()
     {
 		isWorking = false; 
