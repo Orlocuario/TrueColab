@@ -97,6 +97,9 @@ public class PlayerTeleporter : MonoBehaviour
             case 4:
                 HandleCase4(player);
                 break;
+            case 5:
+                HandleCase5(player);
+                break;
             case 8:
                 HandleCase8(player);
                 break;
@@ -163,9 +166,7 @@ public class PlayerTeleporter : MonoBehaviour
             case 1:
                 HandleCase1();
                 break;
-            case 5:
-                HandleCase5();
-                break;
+
             case 6:
                 HandleCase6();
                 break;
@@ -268,9 +269,15 @@ public class PlayerTeleporter : MonoBehaviour
         cDeactivatorZone1.OnExitPlayer(player);
     }
 
-    private void HandleCase5()
+    private void HandleCase5(GameObject player)
     {
+        GameObject firstDeactivator = GameObject.Find("FirstDeactivator");
+        ColliderDeactivator cDeactivator1 = firstDeactivator.GetComponent<ColliderDeactivator>();
+        cDeactivator1.OnExitPlayer(player);
 
+        GameObject secondDeactivator = GameObject.Find("SecondDeactivator");
+        ColliderDeactivator cDeactivator2 = secondDeactivator.GetComponent<ColliderDeactivator>();
+        cDeactivator1.OnExitPlayer(player);
 
     }
 
