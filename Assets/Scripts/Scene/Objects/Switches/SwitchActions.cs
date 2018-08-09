@@ -585,9 +585,10 @@ public class SwitchActions : MonoBehaviour
         levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(39.9f, -56.75f), v2c6, true, 25, "5C", "7C");
     }
 
-    private void HandlerGroup28()
+    private void HandlerGroup28()   // Scene5 Zone 5
     {
-
+        GameObject filter = GameObject.Find("KillZoneForAllHomies");
+        Destroy(filter);
     }
     private void HandlerGroup29()
     {

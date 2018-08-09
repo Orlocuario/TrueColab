@@ -67,7 +67,6 @@ public class ColliderDeactivator : MonoBehaviour {
     {
         PlayerController pController = player.GetComponent<PlayerController>();
         int playerId = pController.playerId;
-        Debug.Log("Ther Player Id is Equal to: " + playerId);
 
         if (pControllers[playerId] == null)
         {
