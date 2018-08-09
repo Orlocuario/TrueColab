@@ -271,11 +271,11 @@ public class PlayerTeleporter : MonoBehaviour
 
     private void HandleCase5(GameObject player)
     {
-        GameObject firstDeactivator = GameObject.Find("FirstDeactivator");
+        GameObject firstDeactivator = GameObject.Find("mFirstDeactivator");
         ColliderDeactivator cDeactivator1 = firstDeactivator.GetComponent<ColliderDeactivator>();
         cDeactivator1.OnExitPlayer(player);
 
-        GameObject secondDeactivator = GameObject.Find("SecondDeactivator");
+        GameObject secondDeactivator = GameObject.Find("mSecondDeactivator");
         ColliderDeactivator cDeactivator2 = secondDeactivator.GetComponent<ColliderDeactivator>();
         cDeactivator1.OnExitPlayer(player);
 
@@ -432,6 +432,17 @@ public class PlayerTeleporter : MonoBehaviour
         ActivateDestinyColliders(player);
         DeactivateOriginColliders(player);
         SendMessageToServer("PlayerIsInZone" + "/" + placeToGo, true);
+    }
+
+    private void HandleCase26(GameObject player)
+    {
+        GameObject firstDeactivator = GameObject.Find("eFirstZoneActivator");
+        ColliderDeactivator cDeactivator1 = firstDeactivator.GetComponent<ColliderDeactivator>();
+        cDeactivator1.OnExitPlayer(player);
+
+        GameObject secondDeactivator = GameObject.Find("eSecondZoneActivator");
+        ColliderDeactivator cDeactivator2 = secondDeactivator.GetComponent<ColliderDeactivator>();
+        cDeactivator1.OnExitPlayer(player);
     }
 
     private void ActivateDestinyColliders(GameObject player)
