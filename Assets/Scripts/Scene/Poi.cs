@@ -8,7 +8,7 @@ public class Poi : MonoBehaviour {
     public PlayerController[] playersNeeded;
     private int playersArrived;
     public bool poiReady;
-
+    public bool anyPlayerIsValid;
 
     private void Start()
     {
@@ -19,9 +19,17 @@ public class Poi : MonoBehaviour {
     } 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-
         if (CheckIfIsLocalPlayer(collider.gameObject))
         {
+            if (anyPlayerIsValid)
+            {
+                PlayerController pController = collider.GetComponent<PlayerController>();
+                string pName = pController.gameObject.name;
+                string messageId = id.ToString();
+                SendPoiEnterToServer(messageId, pName);
+                return;
+            }
+
             if (IsPlayerNeeded(collider.gameObject))
             {
                 if (poiReady)

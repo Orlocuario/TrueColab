@@ -579,7 +579,7 @@ public class SwitchActions : MonoBehaviour
             Destroy(cajaFierro);
         }
     }
-    private void HandlerGroup27()
+    private void HandlerGroup27()   //End of hardest zone in scene 6: 5C
     {
         Vector2 v2c6 = FindObjectOfType<VectorTeleportAssigner>().WhereAmIGoing("7C");
         levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(39.9f, -56.75f), v2c6, true, 25, "5C", "7C");
@@ -590,9 +590,11 @@ public class SwitchActions : MonoBehaviour
         GameObject filter = GameObject.Find("KillZoneForAllHomies");
         Destroy(filter);
     }
-    private void HandlerGroup29()
+    private void HandlerGroup29()   // Teleport for the arrival of players to hardest Zone
     {
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(6.58f, -55.41f), new Vector2(32.71f, -57.3f));
     }
+
     private void HandlerGroup30()
     {
     }
