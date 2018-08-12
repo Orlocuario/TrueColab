@@ -6,7 +6,7 @@ public class ColliderDeactivator : MonoBehaviour {
 
     public GameObject[] gObjects;
     public int numberOfPlayersIn;
-    PlayerController[] pControllers;
+    private PlayerController[] pControllers;
     public bool setCompleteObject;
 	// Use this for initialization
 

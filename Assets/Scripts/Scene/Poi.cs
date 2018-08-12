@@ -117,10 +117,11 @@ public class Poi : MonoBehaviour {
                 }
             }
 
-            else if (pController.localPlayer)
-            {
-                SendPoiEnterButNobodyCaresToServer(id.ToString(), pController.gameObject.name);
-            }
+        }
+        
+        if (pController.localPlayer)
+        {
+            SendPoiEnterButNobodyCaresToServer(id.ToString(), pController.gameObject.name);
         }
 
         return false;
