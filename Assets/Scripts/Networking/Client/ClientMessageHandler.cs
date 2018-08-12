@@ -666,9 +666,16 @@ public class ClientMessageHandler
                     return;
                 }
 
+                else if (destroyableObject.GetComponent<PickUpItem>())
+                {
+                    PickUpItem pItem = destroyableObject.GetComponent<PickUpItem>();
+                    pItem.DestroyMe();
+                    return;
+                }
+
                 else
                 {
-                    Debug.Log(name + " is neither Destroyable or Exp");
+                    Debug.Log(name + " is neither Destroyable, Exp or Item");
                 }
             }
         }

@@ -34,6 +34,11 @@ public class PickUpItem : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    public void DestroyMe()
+    {
+        Destroy(gameObject);
+    }
+
     #endregion
 
     #region Events
