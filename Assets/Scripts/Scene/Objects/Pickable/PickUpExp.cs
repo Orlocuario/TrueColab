@@ -27,6 +27,11 @@ public class PickUpExp : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void DestroyMe()
+    {
+        Destroy(gameObject);
+    }
+
     #endregion
 
     #region Utils

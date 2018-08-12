@@ -496,7 +496,7 @@ public class PlayerController : MonoBehaviour
         StopMoving();
         if (isPowerOn)
         {
-            SetPowerState(!isPowerOn);
+            SetPowerState(false);
             SendPowerDataToServer();
         }
         ResetTransform();

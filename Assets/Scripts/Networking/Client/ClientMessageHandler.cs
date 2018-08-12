@@ -642,7 +642,6 @@ public class ClientMessageHandler
         if (NotInClientScene())
         {
             string name = msg[1];
-
             GameObject destroyableObject = GameObject.Find(name);
 
             if (!destroyableObject)
@@ -653,14 +652,24 @@ public class ClientMessageHandler
 
             else
             {
-                DestroyableObject destroyableController = destroyableObject.GetComponent<DestroyableObject>();
-                if (!destroyableController)
+                if (destroyableObject.GetComponent<DestroyableObject>())
                 {
-                    Debug.Log(name + " is not destroyable");
+                    DestroyableObject destroyableController = destroyableObject.GetComponent<DestroyableObject>();
+                    destroyableController.DestroyMe(false);
                     return;
                 }
 
-                destroyableController.DestroyMe(false);
+                else if (destroyableObject.GetComponent<PickUpExp>())
+                {
+                    PickUpExp pExp = destroyableObject.GetComponent<PickUpExp>();
+                    pExp.DestroyMe();
+                    return;
+                }
+
+                else
+                {
+                    Debug.Log(name + " is neither Destroyable or Exp");
+                }
             }
         }
     }
@@ -967,7 +976,7 @@ public class ClientMessageHandler
             bool pressingLeft = pController.leftPressed;
             bool pressingRight = pController.rightPressed;
 
-            string message =      playerId + "/" +
+            string message = playerId + "/" +
                                   directionX + "/" +
                                   directionY + "/" +
                                   speedX + "/" +

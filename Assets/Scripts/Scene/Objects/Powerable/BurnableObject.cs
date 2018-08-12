@@ -17,7 +17,7 @@ public class BurnableObject : MonoBehaviour {
     {
         ToggleParticles(true);           
         SendDestroyDataToServer();
-        Destroy(gameObject);
+        Destroy(gameObject, 1.2f);
     }
 
     protected virtual void ToggleParticles(bool active)

@@ -681,7 +681,7 @@ public class LevelManager : MonoBehaviour
 
     public void HandleIncomingPoiReached(string poiId, string playerName)
     {
-        Poi poiActivated = GameObject.Find("poi" + poiId).GetComponent<Poi>();
+        Poi poiActivated = GameObject.Find("Poi" + poiId).GetComponent<Poi>();
         GameObject player = GameObject.Find(playerName);
 
         poiActivated.HandlePoiEnterFromServer(poiId, player);
@@ -981,7 +981,6 @@ public class LevelManager : MonoBehaviour
         localPlayer.gameObject.SetActive(true);
         localPlayer.ResetTransform();
         localPlayer.SendPlayerDataToServer();
-        Debug.Log("THIS IS WHERE IM SENDING DATA: " + this.name);
         localPlayer.ResumeMoving();
     }
 
