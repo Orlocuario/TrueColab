@@ -113,8 +113,6 @@ public class Poi : MonoBehaviour {
                 if (pController.GetType().Equals(playersNeeded[i].GetType()))
                 {
                     playersNeeded[i] = null;
-                    Debug.Log("from Poi " + id + ": It WAS THE PLAYER I NEEDED");
-
                     return true;
                 }
             }

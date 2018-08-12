@@ -30,7 +30,7 @@ public class PickUpItem : MonoBehaviour
             }
         }
 
-        SendMessageToServer("OthersDestroyObject/" + name, true);
+        SendMessageToServer("ObjectDestroyed/" + name, true);
         Destroy(this.gameObject);
     }
 

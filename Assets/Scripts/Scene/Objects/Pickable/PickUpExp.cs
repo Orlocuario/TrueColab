@@ -53,7 +53,7 @@ public class PickUpExp : MonoBehaviour
     {
         if (Client.instance)
         {
-            Client.instance.SendMessageToServer("ObjectDestroyed/" + name + "/", true);
+            Client.instance.SendMessageToServer("ObjectDestroyed/" + name, true);
         }
     }
 

@@ -176,7 +176,7 @@ public class ServerMessageHandler
 
     private void HandleReadyPoi(string[] msg, string ip)
     {
-        string poiID = msg[1].ToString();
+        string poiID = msg[1];
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         RoomLogger log = player.room.log;

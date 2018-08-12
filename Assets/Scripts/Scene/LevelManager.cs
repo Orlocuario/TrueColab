@@ -689,9 +689,7 @@ public class LevelManager : MonoBehaviour
 
     public void HandlePoiReady(string poiId)
     {
-        Debug.Log("Me llegó un poi Ready. El: " + poiId);
-        Poi poiActivated = GameObject.Find("poi" + poiId).GetComponent<Poi>();
-        Debug.Log("TENGO EL SCRIPT DEL POI Y ME LO VoY A ECHAR!");
+        Poi poiActivated = GameObject.Find("Poi" + poiId).GetComponent<Poi>();
 
         poiActivated.HandlePoiReadyFromServer();
 
