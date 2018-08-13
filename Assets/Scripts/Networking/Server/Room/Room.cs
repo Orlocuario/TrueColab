@@ -13,6 +13,7 @@ public class Room
     public RoomObstacles obstacleManager;
     public RoomDestroyedObjects objectManager;
     public PoisHandler poisHandler;
+    public MovableTriggersActivated mTriggersActivated;
     public ServerMessageHandler sender;
     public List<NetworkPlayer> players;
     public List<NetworkEnemy> enemies;
@@ -51,6 +52,7 @@ public class Room
         obstacleManager = new RoomObstacles();
         objectManager = new RoomDestroyedObjects();
         poisHandler = new PoisHandler();
+        mTriggersActivated = new MovableTriggersActivated();
         players = new List<NetworkPlayer>();
         switchs = new List<RoomSwitch>();
         enemies = new List<NetworkEnemy>();
@@ -306,6 +308,7 @@ public class Room
         obstacleManager.Reset();
         objectManager.Reset();
         poisHandler.Reset();
+        mTriggersActivated.Reset();
 
         activatedSwitchGroups = new List<int>();
         enemies = new List<NetworkEnemy>();
@@ -313,6 +316,8 @@ public class Room
         hpManager = new RoomHpMp(this);
         objectManager = new RoomDestroyedObjects();
         poisHandler = new PoisHandler();
+        mTriggersActivated = new MovableTriggersActivated();
+
 
     }
 

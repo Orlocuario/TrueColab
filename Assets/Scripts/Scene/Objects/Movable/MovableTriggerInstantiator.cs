@@ -35,17 +35,55 @@ public class MovableTriggerInstantiator : MonoBehaviour {
 	{
 		if (other.gameObject == objectNeeded) 
 		{
-            InstantiateObjects(other.gameObject);
+            ActivateTrigger(other.gameObject);
 		}		
 	}
 
-    public void InstantiateObjects(GameObject other)
+    public void ActivateTrigger(GameObject other)
     {
-        Destroy(other);
+        if (jobDone)
+        {
+            return;
+        }
+        else
+        {
+            SendMessageToServer("ObjectDestroyed" + "/" + objectNeeded.gameObject.name, true);
+            SendMessageToServer("ActivateTrigger" + "/" + gameObject.name, true);
+            InstantiateStuff();
+            jobDone = true;
+        }
+
+    }
+
+    public void HandleTriggerReachedByMovable()
+    {
+        if (jobDone == false)
+        {
+            InstantiateStuff();
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    private void InstantiateStuff()
+    {
+        Destroy(objectNeeded);
         foreach (ObjectToInstantiate instObject in instantiateObjects)
         {
             levelManager.InstantiatePrefab(instObject.name, instObject.position);
         }
-        jobDone = true; 
+        jobDone = true;
+
+        Debug.Log("I FUCKING INSTATIATED Y'ALL!"); 
+    } 
+
+    private void SendMessageToServer(string message, bool secure)
+    {
+        if (Client.instance)
+        {
+            Client.instance.SendMessageToServer(message, secure);
+        }
     }
 }

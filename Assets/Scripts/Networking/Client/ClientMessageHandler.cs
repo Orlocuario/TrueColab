@@ -49,6 +49,9 @@ public class ClientMessageHandler
             case "ChangeObjectPosition":
                 HandleChangeObjectPosition(msg);
                 break;
+            case "ActivateTrigger":
+                HandleActivateTrigger(msg);
+                break;
             case "InstantiateObject":
                 HandleInstantiateObject(msg);
                 break;
@@ -428,7 +431,7 @@ public class ClientMessageHandler
 
             if (mTrigger && movable)
             {
-                mTrigger.GetComponent<MovableTriggerInstantiator>().InstantiateObjects(movable);
+                mTrigger.GetComponent<MovableTriggerInstantiator>().ActivateTrigger(movable);
             }
         }
     }
@@ -558,6 +561,20 @@ public class ClientMessageHandler
         }
     }
 
+    private void HandleActivateTrigger(string[] msg)
+    {
+        string triggerName = msg[1];
+        if (GameObject.Find(triggerName))
+        {
+            MovableTriggerInstantiator mInstantiator = GameObject.Find(triggerName).GetComponent<MovableTriggerInstantiator>();
+            mInstantiator.HandleTriggerReachedByMovable();
+        }
+        else
+        {
+            Debug.Log("Couldn't find the TriggerGameObject for the MovableObject");
+        }
+    }
+
     private void HandleInstantiateObject(string[] msg)
     {
         if (NotInClientScene())
@@ -670,6 +687,13 @@ public class ClientMessageHandler
                 {
                     PickUpItem pItem = destroyableObject.GetComponent<PickUpItem>();
                     pItem.DestroyMe();
+                    return;
+                }
+
+                else if (destroyableObject.GetComponent<MovableObject>())
+                {
+                    MovableObject mObject = destroyableObject.GetComponent<MovableObject>();
+                    mObject.DestroyMe();
                     return;
                 }
 

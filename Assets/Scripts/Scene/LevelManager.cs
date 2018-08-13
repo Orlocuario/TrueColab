@@ -863,7 +863,7 @@ public class LevelManager : MonoBehaviour
         {
             if (mInstantiator.jobDone)
             {
-                mInstantiator.InstantiateObjects(mInstantiator.objectNeeded);
+                mInstantiator.ActivateTrigger(mInstantiator.objectNeeded);
             }
         }
     }

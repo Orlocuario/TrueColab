@@ -6,7 +6,6 @@ public class MovableObject : MonoBehaviour
 
     #region Attributes
 
-    public PlannerObstacle obstacleObj = null;
 
     public GameObject openningTrigger; // The trigger that makes dissapear the object
     public string openedPrefab; // How it looks when its opened
@@ -41,7 +40,7 @@ public class MovableObject : MonoBehaviour
             {
                 rgbd.constraints = RigidbodyConstraints2D.FreezePositionX;
                 sceneAnimator.SetBool("Moving", false, gameObject);
-                imMoving = false; 
+                imMoving = false;
             }
         }
     }
@@ -75,37 +74,22 @@ public class MovableObject : MonoBehaviour
 
     protected void TransitionToOpened(GameObject trigger)
     {
-        if (obstacleObj != null)
-        {
-            obstacleObj.blocked = false;
-            obstacleObj.open = true;
-        }
+        SendMessageToServer("DestroyObject/" + gameObject.name, true);
 
         if (openedPrefab != null)
         {
             SendMessageToServer("InstantiateObject/Prefabs/" + openedPrefab, false);
         }
+    }
 
-        SendMessageToServer("DestroyObject/" + name, false);
+    public void DestroyMe()
+    {
+        Destroy(gameObject);
     }
 
     #endregion
 
     #region Events
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.isTrigger)
-        {
-            if (openningTrigger != null)
-            {
-                if (TriggerIsOpener(other.gameObject))
-                {
-                    TransitionToOpened(other.gameObject);
-                }
-            }
-        }
-    }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
@@ -114,8 +98,6 @@ public class MovableObject : MonoBehaviour
         {
             return;
         }
-
-
     }
 
     #endregion

@@ -32,6 +32,9 @@ public class ServerMessageHandler
             case "ObstacleDestroyed":
                 HandleObstacleDestroyed(msg, ip);
                 break;
+            case "ActivateTrigger":
+                HandleTriggerActivated(message, msg, ip);
+                break;
             case "ChangeObjectPosition":
                 SendUpdatedObjectPosition(message, ip);
                 break;
@@ -324,6 +327,17 @@ public class ServerMessageHandler
         Room room = player.room;
 
         room.obstacleManager.AddObstacle(obstacleName);
+    }
+
+    private void HandleTriggerActivated(string message, string[] msg, string ip)
+    {
+        NetworkPlayer player = server.GetPlayer(ip);
+        Room room = player.room;
+        string triggerName = msg[1];
+        room.SendMessageToAllPlayersExceptOne(message, ip, true);
+        room.mTriggersActivated.AddActivatedTrigger(triggerName);
+
+        //room.log.WriteTriggerActivated();
     }
 
     private void SendSwitchGroupAction(string message, string[] msg, string ip)

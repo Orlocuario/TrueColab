@@ -681,7 +681,7 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup51()
     {
-        levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(-49.273f, -1.56f), new Vector2(-20.7f, 0.5f), true, 1);
+        levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(-49.273f, -1.56f), new Vector2(-47.29f, 1.2f), true, 1);
         BurnableObject treeToBurn = GameObject.Find("TreeAltarHolder").GetComponent<BurnableObject>();
         treeToBurn.Burn();
 

@@ -12,9 +12,6 @@ public class GiantRock : MovableObject
     protected override void Start()
     {
         base.Start();
-        openedPrefab = "Ambientales/SueloRoca";
-        numberOfHits = 0;
-        
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
@@ -33,7 +30,7 @@ public class GiantRock : MovableObject
     private void CrushWithBlocker()
     {
         numberOfHits++;
-        if (numberOfHits == 1 || numberOfHits == 3 || numberOfHits == 5)
+        if (numberOfHits == 1 || numberOfHits == 5 || numberOfHits == 10)
         {
             LevelManager lManager = FindObjectOfType<LevelManager>();
             lManager.ActivateNPCFeedback("Algo está bloqueando la roca... debe haber un modo de abrirla");

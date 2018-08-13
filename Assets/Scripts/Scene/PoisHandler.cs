@@ -36,7 +36,6 @@ public class PoisHandler
     }
 
     public List<string> GetPoiMessages()
-
     {
         List<string> messages = new List<string>();
         foreach (string poiReady in poisReady)

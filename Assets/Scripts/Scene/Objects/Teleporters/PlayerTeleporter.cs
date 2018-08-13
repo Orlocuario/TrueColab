@@ -88,6 +88,9 @@ public class PlayerTeleporter : MonoBehaviour
     {
         switch (id)
         {
+            case 1:
+                HandleCase1();
+                break;
             case 2:
                 HandleCase2(player);
                 break;
@@ -163,10 +166,6 @@ public class PlayerTeleporter : MonoBehaviour
     {
         switch (id)
         {
-            case 1:
-                HandleCase1();
-                break;
-
             case 6:
                 HandleCase6();
                 break;
@@ -207,11 +206,13 @@ public class PlayerTeleporter : MonoBehaviour
     public IEnumerator WaitTillKnow()
     {
         yield return new WaitForSeconds(2f);
-
-        VectorTeleportAssigner vAssigner = FindObjectOfType<VectorTeleportAssigner>();
-        teleportPosition = vAssigner.WhereAmIGoing(placeToGo);
-
+        if (FindObjectOfType<VectorTeleportAssigner>())
+        {
+            VectorTeleportAssigner vAssigner = FindObjectOfType<VectorTeleportAssigner>();
+            teleportPosition = vAssigner.WhereAmIGoing(placeToGo);
+        }
     }
+
     private void HandleCase1() //ChangeFilters in Warrior Zone -- Scene4
     {
         GameObject pFilter = GameObject.Find("ChangableMageFilter1");
