@@ -10,14 +10,13 @@ public class BurnableObject : MonoBehaviour {
     private void Start()
     {
         burned = false;
-        InitializeParticles(); 
-    } 
+        InitializeParticles();
+    }
 
     public void Burn()
     {
-        ToggleParticles(true);           
-        SendDestroyDataToServer();
-        Destroy(gameObject, 1.2f);
+        ToggleParticles(true);
+        StartCoroutine(WaitForDying());
     }
 
     protected virtual void ToggleParticles(bool active)
@@ -50,6 +49,13 @@ public class BurnableObject : MonoBehaviour {
 
         ToggleParticles(false);
 
+    }
+
+    private IEnumerator WaitForDying()
+    {
+        yield return new WaitForSeconds(1.2f);
+        SendDestroyDataToServer();
+        Destroy(gameObject);
     }
 
     protected void SendDestroyDataToServer()
