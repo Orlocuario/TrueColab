@@ -83,6 +83,9 @@ public class ServerMessageHandler
             case "PlayerRequestId":
                 SendAllData(ip, Server.instance.GetPlayer(ip).room); //Manda todo para manejar mejor reconexiones. Inclusive información de playerId.
                 break;
+            case "ActivateThisTeleporter":
+                SendActivatedTeleporter(message, ip);
+                break;
             case "PlayerAttack":
                 SendAttackState(message, ip, msg);
                 break;
@@ -340,6 +343,13 @@ public class ServerMessageHandler
         //room.log.WriteTriggerActivated();
     }
 
+    private void SendActivatedTeleporter(string message, string ip)
+    {
+        NetworkPlayer player = server.GetPlayer(ip);
+        Room room = player.room;
+        room.SendMessageToAllPlayersExceptOne(message, ip, true);
+
+    }
     private void SendSwitchGroupAction(string message, string[] msg, string ip)
     {
         // OBSOLETO <- por qué?

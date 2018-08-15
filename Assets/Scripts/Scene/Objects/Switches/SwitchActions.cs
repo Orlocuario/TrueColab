@@ -597,7 +597,13 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup30()
     {
+        Vector2 startPosition = new Vector2(-65.35f, -3f);
+        Vector2 endPosition = new Vector2(-65.35f, 1.01f);
+
+        GameObject mPlatform = levelManager.InstantiatePrefab("MovPlatform", startPosition);
+        levelManager.SetMovingObjectData(mPlatform, startPosition, endPosition, 1f, .8f, false);
     }
+
     private void HandlerGroup31()
     {
     }

@@ -122,9 +122,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleportPosition: {x: -20.7, y: 0.5}
   teleportAnyPlayer: 0
-  mustDoSomething: 1
-  itsDone: 0
-  id: 1
+  mustDoSomething: 0
+  id: 0
+  groveStreet: 
+  placeToGo: 
+  finalScene: 0
 --- !u!198 &198427528222953736
 ParticleSystem:
   m_ObjectHideFlags: 1

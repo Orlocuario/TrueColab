@@ -841,6 +841,17 @@ public class LevelManager : MonoBehaviour
         sceneAnimator.SetBool(animatorParameter, value, gameObject);
     }
 
+    public void ActivateTeleporter(GameObject player, int id)
+    {
+        PlayerTeleporter[] pTeleporters = FindObjectsOfType<PlayerTeleporter>();
+        foreach (PlayerTeleporter pTeleporter in pTeleporters)
+        {
+            if (id == pTeleporter.id)
+            {
+                pTeleporter.DoYourTeleportedThing(id, player, false);
+            }
+        }
+    }
     #region Coordinators
 
     public void CoordinateReconnectionElements()

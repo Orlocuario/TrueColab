@@ -16,6 +16,7 @@ public class PlayerTeleporter : MonoBehaviour
     public int id;
     public string groveStreet;
     public string placeToGo;
+    public bool finalScene;
 
     #endregion
 
@@ -70,7 +71,14 @@ public class PlayerTeleporter : MonoBehaviour
     {
         if (mustDoSomething)
         {
-            DoYourTeleportedThing(id, other.gameObject);
+            if (other.GetComponent<PlayerController>().localPlayer)
+            {
+                DoYourTeleportedThing(id, other.gameObject, true);
+            }
+            else
+            {
+                DoYourTeleportedThing(id, other.gameObject, false);
+            }
         }
 
         if (other.GetComponent<PlayerController>().localPlayer)
@@ -84,12 +92,12 @@ public class PlayerTeleporter : MonoBehaviour
         }
     }
 
-    public virtual void DoYourTeleportedThing(int id, GameObject player)
+    public virtual void DoYourTeleportedThing(int id, GameObject player, bool fromLocal)
     {
         switch (id)
         {
             case 1:
-                HandleCase1();
+                HandleCase1(player, fromLocal);
                 break;
             case 2:
                 HandleCase2(player);
@@ -191,7 +199,10 @@ public class PlayerTeleporter : MonoBehaviour
 
         else
         {
-            StartCoroutine(WaitTillKnow());
+            if (finalScene)
+            {
+                StartCoroutine(WaitTillKnow());
+            }
         }
 
         if (mustDoSomething)
@@ -213,7 +224,7 @@ public class PlayerTeleporter : MonoBehaviour
         }
     }
 
-    private void HandleCase1() //ChangeFilters in Warrior Zone -- Scene4
+    private void HandleCase1(GameObject player, bool fromLocal) //ChangeFilters in Warrior Zone -- Scene4
     {
         GameObject pFilter = GameObject.Find("ChangableMageFilter1");
         if (pFilter)
@@ -226,12 +237,18 @@ public class PlayerTeleporter : MonoBehaviour
         ParticleSystem.MainModule module = particles.main;
         module.startColor = new Color(0, 255, 213, 255);
 
-        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(-22.21f, -2.135f), new Vector2(-21f, 0.5f));
         levelManager.InstatiateSprite("Arrows/mageArrowDown", new Vector2(-22f, 0.9f));
 
-        GameObject switchObject = GameObject.Find("Switch (2)");
+        if (fromLocal)
+        {
+            int playerId = player.GetComponent<PlayerController>().playerId;
+            SendMessageToServer("ActivateThisTeleporter" + "/" + id.ToString() + "/" + playerId.ToString(), true);
+        }
+
+        GameObject switchObject = GameObject.Find("DestroyableSwitch");
         Destroy(switchObject);
         Destroy(gameObject);
+        
     }
 
     private void HandleCase2(GameObject player)

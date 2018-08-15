@@ -100,6 +100,9 @@ public class ClientMessageHandler
             case "PlayerVote":
                 HandlePlayerVote(msg);
                 break;
+            case "ActivateThisTeleporter":
+                HandleTeleporterActivated(msg);
+                break;
             case "PlayerPreVote":
                 HandlePlayerPreVote(msg);
                 break;
@@ -451,6 +454,22 @@ public class ClientMessageHandler
             }
         }
     }
+    
+    private void HandleTeleporterActivated(string[] msg)
+    {
+        if (NotInClientScene())
+        {
+            int teleporterId = Int32.Parse(msg[1]);
+            int incomingPlayerId = Int32.Parse(msg[2]);
+
+            GameObject lManagerObj = GameObject.Find("LevelManager");
+            LevelManager lManager = lManagerObj.GetComponent<LevelManager>();
+            GameObject player = lManager.GetPlayer(incomingPlayerId);
+            lManager.ActivateTeleporter(player, teleporterId);
+        }
+    }
+
+
     private void HandleMusicForSceneCase(string[] msg)
     {
         if (NotInClientScene())
