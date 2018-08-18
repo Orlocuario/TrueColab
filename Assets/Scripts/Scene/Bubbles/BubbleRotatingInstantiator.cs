@@ -60,7 +60,7 @@ public class BubbleRotatingInstantiator : MonoBehaviour
 			Debug.LogError("Object: " + gameObject.name + " needs an angle to rotate");
 		}
 
-        if (speed <= 0.5)
+        if (speed <= 0.1)
         {
             Debug.LogError("THIS " + gameObject.name + " BUBBLEINSTANTIATOR HAS NO SPEED!");
         }

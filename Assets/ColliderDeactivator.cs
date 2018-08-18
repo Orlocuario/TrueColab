@@ -101,31 +101,43 @@ public class ColliderDeactivator : MonoBehaviour {
 
     public void OnEnterPlayer(GameObject player)
     {
-        PlayerController pController = player.GetComponent<PlayerController>();
-        int playerId = pController.playerId;
-        if (pControllers[playerId] != null)
+        if (player.GetComponent<PlayerController>())
         {
-            return;
-        }
-        else
-        {
-            pControllers[playerId] = pController;
-            numberOfPlayersIn++;
-            if (numberOfPlayersIn > 3)
+            Debug.Log("I see a Player Controller");
+            PlayerController pController = player.GetComponent<PlayerController>();
+            Debug.Log("I HAVE a Player Controller");
+            int playerId = pController.playerId;
+            Debug.Log("I HAVE a Player ID");
+
+            if (pControllers[playerId] != null)
             {
-                numberOfPlayersIn = 3;
+                return;
             }
-        }
-        if (numberOfPlayersIn >= 1)
-        {
-            if (setCompleteObject)
-            {
-                SetCompleteObjectActive(true);
-            }
+
             else
             {
-                SetCollidersActive(true);
+                pControllers[playerId] = pController;
+                numberOfPlayersIn++;
+                if (numberOfPlayersIn > 3)
+                {
+                    numberOfPlayersIn = 3;
+                }
+            }
+
+            if (numberOfPlayersIn >= 1)
+            {
+                if (setCompleteObject)
+                {
+                    SetCompleteObjectActive(true);
+                }
+                else
+                {
+                    SetCollidersActive(true);
+                }
             }
         }
+
+
+       
     }
 }
