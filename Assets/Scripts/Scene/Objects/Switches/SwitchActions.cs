@@ -849,10 +849,10 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup65() //  End Of Zone 4 in Scene 5
     {
-        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(34.03f, 6.26f), new Vector2(-2f, .1f), true, 20);
-        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(33.73f, 6.26f));
-        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(33.43f, 6.26f));
-        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(33.13f, 6.26f));
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(59.29f, 3.68f), new Vector2(-2f, .1f), true, 20);
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(58.38f, 2f));
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(59.3f, 2f));
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(60.2f, 2f));
             
         ForLoopDestroyer fDestroyer = GameObject.Find("BoxesHolder").GetComponent<ForLoopDestroyer>();
         fDestroyer.DestroyOneMoreObject();
@@ -893,9 +893,9 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup69()  // Para Zona 2
     {
-        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(86f, -25f), new Vector2(-2f, .1f));
-        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(86f, -28.5f), new Vector2(-2f, .1f));
-        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(83f, -19.2f), new Vector2(-2f, .1f));
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(86f, -25f), new Vector2(-2f, .1f), true, 27);
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(85.5f, -28.5f), new Vector2(-2f, .1f), true, 27);
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(82.5f, -19.2f), new Vector2(-2f, .1f), true, 27);
 
         SwitchForLoopDestroyer swDestroyer = GameObject.Find("SwitchBoxDestroyer2").GetComponent<SwitchForLoopDestroyer>();
         swDestroyer.SwitchReady("Amarillo");

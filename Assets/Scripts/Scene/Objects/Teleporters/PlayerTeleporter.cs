@@ -463,6 +463,15 @@ public class PlayerTeleporter : MonoBehaviour
         cDeactivator1.OnExitPlayer(player);
     }
 
+    private void HandleCase27(GameObject player)
+    {
+        ColliderDeactivator[] cDeactivatorZone2 = GameObject.Find("Zone2").GetComponents<ColliderDeactivator>();
+        foreach (ColliderDeactivator cDeactivator in cDeactivatorZone2)
+        {
+            cDeactivator.OnExitPlayer(player);
+        }
+    }
+
     private void ActivateDestinyColliders(GameObject player)
     {
         GameObject destination = GameObject.Find(placeToGo);
