@@ -26,7 +26,15 @@ public class BurnableObject : MonoBehaviour {
         {
             for (int i = 0; i < particles.Length; i++)
             {
-                particles[i].SetActive(active);
+                ParticleSystem pSystem = particles[i].GetComponent<ParticleSystem>();
+                if (active)
+                {
+                    pSystem.Play();
+                }
+                else if (active == false)
+                {
+                    pSystem.Stop();
+                }
             }
         }
     }

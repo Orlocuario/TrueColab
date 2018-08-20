@@ -247,10 +247,13 @@ public class NPCtrigger : MonoBehaviour
 
     protected void UndestroyMyCollider()
     {
+        Debug.Log("Voy a Restituir mis colliders");
+
         Collider2D collider = gameObject.GetComponent<Collider2D>();
         if (collider.isTrigger)
         {
             collider.enabled = true;
+            Debug.Log("RESTITUÍ mis colliders");
         }
     }
 
@@ -309,7 +312,7 @@ public class NPCtrigger : MonoBehaviour
                     break;
 
                 default:
-                    return;
+                    break;
             }
         }
 

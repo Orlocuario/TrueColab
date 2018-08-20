@@ -12,7 +12,6 @@ public class Poi : MonoBehaviour {
 
     private void Start()
     {
-        Debug.Log("number of players needed is: " + playersNeeded.Length);
         CheckParameters();
         playersArrived = 0;
         poiReady = false;

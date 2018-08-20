@@ -589,6 +589,10 @@ public class SwitchActions : MonoBehaviour
     {
         GameObject filter = GameObject.Find("KillZoneForAllHomies");
         Destroy(filter);
+
+        ForLoopDestroyer bHolder = GameObject.Find("BoxesHolder").GetComponent<ForLoopDestroyer>();
+        bHolder.DestroyOneMoreObject();
+
     }
     private void HandlerGroup29()   // Teleport for the arrival of players to hardest Zone
     {
@@ -777,7 +781,7 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup57() //MovesObjects and opens path to Altar Engin and instantiatesTeleport in Zone 5: Check
     {
-        levelManager.InstantiatePortal("EnginTeleporter", new Vector2(-97.34f, 0.85f), new Vector2(-56.15f, 16.4f));
+        levelManager.InstantiatePortal("EnginTeleporter", new Vector2(-89.65f, 6.26f), new Vector2(-47.55f, 20.97f));
         GameObject mBground = GameObject.Find("DarkMovableBackground");
         if (mBground)
         {

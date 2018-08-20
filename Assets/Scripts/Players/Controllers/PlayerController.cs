@@ -274,7 +274,7 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Move
-    
+
     protected void CheckCollisionWithPlayers()
     {
         if (mustIgnoreCollisionWithVerde)
@@ -315,7 +315,7 @@ public class PlayerController : MonoBehaviour
         if (IsJumping(isGrounded))
         {
             justJumped = true;
-            if(localPlayer)
+            if (localPlayer)
             {
                 SoundManager sManager = FindObjectOfType<SoundManager>();
                 sManager.PlaySound(gameObject, GameSounds.PlayerJump, false);
@@ -472,18 +472,18 @@ public class PlayerController : MonoBehaviour
 
     #region Item
 
-  /*  public void UseItem()
-    {
-        if (localPlayer)
-        {
-            bool itemButtonPressed = CnInputManager.GetButtonDown("Bag Button");
+    /*  public void UseItem()
+      {
+          if (localPlayer)
+          {
+              bool itemButtonPressed = CnInputManager.GetButtonDown("Bag Button");
 
-            if (itemButtonPressed)
-            {
-                Inventory.instance.SelectItem(this);
-            }
-        }
-    }*/
+              if (itemButtonPressed)
+              {
+                  Inventory.instance.SelectItem(this);
+              }
+          }
+      }*/
 
     #endregion
 
@@ -505,7 +505,7 @@ public class PlayerController : MonoBehaviour
         //ResetCamera();                  //For Test // ShouldTry Again
         ResetDamagingTriggers();
         ResetParticleZones();
-        ResetDecisions();
+        //ResetDecisions();
         ResetPowerables();
         justPowered = false;
         justJumped = false;
@@ -580,7 +580,7 @@ public class PlayerController : MonoBehaviour
             decisionOff = null;
         }
     }
-    
+
     public void ResetTransform()
     {
         transform.parent = null;
@@ -661,7 +661,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            mustIgnoreCollisionWithVerde = true; 
+            mustIgnoreCollisionWithVerde = true;
         }
 
         if (player2)
@@ -670,7 +670,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            mustIgnoreCollisionWithRojo = true; 
+            mustIgnoreCollisionWithRojo = true;
         }
         if (player3)
         {
@@ -678,7 +678,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            mustIgnoreCollisionWithAmarillo = true; 
+            mustIgnoreCollisionWithAmarillo = true;
         }
     }
 
@@ -758,7 +758,7 @@ public class PlayerController : MonoBehaviour
         {
             directionY = 1;
             rb2d.gravityScale = 2.5f;
-            cameraState = CameraState.Normal; 
+            cameraState = CameraState.Normal;
             if (localPlayer)
             {
                 SetCamera();
@@ -769,7 +769,7 @@ public class PlayerController : MonoBehaviour
             directionY = -1;
             rb2d.gravityScale = -1.5f;
             cameraState = CameraState.Backwards;
-            if(localPlayer)
+            if (localPlayer)
             {
                 SetCamera();
             }
@@ -836,12 +836,12 @@ public class PlayerController : MonoBehaviour
 
     #region MusicHandlers
 
-    protected void HandlerMusicScene1( )
+    protected void HandlerMusicScene1()
     {
         SoundManager sManager = FindObjectOfType<SoundManager>();
         sManager.PlaySound(mainCamera, GameSounds.Escena1, true, true);
     }
-    protected void HandlerMusicScene2( )
+    protected void HandlerMusicScene2()
     {
         SoundManager sManager = FindObjectOfType<SoundManager>();
         sManager.PlaySound(mainCamera, GameSounds.Escena2, true, true);
@@ -856,12 +856,12 @@ public class PlayerController : MonoBehaviour
         SoundManager sManager = FindObjectOfType<SoundManager>();
         sManager.PlaySound(mainCamera, GameSounds.Escena4, true, true);
     }
-    protected void HandlerMusicScene5( )
+    protected void HandlerMusicScene5()
     {
         SoundManager sManager = FindObjectOfType<SoundManager>();
         sManager.PlaySound(mainCamera, GameSounds.Escena5, true, true);
     }
-    protected void HandlerMusicScene6( )
+    protected void HandlerMusicScene6()
     {
         SoundManager sManager = FindObjectOfType<SoundManager>();
         sManager.PlaySound(mainCamera, GameSounds.Escena6, true, true);
@@ -1185,29 +1185,29 @@ public class PlayerController : MonoBehaviour
 
     #region Events
 
-   /* protected void OnTriggerStay2D(Collider2D other)
-    {
-        if (GameObjectIsPOI(other.gameObject))
-        {
-            PlannerPoi newPoi = other.GetComponent<PlannerPoi>();
-            if (!playerObj.playerAt.name.Equals(newPoi.name))
-            {
-                Debug.Log("Change OK: " + newPoi.name);
-                playerObj.playerAt = newPoi;
-                playerObj.luring = false;
-                if (newPoi.araña != null && this.playerId == 0)
-                {
-                    playerObj.luring = true;
-                    newPoi.araña.blocked = false;
-                    newPoi.araña.open = true;
-                }
-                Planner planner = FindObjectOfType<Planner>();
-                planner.Monitor();
-                Client.instance.SendMessageToServer("EnterPOI/" + newPoi.name, true);
-            }
-        }
-    }
-    */
+    /* protected void OnTriggerStay2D(Collider2D other)
+     {
+         if (GameObjectIsPOI(other.gameObject))
+         {
+             PlannerPoi newPoi = other.GetComponent<PlannerPoi>();
+             if (!playerObj.playerAt.name.Equals(newPoi.name))
+             {
+                 Debug.Log("Change OK: " + newPoi.name);
+                 playerObj.playerAt = newPoi;
+                 playerObj.luring = false;
+                 if (newPoi.araña != null && this.playerId == 0)
+                 {
+                     playerObj.luring = true;
+                     newPoi.araña.blocked = false;
+                     newPoi.araña.open = true;
+                 }
+                 Planner planner = FindObjectOfType<Planner>();
+                 planner.Monitor();
+                 Client.instance.SendMessageToServer("EnterPOI/" + newPoi.name, true);
+             }
+         }
+     }
+     */
     #endregion
 
     #region Messaging
@@ -1293,10 +1293,5 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(jumpRate);
         justJumped = false;
     }
-
-
-
-
     #endregion
-
 }

@@ -36,6 +36,7 @@ public class SpiderController : EnemyController
         IgnoreCollisionsWithRock();
 
         lastPosition = transform.position;
+        levelManager = FindObjectOfType<LevelManager>();
 
         base.Start();
     }
@@ -63,7 +64,7 @@ public class SpiderController : EnemyController
     protected void ProtectTunnel()
     {
 
-        if (levelManager.players == null || levelManager.players.Length == 0)
+        if (levelManager == null || levelManager.players == null || levelManager.players.Length == 0)
         {
             return;
         }

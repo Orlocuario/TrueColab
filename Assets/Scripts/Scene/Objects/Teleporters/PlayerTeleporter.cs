@@ -353,8 +353,6 @@ public class PlayerTeleporter : MonoBehaviour
         ColliderDeactivator cDeactivator5 = GameObject.Find("Zone5").GetComponent<ColliderDeactivator>();
         cDeactivator5.OnEnterPlayer(player);
 
-        ColliderDeactivator cDeactivator5Engin = GameObject.Find("Zone5Engin").GetComponent<ColliderDeactivator>();
-        cDeactivator5Engin.OnEnterPlayer(player);
     }
 
     private void HandleCase13(GameObject player)

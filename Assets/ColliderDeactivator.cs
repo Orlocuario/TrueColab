@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColliderDeactivator : MonoBehaviour {
+public class ColliderDeactivator : MonoBehaviour
+{
 
     public GameObject[] gObjects;
     public int numberOfPlayersIn;
     private PlayerController[] pControllers;
     public bool setCompleteObject;
-	// Use this for initialization
+    // Use this for initialization
 
-	void Start ()
+    void Start()
     {
         if (setCompleteObject)
         {
@@ -23,17 +24,20 @@ public class ColliderDeactivator : MonoBehaviour {
         numberOfPlayersIn = 0;
         pControllers = new PlayerController[3];
     }
-	
-    public void SetCollidersActive (bool active)
+
+    public void SetCollidersActive(bool active)
     {
         foreach (GameObject gObject in gObjects)
         {
-            if (gObject.GetComponent<Collider2D>())
+            if (gObject)
             {
-                Collider2D[] colliders = gObject.GetComponents<Collider2D>();
-                foreach (Collider2D collider in colliders)
+                if (gObject.GetComponent<Collider2D>())
                 {
-                    collider.enabled = active;
+                    Collider2D[] colliders = gObject.GetComponents<Collider2D>();
+                    foreach (Collider2D collider in colliders)
+                    {
+                        collider.enabled = active;
+                    }
                 }
             }
         }
@@ -63,7 +67,7 @@ public class ColliderDeactivator : MonoBehaviour {
         }
     }
 
-   public void OnExitPlayer(GameObject player)
+    public void OnExitPlayer(GameObject player)
     {
         PlayerController pController = player.GetComponent<PlayerController>();
         int playerId = pController.playerId;
@@ -103,11 +107,8 @@ public class ColliderDeactivator : MonoBehaviour {
     {
         if (player.GetComponent<PlayerController>())
         {
-            Debug.Log("I see a Player Controller");
             PlayerController pController = player.GetComponent<PlayerController>();
-            Debug.Log("I HAVE a Player Controller");
             int playerId = pController.playerId;
-            Debug.Log("I HAVE a Player ID");
 
             if (pControllers[playerId] != null)
             {
@@ -138,6 +139,6 @@ public class ColliderDeactivator : MonoBehaviour {
         }
 
 
-       
+
     }
 }

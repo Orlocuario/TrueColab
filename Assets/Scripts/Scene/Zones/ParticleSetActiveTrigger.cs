@@ -10,6 +10,7 @@ public class ParticleSetActiveTrigger : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("The object named: " + gameObject.name + " has a PARTICLE SET ACTIVE TRIGGER");
         numberOfPlayers = 0;
         ToggleParticles(false);
     }

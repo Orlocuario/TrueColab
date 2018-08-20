@@ -333,15 +333,22 @@ public class Room
         switch (sceneToLoad)
         {
             case ("Escena1"):
+                //coordenadas[0] = 134.69f;
+                //coordenadas[1] = -25.48f;     Posiciones para testear final de etapa
+
                 coordenadas[0] = -20f;
-                coordenadas[1] = -42;
+                coordenadas[1] = -42;             
                 break;
             case ("Escena2"):
-                coordenadas[0] = -21.32f;
+                //coordenadas[0] = 63.46f;
+                //coordenadas[1] = -5f;         Posiciones para testear final de etapa
+
+                coordenadas[0] = -21.32f;     
                 coordenadas[1] = 0.33f;
+                
                 break;
             case ("Escena3"):
-        //        coordenadas[0] = 80.81f;
+        //        coordenadas[0] = 80.81f;      Posiciones testear final de etapa
          //       coordenadas[1] = -4.94f; 
                 coordenadas[0] = -1.24f;
                 coordenadas[1] = 0f;
