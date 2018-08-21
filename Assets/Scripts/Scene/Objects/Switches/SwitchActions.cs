@@ -526,8 +526,9 @@ public class SwitchActions : MonoBehaviour
     private void HandlerGroup19()
     {
 
-        // Set Active Mucha EXP por todos los Switch
-        
+        OrganizeAndHide expActivator = GameObject.Find("HiddenExpHolderFor19").GetComponent<OrganizeAndHide>();
+        expActivator.ShowObjects();
+
     }
 
     private void HandlerGroup20()
@@ -557,7 +558,8 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup23()
     {
-        //  Mucha exp en la zona 
+        OrganizeAndHide expActivator = GameObject.Find("HiddenExpHolderFor23").GetComponent<OrganizeAndHide>();
+        expActivator.ShowObjects();
     }
 
     private void HandlerGroup24()
