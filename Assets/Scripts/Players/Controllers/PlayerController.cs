@@ -514,7 +514,7 @@ public class PlayerController : MonoBehaviour
         //ResetCamera();                  //For Test // ShouldTry Again
         ResetDamagingTriggers();
         ResetParticleZones();
-        ResetDecisions();
+        //ResetDecisions();
         ResetPowerables();
         justPowered = false;
         justJumped = false;

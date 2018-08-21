@@ -728,7 +728,7 @@ public class LevelManager : MonoBehaviour
             portal.GetComponent<PlayerTeleporter>().id = id;
             portal.GetComponent<PlayerTeleporter>().groveStreet = _groveStreet;
             portal.GetComponent<PlayerTeleporter>().placeToGo = _whereToGo;
-
+            portal.GetComponent<PlayerTeleporter>().finalScene = true;
 
         }
     }
