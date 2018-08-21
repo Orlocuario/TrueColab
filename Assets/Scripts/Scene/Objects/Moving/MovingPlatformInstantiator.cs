@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingPlatformInstantiator : MonoBehaviour {
+public class MovingPlatformInstantiator : MonoBehaviour
+{
 
 
     GameObject[] platforms;
@@ -16,6 +17,9 @@ public class MovingPlatformInstantiator : MonoBehaviour {
     public bool isWorking;
     public bool playerHasReturned;
 
+    private int?[] players;
+    private int playersIn;
+
 
 
     public string objectName;
@@ -26,6 +30,8 @@ public class MovingPlatformInstantiator : MonoBehaviour {
         playerHasReturned = false;
         initialPosition = gameObject.transform.position;
         CheckParameters();
+        players = new int?[3];
+
         if (onStart)
         {
             StartTheCoRoutine();
@@ -57,12 +63,77 @@ public class MovingPlatformInstantiator : MonoBehaviour {
                         playerHasReturned = false;
                     }
                 }
-
                 yield return new WaitForSeconds(instantiationRate);
             }
         }
     }
 
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<PlayerController>())
+        {
+            if (CheckIfPlayerHasntEntered(collision.gameObject))
+            {
+                playersIn++;
+                if (playersIn >= 1)
+                {
+                    StartCoroutine(InstantiatePlatform());
+                }
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<PlayerController>())
+        {
+            if (CheckIfPlayerAlreadyLeft(collision.gameObject))
+            {
+                playersIn--;
+                if (playersIn <= 0)
+                {
+                    StopCoroutines();
+                }
+            }
+        }
+    }
+
+    public void StopCoroutines()
+    {
+        StopAllCoroutines();
+    }
+
+    protected bool CheckIfPlayerHasntEntered(GameObject playerObject)
+    {
+        PlayerController player = playerObject.GetComponent<PlayerController>();
+        int i = player.playerId;
+        if (players[i] == null)
+        {
+            players[i] = i;
+            return true;
+
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    protected bool CheckIfPlayerAlreadyLeft(GameObject playerObject)
+    {
+        PlayerController player = playerObject.GetComponent<PlayerController>();
+        int i = player.playerId;
+        if (players[i] != null)
+        {
+            players[i] = null;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     private void StartMovingPlatform(GameObject movingPlatform)
     {
         OneTimeMovingObject movingVariables = movingPlatform.GetComponent<OneTimeMovingObject>();
@@ -79,14 +150,14 @@ public class MovingPlatformInstantiator : MonoBehaviour {
         if (initialPosition == new Vector2(0f, 0f))
         {
             Debug.LogError("MovingPlatformInstantiator: " + gameObject.name + " needs an Initial Position");
-        } 
+        }
 
         if (targetPosition == new Vector2(0f, 0f))
         {
             Debug.LogError("MovingPlatformInstantiator: " + gameObject.name + " needs a Target Position");
         }
 
-        if (timeBeforeKill == 0f) 
+        if (timeBeforeKill == 0f)
         {
             Debug.LogError("MovingPlatformInstantiator: " + gameObject.name + " needs has 0 waitBeforKill");
         }

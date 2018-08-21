@@ -491,21 +491,30 @@ public class PlayerController : MonoBehaviour
 
     #region Callable
 
-    public void HardReset()
+    public void HardReset(bool fromLocal)
     {
         StopMoving();
-        if (isPowerOn)
+        if (fromLocal)
         {
-            SetPowerState(false);
-            SendPowerDataToServer();
+            if (isPowerOn)
+            {
+                SetPowerState(false);
+                SendPowerDataToServer();
+            }
         }
+
         ResetTransform();
-        ResetDamagingObjects();
+
+        if(fromLocal)
+        {
+            ResetDamagingObjects();
+        }
+
         ResetChatZones();
         //ResetCamera();                  //For Test // ShouldTry Again
         ResetDamagingTriggers();
         ResetParticleZones();
-        //ResetDecisions();
+        ResetDecisions();
         ResetPowerables();
         justPowered = false;
         justJumped = false;
@@ -870,8 +879,13 @@ public class PlayerController : MonoBehaviour
     #endregion
 
 
-    protected void ResetDamagingObjects()
+    public void ResetDamagingObjects()
     {
+        if(localPlayer)
+        {
+            SendMessageToServer("ResetDamagingObjects" + "/" + playerId);
+        }
+
         DamagingObject[] damagingObjects = FindObjectsOfType<DamagingObject>();
         EnemyController[] enemies = FindObjectsOfType<EnemyController>();
 

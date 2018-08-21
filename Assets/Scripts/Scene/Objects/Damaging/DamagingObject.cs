@@ -83,9 +83,9 @@ public class DamagingObject : MonoBehaviour
 
     #region Messaging
 
-    private void SendIgnoreCollisionDataToServer(GameObject player, bool collision)
+    private void SendIgnoreCollisionDataToServer(GameObject player, bool collision, bool fromLocal)
     {
-        SendMessageToServer("IgnoreCollisionBetweenObjects/" + collision + "/" + player.name + "/" + gameObject.name, true);
+        SendMessageToServer("IgnoreCollisionBetweenObjects/" + collision + "/" + player.name + "/" + gameObject.name + "/" + fromLocal, true);
     }
 
     protected virtual void SendMessageToServer(string message, bool secure)
@@ -303,9 +303,7 @@ public class DamagingObject : MonoBehaviour
                 Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>(), ignores);
             }
         }
-
         ignoresCollisions[player.name] = ignores;
-        SendIgnoreCollisionDataToServer(player, ignores);
     }
 
     #endregion

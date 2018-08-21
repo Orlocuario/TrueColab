@@ -183,6 +183,7 @@ public class EnemyController : MonoBehaviour
         }
 
         ignoresCollisions[player.name] = ignores;
+
         if (LocalPlayerHasControl())
         {
             SendIgnoreCollisionDataToServer(player, ignores);

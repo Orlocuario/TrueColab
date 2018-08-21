@@ -165,6 +165,18 @@ public class PlayerTeleporter : MonoBehaviour
             case 25:
                 HandleCase25(player);
                 break;
+            case 26:
+                HandleCase26(player);
+                break;
+            case 27:
+                HandleCase27(player);
+                break;
+            case 28:
+                HandleCase28(player);
+                break;
+            case 29:
+                HandleCase29(player);
+                break;
             default:
                 return;
         }
@@ -387,21 +399,21 @@ public class PlayerTeleporter : MonoBehaviour
     {
         //ReturnFrom1
         ColliderDeactivator cDeactivatorZone1 = GameObject.Find("Zone1Intro").GetComponent<ColliderDeactivator>();
-        cDeactivatorZone1.OnEnterPlayer(player);
+        cDeactivatorZone1.OnExitPlayer(player);
     }
 
     private void HandleCase18(GameObject player)
     {
         //ReturnFrom2
         ColliderDeactivator cDeactivator2 = GameObject.Find("Zone2").GetComponent<ColliderDeactivator>();
-        cDeactivator2.OnEnterPlayer(player);
+        cDeactivator2.OnExitPlayer(player);
     }
 
     private void HandleCase19(GameObject player)
     {
         //ReturnFrom3
         ColliderDeactivator cDeactivator3 = GameObject.Find("Zone3").GetComponent<ColliderDeactivator>();
-        cDeactivator3.OnEnterPlayer(player);
+        cDeactivator3.OnExitPlayer(player);
     }
 
     private void HandleCase20(GameObject player)
@@ -427,6 +439,7 @@ public class PlayerTeleporter : MonoBehaviour
 
     private void HandleCase23(GameObject player)
     {
+        // Entering GearZone Scene4
         ColliderDeactivator[] cDeactivators23 = GameObject.Find("WarriorGearDeactivator").GetComponents<ColliderDeactivator>();
         foreach (ColliderDeactivator cDeactivator in cDeactivators23)
         {
@@ -436,6 +449,7 @@ public class PlayerTeleporter : MonoBehaviour
 
     private void HandleCase24(GameObject player)
     {
+        //Left Gear Zone Scene 4
         ColliderDeactivator[] cDeactivators23 = GameObject.Find("WarriorGearDeactivator").GetComponents<ColliderDeactivator>();
         foreach (ColliderDeactivator cDeactivator in cDeactivators23)
         {
@@ -469,6 +483,43 @@ public class PlayerTeleporter : MonoBehaviour
             cDeactivator.OnExitPlayer(player);
         }
     }
+
+    private void HandleCase28(GameObject player)
+    {
+        //Leave Zone 6, Enter zone6 Final
+
+        ColliderDeactivator[] cDeactivatorZone6 = GameObject.Find("Zone6").GetComponents<ColliderDeactivator>();
+        foreach (ColliderDeactivator cDeactivator in cDeactivatorZone6)
+        {
+            cDeactivator.OnExitPlayer(player);
+        }
+
+        ColliderDeactivator[] cDeactivatorZone6Final = GameObject.Find("Zone6Final").GetComponents<ColliderDeactivator>();
+        foreach (ColliderDeactivator cDeactivator in cDeactivatorZone6Final)
+        {
+            cDeactivator.OnEnterPlayer(player);
+        }
+
+    }
+
+    private void HandleCase29(GameObject player)
+    {
+        //Leave Zone 6Final, Enter zone6 Previous
+
+        ColliderDeactivator[] cDeactivatorZone6 = GameObject.Find("Zone6").GetComponents<ColliderDeactivator>();
+        foreach (ColliderDeactivator cDeactivator in cDeactivatorZone6)
+        {
+            cDeactivator.OnEnterPlayer(player);
+        }
+
+        ColliderDeactivator[] cDeactivatorZone6Final = GameObject.Find("Zone6Final").GetComponents<ColliderDeactivator>();
+        foreach (ColliderDeactivator cDeactivator in cDeactivatorZone6Final)
+        {
+            cDeactivator.OnExitPlayer(player);
+        }
+
+    }
+
 
     private void ActivateDestinyColliders(GameObject player)
     {

@@ -972,7 +972,7 @@ public class LevelManager : MonoBehaviour
 
     public IEnumerator Respawning(PlayerController player)
     {
-        player.HardReset();
+        player.HardReset(false);
 
         yield return new WaitForSeconds(waitToRespawn * .9f); // Respawn a bit sooner than local
 
@@ -984,7 +984,7 @@ public class LevelManager : MonoBehaviour
 
     public IEnumerator Respawning()
     {
-        localPlayer.HardReset();
+        localPlayer.HardReset(true);
 
         yield return new WaitForSeconds(waitToRespawn);
 

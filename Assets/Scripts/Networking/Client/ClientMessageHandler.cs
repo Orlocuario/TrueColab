@@ -166,6 +166,9 @@ public class ClientMessageHandler
             case "CoordinatePlayerId":
                 HandlePlayerIdCoordination(msg);
                 break;
+            case "ResetDamagingObjects":
+                HandleResetCollisions(msg);
+                break;
             default:
                 break;
         }
@@ -259,6 +262,32 @@ public class ClientMessageHandler
         foreach (EnemyController enemy in enemies)
         {
             enemy.Register(enemyId++);
+        }
+    }
+
+    private void HandleResetCollisions(string[]msg)
+    {
+        if(NotInClientScene())
+        {
+            int playerId = Int32.Parse(msg[1]);
+            LevelManager levelManager = GameObject.FindObjectOfType<LevelManager>();
+            switch (playerId)
+            {
+                case 0:
+                    MageController mController = levelManager.GetMage();
+                    mController.ResetDamagingObjects();
+                    break;
+                case 1:
+                    WarriorController wController = levelManager.GetWarrior();
+                    wController.ResetDamagingObjects();
+                    break;
+                case 2:
+                    EngineerController eController = levelManager.GetEngineer();
+                    eController.ResetDamagingObjects();
+                    break;
+                default:
+                    return;
+            }
         }
     }
 
@@ -692,6 +721,13 @@ public class ClientMessageHandler
                 {
                     DestroyableObject destroyableController = destroyableObject.GetComponent<DestroyableObject>();
                     destroyableController.DestroyMe(false);
+                    return;
+                }
+
+                else if (destroyableObject.GetComponent<BurnableObject>())
+                {
+                    BurnableObject bObject = destroyableObject.GetComponent<BurnableObject>();
+                    bObject.BurnFromServer();
                     return;
                 }
 

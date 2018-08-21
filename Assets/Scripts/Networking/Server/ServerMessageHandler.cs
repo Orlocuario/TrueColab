@@ -167,6 +167,9 @@ public class ServerMessageHandler
             case "CoordinatePlayerId":
                 SendPlayerIdCoordination(message, ip);
                 break;
+            case "ResetDamagingObjects":
+                SendPlayerResetDamagingObjects(message, ip);
+                break;
             default:
                 break;
         }
@@ -281,7 +284,7 @@ public class ServerMessageHandler
     {
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.SendMessageToAllPlayers(message, true);
+        room.SendMessageToAllPlayersExceptOne(message, ip, true);
     }
 
     public void SendActivationNPC(string[] msg, string ip) // Manda un mensaje a un solo jugador
@@ -475,6 +478,13 @@ public class ServerMessageHandler
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         room.SendMessageToAllPlayers(message, true);
+    }
+
+    private void SendPlayerResetDamagingObjects(string message, string ip)
+    {
+        NetworkPlayer player = server.GetPlayer(ip);
+        Room room = player.room;
+        room.SendMessageToAllPlayersExceptOne(message, ip, true);
     }
 
     private void SendDestroyObject(string message, string ip)

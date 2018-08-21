@@ -226,7 +226,7 @@ public class BubbleController : MonoBehaviour
         {
             playerControllers[i] = myPlayer;
             playerControllers[i].parent = gameObject;
-            myPlayer.transform.parent = transform;
+            myPlayer.transform.parent = gameObject.transform;
         }
     }
 

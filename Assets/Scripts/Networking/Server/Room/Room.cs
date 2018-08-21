@@ -350,6 +350,7 @@ public class Room
             case ("Escena3"):
         //        coordenadas[0] = 80.81f;      Posiciones testear final de etapa
          //       coordenadas[1] = -4.94f; 
+
                 coordenadas[0] = -1.24f;
                 coordenadas[1] = 0f;
                 break;
@@ -358,7 +359,11 @@ public class Room
                 coordenadas[1] = 4.18f;
                 break;
             case ("Escena5"):
-                coordenadas[0] = -2.3f;
+
+                //coordenadas[0] = 16.26f;
+                //coordenadas[1] = 15.21f;      Coordenadas para testear zona 6
+
+                coordenadas[0] = -2.3f; 
                 coordenadas[1] = .1f;
                 break;
             case ("Escena6"):

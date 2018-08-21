@@ -525,6 +525,7 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup19()
     {
+
         // Set Active Mucha EXP por todos los Switch
         
     }
@@ -799,6 +800,24 @@ public class SwitchActions : MonoBehaviour
         {
             mWall.GetComponent<OneTimeMovingObject>().move = true;
         }
+
+        GameObject firstSwitch = GameObject.Find("SwitchYellowShoot1");
+        if(firstSwitch)
+        {
+            firstSwitch.GetComponent<OneTimeMovingObject>().move = true;
+        }
+        GameObject secondSwitch = GameObject.Find("SwitchYellowShoot2");
+        if(secondSwitch)
+        {
+            secondSwitch.GetComponent<OneTimeMovingObject>().move = true;
+        }
+
+        GameObject thirdSwitch = GameObject.Find("SwitchYellowShoot3");
+        if(thirdSwitch)
+        {
+            thirdSwitch.GetComponent<OneTimeMovingObject>().move = true;
+        }
+
     }
 
     private void HandlerGroup58() // Destroys Box For Powerable In Zone 6 : Check
@@ -815,26 +834,25 @@ public class SwitchActions : MonoBehaviour
 
     }
 
-    private void HandlerGroup59() // Teleporter to EndOfZone6: Check
+    private void HandlerGroup59() // Teleporter to EndOfZone6 Mage: Check
     {
-        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(39.87f, 37f), new Vector2(80f, 41f));
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(39.87f, 37f), new Vector2(80f, 41f), true, 28);
     }
 
     private void HandlerGroup60() // Teleporter to EndOfZone6: Check
     {
-        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(69.68f, 39.41f), new Vector2(80f, 41f));
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(69.68f, 39.41f), new Vector2(80f, 41f), true, 28);
 
     }
 
     private void HandlerGroup61() // Teleporter to EndOfZone6: Check
     {
-        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(80.62f, 31.32f), new Vector2(80f, 41f));
-
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(80.62f, 31.32f), new Vector2(80f, 41f), true, 28);
     }
 
     private void HandlerGroup62() //End of Zone 6 in Scene 5
     {
-        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(113f, 42.8f), new Vector2(.1f, .1f), true, 22);
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(113f, 42.8f), new Vector2(.1f, .1f), true, 29);
         levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(111.53f, 42.8f));
         levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(110.69f, 42.8f));
         levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(109.82f, 42.8f));

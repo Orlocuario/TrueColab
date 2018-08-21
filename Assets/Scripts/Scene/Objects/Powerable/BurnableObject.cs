@@ -65,6 +65,12 @@ public class BurnableObject : MonoBehaviour {
         SendDestroyDataToServer();
         Destroy(gameObject);
     }
+    
+    public void BurnFromServer()
+    {
+        ToggleParticles(true);
+        Destroy(gameObject, 1.2f);
+    }
 
     protected void SendDestroyDataToServer()
     {
