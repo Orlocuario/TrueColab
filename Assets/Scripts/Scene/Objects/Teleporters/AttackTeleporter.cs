@@ -28,12 +28,12 @@ public class AttackTeleporter : MonoBehaviour
     {
         if (other.GetComponent<AttackController>())
         {
-            AttackController attack = other.GetComponent<AttackController>();
             if (teleporting)
             {
                 return;
             }
 
+            AttackController attack = other.GetComponent<AttackController>();
             if (attack)
             {
                 teleporting = true;
