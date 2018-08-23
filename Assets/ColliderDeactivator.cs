@@ -90,6 +90,7 @@ public class ColliderDeactivator : MonoBehaviour
 
         if (numberOfPlayersIn == 0)
         {
+            SendCollidersActivatedToServer(0, playerId);
             if (setCompleteObject)
             {
                 Debug.Log("El jugador " + player.name + " me voy a pitear los collider porque somos " + numberOfPlayersIn);
@@ -127,8 +128,14 @@ public class ColliderDeactivator : MonoBehaviour
 
             if (numberOfPlayersIn >= 1)
             {
+                if(player.GetComponent<PlayerController>().localPlayer)
+                {
+                    SendCollidersActivatedToServer(1, playerId);
+                }
+
                 if (setCompleteObject)
                 {
+
                     SetCompleteObjectActive(true);
                 }
                 else
@@ -137,8 +144,10 @@ public class ColliderDeactivator : MonoBehaviour
                 }
             }
         }
+    }
 
-
-
+    public void SendCollidersActivatedToServer(int onEnter, int playerId)
+    {
+        Client.instance.SendMessageToServer("ColliderDeactivatorSet/" + gameObject.name + "/" + onEnter.ToString() + "/" + playerId, true);
     }
 }

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ClientMessageHandler
+public class ClientMessageHandler : MonoBehaviour
 {
 
     #region Attributes
@@ -103,6 +103,9 @@ public class ClientMessageHandler
             case "ActivateThisTeleporter":
                 HandleTeleporterActivated(msg);
                 break;
+            case "ColliderDeactivatorSet":
+                HandleColliderCoordination(msg);
+                break;
             case "PlayerPreVote":
                 HandlePlayerPreVote(msg);
                 break;
@@ -153,9 +156,6 @@ public class ClientMessageHandler
                 break;
             case "CoordinateObjectInCircuit":
                 HandlerCircuitObjectsMovementData(msg);
-                break;
-            case "MustInstantiateAndDestroy":
-                HandlerMovableTriggerCoordinator(msg);
                 break;
             case "ExpAnswer":
                 HandlerExpAnswer(msg);
@@ -265,9 +265,9 @@ public class ClientMessageHandler
         }
     }
 
-    private void HandleResetCollisions(string[]msg)
+    private void HandleResetCollisions(string[] msg)
     {
-        if(NotInClientScene())
+        if (NotInClientScene())
         {
             int playerId = Int32.Parse(msg[1]);
             LevelManager levelManager = GameObject.FindObjectOfType<LevelManager>();
@@ -467,22 +467,6 @@ public class ClientMessageHandler
         }
     }
 
-    private void HandlerTeleporterCoordinator(string[] msg)
-    {
-        if (NotInClientScene())
-        {
-            GameObject teleporter = GameObject.Find(msg[1]);
-            if (teleporter.GetComponent<PlayerTeleporter>())
-            {
-                PlayerTeleporter pTeleporter = teleporter.GetComponent<PlayerTeleporter>();
-                if (pTeleporter.id.Equals(Int32.Parse(msg[2])))
-                {
-                    pTeleporter.DoYourTeleportedThing(Int32.Parse(msg[2]));
-                }
-            }
-        }
-    }
-    
     private void HandleTeleporterActivated(string[] msg)
     {
         if (NotInClientScene())
@@ -700,6 +684,45 @@ public class ClientMessageHandler
     #endregion
 
     #region Destroyables
+
+    private void HandleColliderCoordination(string[] msg)
+    {
+        if (NotInClientScene())
+        {
+            GameObject cDeactivatorHolder = GameObject.Find(msg[1]);
+            if (cDeactivatorHolder)
+            {
+                if (cDeactivatorHolder.GetComponent<ColliderDeactivator>())
+                {
+
+                    ColliderDeactivator deactivator = cDeactivatorHolder.GetComponent<ColliderDeactivator>();
+                    LevelManager lManager = FindObjectOfType<LevelManager>();
+                    GameObject player;
+                    int playerId = Int32.Parse(msg[2]);
+
+                    switch (playerId)
+                    {
+                        case 0:
+                            player = lManager.GetMage().gameObject;
+                            break; 
+
+                        case 1:
+                            player = lManager.GetWarrior().gameObject;
+                            break;
+
+                        case 2:
+                            player =  lManager.GetEngineer().gameObject;
+                            break;
+
+                        default:
+                            return;
+                    }
+
+                    deactivator.OnEnterPlayer(player);
+                }
+            }
+        }
+    }
 
     private void HandleObjectDestroyed(string[] msg)
     {

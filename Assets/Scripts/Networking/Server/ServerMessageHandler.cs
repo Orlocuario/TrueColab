@@ -84,7 +84,7 @@ public class ServerMessageHandler
                 SendAllData(ip, Server.instance.GetPlayer(ip).room); //Manda todo para manejar mejor reconexiones. Inclusive información de playerId.
                 break;
             case "ActivateThisTeleporter":
-                SendActivatedTeleporter(message, ip);
+                SendActivatedTeleporter(msg, message, ip);
                 break;
             case "PlayerAttack":
                 SendAttackState(message, ip, msg);
@@ -112,6 +112,9 @@ public class ServerMessageHandler
                 break;
             case "DestroyObject":
                 SendDestroyObject(message, ip);
+                break;
+            case "ColliderDeactivatorSet":
+                SendColliderActivatorSet(msg, message, ip);
                 break;
             case "InventoryUpdate":
                 SendInventoryUpdate(message, ip);
@@ -142,9 +145,6 @@ public class ServerMessageHandler
                 break;
             case "CoordinateMovingObject":
                 SyncMovingObjects(message, ip);
-                break;
-            case "MustInstantiateAndDestroy":
-                SyncMovableTriggers(message, ip);
                 break;
             case "EnterPOI":
                 HandleEnterPOI(msg, ip);
@@ -278,6 +278,21 @@ public class ServerMessageHandler
             room.SendMessageToPlayer(poiMessages, ip, true);
         }
 
+        foreach (string cDeactivatorMessage in room.activatedColliderZones.GetActivatedColliderMessage())
+        {
+            room.SendMessageToPlayer(cDeactivatorMessage, ip, true);
+        }
+
+        foreach (string teleMessage in room.activatedTeleporters.GetActivatedTeleporterMessages())
+        {
+            room.SendMessageToPlayer(teleMessage, ip, true);
+        }
+
+        foreach (string triggerMessage in room.mTriggersActivated.GetMovableTriggerMessages())
+        {
+            room.SendMessageToPlayer(triggerMessage, ip, true);
+        }
+
     }
 
     private void SendIgnoreCollisionBetweenObjects(string message, string ip)
@@ -346,13 +361,15 @@ public class ServerMessageHandler
         //room.log.WriteTriggerActivated();
     }
 
-    private void SendActivatedTeleporter(string message, string ip)
+    private void SendActivatedTeleporter(string[] msg, string message, string ip)
     {
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         room.SendMessageToAllPlayersExceptOne(message, ip, true);
+        room.activatedTeleporters.AddTeleporter(msg[1], msg[2]);
 
     }
+
     private void SendSwitchGroupAction(string message, string[] msg, string ip)
     {
         // OBSOLETO <- por qué?
@@ -494,12 +511,24 @@ public class ServerMessageHandler
         room.SendMessageToAllPlayers(message, true);
     }
 
-    private void SendOthersDestroyObject(string message, string ip)
+    private void SendColliderActivatorSet(string[] msg, string message, string ip)
     {
+        int onEnter = Int32.Parse(msg[2]);
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         room.SendMessageToAllPlayersExceptOne(message, ip, true);
+
+        if(onEnter >= 1)
+        {
+            room.activatedColliderZones.AddColliderDeactivator(msg[1], msg[3]);
+        }
+
+        else if (onEnter == 0)
+        {
+            room.activatedColliderZones.RemoveActivatedZone(msg[1], msg[3]);
+        }
     }
+
 
     private void SendPlayerVoted(string message, string ip)
     {

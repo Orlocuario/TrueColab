@@ -863,20 +863,6 @@ public class LevelManager : MonoBehaviour
         CoordinateMovingObjects();
         CoordinateCircuitMovingElements();
         CoordinateEnemyControllers();
-        CoordinateTeleporters();
-    }
-
-    private void CoordinateTeleporters()
-    {
-        PlayerTeleporter[] pTeleporters = FindObjectsOfType<PlayerTeleporter>();
-        foreach (PlayerTeleporter teleporter in pTeleporters)
-        {
-            if (teleporter.DidYourThing())
-            {
-                teleporter.DoYourTeleportedThing(teleporter.id);
-            }
-        }
-
     }
 
     private void CoordinatePlayers()

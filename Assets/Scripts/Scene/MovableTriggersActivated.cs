@@ -35,7 +35,7 @@ public class MovableTriggersActivated
         readyTriggers = new HashSet<string>();
     }
 
-    public List<string> GetPoiMessages()
+    public List<string> GetMovableTriggerMessages()
     {
         List<string> messages = new List<string>();
         foreach (string activatedTrigger in readyTriggers)

@@ -11,6 +11,8 @@ public class Room
     public List<int> activatedSwitchGroups; //guarda los numeros de los grupos de switchs activados
     public RoomSystems systemsManager;
     public RoomObstacles obstacleManager;
+    public ActivatedColliderZones activatedColliderZones;
+    public ActivatedTeleporters activatedTeleporters;
     public RoomDestroyedObjects objectManager;
     public PoisHandler poisHandler;
     public MovableTriggersActivated mTriggersActivated;
@@ -52,6 +54,8 @@ public class Room
         obstacleManager = new RoomObstacles();
         objectManager = new RoomDestroyedObjects();
         poisHandler = new PoisHandler();
+        activatedTeleporters = new ActivatedTeleporters();
+        activatedColliderZones = new ActivatedColliderZones();
         mTriggersActivated = new MovableTriggersActivated();
         players = new List<NetworkPlayer>();
         switchs = new List<RoomSwitch>();
@@ -309,6 +313,8 @@ public class Room
         objectManager.Reset();
         poisHandler.Reset();
         mTriggersActivated.Reset();
+        activatedColliderZones.Reset();
+        activatedTeleporters.Reset();
 
         activatedSwitchGroups = new List<int>();
         enemies = new List<NetworkEnemy>();
@@ -317,6 +323,8 @@ public class Room
         objectManager = new RoomDestroyedObjects();
         poisHandler = new PoisHandler();
         mTriggersActivated = new MovableTriggersActivated();
+        activatedColliderZones = new ActivatedColliderZones();
+        activatedTeleporters = new ActivatedTeleporters();
 
 
     }
@@ -356,8 +364,11 @@ public class Room
                 break;
 
             case ("Escena4"):
+                //coordenadas[0] = -42.92f;
+                //coordenadas[1] = 1f;
+
                 coordenadas[0] = -2.04f;
-                coordenadas[1] = 4.18f;
+                coordenadas[1] = 4.18f;                   
                 break;
 
             case ("Escena5"):
