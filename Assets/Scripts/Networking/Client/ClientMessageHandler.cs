@@ -694,31 +694,34 @@ public class ClientMessageHandler : MonoBehaviour
             {
                 if (cDeactivatorHolder.GetComponent<ColliderDeactivator>())
                 {
+                    ColliderDeactivator[] cDeactivators = cDeactivatorHolder.GetComponents<ColliderDeactivator>();
 
-                    ColliderDeactivator deactivator = cDeactivatorHolder.GetComponent<ColliderDeactivator>();
-                    LevelManager lManager = FindObjectOfType<LevelManager>();
-                    GameObject player;
-                    int playerId = Int32.Parse(msg[2]);
-
-                    switch (playerId)
+                    foreach (ColliderDeactivator deactivator in cDeactivators)
                     {
-                        case 0:
-                            player = lManager.GetMage().gameObject;
-                            break; 
+                        LevelManager lManager = FindObjectOfType<LevelManager>();
+                        GameObject player;
+                        int playerId = Int32.Parse(msg[2]);
 
-                        case 1:
-                            player = lManager.GetWarrior().gameObject;
-                            break;
+                        switch (playerId)
+                        {
+                            case 0:
+                                player = lManager.GetMage().gameObject;
+                                break;
 
-                        case 2:
-                            player =  lManager.GetEngineer().gameObject;
-                            break;
+                            case 1:
+                                player = lManager.GetWarrior().gameObject;
+                                break;
 
-                        default:
-                            return;
+                            case 2:
+                                player = lManager.GetEngineer().gameObject;
+                                break;
+
+                            default:
+                                return;
+                        }
+
+                        deactivator.OnEnterPlayer(player);
                     }
-
-                    deactivator.OnEnterPlayer(player);
                 }
             }
         }
