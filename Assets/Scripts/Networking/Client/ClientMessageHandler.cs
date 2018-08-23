@@ -459,11 +459,10 @@ public class ClientMessageHandler
         if (NotInClientScene())
         {
             GameObject mTrigger = GameObject.Find(msg[1]);
-            GameObject movable = GameObject.Find(msg[2]);
-
-            if (mTrigger && movable)
+            if (mTrigger)
             {
-                mTrigger.GetComponent<MovableTriggerInstantiator>().ActivateTrigger(movable);
+                GameObject movObject = mTrigger.GetComponent<MovableTriggerInstantiator>().objectNeeded;
+                mTrigger.GetComponent<MovableTriggerInstantiator>().ActivateTrigger(movObject);
             }
         }
     }

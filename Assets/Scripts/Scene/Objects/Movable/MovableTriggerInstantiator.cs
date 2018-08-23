@@ -4,67 +4,52 @@ using UnityEngine;
 using System;
 
 
-public class MovableTriggerInstantiator : MonoBehaviour {
+public class MovableTriggerInstantiator : MonoBehaviour
+{
 
-	[Serializable]
-	 
-	public struct ObjectToInstantiate
-	{
-		public Vector2 position;
-		public string name;
-	}
+    [Serializable]
 
-	public ObjectToInstantiate[] instantiateObjects;
-	public GameObject objectNeeded;
-    public bool jobDone;
+    public struct ObjectToInstantiate
+    {
+        public Vector2 position;
+        public string name;
+    }
 
-	private LevelManager levelManager; 
+    public ObjectToInstantiate[] instantiateObjects;
+    public GameObject objectNeeded;
 
-	void Start () {
-	
-		levelManager = FindObjectOfType<LevelManager>();
-		if (instantiateObjects.Length == 0)
-		{
-			Debug.LogError (gameObject.name + " doesnt have instantiate values");
-		}
-	}
-	
-	// Update is called once per frame
+    private LevelManager levelManager;
 
-	private void OnTriggerEnter2D(Collider2D other)
-	{
-		if (other.gameObject == objectNeeded) 
-		{
+    void Start()
+    {
+
+        levelManager = FindObjectOfType<LevelManager>();
+        if (instantiateObjects.Length == 0)
+        {
+            Debug.LogError(gameObject.name + " doesnt have instantiate values");
+        }
+    }
+
+    // Update is called once per frame
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject == objectNeeded)
+        {
             ActivateTrigger(other.gameObject);
-		}		
-	}
+        }
+    }
 
     public void ActivateTrigger(GameObject other)
     {
-        if (jobDone)
-        {
-            return;
-        }
-        else
-        {
-            SendMessageToServer("ObjectDestroyed" + "/" + objectNeeded.gameObject.name, true);
-            SendMessageToServer("ActivateTrigger" + "/" + gameObject.name, true);
-            InstantiateStuff();
-            jobDone = true;
-        }
-
+        SendMessageToServer("ObjectDestroyed" + "/" + objectNeeded.gameObject.name, true);
+        SendMessageToServer("ActivateTrigger" + "/" + gameObject.name, true);
+        InstantiateStuff();
     }
 
     public void HandleTriggerReachedByMovable()
     {
-        if (jobDone == false)
-        {
-            InstantiateStuff();
-        }
-        else
-        {
-            return;
-        }
+        InstantiateStuff();
     }
 
     private void InstantiateStuff()
@@ -74,10 +59,7 @@ public class MovableTriggerInstantiator : MonoBehaviour {
         {
             levelManager.InstantiatePrefab(instObject.name, instObject.position);
         }
-        jobDone = true;
-
-        Debug.Log("I FUCKING INSTATIATED Y'ALL!"); 
-    } 
+    }
 
     private void SendMessageToServer(string message, bool secure)
     {
