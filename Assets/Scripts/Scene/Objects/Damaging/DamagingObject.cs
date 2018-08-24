@@ -56,18 +56,14 @@ public class DamagingObject : MonoBehaviour
         // Don't hit protected players
         if (mage.ProtectedByShield(player))
         {
-            if (!ignoresCollisions[player.name])
-            {
-                UpdateCollisionsWithPlayer(player, true);
-            }
+            UpdateCollisionsWithPlayer(true);
             return;
         }
-        else
+
+        //if is not turned into water, hit him
+        else if (turnedIntoWater == false)
         {
-            if (ignoresCollisions[player.name])
-            {
-                UpdateCollisionsWithPlayer(player, false);
-            }
+            UpdateCollisionsWithPlayer(false);
         }
 
         // If player is at the left side of the enemy push it to the left
@@ -82,11 +78,6 @@ public class DamagingObject : MonoBehaviour
     #endregion
 
     #region Messaging
-
-    private void SendIgnoreCollisionDataToServer(GameObject player, bool collision, bool fromLocal)
-    {
-        SendMessageToServer("IgnoreCollisionBetweenObjects/" + collision + "/" + player.name + "/" + gameObject.name + "/" + fromLocal, true);
-    }
 
     protected virtual void SendMessageToServer(string message, bool secure)
     {
@@ -134,6 +125,7 @@ public class DamagingObject : MonoBehaviour
 
                 if (id > 0)
                 {
+                    UpdateCollisionsWithPlayer(true);
                     ChangeLavaIntoWater(true);
                 }
             }
@@ -294,16 +286,25 @@ public class DamagingObject : MonoBehaviour
         return playerController && playerController.localPlayer;
     }
 
-    public virtual void UpdateCollisionsWithPlayer(GameObject player, bool ignores)
+    public virtual void UpdateCollisionsWithPlayer(bool ignores)
     {
         foreach (Collider2D collider in GetComponents<Collider2D>())
         {
             if (!collider.isTrigger)
             {
-                Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>(), ignores);
+                if (ignores)
+                {
+                    collider.enabled = false;
+                }
+                else
+                {
+                    collider.enabled = true;
+                }
+
+                //Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>(), ignores);
             }
         }
-        ignoresCollisions[player.name] = ignores;
+        //ignoresCollisions[player.name] = ignores;
     }
 
     #endregion

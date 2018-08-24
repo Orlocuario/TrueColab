@@ -774,8 +774,9 @@ public class SwitchActions : MonoBehaviour
         
     private void HandlerGroup56() ////Unlocks BubbleInstantiator in Zone 1 for Mage +Exp: Check
     {
-        BubbleRotatingInstantiator bInstantiator = GameObject.Find("BubbleInstantiatorMageZone").GetComponent<BubbleRotatingInstantiator>();
-        bInstantiator.GearActivation();
+        GameObject movPlat = levelManager.InstantiatePrefab("MovPlatform", new Vector2(13.63f, -1.96f));
+        levelManager.SetMovingObjectData(movPlat, new Vector2(-53.27f, -1.14f), new Vector2(-50.92f, 2.29f), 1f, 1.5f, false);
+        levelManager.ShowFeedbackParticles("FBMageButt", new Vector2(13.63f, -1.96f), 3f);
 
         levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(-46.19f, -4.47f));
         levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(-44.69f, -4.47f));

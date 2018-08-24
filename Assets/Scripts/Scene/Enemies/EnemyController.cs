@@ -172,21 +172,21 @@ public class EnemyController : MonoBehaviour
         timeMaged = 0;
     }
 
-    public virtual void UpdateCollisionsWithPlayer(GameObject player, bool ignores)
+    public virtual void UpdateCollisionsWithPlayer(bool ignores)
     {
         foreach (Collider2D collider in GetComponents<Collider2D>())
         {
             if (!collider.isTrigger)
             {
-                Physics2D.IgnoreCollision(player.GetComponent<BoxCollider2D>(), collider, ignores);
+                if (ignores)
+                {
+                    collider.enabled = false;
+                }
+                else
+                {
+                    collider.enabled = true;
+                }
             }
-        }
-
-        ignoresCollisions[player.name] = ignores;
-
-        if (LocalPlayerHasControl())
-        {
-            SendIgnoreCollisionDataToServer(player, ignores);
         }
     }
 
@@ -208,17 +208,15 @@ public class EnemyController : MonoBehaviour
         // Don't hit protected players
         if (mage.ProtectedByShield(player))
         {
-            if (!ignoresCollisions[player.name])
-            {
-                UpdateCollisionsWithPlayer(player, true);
-            }
+            UpdateCollisionsWithPlayer(true);
             return;
         }
+
         else
         {
-            if (ignoresCollisions[player.name])
+            if (maged == false)
             {
-                UpdateCollisionsWithPlayer(player, false);
+                UpdateCollisionsWithPlayer(false);
             }
         }
 
@@ -233,7 +231,6 @@ public class EnemyController : MonoBehaviour
         {
             attackForce.x *= -1;
         }
-
 
         playerController.TakeDamage(damage, attackForce);
     }
@@ -473,7 +470,7 @@ public class EnemyController : MonoBehaviour
             Attack(other.gameObject);
         }
     }
-    
+
     // Attack those who collide with me
     protected virtual void OnCollisionEnter2D(Collision2D other)
     {

@@ -891,11 +891,11 @@ public class PlayerController : MonoBehaviour
 
         foreach (DamagingObject damaging in damagingObjects)
         {
-            damaging.UpdateCollisionsWithPlayer(gameObject, false);
+            damaging.UpdateCollisionsWithPlayer(false);
         }
         foreach (EnemyController enemy in enemies)
         {
-            enemy.UpdateCollisionsWithPlayer(gameObject, false);
+            enemy.UpdateCollisionsWithPlayer(false);
         }
     }
 
