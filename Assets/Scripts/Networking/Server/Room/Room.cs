@@ -21,7 +21,7 @@ public class Room
     public List<NetworkEnemy> enemies;
     public List<RoomSwitch> switchs;
     public List<string> deathGameObject;
-    public RoomHpMp hpManager;
+    public RoomHpMp hpMpManager;
     public RoomLogger log;
     public Server server;
 
@@ -62,7 +62,7 @@ public class Room
         enemies = new List<NetworkEnemy>();
         deathGameObject = new List<string>();
 
-        hpManager = new RoomHpMp(this);
+        hpMpManager = new RoomHpMp(this);
 
         if (logger == null)
         {
@@ -319,7 +319,7 @@ public class Room
         activatedSwitchGroups = new List<int>();
         enemies = new List<NetworkEnemy>();
         switchs = new List<RoomSwitch>();
-        hpManager = new RoomHpMp(this);
+        hpMpManager = new RoomHpMp(this);
         objectManager = new RoomDestroyedObjects();
         poisHandler = new PoisHandler();
         mTriggersActivated = new MovableTriggersActivated();

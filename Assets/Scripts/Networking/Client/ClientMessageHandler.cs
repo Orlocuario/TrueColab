@@ -58,6 +58,15 @@ public class ClientMessageHandler : MonoBehaviour
             case "NewChatMessage":
                 HandleNewChatMessage(msg);
                 break;
+            case "StartSpendingMana":
+                HandleStartSpendingMana(msg);
+                break;
+            case "StopSpendingMana":
+                HandlePlayerStopSpendingMana(msg);
+                break;
+            case "ChangeRegeneration":
+                HandlePlayerChangedRegenerationState(msg);
+                break;
             case "DisplayChangeHPToClient":
                 HandleChangeHpHUDToClient(msg);
                 break;
@@ -66,9 +75,6 @@ public class ClientMessageHandler : MonoBehaviour
                 break;
             case "DisplayChangeExpToClient":
                 HandleChangeExpHUDToClient(msg);
-                break;
-            case "DisplayStopChangeHPMPToClient":
-                StopChangeHPMPToClient(msg);
                 break;
             case "EnemyDie":
                 EnemyDie(msg);
@@ -499,12 +505,38 @@ public class ClientMessageHandler : MonoBehaviour
 
     #region HUD
 
+    private void HandleStartSpendingMana(string[]msg)
+    {
+        if (NotInClientScene())
+        {
+            HpMpManager hpMpManager = FindObjectOfType<HpMpManager>();
+            if (hpMpManager)
+            {
+                int rateDivider = Int32.Parse(msg[1]);
+                hpMpManager.ReceivePlayerStartSpendingMana(rateDivider);
+            }
+        }
+    }
+
+    private void HandlePlayerChangedRegenerationState(string[] msg)
+    {
+        if (NotInClientScene())
+        {
+            HpMpManager hpMpManager = FindObjectOfType<HpMpManager>();
+            if (hpMpManager)
+            {
+                int rateDivider = Int32.Parse(msg[1]);
+                hpMpManager.ReceivePlayerChangedRegeneration(rateDivider);
+            }
+        }
+    }
+
     private void HandleChangeHpHUDToClient(string[] msg)
     {
         if (NotInClientScene())
         {
-            HUDDisplay hpAndMp = GameObject.FindObjectOfType<LevelManager>().hpAndMp;
-            hpAndMp.CurrentHPPercentage(float.Parse(msg[1]));
+            HpMpManager hpAndMp = FindObjectOfType<HpMpManager>();
+            hpAndMp.ChangeHP(int.Parse(msg[1]));
         }
     }
 
@@ -514,15 +546,6 @@ public class ClientMessageHandler : MonoBehaviour
         {
             HUDDisplay hpAndMp = GameObject.FindObjectOfType<LevelManager>().hpAndMp;
             hpAndMp.CurrentMPPercentage(float.Parse(msg[1]));
-        }
-    }
-
-    private void StopChangeHPMPToClient(string[] msg)
-    {
-        if (NotInClientScene())
-        {
-            HUDDisplay hpAndMp = GameObject.FindObjectOfType<LevelManager>().hpAndMp;
-            hpAndMp.StopLocalParticles(); // Only stop local particles
         }
     }
 
@@ -981,6 +1004,12 @@ public class ClientMessageHandler : MonoBehaviour
         }
     }
 
+    private void HandlePlayerStopSpendingMana(string[] msg)
+    {
+        int currentDivider = Int32.Parse(msg[1]);
+        HpMpManager hpMpManager = FindObjectOfType<HpMpManager>();
+        hpMpManager.ReceivePlayerStopSpendingMana(currentDivider);
+    }
     private void HandlePlayersAreDead(string[] array)
     {
         if (NotInClientScene())

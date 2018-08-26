@@ -35,6 +35,9 @@ public class ServerMessageHandler
             case "ActivateTrigger":
                 HandleTriggerActivated(message, msg, ip);
                 break;
+            case "PlayersAreDead":
+                HandlePlayersAreDead(msg, ip);
+                break;
             case "ChangeObjectPosition":
                 SendUpdatedObjectPosition(message, ip);
                 break;
@@ -47,20 +50,14 @@ public class ServerMessageHandler
             case "ChangeHpHUDToRoom":
                 SendHpHUDToRoom(msg, ip);
                 break;
-            case "ChangeMpHUDToRoom":
-                SendMpHUDToRoom(msg, ip);
-                break;
             case "StopChangeHpAndMpHUDToRoom":
-                StopChangeHPMpHUDToRoom(msg, ip);
+                StopRegeneratingHPMP(msg, ip);
                 break;
-            case "ChangeHpAndMpHUDToRoom": //Necessary coz' ChatZone changes both at the same rate
-                SendHpHAndMpHUDToRoom(msg, ip);
-                break;
-            case "EnteredChatZone":
-                PlayerEnteredChatZone(message, ip);
+            case "PlayerEnteredChatZone": //Necessary coz' ChatZone changes both at the same rate
+                RegenerateHPMP(msg, ip);
                 break;
             case "LeftChatZone":
-                SendPlayerLeftChatZoneSignal(message, ip);
+                SendPlayerLeftChatZoneSignalLogWriter(message, ip);
                 break;
             case "GainExp":
                 SendExpToRoom(msg, ip);
@@ -228,7 +225,7 @@ public class ServerMessageHandler
 
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        int totalExp = room.hpManager.currentExp;
+        int totalExp = room.hpMpManager.currentExp;
         RoomLogger log = room.log;
         log.WriteTotalExp(totalExp);
         log.WriteChangeScene(scence);
@@ -248,6 +245,12 @@ public class ServerMessageHandler
     public void SendAllData(string ip, Room room)
     {
         SendPlayerIdAndControl(ip);
+
+        foreach (string cDeactivatorMessage in room.activatedColliderZones.GetActivatedColliderMessage())
+        {
+            room.SendMessageToPlayer(cDeactivatorMessage, ip, true);
+        }
+
         foreach (NetworkPlayer player in room.players)
         {
             room.SendMessageToPlayer(player.GetReconnectData(), ip, true);
@@ -256,6 +259,11 @@ public class ServerMessageHandler
         foreach (RoomSwitch switchi in room.switchs)
         {
             room.SendMessageToPlayer(switchi.GetReconnectData(), ip, true);
+        }
+
+        foreach (string triggerMessage in room.mTriggersActivated.GetMovableTriggerMessages())
+        {
+            room.SendMessageToPlayer(triggerMessage, ip, true);
         }
 
         foreach (string doorMessage in room.systemsManager.GetSystemsMessages())
@@ -276,11 +284,6 @@ public class ServerMessageHandler
         foreach (string poiMessages in room.poisHandler.GetPoiMessages())
         {
             room.SendMessageToPlayer(poiMessages, ip, true);
-        }
-
-        foreach (string cDeactivatorMessage in room.activatedColliderZones.GetActivatedColliderMessage())
-        {
-            room.SendMessageToPlayer(cDeactivatorMessage, ip, true);
         }
 
         foreach (string teleMessage in room.activatedTeleporters.GetActivatedTeleporterMessages())
@@ -511,6 +514,15 @@ public class ServerMessageHandler
         room.SendMessageToAllPlayers(message, true);
     }
 
+    private void HandlePlayersAreDead(string[] msg, string ip)
+    {
+        NetworkPlayer player = server.GetPlayer(ip);
+        Room room = player.room;
+        room.log.WritePlayersAreDead();
+        room.SendMessageToAllPlayers("PlayersAreDead/", true);
+        room.SendMessageToAllPlayers("NewChatMessage/" + room.actualChat, true);
+
+    }
     private void SendColliderActivatorSet(string[] msg, string message, string ip)
     {
         int onEnter = Int32.Parse(msg[2]);
@@ -548,59 +560,54 @@ public class ServerMessageHandler
     {
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.hpManager.ChangeHP(msg[1], ip);
+        int damage = Int32.Parse(msg[1]);
+        room.hpMpManager.ChangeHPFromDamage(damage);
     }
 
-    private void SendMpHUDToRoom(string[] msg, string ip)
+    private void StopRegeneratingHPMP(string[] msg, string ip)
     {
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.hpManager.ChangeMP(msg[1], ip);
+        room.hpMpManager.StopChangeHpAndMpHUD(ip);
+        room.log.WritePlayernotCharging(player.id);
     }
 
-
-    private void StopChangeHPMpHUDToRoom(string[] msg, string ip)
+    private void RegenerateHPMP(string[] msg, string ip)
     {
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.hpManager.StopChangeHpAndMpHUD(ip);
+        room.hpMpManager.RecieveHpAndMpHUD(ip);
+        room.log.WritePlayerIsCharging(player.id);
     }
 
-    private void SendHpHAndMpHUDToRoom(string[] msg, string ip)
-    {
-        NetworkPlayer player = server.GetPlayer(ip);
-        Room room = player.room;
-        room.hpManager.RecieveHpAndMpHUD(msg[1], ip);
-    }
-
-    private void PlayerEnteredChatZone(string msg, string ip)
+    private void PlayerEnteredChatZoneLogWriter(string msg, string ip)
     {
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         RoomLogger log = room.log;
-        log.WritePlayerIsCharging(player.id);
+
     }
 
-    private void SendPlayerLeftChatZoneSignal(string msg, string ip)
+    private void SendPlayerLeftChatZoneSignalLogWriter(string msg, string ip)
     {
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         RoomLogger log = room.log;
-        log.WritePlayernotCharging(player.id);
+
     }
 
     private void SendExpToRoom(string[] msg, string ip)
     {
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.hpManager.ChangeExp(msg[1]);
+        room.hpMpManager.ChangeExp(msg[1]);
     }
 
     private void HandleExpQuestion(string[] msg, string ip)
     {
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        int exp = room.hpManager.currentExp;
+        int exp = room.hpMpManager.currentExp;
         room.SendMessageToAllPlayers("ExpAnswer/" + exp + "/" + msg[1], true);
     }
 
@@ -792,12 +799,15 @@ public class ServerMessageHandler
         room.log.WriteAttack(player.id);
     }
 
-    public void SendPowerState(string message, string ip, string[] data)
+    public void SendPowerState(string message, string ip, string[] msg)
     {
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        player.power = bool.Parse(data[2]);
-        room.SendMessageToAllPlayersExceptOne(message, ip, false);
+
+        player.power = bool.Parse(msg[2]);
+        float startingPercentage = float.Parse(msg[3]);
         room.log.WritePower(player.id, player.power);
+        room.hpMpManager.ReceivePowerStateChange(ip, player.power, startingPercentage);
+        room.SendMessageToAllPlayers(message, false);
     }
 }

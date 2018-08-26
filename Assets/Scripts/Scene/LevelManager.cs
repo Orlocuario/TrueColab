@@ -665,6 +665,12 @@ public class LevelManager : MonoBehaviour
         {
             movingController.SetData(startPos, endPos, moveSpeed, timeToWait, ignoreCollisionWithPlayers);
         }
+
+        if (FindObjectOfType<MovingObjectNameGiver>())
+        {
+            MovingObjectNameGiver mNameG = FindObjectOfType<MovingObjectNameGiver>();
+            mNameG.GiveNameFromInstantiation(movingController.gameObject);
+        }
     }
 
     public GameObject InstantiatePrefab(string name, Vector2 initialPos)

@@ -10,11 +10,11 @@ public class ChatZone : MonoBehaviour
     private GameObject[] particles;
     private HUDDisplay hpAndMp;
 
-    private static float regenerationUnits = 6;
-    private static int regenerationFrameRate = 17;
+    //private static float regenerationUnits = 6;
+    //private static int regenerationFrameRate = 17;
 
     private int regenerationFrame;
-    private bool activated;
+    //private bool activated;
 
     #endregion
 
@@ -23,27 +23,10 @@ public class ChatZone : MonoBehaviour
     private void Start()
     {
         regenerationFrame = 0;
-        activated = false;
+        //activated = false;
 
         InitializeChatButtons();
         InitializeParticles();
-    }
-
-    private void Update()
-    {
-        if (activated)
-        {
-            if (CanRegenerateHPorMP())
-            {
-                regenerationFrame++;
-                if (regenerationFrame == regenerationFrameRate)
-                {
-                    regenerationFrame = 0;
-                    hpAndMp.ChangeHPAndMP(regenerationUnits);
-                    SendMessageToServer("ChangeHpAndMpHUDToRoom/" + regenerationUnits);
-                }
-            }
-        }
     }
 
     #endregion
@@ -133,9 +116,13 @@ public class ChatZone : MonoBehaviour
         {
             PlayerController player = other.gameObject.GetComponent<PlayerController>();
             player.availableChatZone = gameObject;
-            ToggleParticles(true);
-            activated = true;
-            
+            if (CanRegenerateHPorMP())
+            {
+                ToggleParticles(true);
+                //activated = true;
+                //hpAndMp.ChangeHPAndMP(regenerationUnits);
+                SendMessageToServer("PlayerEnteredChatZone/");
+            }
         }
     }
 
@@ -146,6 +133,7 @@ public class ChatZone : MonoBehaviour
             TurnChatZoneOff();
             PlayerController player = other.gameObject.GetComponent<PlayerController>();
             player.availableChatZone = null;
+            SendMessageToServer("StopChangeHpAndMpHUDToRoom/");
         }
     }
 
@@ -153,7 +141,7 @@ public class ChatZone : MonoBehaviour
     {
         if (Client.instance)
         {
-            Client.instance.SendMessageToServer(message, false);
+            Client.instance.SendMessageToServer(message, true);
         }
     }
 
@@ -161,7 +149,7 @@ public class ChatZone : MonoBehaviour
     {
         regenerationFrame = 0;
         ToggleParticles(false);
-        activated = false;
+        //activated = false;
         hpAndMp.StopParticles();
 
     }

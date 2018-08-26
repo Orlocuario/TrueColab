@@ -449,19 +449,8 @@ public class PlayerController : MonoBehaviour
                     SendPowerDataToServer();
                 }
 
-                if (isPowerOn)
-                {
+                //  levelManager.hpAndMp.ChangeMP(mpSpendRate); // Change local
 
-                    if (mpUpdateFrame == mpUpdateFrameRate)
-                    {
-                        levelManager.hpAndMp.ChangeMP(mpSpendRate); // Change local
-                        SendMPDataToServer(); // Change remote
-                        mpUpdateFrame = 0;
-                    }
-
-                    mpUpdateFrame++;
-
-                }
 
             }
         }
@@ -505,7 +494,7 @@ public class PlayerController : MonoBehaviour
 
         ResetTransform();
 
-        if(fromLocal)
+        if (fromLocal)
         {
             ResetDamagingObjects();
         }
@@ -621,7 +610,6 @@ public class PlayerController : MonoBehaviour
                 damage *= -1;
             }
 
-            levelManager.hpAndMp.ChangeHP(damage); // Change local HP
             SendMessageToServer("ChangeHpHUDToRoom/" + damage); // Change remote HP
         }
 
@@ -881,7 +869,7 @@ public class PlayerController : MonoBehaviour
 
     public void ResetDamagingObjects()
     {
-        if(localPlayer)
+        if (localPlayer)
         {
             SendMessageToServer("ResetDamagingObjects" + "/" + playerId);
         }
@@ -1256,18 +1244,14 @@ public class PlayerController : MonoBehaviour
 
     protected void SendPowerDataToServer()
     {
-        string message = "PlayerPower/" + playerId + "/" + isPowerOn;
+        float mpPercentage = levelManager.hpAndMp.mpCurrentPercentage;
+        string message = "PlayerPower/" + playerId + "/" + isPowerOn + "/" + mpPercentage;
         SendMessageToServer(message);
     }
 
     public void SendPlayerPowerDataToServer()
     {
         SendPowerDataToServer();
-    }
-
-    public void SendMPDataToServer()
-    {
-        SendMessageToServer("ChangeMpHUDToRoom/" + mpSpendRate);
     }
 
     protected void SendMessageToServer(string message)

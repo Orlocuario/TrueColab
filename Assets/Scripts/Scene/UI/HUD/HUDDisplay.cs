@@ -22,7 +22,6 @@ public class HUDDisplay : MonoBehaviour
 
     private float hpLastPercentage;
     private float mpLastPercentage;
-    private float expLastPercentage;
 
     #endregion
 
@@ -238,7 +237,7 @@ public class HUDDisplay : MonoBehaviour
 
     }
 
-    private void StartHPParticles()
+    public void StartHPParticles()
     {
         if (hpCurrentPercentage > hpLastPercentage)
         {
@@ -255,7 +254,7 @@ public class HUDDisplay : MonoBehaviour
         hpLastPercentage = hpCurrentPercentage;
     }
 
-    private void StartMPParticles()
+    public void StartMPParticles()
     {
         if (mpCurrentPercentage > mpLastPercentage)
         {

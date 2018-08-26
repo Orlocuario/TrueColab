@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 
 public class RoomHpMp
 {
@@ -16,6 +15,11 @@ public class RoomHpMp
     public float percentageMP;
     public float percentageExp;
     private bool mpAtLimit;
+
+    private int mpRateDivider;
+
+    private NetworkPlayer[] regeneratingPlayers;
+    private NetworkPlayer[] manaSpendingPlayers;
 
     Room room;
 
@@ -35,61 +39,194 @@ public class RoomHpMp
         percentageHP = 1;
         percentageMP = 1;
         percentageExp = 0;
+
+        regeneratingPlayers = new NetworkPlayer[3];
+        manaSpendingPlayers = new NetworkPlayer[3];
     }
 
     #endregion
 
-    #region Common
+    #region RegenerationWork
+
+
+    public void RecieveHpAndMpHUD(string ip)
+    {
+        if (IsPlayerSlotEmpty(ip))
+        {
+            GetPlayerRegenerating();
+        }
+    }
+
+    private bool IsPlayerSlotEmpty(string ip)
+    {
+        int id = GetPlayerId(ip);
+        if (regeneratingPlayers[id] != null)
+        {
+            return false;
+        }
+        else
+        {
+            regeneratingPlayers[id] = room.players[id];
+            return true;
+        }
+    }
+
+    private bool IsPlayerSlotOccupied(string ip)
+    {
+        int id = GetPlayerId(ip);
+        if (regeneratingPlayers[id] == null)
+        {
+            return false;
+        }
+        else
+        {
+            regeneratingPlayers[id] = null;
+            return true;
+        }
+    }
+
+
+    private void GetPlayerRegenerating()
+    {
+        SetRegenerationParameters();
+    }
+
+    private void GetPlayerStopRegenerating()
+    {
+        SetRegenerationParameters();
+    }
 
     public void StopChangeHpAndMpHUD(string ip)
     {
-        room.SendMessageToAllPlayersExceptOne("DisplayStopChangeHPMPToClient/", ip, false);
+        if (IsPlayerSlotOccupied(ip))
+        {
+            GetPlayerStopRegenerating();
+            //room.SendMessageToAllPlayers("DisplayStopChangeHPMPToClient/", false);
+        }
     }
 
-    public void RecieveHpAndMpHUD(string changeRate, string ip)
+    private void SetRegenerationParameters()
     {
-        ChangeHP(changeRate, ip);
-        ChangeMP(changeRate, ip);
-    }
-
-    public void ChangeHP(string deltaHP, string ip)
-    {
-        float valueDeltaHP = float.Parse(deltaHP);
-        if (valueDeltaHP == 0)
+        int playersIn = 0;
+        
+        for (int i = 0; i < regeneratingPlayers.Length; i++)
         {
-            return;
-        }
-        currentHP += valueDeltaHP;
-
-        if (currentHP >= maxHP)
-        {
-            currentHP = maxHP;
-        }
-        else if (currentHP <= 0)
-        {
-            currentHP = 0;
-            room.SendMessageToAllPlayers("PlayersAreDead/" + Server.instance.sceneToLoad,false);
-            room.log.WritePlayersAreDead();
-            currentHP = maxHP;
-            currentMP = maxMP;
-            room.SendMessageToAllPlayers("NewChatMessage/" + room.actualChat,false);
+            if (regeneratingPlayers[i] != null)
+            {
+                playersIn++;
+            }
         }
 
-        percentageHP = currentHP / maxHP;
-        room.SendMessageToAllPlayersExceptOne("DisplayChangeHPToClient/" + percentageHP, ip, false);
+        int regenerationFrameRateDivider = playersIn;
+        room.SendMessageToAllPlayers("ChangeRegeneration/" + regenerationFrameRateDivider.ToString(), true);
+
     }
 
-    public void ChangeMaxHP(string NewMaxHP, string ip)
+    #endregion
+
+    #region ManaSpending
+
+    public void ReceivePowerStateChange(string ip, bool powerState, float percentage)
     {
-        maxHP = float.Parse(NewMaxHP);
-        ChangeHP(NewMaxHP, ip);
+        if (powerState == true)
+        {
+            if (IsPlayerMPSlotEmpty(ip))
+            {
+                currentMP = percentage;
+                int id = GetPlayerId(ip);
+                GetPlayerSpendingMana(id);
+            }
+        }
+
+        else
+        {
+            if (IsPlayerMPSlotOccupied(ip))
+            {
+                currentMP = percentage;
+                int id = GetPlayerId(ip);
+                GetPlayerStopSpendingMana(id);
+            }
+        }
     }
 
-    public void ChangeMP(string deltaMP, string ip)
+    private bool IsPlayerMPSlotEmpty(string ip)
     {
-        float valueDeltaMP = float.Parse(deltaMP);
+        int id = GetPlayerId(ip);
+        if (manaSpendingPlayers[id] != null)
+        {
+            return false;
+        }
+        else
+        {
+            manaSpendingPlayers[id] = room.players[id];
+            return true;
+        }
+    }
 
-        currentMP += valueDeltaMP;
+    private bool IsPlayerMPSlotOccupied(string ip)
+    {
+        int id = GetPlayerId(ip);
+        if (manaSpendingPlayers[id] == null)
+        {
+            return false;
+        }
+        else
+        {
+            manaSpendingPlayers[id] = null;
+            return true;
+        }
+    }
+
+    private void GetPlayerSpendingMana(int id)
+    {
+        SetMPParameters(id);
+    }
+
+    private void GetPlayerStopSpendingMana(int id)
+    {
+        SetMPParameters(id);
+    }
+
+    private void SetMPParameters(int id)
+    {
+        int playersIn = 0;
+        for (int i = 0; i < manaSpendingPlayers.Length; i++)
+        {
+            if (manaSpendingPlayers[i] != null)
+            {
+                playersIn++;
+            }
+        }
+
+        mpRateDivider = playersIn;
+
+        if (mpRateDivider == 0)
+        {
+            room.SendMessageToAllPlayers("StopSpendingMana/" + mpRateDivider.ToString(), true);
+        }
+        else
+        {
+            room.SendMessageToAllPlayers("StartSpendingMana/" + mpRateDivider.ToString(), true);
+        }
+    }
+    #endregion
+
+    #region Utils
+    private int GetPlayerId(string ip)
+    {
+        NetworkPlayer incomingPlayer = Server.instance.GetPlayer(ip);
+        int id = incomingPlayer.id;
+        return id;
+    }
+
+    public void ChangeHPFromDamage(int damage)
+    {
+        room.SendMessageToAllPlayers("DisplayChangeHPToClient/" + damage, true);
+    }
+
+    public void ChangeMP(int deltaMP)
+    {
+        currentMP += deltaMP;
 
         if (currentMP > maxMP)
         {
@@ -115,13 +252,7 @@ public class RoomHpMp
             mpAtLimit = false;
         }
 
-        room.SendMessageToAllPlayersExceptOne("DisplayChangeMPToClient/" + percentageMP, ip, false);
-    }
-
-    public void ChangeMaxMP(string NewMaxMP, string ip)
-    {
-        maxMP = float.Parse(NewMaxMP);
-        ChangeMP(NewMaxMP, ip);
+        room.SendMessageToAllPlayers("DisplayChangeMPToClient/" + percentageMP, false);
     }
 
     public void ChangeExp(string deltaExp)
@@ -157,7 +288,7 @@ public class RoomHpMp
         maxExp = float.Parse(NewMaxExp);
         ChangeExp(NewMaxExp);
     } */
-    
+
     #endregion
 
 }
