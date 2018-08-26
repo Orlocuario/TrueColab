@@ -221,7 +221,7 @@ public class RoomHpMp
 
     public void ChangeHPFromDamage(int damage)
     {
-        room.SendMessageToAllPlayers("DisplayChangeHPToClient/" + damage, true);
+        room.SendMessageToAllPlayers("DisplayChangeHPToClient/" + damage.ToString(), true);
     }
 
     public void ChangeMP(int deltaMP)

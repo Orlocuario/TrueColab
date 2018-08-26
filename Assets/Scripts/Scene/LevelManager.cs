@@ -303,7 +303,7 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(WaitForCollision(newObject, player));
     }
 
-    public void InsantiateGameObject(string[] msg)
+    public void InstantiateObjectForPlanner(string[] msg)
     {
         Debug.LogError("Sistema Instanciación Planner no tiene Vector de instanciación");
         string objectName = "";
@@ -316,6 +316,14 @@ public class LevelManager : MonoBehaviour
             }
         }
         Instantiate(Resources.Load(objectName));
+    }
+
+    public void TrulyInstantiateGameObject(string[] msg)
+    {
+        GameObject gObject = (GameObject)Instantiate(Resources.Load("Prefabs/" + msg[1]));
+        Transform oTransform = gObject.transform;
+        transform.position = new Vector2(float.Parse(msg[2]), float.Parse(msg[3]));
+
     }
 
     public void ReloadLevel(string sceneName)

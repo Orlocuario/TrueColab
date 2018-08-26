@@ -93,12 +93,10 @@ public class ColliderDeactivator : MonoBehaviour
             SendCollidersActivatedToServer(0, playerId);
             if (setCompleteObject)
             {
-                Debug.Log("El jugador " + player.name + " me voy a pitear los collider porque somos " + numberOfPlayersIn);
                 SetCompleteObjectActive(false);
             }
             else
             {
-                Debug.Log("El jugador " + player.name + " me voy a pitear los collider porque somos " + numberOfPlayersIn);
                 SetCollidersActive(false);
             }
         }

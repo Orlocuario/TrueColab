@@ -34,13 +34,23 @@ public class HpMpManager : MonoBehaviour {
     // Use this for initialization
     void Start() {
 
+        maxHP = 250;
+        maxMP = 250;
+        //maxExp = 250;
+        currentHP = maxHP;
+        currentMP = maxMP;
+        percentageHP = 1;
+        percentageMP = 1;
+        percentageExp = 0;
+
+
         mpCost = -1;
-        mpSpendingRate = 120;
-        standardFrameRate = 120;
+        mpSpendingRate = 90;
+        standardFrameRate = 90;
         currentMpRate = 0;
         isSpendingMana = false;
 
-        regenerationUnits = 6;
+        regenerationUnits = 5;
         standardRegFrameRate = 60;
         regenerationFrameRate = 60;
         currentRegRate = 0;
@@ -56,7 +66,6 @@ public class HpMpManager : MonoBehaviour {
         if (isRegenerating)
         {
             currentRegRate++;
-            Debug.Log("THE CURRENT REGENERATION RATE IS: " + currentRegRate);
             if (currentRegRate >= regenerationFrameRate)
             {
                 currentRegRate = 0;
@@ -68,7 +77,6 @@ public class HpMpManager : MonoBehaviour {
         if (isSpendingMana)
         {
             currentMpRate++;
-            Debug.Log("THE CURRENT MP SPEND RATE IS: " + currentMpRate);
 
             if (currentMpRate >= mpSpendingRate)
             {
@@ -81,7 +89,6 @@ public class HpMpManager : MonoBehaviour {
     public void ReceivePlayerStartSpendingMana(int rateDivider)
     {
         mpSpendingRate = standardFrameRate / rateDivider;
-        Debug.Log("THE SPENDING RATE IS NOW: " + mpSpendingRate);
         currentMpRate = mpSpendingRate -= 2;
         isSpendingMana = true;
     }
@@ -90,7 +97,6 @@ public class HpMpManager : MonoBehaviour {
     {
         if (rateDivider == 0)
         {
-            Debug.Log("I FINISHED SPENDING MANA");
             currentRegRate = 0;
             mpSpendingRate = standardRegFrameRate;
             isSpendingMana = false;

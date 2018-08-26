@@ -130,6 +130,9 @@ public class ClientMessageHandler : MonoBehaviour
             case "CreateGameObject":
                 HandleCreateGameObject(msg);
                 break;
+            case "InstantiateThisObjects":
+                HandleTruePrefabInstantiation(msg);
+                break;
             case "DestroyObject":
                 HandleDestroyObject(msg);
                 break;
@@ -310,7 +313,6 @@ public class ClientMessageHandler : MonoBehaviour
                         LevelManager lManager = GameObject.FindObjectOfType<LevelManager>();
                         MageController mage = lManager.GetMage();
                         mage.playerId = incomingId;
-                        Debug.LogError("Now Mage has the ID: " + incomingId);
                     }
                     break;
 
@@ -319,7 +321,6 @@ public class ClientMessageHandler : MonoBehaviour
                         LevelManager lManager = GameObject.FindObjectOfType<LevelManager>();
                         WarriorController warrior = lManager.GetWarrior();
                         warrior.playerId = incomingId;
-                        Debug.LogError("Now Warrior has the ID: " + incomingId);
                     }
                     break;
 
@@ -328,7 +329,6 @@ public class ClientMessageHandler : MonoBehaviour
                         LevelManager lManager = GameObject.FindObjectOfType<LevelManager>();
                         EngineerController engin = lManager.GetEngineer();
                         engin.playerId = incomingId;
-                        Debug.LogError("Now Engineer has the ID: " + incomingId);
                     }
                     break;
 
@@ -535,8 +535,9 @@ public class ClientMessageHandler : MonoBehaviour
     {
         if (NotInClientScene())
         {
+            int damage = Int32.Parse(msg[1]);
             HpMpManager hpAndMp = FindObjectOfType<HpMpManager>();
-            hpAndMp.ChangeHP(int.Parse(msg[1]));
+            hpAndMp.ChangeHP(damage);
         }
     }
 
@@ -629,12 +630,21 @@ public class ClientMessageHandler : MonoBehaviour
         }
     }
 
-    private void HandleInstantiateObject(string[] msg)
+    private void HandleInstantiateObject(string[] msg)  //This method is Shit;
     {
         if (NotInClientScene())
         {
             LevelManager levelManager = GameObject.FindObjectOfType<LevelManager>();
-            levelManager.InsantiateGameObject(msg);
+            levelManager.InstantiateObjectForPlanner(msg);
+        }
+    }
+
+    private void HandleTruePrefabInstantiation(string[] msg)
+    {
+        if (NotInClientScene())
+        {
+            LevelManager lManager = FindObjectOfType<LevelManager>();
+            lManager.TrulyInstantiateGameObject(msg);
         }
     }
 
@@ -888,6 +898,7 @@ public class ClientMessageHandler : MonoBehaviour
                     player.remoteLeft = false;
                 }
             }
+
             LevelManager lManager = GameObject.FindObjectOfType<LevelManager>();
 
         }

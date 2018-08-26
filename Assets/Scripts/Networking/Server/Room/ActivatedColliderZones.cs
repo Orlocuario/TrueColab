@@ -36,7 +36,6 @@ public class ActivatedColliderZones
         if (!activatedColliders.Contains(name + "/" + playerId))
         {
             activatedColliders.Remove(name + "/" + playerId);
-            Debug.Log("REMOVÍ DE LA LISTA EL STRING QL");
         }
     }
 

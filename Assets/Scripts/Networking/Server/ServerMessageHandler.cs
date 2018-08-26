@@ -107,6 +107,9 @@ public class ServerMessageHandler
             case "CreateGameObject":
                 SendNewGameObject(message, ip);
                 break;
+            case "InstantiateThisObjects":
+                SendNewInstantiation(message, ip);
+                break;
             case "DestroyObject":
                 SendDestroyObject(message, ip);
                 break;
@@ -486,6 +489,12 @@ public class ServerMessageHandler
         room.SendMessageToAllPlayers(message + "/" + player.id, true);
     }
 
+    private void SendNewInstantiation(string msg, string ip)
+    {
+        NetworkPlayer player = server.GetPlayer(ip);
+        Room room = player.room;
+        room.SendMessageToAllPlayers(msg, true);
+    }
     private void SendInventoryUpdate(string message, string ip)
     {
         NetworkPlayer player = server.GetPlayer(ip);

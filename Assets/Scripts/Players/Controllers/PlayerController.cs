@@ -1258,7 +1258,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Client.instance)
         {
-            Client.instance.SendMessageToServer(message, false);
+            Client.instance.SendMessageToServer(message, true);
         }
     }
 
