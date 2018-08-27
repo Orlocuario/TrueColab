@@ -305,7 +305,6 @@ public class ClientMessageHandler : MonoBehaviour
         if (NotInClientScene())
         {
             int incomingId = Int32.Parse(msg[1]);
-            Debug.LogError("Incoming ID is: " + incomingId);
             switch (incomingId)
             {
                 case 0:

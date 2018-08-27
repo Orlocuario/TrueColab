@@ -139,9 +139,9 @@ public class MovingObject : MonoBehaviour
         float targetX = float.Parse(msg[4]);
         float targetY = float.Parse(msg[5]);
 
-        gameObject.transform.position = new Vector3(_x, _y, transform.position.z);
+        gameObject.transform.position = new Vector2(_x, _y);
         currentTarget = new Vector2(targetX, targetY);
-        Debug.Log("Moving object named: " + gameObject.name + "was updated to position: "+ _x.ToString() + _y.ToString() + ". Current Target: " + targetX + targetY);
+        isWorking = true;
     }
 
     #endregion

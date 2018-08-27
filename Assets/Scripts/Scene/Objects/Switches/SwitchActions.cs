@@ -598,6 +598,7 @@ public class SwitchActions : MonoBehaviour
         bHolder.DestroyOneMoreObject();
 
     }
+
     private void HandlerGroup29()   // Teleport for the arrival of players to hardest Zone
     {
         levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(6.58f, -55.41f), new Vector2(32.71f, -57.3f));
@@ -614,9 +615,16 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup31()
     {
+        Vector2 startPosition = new Vector2(-65.35f, -3f);
+        Vector2 endPosition = new Vector2(-65.35f, 1.01f);
+
+        GameObject mPlatform = levelManager.InstantiatePrefab("MovPlatform", startPosition);
+        levelManager.SetMovingObjectData(mPlatform, startPosition, endPosition, 1f, .8f, false);
     }
+
     private void HandlerGroup32()
     {
+
     }
 
     private void HandlerGroup33()

@@ -78,6 +78,10 @@ public class KillingObject : MonoBehaviour
         hits++;
         if (hits == hitsBeforeKilled)
         {
+            if (levelManager.GetLocalPlayerController().controlOverEnemies)
+            {
+                SendMessageToServer("ObjectDestroyed" + "/" + gameObject.name, true);
+            }
             Destroy(gameObject);
         }
     }
@@ -115,6 +119,14 @@ public class KillingObject : MonoBehaviour
     protected bool PlayerIsLocalPlayer(PlayerController player)
     {
         return player.localPlayer;
+    }
+
+    private void SendMessageToServer(string message, bool secure)
+    {
+        if (Client.instance)
+        {
+            Client.instance.SendMessageToServer(message, secure);
+        }
     }
 
     #endregion

@@ -29,6 +29,7 @@ public class EasterEggSafety : MonoBehaviour {
         currentOblivion++;
         if (currentOblivion == oblivionRate)
         {
+            currentOblivion = 0;
             timesHit = 0;
         }
     }
