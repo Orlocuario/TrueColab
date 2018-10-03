@@ -1834,13 +1834,19 @@
 
 12:50:08 Player 1 jumped from (129.8653,-25.735)
 
-12:50:08 CHANGING SCENE!  The players gathered 0 experience points
-12:50:08 PLAYERS ARE STARTING SCENE: Escena2
-12:50:08 CHANGING SCENE!  The players gathered 0 experience points
-12:50:08 PLAYERS ARE STARTING SCENE: Escena2
 12:50:08 Player 0 jumped from (130.834,-25.735)
 
 12:50:08 Player 0 jumped from (130.924,-25.50972)
+
+12:50:08 CHANGING SCENE!  The players gathered 0 experience points
+12:50:08 PLAYERS ARE STARTING SCENE: Escena2
+12:50:08 CHANGING SCENE!  The players gathered 0 experience points
+12:50:08 PLAYERS ARE STARTING SCENE: Escena2
+
+
+///////////////////////////////////////////////////////////////ESCENA2///////////////////////////////////////////////////////////////
+
+
 
 12:50:13 Player 1 is going right from (-21.32,0.33)
 
@@ -5168,6 +5174,10 @@
 
 13:00:49 Player 0 jumped from (-0.2140474,-1.254101)
 
+
+
+			///////////////////////////////////////////////////////RESET/////////////////////////////////////////////////
+
 13:00:51 Poi number: 1 was reached by Player2
 13:00:51 Player: 2reached Poi number: 1. Not relevant or Already Entered to Poi
 13:00:51 Player 2 stopped using his power
@@ -5460,7 +5470,7 @@
 
 13:01:33 Player 2 is going right from (8.545117,-4.312251)
 
-13:01:33 Poi number: 2 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 147.8955902
+13:01:33 Poi number: 2 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 42.8955902
 13:01:34 Player 1 is going left from (14.8397,-1.573837)
 
 13:01:34 Player 0 jumped from (7.654622,-3.677154)

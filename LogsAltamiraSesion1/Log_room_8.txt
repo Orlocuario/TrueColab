@@ -1836,16 +1836,6 @@
 
 12:51:41 Player 1 jumped from (130.5319,-25.735)
 
-12:51:42 CHANGING SCENE!  The players gathered 330 experience points
-12:51:42 PLAYERS ARE STARTING SCENE: Escena2
-12:51:42 CHANGING SCENE!  The players gathered 0 experience points
-12:51:42 PLAYERS ARE STARTING SCENE: Escena2
-12:51:42 Player 0 jumped from (130.2281,-25.735)
-
-12:51:42 Player 1 is going left from (130.5319,-25.735)
-
-12:51:42 CHANGING SCENE!  The players gathered 0 experience points
-12:51:42 PLAYERS ARE STARTING SCENE: Escena2
 12:51:43 Player 0 stopped using his power
 
 12:51:43 Player 1 jumped from (130.0764,-25.735)
@@ -1861,6 +1851,20 @@
 12:51:44 Player 2 is going left from (136.5373,-26.70166)
 
 12:51:44 Player 1 jumped from (130.0764,-25.735)
+
+12:51:42 CHANGING SCENE!  The players gathered 330 experience points
+12:51:42 PLAYERS ARE STARTING SCENE: Escena2
+12:51:42 CHANGING SCENE!  The players gathered 0 experience points
+12:51:42 PLAYERS ARE STARTING SCENE: Escena2
+12:51:42 Player 0 jumped from (130.2281,-25.735)
+
+12:51:42 Player 1 is going left from (130.5319,-25.735)
+
+12:51:42 CHANGING SCENE!  The players gathered 0 experience points
+12:51:42 PLAYERS ARE STARTING SCENE: Escena2
+
+////////////////////////////////////////////////////////////////////////ESCENA2//////////////////////////////////////////////////
+
 
 12:51:48 Player 2 is going right from (-20.99,-2.413567)
 

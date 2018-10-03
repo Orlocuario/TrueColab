@@ -53,7 +53,7 @@ public class RoomLogger
     public void WriteEnterPOIButDontCare(int playerId, string poiId)
     {
         StreamWriter writer = GetWriter();
-        writer.WriteLine(GetTime() + " Player: " + playerId +  "reached Poi number: " + poiId + ". Not relevant or Already Entered to Poi");
+        writer.WriteLine(GetTime() + " Player: " + playerId + "reached Poi number: " + poiId + ". Not relevant or Already Entered to Poi");
         writer.Close();
     }
 
@@ -82,9 +82,19 @@ public class RoomLogger
     {
         StreamWriter writer = GetWriter();
         TimeSpan spans = GetTimeAsDateTime().Subtract(lastPOIP);
-        writer.WriteLine(GetTime() +" Poi number: " + poiID + " was reached by all the necessary players. Seconds spent reaching this POI from the last one was: " + spans.TotalSeconds);
+        writer.WriteLine(GetTime() + " Poi number: " + poiID + " was reached by all the necessary players. Seconds spent reaching this POI from the last one was: " + spans.TotalSeconds);
         lastPOIP = GetTimeAsDateTime();
         writer.Close();
+    }
+
+    public void WriteChangeSceneFromAdmin(string sceneName)
+    {
+        StreamWriter writer = GetWriter();
+        writer.WriteLine(GetTime() + "AdminChangedScene : " + sceneName);
+        writer.Close();
+
+        ///144020796794
+        ///1-52182990000
     }
 
     public void WritePlayersAreDead()
@@ -99,7 +109,22 @@ public class RoomLogger
         StreamWriter writer = GetWriter();
         writer.WriteLine(GetTime() + " PLAYERS ARE STARTING SCENE: " + sceneName);
         writer.Close();
+    } 
+
+    public void WriteGroupFinishedTask(string[] msg)
+    {
+        StreamWriter writer = GetWriter();
+        writer.WriteLine(GetTime() + "The Group Finished Task: " + msg[1]);
+        writer.Close();
     }
+
+    public void WritePlayerFinishedTask(string[] msg)
+    {
+        StreamWriter writer = GetWriter();
+        writer.WriteLine(GetTime() + " Player: " + msg[1] + " Finished Task: " + msg[2]);
+        writer.Close();
+    }
+
     public void WriteNewLine()
     {
         StreamWriter writer = GetWriter();

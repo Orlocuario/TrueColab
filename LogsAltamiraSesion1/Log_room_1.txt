@@ -1780,17 +1780,20 @@
 
 12:48:54 Player 2 jumped from (130.588,-25.37179)
 
+12:48:55 Player 2 is going left from (130.42,-24.68098)
+
+12:48:55 Player 0 attacked
+
+12:48:55 Player 1 is going left from (130.2292,-25.735)
+
+
 12:48:55 CHANGING SCENE!  The players gathered 325 experience points
 12:48:55 PLAYERS ARE STARTING SCENE: Escena2
 12:48:55 CHANGING SCENE!  The players gathered 0 experience points
 12:48:55 PLAYERS ARE STARTING SCENE: Escena2
 12:48:55 CHANGING SCENE!  The players gathered 0 experience points
 12:48:55 PLAYERS ARE STARTING SCENE: Escena2
-12:48:55 Player 2 is going left from (130.42,-24.68098)
 
-12:48:55 Player 0 attacked
-
-12:48:55 Player 1 is going left from (130.2292,-25.735)
 
 12:49:00 Player 1 is going right from (-20.95,-2.413567)
 

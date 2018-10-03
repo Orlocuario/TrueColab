@@ -6242,6 +6242,10 @@
 
 13:00:58 CHANGING SCENE!  The players gathered 710 experience points
 13:00:58 PLAYERS ARE STARTING SCENE: Escena3
+
+
+
+
 13:00:58 Player 2 is going left from (101.6373,-6.277909)
 
 13:00:58 Player 1 is going left from (99.21433,-6.27791)
@@ -11080,6 +11084,11 @@
 
 13:21:21 CHANGING SCENE!  The players gathered 285 experience points
 13:21:21 PLAYERS ARE STARTING SCENE: Escena4
+
+
+
+
+
 13:21:25 Player 2 stopped using his power
 
 13:21:25 Poi number: 1 was reached by Player2

@@ -184,6 +184,7 @@ public class PowerableObject : MonoBehaviour
             DoYourPowerableThing(); //This should be an override
         }
 
+        // Record Action?
     }
 
     public virtual void DeactivatePower()

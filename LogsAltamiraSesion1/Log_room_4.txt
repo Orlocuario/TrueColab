@@ -1600,6 +1600,11 @@
 
 12:49:27 CHANGING SCENE!  The players gathered 0 experience points
 12:49:27 PLAYERS ARE STARTING SCENE: Escena2
+
+
+/////////////////////////////////////////////////////////////////// ESCENA2////////////////////////////////////////////////////////
+
+
 12:49:31 Poi number: 1 was reached by Player0
 12:49:31 Player 1 is going right from (-21.32,0.1951125)
 
@@ -6815,6 +6820,11 @@
 
 13:03:24 CHANGING SCENE!  The players gathered 660 experience points
 13:03:24 PLAYERS ARE STARTING SCENE: Escena3
+
+//////////////////////////////////////////////////////////////ESCENA3//////////////////////////////////////////////////////////////
+
+
+
 13:03:24 Player 0 is going left from (99.59795,-6.27791)
 
 13:03:24 Player 2 is going left from (99.19869,-6.27791)

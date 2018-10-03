@@ -5883,6 +5883,13 @@
 
 15:34:57 CHANGING SCENE!  The players gathered 155 experience points
 15:34:57 PLAYERS ARE STARTING SCENE: Escena4
+
+
+
+////////////////////////////////////////////ESCENA 4///////////////////////////////////////////////////////////////
+
+
+
 15:34:57 Player 0 is going right from (91.46508,-4.57682)
 
 15:35:02 Poi number: 1 was reached by Player0

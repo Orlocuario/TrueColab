@@ -4376,6 +4376,11 @@
 
 15:22:08 CHANGING SCENE!  The players gathered 100 experience points
 15:22:08 PLAYERS ARE STARTING SCENE: Escena4
+
+
+/////////////////////////////////////////////////ESCENA4///////////////////////////////////////////////////////////////////
+
+
 15:22:12 Player 2 is going left from (-1.51,4.1057)
 
 15:22:12 Poi number: 1 was reached by Player2
@@ -8095,6 +8100,11 @@
 
 15:39:30 Player 0 jumped from (-26.41266,34.68484)
 
+
+
+////////////////////////////////////////////Change Of Scene Made By Admin/////////////////////////////////////////////////////
+////////////////////////////////////////////	  Starting Scene5	 /////////////////////////////////////////////////////
+
 15:39:35 Player 1 is going left from (2,3.366338)
 
 15:39:36 Player 0 is going left from (2,3.727592)
@@ -8652,10 +8662,12 @@
 15:42:50 Player 0 is going left from (4.343082,-2.249333)
 
 15:42:50 Poi number: 5 was reached by Player0
+15:42:50 Poi number: 5 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 23.4625162
 15:42:50 Poi number: 6 was reached by Player0
 15:42:51 Player 2 is going left from (4.764256,-2.249333)
 
 15:42:51 Poi number: 6 was reached by Player2
+15:42:51 Poi number: 6 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 1.78252431
 15:42:51 Poi number: 5 was reached by Player2
 15:42:51 Player: 2reached Poi number: 6. Not relevant or Already Entered to Poi
 15:42:51 Player: 2reached Poi number: 5. Not relevant or Already Entered to Poi

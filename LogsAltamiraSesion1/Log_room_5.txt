@@ -1594,10 +1594,6 @@
 
 12:48:34 Player 1 is going left from (127.8645,-26.70166)
 
-12:48:35 CHANGING SCENE!  The players gathered 670 experience points
-12:48:35 PLAYERS ARE STARTING SCENE: Escena2
-12:48:35 CHANGING SCENE!  The players gathered 0 experience points
-12:48:35 PLAYERS ARE STARTING SCENE: Escena2
 12:48:35 Player 2 is going right from (130.2578,-24.95455)
 
 12:48:35 Player 2 jumped from (130.4584,-25.73501)
@@ -1627,6 +1623,15 @@
 12:48:36 Player 0 is going left from (130.51,-25.735)
 
 12:48:36 Player 2 is going right from (131.4491,-24.71438)
+
+12:48:35 CHANGING SCENE!  The players gathered 670 experience points
+12:48:35 PLAYERS ARE STARTING SCENE: Escena2
+12:48:35 CHANGING SCENE!  The players gathered 0 experience points
+12:48:35 PLAYERS ARE STARTING SCENE: Escena2
+
+
+/////////////////////////////////////////////////////////////////////ESCENA2////////////////////////////////////////////////////////
+
 
 12:48:39 Player 2 is going right from (-20.99,-2.413567)
 
@@ -6089,6 +6094,11 @@
 
 13:01:07 CHANGING SCENE!  The players gathered 580 experience points
 13:01:07 PLAYERS ARE STARTING SCENE: Escena3
+
+
+///////////////////////////////////////////////////////////////Escena3/////////////////////////////////////////////////////////
+
+
 13:01:07 Player 2 is going left from (99.6397,-6.277909)
 
 13:01:07 Player 2 is going left from (99.61962,-6.277909)
@@ -13647,6 +13657,9 @@
 
 13:29:43 CHANGING SCENE!  The players gathered 230 experience points
 13:29:43 PLAYERS ARE STARTING SCENE: Escena4
+
+
+
 13:29:43 Player 2 jumped from (90.84296,-5.841938)
 
 13:29:46 Poi number: 1 was reached by Player2

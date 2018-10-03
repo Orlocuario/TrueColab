@@ -4401,6 +4401,15 @@
 12:59:30 Poi number: 23 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 1.606702
 12:59:31 CHANGING SCENE!  The players gathered 655 experience points
 12:59:31 PLAYERS ARE STARTING SCENE: Escena3
+
+
+
+
+///////////////////////////////////////////////////////////////ESCENA3///////////////////////////////////////////////////////
+
+
+
+
 12:59:31 Player 1 is going right from (99.02486,-6.277909)
 
 12:59:32 Player 0 is going right from (98.75845,-6.27791)
@@ -9685,6 +9694,11 @@
 
 13:23:22 CHANGING SCENE!  The players gathered 250 experience points
 13:23:22 PLAYERS ARE STARTING SCENE: Escena4
+
+
+//////////////////////////////////////////////////////////////////////ESCENA4/////////////////////////////////////////////////////
+
+
 13:23:26 Player 0 is going right from (-1.47,3.946822)
 
 13:23:26 Player 0 is going right from (-2.04,4.18)

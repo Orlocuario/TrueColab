@@ -5001,6 +5001,7 @@
 15:25:48 Player 0 stopped using his power
 
 15:25:48 Poi number: 22 was reached by Player2
+15:25:48 Poi number: 22 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 26.673521
 15:25:48 Player: 2reached Poi number: 22. Not relevant or Already Entered to Poi
 15:25:52 Player 0 is going right from (86.06713,-5.8419)
 
@@ -5052,6 +5053,10 @@
 
 15:26:01 CHANGING SCENE!  The players gathered 225 experience points
 15:26:01 PLAYERS ARE STARTING SCENE: Escena4
+
+
+///////////////////////////////////////////ESCENA4//////////////////////////////////////////////////////////////////////////////
+
 15:26:05 Player 1 is going left from (-1.58,3.888304)
 
 15:26:05 Poi number: 1 was reached by Player2
@@ -7249,6 +7254,9 @@
 
 15:34:18 Player 0 attacked
 
+
+///////////////////////////////////////////////////////////////SENT TO LEVEL 3 BY ADMIN///////////////////////////////////////
+
 15:34:21 Player 0 is going right from (-1.24,-0.5150252)
 
 15:34:23 Player 2 is going right from (-1.24,-1.254101)
@@ -7269,6 +7277,9 @@
 15:34:29 Player 0 stopped using his power
 
 15:34:29 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 139.4016749
+
+
+////////////////////////////////////////////////////Re SENT TO SCENE4 BY ADMIN
 15:34:39 Player 1 jumped from (-2.04,3.888304)
 
 15:34:39 Player 1 is going left from (-2.04,4.570239)
@@ -12669,6 +12680,9 @@
 
 15:55:33 CHANGING SCENE!  The players gathered 510 experience points
 15:55:33 PLAYERS ARE STARTING SCENE: Escena5
+
+
+
 15:55:39 Player 2 stopped using his power
 
 15:55:40 Player 1 stopped using his power
@@ -12924,7 +12938,7 @@
 
 15:56:47 Poi number: 1 was reached by Player1
 15:56:47 Player: 1reached Poi number: 1. Not relevant or Already Entered to Poi
-15:56:48 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 987.6926273
+15:56:48 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 69.8926273
 15:56:48 Player 0 jumped from (-17.59973,-1.157513)
 
 15:56:49 Player 2 is going left from (-20.6,-1.157513)

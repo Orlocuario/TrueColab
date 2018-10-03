@@ -493,7 +493,7 @@ public class SwitchActions : MonoBehaviour
             camera.ChangeState(CameraState.TargetZoom, tCamera.movements[0]);
         }
         levelManager.DestroyObject("ActivateNPCForEnginDestroyabe", .1f);
-        levelManager.DestroyObject("CajaSwitchFierro", 2.9f);
+        levelManager.DestroyObject("CajaSwitchFierro", 3.1f);
         levelManager.InstantiatePortal("EnginTeleporter", new Vector2(-11.3f, 17.5f), new Vector2(14.1f, 15.7f));
         levelManager.InstantiatePortal("MageTeleporter", new Vector2(-11.3f, 22.05f), new Vector2(25.1f, -1.1f));
         levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(-21.77f, 17.2f), new Vector2(26.06f, -12.9f));
@@ -523,12 +523,24 @@ public class SwitchActions : MonoBehaviour
         }
     }
 
-    private void HandlerGroup19()
+    private void HandlerGroup19()   //Scene 6  : All Switches Group19 Activated
     {
+        //  Instantiate Portal towards End Of Scene
+        CameraController mainCamera = GameObject.Find("MainCamera").GetComponent<CameraController>();
+        TriggerCamera tCamera = GameObject.Find("Group19CameraMovement").GetComponent<TriggerCamera>();
+        mainCamera.ChangeState(CameraState.TargetZoom, tCamera.movements[0]);
 
+        //  Set Exp Active
         OrganizeAndHide expActivator = GameObject.Find("HiddenExpHolderFor19").GetComponent<OrganizeAndHide>();
         expActivator.ShowObjects();
 
+        //  Destroy Switches Blocker
+        GameObject cajaSwitch = GameObject.Find("CajaSwitchFierroFinal");
+        Destroy(cajaSwitch, 1.5f);
+
+        //  Destroy Feedback for Switches
+        GameObject feedBack = GameObject.Find("ActivateNPCForFinalSwitches");
+        Destroy(feedBack);
     }
 
     private void HandlerGroup20()
@@ -634,31 +646,47 @@ public class SwitchActions : MonoBehaviour
         levelManager.InstantiatePrefab("Items/RunaR1", new Vector2(43.32f, -12.53f));
     }
 
+    //  Exp in Scene 6 foreach SwitchGroup
+
     private void HandlerGroup34()
     {
+        OrganizeAndHide expActivator = GameObject.Find("HiddenExpHolderFor34").GetComponent<OrganizeAndHide>();
+        expActivator.ShowObjects();
     }
     private void HandlerGroup35()
     {
+        OrganizeAndHide expActivator = GameObject.Find("HiddenExpHolderFor35").GetComponent<OrganizeAndHide>();
+        expActivator.ShowObjects();
     }
 
     private void HandlerGroup36()
     {
+        OrganizeAndHide expActivator = GameObject.Find("HiddenExpHolderFor36").GetComponent<OrganizeAndHide>();
+        expActivator.ShowObjects();
     }
 
     private void HandlerGroup37()
     {
+        OrganizeAndHide expActivator = GameObject.Find("HiddenExpHolderFor37").GetComponent<OrganizeAndHide>();
+        expActivator.ShowObjects();
     }
 
     private void HandlerGroup38()
     {
+        OrganizeAndHide expActivator = GameObject.Find("HiddenExpHolderFor38").GetComponent<OrganizeAndHide>();
+        expActivator.ShowObjects();
     }
 
     private void HandlerGroup39()
     {
+        OrganizeAndHide expActivator = GameObject.Find("HiddenExpHolderFor39").GetComponent<OrganizeAndHide>();
+        expActivator.ShowObjects();
     }
 
-    private void HandlerGroup40()
+    private void HandlerGroup40()   //Final Switches After Switches
     {
+        Vector2 v2c6 = FindObjectOfType<VectorTeleportAssigner>().WhereAmIGoing("7C");
+        levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(0f, 11f), v2c6, true, 25, "0C", "7C");
     }
     private void HandlerGroup41()
     {
@@ -756,14 +784,14 @@ public class SwitchActions : MonoBehaviour
 
     // For Scene 5
 
-    private void HandlerGroup54() // Switch For ForLoop Destroyer 1: Check // End Of Zone1 in Scene 6
+    private void HandlerGroup54() // Switch For ForLoop Destroyer 1: Check // End Of Zone1 in Scene 5
     {
         levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(-29.76f, -13.44f), new Vector2(-2f, .1f), true, 3);
         SwitchForLoopDestroyer swDestroyer = GameObject.Find("SwitchBoxDestroyer1").GetComponent<SwitchForLoopDestroyer>();
         swDestroyer.SwitchReady("Rojo");
     }
 
-    private void HandlerGroup55() // Switch For ForLoop Destroyer 1 // End Of Zone1 in Scene 6
+    private void HandlerGroup55() // Switch For ForLoop Destroyer 1 // End Of Zone1 in Scene 5
     {
         levelManager.InstantiatePortal("EnginTeleporter", new Vector2(1.76f, -23.48f), new Vector2(-2f, .1f), true, 4);
         levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(0f, -23.76f));
@@ -773,7 +801,7 @@ public class SwitchActions : MonoBehaviour
 
     }
 
-    private void HandlerGroup64() //Switch For ForLoop Destroyer 1: Check  // End Of Zone1 in Scene 6
+    private void HandlerGroup64() //Switch For ForLoop Destroyer 1: Check  // End Of Zone1 in Scene 5
     {
         levelManager.InstantiatePortal("MageTeleporter", new Vector2(-41.78f, 1.64f), new Vector2(-2.2f, .1f), true, 2);
         SwitchForLoopDestroyer swDestroyer = GameObject.Find("SwitchBoxDestroyer1").GetComponent<SwitchForLoopDestroyer>();
@@ -791,7 +819,7 @@ public class SwitchActions : MonoBehaviour
     }
 
 
-    private void HandlerGroup57() //MovesObjects and opens path to Altar Engin and instantiatesTeleport in Zone 5: Check
+    private void HandlerGroup57() //Scene 5 Zone 5: MovesObjects and opens path to Altar Engin and instantiatesTeleport
     {
         levelManager.InstantiatePortal("EnginTeleporter", new Vector2(-89.65f, 6.26f), new Vector2(-47.55f, 20.97f));
         GameObject mBground = GameObject.Find("DarkMovableBackground");
@@ -878,7 +906,7 @@ public class SwitchActions : MonoBehaviour
         burnableBoxes.GetComponent<ObjectsToDestroy>().BurnAllThisStuff();
     }
 
-    // Handler64 está sobre el handler56// 
+    // Handler64 está sobre el handler 56// 
 
     private void HandlerGroup65() //  End Of Zone 4 in Scene 5
     {
@@ -891,7 +919,7 @@ public class SwitchActions : MonoBehaviour
         fDestroyer.DestroyOneMoreObject();
     }
 
-    private void HandlerGroup66() // Switches para zona 3 Mage
+    private void HandlerGroup66() // Scene5 Zone 3 Verde Switches
     {
         levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(-11.62f, 44.3f), new Vector2(-12f, 34.5f));
 
@@ -902,7 +930,7 @@ public class SwitchActions : MonoBehaviour
         swDestroyer2.SwitchReady("Verde");
     }
 
-    private void HandlerGroup67()  // Switches para zona 3 Warrior
+    private void HandlerGroup67()  // Scene 5 Zone 3 Rojo Switches
     {
         levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(10f, 45f), new Vector2(-12f, 34.5f));
 
@@ -914,7 +942,7 @@ public class SwitchActions : MonoBehaviour
 
 
     }
-    private void HandlerGroup68() // PAra Zona 3 Engin
+    private void HandlerGroup68() // Scene 5 Zone 3 AmarilloSwitches
     {
         levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(10.8f, 39.5f), new Vector2(-12f, 34.5f));
         SwitchForLoopDestroyer swDestroyer = GameObject.Find("SwitchBoxDestroyer3").GetComponent<SwitchForLoopDestroyer>();
@@ -924,7 +952,7 @@ public class SwitchActions : MonoBehaviour
         swDestroyer2.SwitchReady("Amarillo");
     }
 
-    private void HandlerGroup69()  // Para Zona 2
+    private void HandlerGroup69()  //   Scene 5 Zone 2. Open Switch Blocker
     {
         levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(86f, -25f), new Vector2(-2f, .1f), true, 27);
         levelManager.InstantiatePortal("AnyPlayerTeleporter", new Vector2(85.5f, -28.5f), new Vector2(-2f, .1f), true, 27);
@@ -937,17 +965,21 @@ public class SwitchActions : MonoBehaviour
 
     }
 
-    private void HandlerGroup70()  //End Of Scene 5
+    private void HandlerGroup70()  //   Instantiate End Of Scene 5
     {
+        //  Create and Control Camera
         CameraController mainCamera = GameObject.Find("MainCamera").GetComponent<CameraController>();
         TriggerCamera tCamera = GameObject.Find("TriggerCameraForSwitchGroup70").GetComponent<TriggerCamera>();
         mainCamera.ChangeState(CameraState.TargetZoom, tCamera.movements[0]);
 
+        //  Instantiate and set EndOfScenePortal
         levelManager.InstantiatePrefab("PortalEndOfScene", new Vector2(7.74f, 7.84f));
         GameObject eOfScene = levelManager.InstantiatePrefab("EndOfScene", new Vector2(7.43f, 6.76f));
         EndOfScene theEnd = eOfScene.GetComponent<EndOfScene>();
         theEnd.playersToArrive = 3;
 
+
+        //  Instantiate 
         GameObject oPlatform1 = levelManager.InstantiatePrefab("/Ambientales/OrnatedTreePlatform", new Vector2(10.02f, 8.38f));
         Transform oPlatTransform = oPlatform1.GetComponent<Transform>();
         oPlatTransform.localScale = new Vector3(-1, 1, 1);
@@ -955,6 +987,8 @@ public class SwitchActions : MonoBehaviour
         GameObject oPlatform2 = levelManager.InstantiatePrefab("/Ambientales/OrnatedTreePlatform", new Vector2(5.58f, 8.38f));
 
     }
+
+    //  Scene5 Secret Path Deactivator
 
     private void HandlerGroup71()
     {

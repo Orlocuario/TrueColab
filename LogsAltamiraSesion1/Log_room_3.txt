@@ -1848,6 +1848,9 @@
 12:48:33 PLAYERS ARE STARTING SCENE: Escena2
 12:48:33 CHANGING SCENE!  The players gathered 0 experience points
 12:48:33 PLAYERS ARE STARTING SCENE: Escena2
+
+
+
 12:48:34 Player 0 jumped from (130.4614,-25.735)
 
 12:48:34 Player 1 jumped from (130.0365,-25.735)
@@ -5926,6 +5929,11 @@
 
 12:59:15 CHANGING SCENE!  The players gathered 800 experience points
 12:59:15 PLAYERS ARE STARTING SCENE: Escena3
+
+
+
+
+
 12:59:15 Player 1 stopped using his power
 
 12:59:17 Player 0 is going right from (99.1266,-6.27791)
@@ -11213,6 +11221,10 @@
 
 13:23:21 CHANGING SCENE!  The players gathered 235 experience points
 13:23:21 PLAYERS ARE STARTING SCENE: Escena4
+
+
+
+
 13:23:25 Player 0 is going right from (-2.04,4.18)
 
 13:23:25 Poi number: 1 was reached by Player0

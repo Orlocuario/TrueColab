@@ -871,10 +871,10 @@ public class LevelManager : MonoBehaviour
     public void CoordinateReconnectionElements()
     {
         CoordinatePlayers();
-        CoordinateBubbleInstantiators();
-        CoordinateRotators();
-        CoordinatePlatformInstantiators();
-        CoordinateMovingObjects();
+        //CoordinateBubbleInstantiators();
+        //CoordinateRotators();
+        //CoordinatePlatformInstantiators();
+        //CoordinateMovingObjects();
         CoordinateCircuitMovingElements();
         CoordinateEnemyControllers();
     }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Poi : MonoBehaviour {
 
-    public float id;
+    public int id;
+    public int relatedTask;
     public PlayerController[] playersNeeded;
     private int playersArrived;
     public bool poiReady;
@@ -42,6 +43,12 @@ public class Poi : MonoBehaviour {
 
                 SendPoiEnterToServer(messageId, pName);
 
+                if (relatedTask != -1)
+                {
+                    TaskManager tManager = GameObject.Find("Task" + relatedTask.ToString()).GetComponent<TaskManager>();
+                    tManager.HandlePlayerUsedPoi(id, pController.playerId);
+                }
+
                 playersArrived++;
                 if (playersArrived == playersNeeded.Length)
                 {
@@ -64,6 +71,11 @@ public class Poi : MonoBehaviour {
 
         if (IsPlayerNeeded(incomingPlayer))
         {
+            if (relatedTask != -1)
+            {
+                TaskManager tManager = GameObject.Find("Task" + relatedTask.ToString()).GetComponent<TaskManager>();
+                tManager.HandlePlayerUsedPoi(id, incomingPController.playerId);
+            }
             playersArrived++;
             if (playersArrived == playersNeeded.Length)
             {
@@ -115,14 +127,7 @@ public class Poi : MonoBehaviour {
                     return true;
                 }
             }
-
         }
-        
-        if (pController.localPlayer)
-        {
-            SendPoiEnterButNobodyCaresToServer(id.ToString(), pController.gameObject.name);
-        }
-
         return false;
     }
 
@@ -146,6 +151,11 @@ public class Poi : MonoBehaviour {
         if (id == 0)
         {
             Debug.LogError("A poi needs an ID");
+        }
+
+        if (relatedTask == 0)
+        {
+            Debug.LogError("Poi number " + id + " needs a related Task");
         }
 
         if (playersNeeded == null)

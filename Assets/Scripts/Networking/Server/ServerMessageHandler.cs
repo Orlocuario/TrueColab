@@ -170,11 +170,34 @@ public class ServerMessageHandler
             case "ResetDamagingObjects":
                 SendPlayerResetDamagingObjects(message, ip);
                 break;
+            case "TaskReadyByPlayer":
+                SendPlayerFinishedTask(msg, ip);
+                break;
+            case "TaskReadyByGroup":
+                SendGroupFinishedTask(msg, ip);
+                break;
             default:
                 break;
         }
     }
 
+    private void SendGroupFinishedTask(string[] msg, string ip)
+    {
+        NetworkPlayer player = server.GetPlayer(ip);
+        Room room = player.room;
+        RoomLogger log = player.room.log;
+
+        log.WriteGroupFinishedTask(msg);
+    }
+
+    private void SendPlayerFinishedTask(string[] msg, string ip)
+    {
+        NetworkPlayer player = server.GetPlayer(ip);
+        Room room = player.room;
+        RoomLogger log = player.room.log;
+
+        log.WritePlayerFinishedTask(msg);
+    } 
 
     private void SendPlayerIdCoordination(string msg, string ip)
     {
@@ -787,6 +810,7 @@ public class ServerMessageHandler
     public void SendChangeScene(string sceneName, Room room)
     {
         string message = "ChangeScene/" + sceneName;
+        room.log.WriteChangeSceneFromAdmin(sceneName);
         room.sceneToLoad = sceneName;
         room.SendMessageToAllPlayers(message, true);
         room.Reset();
