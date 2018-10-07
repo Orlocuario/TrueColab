@@ -744,13 +744,6 @@ public class SwitchActions : MonoBehaviour
 
     private void HandlerGroup52()
     {
-        GameObject bInstantiator = GameObject.Find("BubbleExitUp");
-        if (bInstantiator)
-        {
-            BubbleRotatingInstantiator bIController = bInstantiator.GetComponent<BubbleRotatingInstantiator>();
-            bIController.GearActivation();
-        }
-
         GameObject kZone = GameObject.Find("KillZoneForAll");
         if (kZone)
         {
