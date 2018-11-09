@@ -1187,6 +1187,7 @@ public class PlayerController : MonoBehaviour
 
     #region Events
 
+    //      Commented PoiStay for planner system. 
     /* protected void OnTriggerStay2D(Collider2D other)
      {
          if (GameObjectIsPOI(other.gameObject))
@@ -1233,7 +1234,8 @@ public class PlayerController : MonoBehaviour
                                remoteLeft + "/" +
                                remoteRight;
 
-        SendMessageToServer(message);
+        SendPositionMessageToServer(message);
+
     }
 
     protected virtual void SendAttackDataToServer()
@@ -1254,6 +1256,13 @@ public class PlayerController : MonoBehaviour
         SendPowerDataToServer();
     }
 
+    protected void SendPositionMessageToServer(string message)
+    {
+        if (Client.instance)
+        {
+            Client.instance.SendMessageToServer(message, false);
+        }
+    }
     protected void SendMessageToServer(string message)
     {
         if (Client.instance)

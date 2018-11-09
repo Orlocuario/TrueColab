@@ -9,6 +9,7 @@ public class DestroyableObject : MonoBehaviour
 
     public float destroyDelayTime;
     public bool reinforced;
+    public bool mustReturn;
     public GameObject particle;
 
     #endregion
@@ -46,7 +47,34 @@ public class DestroyableObject : MonoBehaviour
             gameObject.GetComponent<ParticleSystem>().Play();
         }
 
-        Destroy(gameObject, destroyDelayTime);
+        if (mustReturn)
+        {
+            DoFalseDeactivation();
+        }
+        else
+        {
+            Destroy(gameObject, destroyDelayTime);
+        }
+    }
+
+    private void DoFalseDeactivation()
+    {
+        DeactivateColliders();
+        DeactivateSpriteRenderer();
+    }
+    private void DeactivateSpriteRenderer()
+    {
+        SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
+        renderer.enabled = false;
+    }
+
+    private void DeactivateColliders()
+    {
+        Collider2D[] colliders = gameObject.GetComponents<Collider2D>();
+        foreach (Collider2D collider in colliders)
+        {
+            collider.enabled = false;
+        }
     }
 
     #endregion

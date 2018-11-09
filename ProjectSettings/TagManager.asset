@@ -53,6 +53,7 @@ TagManager:
   - LavaCascade3
   - BurnableBranches2
   - LavaFalling
+  - MusntDieDestroyable
   layers:
   - Default
   - TransparentFX
