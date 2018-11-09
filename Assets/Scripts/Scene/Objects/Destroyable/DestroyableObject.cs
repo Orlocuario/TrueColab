@@ -10,6 +10,7 @@ public class DestroyableObject : MonoBehaviour
     public float destroyDelayTime;
     public bool reinforced;
     public bool mustReturn;
+    private float timeToReactivate;
     public GameObject particle;
 
     #endregion
@@ -49,7 +50,9 @@ public class DestroyableObject : MonoBehaviour
 
         if (mustReturn)
         {
-            DoFalseDeactivation();
+            timeToReactivate = 5;
+            StartCoroutine(DoFalseDeactivation());
+            StartCoroutine(Reactivate());
         }
         else
         {
@@ -57,24 +60,33 @@ public class DestroyableObject : MonoBehaviour
         }
     }
 
-    private void DoFalseDeactivation()
+    private IEnumerator DoFalseDeactivation()
     {
-        DeactivateColliders();
-        DeactivateSpriteRenderer();
-    }
-    private void DeactivateSpriteRenderer()
-    {
-        SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
-        renderer.enabled = false;
+        yield return new WaitForSeconds(.5f);
+        ToggleColliders(false);
+        ToggleSpriteRenderer(false);
     }
 
-    private void DeactivateColliders()
+    private void ToggleSpriteRenderer(bool active)
+    {
+        SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
+        renderer.enabled = active;
+    }
+
+    private void ToggleColliders(bool active)
     {
         Collider2D[] colliders = gameObject.GetComponents<Collider2D>();
         foreach (Collider2D collider in colliders)
         {
-            collider.enabled = false;
+            collider.enabled = active;
         }
+    }
+
+    private IEnumerator Reactivate()
+    {
+        yield return new WaitForSeconds(timeToReactivate);
+        ToggleSpriteRenderer(true);
+        ToggleColliders(true);
     }
 
     #endregion
