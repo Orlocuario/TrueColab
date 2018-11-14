@@ -10,7 +10,7 @@ public class DestroyableObject : MonoBehaviour
     public float destroyDelayTime;
     public bool reinforced;
     public bool mustReturn;
-    private float timeToReactivate;
+    public float timeToReactivate;
     public GameObject particle;
 
     #endregion
@@ -50,7 +50,6 @@ public class DestroyableObject : MonoBehaviour
 
         if (mustReturn)
         {
-            timeToReactivate = 5;
             StartCoroutine(DoFalseDeactivation());
             StartCoroutine(Reactivate());
         }
@@ -62,7 +61,7 @@ public class DestroyableObject : MonoBehaviour
 
     private IEnumerator DoFalseDeactivation()
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.1f);
         ToggleColliders(false);
         ToggleSpriteRenderer(false);
     }
