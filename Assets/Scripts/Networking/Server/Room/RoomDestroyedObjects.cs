@@ -28,6 +28,14 @@ public class RoomDestroyedObjects
         }
     }
 
+    public void RemoveObjectDestroyed(string name)
+    {
+        if (destroyedObjects.Contains(name))
+        {
+            destroyedObjects.Remove(name);
+        }
+    }
+
     public void Reset()
     {
         destroyedObjects = new HashSet<string>();

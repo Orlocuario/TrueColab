@@ -306,7 +306,10 @@ public class CameraController : MonoBehaviour
         Vector3 targetPosition = new Vector3(movement.target.transform.position.x, movement.target.transform.position.y, -10);
         currentState = CameraState.TargetZoom;
 
-        currentStepPos = (targetPosition - transform.position) / movement.stepsToTarget;
+        Vector3 currentDistance = targetPosition - transform.position;
+        currentDistance.Normalize();
+
+        currentStepPos = currentDistance / movement.stepsToTarget;
         cameraRate = (movement.ortographic_size - initialSize) / movement.stepsToTarget;
         zoomSteps = 0;
     }

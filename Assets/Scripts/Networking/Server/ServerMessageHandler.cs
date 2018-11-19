@@ -105,7 +105,7 @@ public class ServerMessageHandler
                 SendPlayerPreVoted(message, ip);
                 break;
             case "CreateGameObject":
-                SendNewGameObject(message, ip);
+                SendNewGameObject(message, msg, ip);
                 break;
             case "InstantiateThisObjects":
                 SendNewInstantiation(message, ip);
@@ -197,7 +197,7 @@ public class ServerMessageHandler
         RoomLogger log = player.room.log;
 
         log.WritePlayerFinishedTask(msg);
-    } 
+    }
 
     private void SendPlayerIdCoordination(string msg, string ip)
     {
@@ -280,6 +280,15 @@ public class ServerMessageHandler
         foreach (NetworkPlayer player in room.players)
         {
             room.SendMessageToPlayer(player.GetReconnectData(), ip, true);
+        }
+
+        NetworkPlayer nPlayer = server.GetPlayer(ip);
+        for (int i = 0; i<nPlayer.inventory.Length; i++)
+        {
+            if (nPlayer.inventory[i] != null)
+            {
+                room.SendMessageToPlayer("UpdateInventoryFromServer" + "/" + nPlayer.inventory[i],ip,true);
+            }
         }
 
         foreach (RoomSwitch switchi in room.switchs)
@@ -505,10 +514,11 @@ public class ServerMessageHandler
         room.SendMessageToAllPlayers(message, true);
     }
 
-    private void SendNewGameObject(string message, string ip)
+    private void SendNewGameObject(string message, string[] msg, string ip)
     {
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
+        room.objectManager.RemoveObjectDestroyed(msg[1]);
         room.SendMessageToAllPlayers(message + "/" + player.id, true);
     }
 
@@ -562,7 +572,7 @@ public class ServerMessageHandler
         Room room = player.room;
         room.SendMessageToAllPlayersExceptOne(message, ip, true);
 
-        if(onEnter >= 1)
+        if (onEnter >= 1)
         {
             room.activatedColliderZones.AddColliderDeactivator(msg[1], msg[3]);
         }
@@ -706,11 +716,11 @@ public class ServerMessageHandler
     {
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        float [] coordenadas = player.room.GetStartPosition();
+        float[] coordenadas = player.room.GetStartPosition();
 
         int charId = Int32.Parse(data[1]);
         float positionX = coordenadas[0]; //Cambiar Aquí 
-        float positionY = coordenadas[1]; 
+        float positionY = coordenadas[1];
         int directionX = Int32.Parse(data[2]);
         int directionY = Int32.Parse(data[3]);
         float speedX = float.Parse(data[4]);
@@ -821,7 +831,7 @@ public class ServerMessageHandler
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         string sceneName = room.sceneToLoad;
-        room.SendMessageToPlayer("SceneNameAnswerForMusic" + "/" + sceneName , ip, true);
+        room.SendMessageToPlayer("SceneNameAnswerForMusic" + "/" + sceneName, ip, true);
     }
 
     public void SendAttackState(string message, string ip, string[] data)

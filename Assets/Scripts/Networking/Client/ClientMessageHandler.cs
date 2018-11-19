@@ -67,6 +67,9 @@ public class ClientMessageHandler : MonoBehaviour
             case "ChangeRegeneration":
                 HandlePlayerChangedRegenerationState(msg);
                 break;
+            case "UpdateInventoryFromServer":
+                HandleInventoryUpdateFromServer(msg);
+                break;
             case "DisplayChangeHPToClient":
                 HandleChangeHpHUDToClient(msg);
                 break;
@@ -513,6 +516,24 @@ public class ClientMessageHandler : MonoBehaviour
             {
                 int rateDivider = Int32.Parse(msg[1]);
                 hpMpManager.ReceivePlayerStartSpendingMana(rateDivider);
+            }
+        }
+    }
+    private void HandleInventoryUpdateFromServer(string[] msg)
+    {
+        if (NotInClientScene())
+        {
+            Debug.Log("Estoy en la escena");
+            PickUpItem[] items = FindObjectsOfType<PickUpItem>();
+            Debug.Log("Tengo los items");
+            foreach (PickUpItem item in items)
+            {
+                Debug.Log("Estoy viendo si el item: " + item.gameObject.GetComponent<SpriteRenderer>().sprite.name + " es igual al msg 1: " + msg[1]);
+                if (item.gameObject.GetComponent<SpriteRenderer>().sprite.name == msg[1])
+                {
+                    Debug.Log("LLegué CTM!!!");
+                    item.PickUpFromServer();
+                }
             }
         }
     }

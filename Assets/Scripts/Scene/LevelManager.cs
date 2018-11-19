@@ -64,7 +64,7 @@ public class LevelManager : MonoBehaviour
         }
         waitToKillSpiderCountdown = 5f;
         waitToKillNPCCountdown = 5f;
-        waitToGrabItem = 2f;
+        waitToGrabItem = 3f;
         currentChoice = null;
 
         if (GameObject.Find("ClientObject"))

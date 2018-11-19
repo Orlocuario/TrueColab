@@ -77,7 +77,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddItem(PickUpItem item)
+    public void AddItem(PickUpItem item, bool pickedFromServer)
     {
         int freeSlot = GetFreeSlot();
 
@@ -88,15 +88,17 @@ public class Inventory : MonoBehaviour
             Image slotSprite = GameObject.Find("SlotSprite" + freeSlot).GetComponent<Image>();
             slotSprite.sprite = item.GetComponent<SpriteRenderer>().sprite;
             slotSprite.enabled = true;
-
-            SendMessageToServer("InventoryUpdate/Add/" + freeSlot + "/" + items[freeSlot].Value.name, true);
+            
+            if (pickedFromServer == false)
+            {
+                SendMessageToServer("InventoryUpdate/Add/" + freeSlot + "/" + items[freeSlot].Value.name, true);
+            }
         }
 
     }
 
     public void RemoveItem()
     {
-
         bool found = false;
         int index;
 

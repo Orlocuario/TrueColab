@@ -14,9 +14,10 @@ public class PickUpItem : MonoBehaviour
 
     #region Common
 
-    public void PickUp()
+    public void PickUp(bool pickedFromServer)
     {
-        Inventory.instance.AddItem(this);
+
+        Inventory.instance.AddItem(this, pickedFromServer);
 
         if (itemObj != null)
         {
@@ -30,8 +31,8 @@ public class PickUpItem : MonoBehaviour
             }
         }
 
-        SendMessageToServer("ObjectDestroyed/" + name, true);
-        Destroy(this.gameObject);
+        SendMessageToServer("ObjectDestroyed/" + gameObject.name, true);
+        Destroy(gameObject);
     }
 
     public void DestroyMe()
@@ -47,7 +48,7 @@ public class PickUpItem : MonoBehaviour
     {
         if (GameObjectIsPlayer(other.gameObject))
         {   
-            PickUp();
+            PickUp(false);
         }
     }
 
@@ -73,6 +74,10 @@ public class PickUpItem : MonoBehaviour
         }
     }
 
+    public void PickUpFromServer()
+    {
+        PickUp(true);
+    }
     #endregion
 
 }
