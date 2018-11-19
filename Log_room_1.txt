@@ -7771,3 +7771,179 @@
 
 00:04:33 Player 0 is going right from (5.624509,-6.98761)
 
+01:04:54AdminChangedScene : Escena2
+01:04:58 Player 2 stopped using his power
+
+01:04:58 Poi number: 1 was reached by Player0
+01:04:58 Player 1 stopped using his power
+
+01:04:58 Player 0 stopped using his power
+
+01:04:58 Poi number: 1 was reached by Player1
+01:04:58 Poi number: 1 was reached by Player2
+01:04:59 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 7.784526
+01:05:11 Player 1 is going right from (-21.32,-2.413567)
+
+01:05:12 Player 1 is going left from (-18.16582,-2.413567)
+
+01:05:13 Player 1 is going right from (-18.70834,-2.413567)
+
+01:05:15 Player 1 used his power
+
+01:05:16 Player 1 is going left from (-16.27962,-2.413567)
+
+01:05:16 Player 1 stopped using his power
+
+01:05:18 Player 0 is going right from (-21.32,-2.413567)
+
+01:05:19 Player 0 attacked
+
+01:05:24 Player 1 is going left from (-17.40252,-2.413567)
+
+01:05:25 Player 1 is going right from (-18.90265,-2.413567)
+
+01:05:27 Player 1 jumped from (-15.34219,-2.413567)
+
+01:05:27 Player 1 is going right from (-14.71219,-0.7143946)
+
+01:05:28 Player 1 is going left from (-12.82377,-2.413567)
+
+01:05:28 Player 1 jumped from (-13.85963,-2.413567)
+
+01:05:28 Player 1 is going left from (-14.69962,-1.169282)
+
+01:05:29 Player 1 jumped from (-15.99363,-2.413568)
+
+01:05:29 Player 1 is going left from (-16.77365,-1.194396)
+
+01:05:29 Player 1 attacked
+
+01:05:30 Player 1 is going right from (-19.83977,-2.413567)
+
+01:05:31 Player 1 is going right from (-19.5584,-2.413567)
+
+01:05:34 Player 1 is going right from (-19.3581,-2.413567)
+
+01:05:36 Player 1 is going left from (-18.46735,-2.413567)
+
+01:05:37 Player 1 is going right from (-18.6016,-2.413567)
+
+01:05:42 Player 1 used his power
+
+01:05:50AdminChangedScene : Escena3
+01:05:53Player 0 Stoped Charging
+01:05:53Player 0 Stoped Charging
+01:05:53Player 2 Stoped Charging
+01:05:53Player 2 Stoped Charging
+01:05:53Player 2 Stoped Charging
+01:05:53Player 2 Stoped Charging
+01:05:53Player 1 Stoped Charging
+01:05:53Player 1 Stoped Charging
+01:05:53Player 1 Stoped Charging
+01:05:53Player 1 Stoped Charging
+01:05:58 Player 1 is going left from (-1.24,-1.254101)
+
+01:06:00 Player 1 used his power
+
+01:29:17AdminChangedScene : Escena3
+01:29:22Player 2 Stoped Charging
+01:29:22Player 2 Stoped Charging
+01:29:22Player 2 Stoped Charging
+01:29:22Player 2 Stoped Charging
+01:29:23 Player 1 is going left from (-1.24,-1.254101)
+
+01:29:23Player 1 Stoped Charging
+01:29:23Player 1 Stoped Charging
+01:29:23Player 1 Stoped Charging
+01:29:23Player 1 Stoped Charging
+01:29:24 Player 1 is going right from (-2.653105,-1.254101)
+
+01:29:24 Player 1 used his power
+
+01:29:31 Player 1 stopped using his power
+
+01:29:33 Player 2 is going left from (-1.24,-1.254101)
+
+01:29:35 Player 0 is going left from (-1.24,-1.254101)
+
+01:29:35Player 0 Stoped Charging
+01:29:35Player 0 Stoped Charging
+01:29:37 Player 1 is going left from (-2.572915,-1.254101)
+
+01:29:38 Player 1 is going left from (-2.823238,-1.254101)
+
+01:29:41Player 1 is Charging
+01:29:41Player 1 is Charging
+01:29:41 Poi number: 22 was reached by Player1
+01:29:41 Player 1 stopped using his power
+
+01:29:41 Player: 1 Finished Task: 1
+01:29:46 Player 2 is going right from (-2.13076,-1.254101)
+
+01:29:47 Player 2 is going left from (-1.036868,-1.254101)
+
+01:29:47 Player 2 is going left from (-1.066982,-1.254101)
+
+01:29:48 Player 2 jumped from (-1.957742,-1.254101)
+
+01:29:48Player 2 Stoped Charging
+01:29:48Player 2 Stoped Charging
+01:29:48Player 2 Stoped Charging
+01:29:48Player 2 Stoped Charging
+01:29:48 Player 2 is going left from (-2.737741,-0.03492953)
+
+01:29:48 Player 2 jumped from (-3.30774,-0.1924402)
+
+01:29:49 Player 2 is going left from (-3.954379,0.8108127)
+
+01:29:51 Player 0 is going right from (-2.537028,-1.254101)
+
+01:29:51 Poi number: 22 was reached by Player2
+01:29:51 Player 2 stopped using his power
+
+01:29:51 Player: 2 Finished Task: 1
+01:29:52Player 0 Stoped Charging
+01:29:52Player 0 Stoped Charging
+01:29:59AdminChangedScene : Escena6
+01:30:05 Player 2 stopped using his power
+
+01:30:05 Player 1 stopped using his power
+
+01:30:05Player 1 Stoped Charging
+01:30:05Player 1 Stoped Charging
+01:30:05Player 1 Stoped Charging
+01:30:05Player 1 Stoped Charging
+01:30:05 Player 0 stopped using his power
+
+01:30:05Player 2 Stoped Charging
+01:30:05Player 2 Stoped Charging
+01:30:05Player 2 Stoped Charging
+01:30:05Player 2 Stoped Charging
+01:30:05Player 0 Stoped Charging
+01:30:05Player 0 Stoped Charging
+01:30:22 Player 1 is going right from (-8.3,10.04889)
+
+01:30:23Player 1 Stoped Charging
+01:30:23Player 1 Stoped Charging
+01:30:23Player 1 Stoped Charging
+01:30:23Player 1 Stoped Charging
+01:30:24 Player 1 used his power
+
+01:30:36 Player 1 attacked
+
+01:30:37 Player 1 stopped using his power
+
+01:30:38 Player 1 is going left from (-5.290864,10.04889)
+
+01:30:38 Player 1 used his power
+
+01:30:39 Player 1 stopped using his power
+
+01:30:41 Player 1 used his power
+
+01:30:43 Player 1 attacked
+
+01:30:45 Player 1 attacked
+
+01:30:46 Player 1 stopped using his power
+

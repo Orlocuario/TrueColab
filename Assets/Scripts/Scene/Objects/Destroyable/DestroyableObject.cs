@@ -10,7 +10,7 @@ public class DestroyableObject : MonoBehaviour
     public float destroyDelayTime;
     public bool reinforced;
     public bool mustReturn;
-    public float timeToReactivate;
+    private float timeToReactivate;
     public GameObject particle;
 
     #endregion
@@ -19,6 +19,7 @@ public class DestroyableObject : MonoBehaviour
 
     protected virtual void Start()
     {
+        timeToReactivate = 5f;
         destroyDelayTime = .4f;
 
         if (particle != null)
@@ -37,12 +38,7 @@ public class DestroyableObject : MonoBehaviour
         {
             particle.SetActive(true);
         }
-
-        if (destroyedFromLocal)
-        {
-            SendDestroyDataToServer();
-        }
-
+    
         if (gameObject.GetComponent<ParticleSystem>())
         {
             gameObject.GetComponent<ParticleSystem>().Play();
@@ -51,10 +47,20 @@ public class DestroyableObject : MonoBehaviour
         if (mustReturn)
         {
             StartCoroutine(DoFalseDeactivation());
+            if (particle != null)
+            {
+                StartCoroutine(StopParticles());
+            }
             StartCoroutine(Reactivate());
         }
+
         else
         {
+            if (destroyedFromLocal)
+            {
+                SendDestroyDataToServer();
+            }
+
             Destroy(gameObject, destroyDelayTime);
         }
     }
@@ -68,8 +74,26 @@ public class DestroyableObject : MonoBehaviour
 
     private void ToggleSpriteRenderer(bool active)
     {
-        SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
-        renderer.enabled = active;
+        for(int i = 0; i<gameObject.transform.childCount; i++)
+        {
+            if (gameObject.transform.GetChild(i).childCount > 0)
+            {
+                for(int j = 0; j< gameObject.transform.GetChild(i).childCount; j++)
+                {
+                    if (gameObject.transform.GetChild(i).GetChild(j).GetComponent<SpriteRenderer>())
+                    {
+                        SpriteRenderer renderer = gameObject.transform.GetChild(i).GetChild(j).GetComponent<SpriteRenderer>();
+                        renderer.enabled = active;
+                    }
+                }
+            }
+            if (gameObject.transform.GetChild(i).GetComponent<SpriteRenderer>())
+            {
+                SpriteRenderer secondLevelRenderer = gameObject.transform.GetChild(i).GetComponent<SpriteRenderer>();
+                secondLevelRenderer.enabled = active;
+            }
+        }
+
     }
 
     private void ToggleColliders(bool active)
@@ -79,6 +103,11 @@ public class DestroyableObject : MonoBehaviour
         {
             collider.enabled = active;
         }
+    }
+    private IEnumerator StopParticles()
+    {
+        yield return new WaitForSeconds(.6f);
+        particle.SetActive(false);
     }
 
     private IEnumerator Reactivate()

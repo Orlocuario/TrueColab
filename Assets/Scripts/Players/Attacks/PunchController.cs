@@ -164,6 +164,7 @@ public class PunchController : AttackController
         BurnableObject bObject = burnableObject.GetComponent<BurnableObject>();
         bObject.Burn();
     }
+
     protected override float GetDistance()
     {
         if (enhanced)

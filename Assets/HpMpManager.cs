@@ -181,8 +181,22 @@ public class HpMpManager : MonoBehaviour {
             mpAtLimit = false;
         }
 
-        hudDisplay.ChangeMP(deltaMP);
-
+        if (hudDisplay != null)
+        {
+            hudDisplay.ChangeMP(deltaMP);
+        }
+        else
+        {
+            hudDisplay = lManager.hpAndMp;
+            if (hudDisplay)
+            {
+                hudDisplay.ChangeMP(deltaMP);
+            }
+            else
+            {
+                Debug.Log("Mefui a la mierda no sirvió de nada. No tengo huddisplay");
+            }
+        }
         //room.SendMessageToAllPlayers("DisplayChangeMPToClient/" + percentageMP, false);
     }
 

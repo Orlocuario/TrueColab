@@ -363,6 +363,7 @@ public class LevelManager : MonoBehaviour
         if (!canvas.activeInHierarchy)
         {
             canvas.SetActive(true);
+            canvas = GameObject.Find("Canvas");
         }
     }
 
