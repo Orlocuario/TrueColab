@@ -19,6 +19,7 @@ public class DestroyableObject : MonoBehaviour
 
     protected virtual void Start()
     {
+
         timeToReactivate = 7f;
         destroyDelayTime = .4f;
 
