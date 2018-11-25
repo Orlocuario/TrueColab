@@ -310,6 +310,9 @@ public class SwitchActions : MonoBehaviour
 		levelManager.DestroyObject("SpikesDead", .1f);
         levelManager.DestroyObject("LavaPool", .1f);
 
+        
+        GameObject sFeedback = GameObject.Find("ActivateNPCForEngin1");
+        Destroy(sFeedback);
 
         GameObject sueloMetal = GameObject.Find("SueloMetal");
         sueloMetal.AddComponent<PlatformEffector2D>();
@@ -326,18 +329,18 @@ public class SwitchActions : MonoBehaviour
 		rocaGigante.Slide();
 		Debug.Log ("Got Rock");
 
-        levelManager.InstatiateSprite("Arrows/engineerArrowUp", new Vector2(45.3f, -6.42f));
+        GameObject eArrowUp = levelManager.InstatiateSprite("Arrows/engineerArrowUp", new Vector2(45.3f, -6.42f));
+        eArrowUp.name = "eArrowUp";
 
         BendTree bendTree = FindObjectOfType<BendTree>();
 		bendTree.Fall();
-		Debug.Log ("Got Tree");
 
         levelManager.InstatiateSprite("Arrows/engineerArrowUp", new Vector2(33.07f, -6.3f));
         levelManager.InstatiateSprite("Arrows/mageArrowDown", new Vector2(35.16f, -6.3f));
         levelManager.InstatiateSprite("Arrows/warriorArrowDown", new Vector2(35.95f, -6.3f));
         levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(34.51f, -3.88f));
 
-        GameObject sFeedback = GameObject.Find("ActivateNPCForAllSwitches");
+        GameObject sFeedback = GameObject.Find("ActivateNPCFor3DeactivableSwitches");
         Destroy(sFeedback);
     }
 
@@ -690,7 +693,11 @@ public class SwitchActions : MonoBehaviour
     }
     private void HandlerGroup41()
     {
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(1.8f, -34.58f));
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(0.8f, -34.58f));
+        levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(2.8f, -34.58f));
     }
+
     private void HandlerGroup42()
     {
     }
@@ -971,11 +978,22 @@ public class SwitchActions : MonoBehaviour
         EndOfScene theEnd = eOfScene.GetComponent<EndOfScene>();
         theEnd.playersToArrive = 3;
 
+        GameObject finalPoi = levelManager.InstantiatePrefab("ProtoPoi", new Vector2(7.74f, 7.84f));
+        finalPoi.name = "Poi46";
+        Poi fPoi = finalPoi.GetComponent<Poi>();
+        fPoi.id = 46;
+        fPoi.relatedTask = 7;
+        fPoi.playersNeeded[0] = levelManager.GetMage();
+        fPoi.playersNeeded[1] = levelManager.GetWarrior();
+        fPoi.playersNeeded[2] = levelManager.GetEngineer();
+
 
         //  Instantiate 
         GameObject oPlatform1 = levelManager.InstantiatePrefab("/Ambientales/OrnatedTreePlatform", new Vector2(10.02f, 8.38f));
         Transform oPlatTransform = oPlatform1.GetComponent<Transform>();
         oPlatTransform.localScale = new Vector3(-1, 1, 1);
+
+
 
         GameObject oPlatform2 = levelManager.InstantiatePrefab("/Ambientales/OrnatedTreePlatform", new Vector2(5.58f, 8.38f));
 

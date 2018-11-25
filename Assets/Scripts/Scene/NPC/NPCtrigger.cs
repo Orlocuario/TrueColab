@@ -310,6 +310,9 @@ public class NPCtrigger : MonoBehaviour
                 case "UnblockEnginSecretPath":
                     UnblockEnginSecretPath();
                     break;
+                case "ChangeRouteForAmarilloStage2":
+                    ChangeForAmarilloStage2();
+                    break;
 
                 default:
                     break;
@@ -332,6 +335,13 @@ public class NPCtrigger : MonoBehaviour
     }
 
     #endregion
+
+    private void ChangeForAmarilloStage2()
+    {
+        GameObject yellowSign = GameObject.Find("SueloMetalMageSecretBlocker");
+
+    }
+
     private void UnblockMageSecretPath()
     {
         GameObject teleportBlocker = GameObject.Find("SueloMetalMageSecretBlocker");

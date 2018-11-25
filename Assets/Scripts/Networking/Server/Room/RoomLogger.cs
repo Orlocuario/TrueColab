@@ -67,14 +67,14 @@ public class RoomLogger
     public void WritePlayerIsCharging(int playerId)
     {
         StreamWriter writer = GetWriter();
-        writer.WriteLine(GetTime() + "Player " + playerId + " is Charging");
+        writer.WriteLine(GetTime() + " Player " + playerId + " is Charging");
         writer.Close();
     }
 
     public void WritePlayernotCharging(int playerId)
     {
         StreamWriter writer = GetWriter();
-        writer.WriteLine(GetTime() + "Player " + playerId + " Stoped Charging");
+        writer.WriteLine(GetTime() + " Player " + playerId + " Stoped Charging");
         writer.Close();
     }
 

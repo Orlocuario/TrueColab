@@ -271,6 +271,7 @@ public class ServerMessageHandler
     public void SendAllData(string ip, Room room)
     {
         SendPlayerIdAndControl(ip);
+        SendPlayerHPMP(ip);
 
         foreach (string cDeactivatorMessage in room.activatedColliderZones.GetActivatedColliderMessage())
         {
@@ -782,6 +783,17 @@ public class ServerMessageHandler
         server.SendMessageToClient(player.connectionId, message, true);
     }
 
+    private void SendPlayerHPMP(string ip)
+    {
+        NetworkPlayer player = server.GetPlayer(ip);
+        Room room = player.room;
+        int hp = room.hpMpManager.currentHP;
+        int mp = room.hpMpManager.currentMP;
+
+        string message = "SetHpMpFromServer" + "/" + hp.ToString() + "/" + mp.ToString();
+        room.SendMessageToPlayer(message, ip, true);
+    }
+
     private void SendBubbleInstantiatorDaTa(string message, string ip)
     {
         NetworkPlayer player = server.GetPlayer(ip);
@@ -848,9 +860,9 @@ public class ServerMessageHandler
         Room room = player.room;
 
         player.power = bool.Parse(msg[2]);
-        float startingPercentage = float.Parse(msg[3]);
+        int startingMP = Int32.Parse(msg[3]);
         room.log.WritePower(player.id, player.power);
-        room.hpMpManager.ReceivePowerStateChange(ip, player.power, startingPercentage);
+        room.hpMpManager.ReceivePowerStateChange(ip, player.power, startingMP);
         room.SendMessageToAllPlayers(message, false);
     }
 }

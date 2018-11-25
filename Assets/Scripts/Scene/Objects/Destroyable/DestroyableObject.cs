@@ -19,7 +19,7 @@ public class DestroyableObject : MonoBehaviour
 
     protected virtual void Start()
     {
-        timeToReactivate = 5f;
+        timeToReactivate = 7f;
         destroyDelayTime = .4f;
 
         if (particle != null)
@@ -51,7 +51,8 @@ public class DestroyableObject : MonoBehaviour
             {
                 StartCoroutine(StopParticles());
             }
-            StartCoroutine(Reactivate());
+            StartCoroutine(ReactivateSprite());
+            StartCoroutine(ReactivateColliders());  
         }
 
         else
@@ -110,10 +111,15 @@ public class DestroyableObject : MonoBehaviour
         particle.SetActive(false);
     }
 
-    private IEnumerator Reactivate()
+    private IEnumerator ReactivateSprite()
     {
         yield return new WaitForSeconds(timeToReactivate);
         ToggleSpriteRenderer(true);
+    }
+
+    private IEnumerator ReactivateColliders()
+    {
+        yield return new WaitForSeconds(.8f);
         ToggleColliders(true);
     }
 

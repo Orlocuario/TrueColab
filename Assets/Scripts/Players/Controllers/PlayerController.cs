@@ -179,6 +179,7 @@ public class PlayerController : MonoBehaviour
             SendPowerDataToServer();
             playerHasReturned = false;
         }
+
         CheckCollisionWithPlayers();
         Move();
         Attack();
@@ -1246,8 +1247,8 @@ public class PlayerController : MonoBehaviour
 
     protected void SendPowerDataToServer()
     {
-        float mpPercentage = levelManager.hpAndMp.mpCurrentPercentage;
-        string message = "PlayerPower/" + playerId + "/" + isPowerOn + "/" + mpPercentage;
+        HpMpManager hpManager = FindObjectOfType<HpMpManager>();
+        string message = "PlayerPower/" + playerId + "/" + isPowerOn + "/" + hpManager.mpCurrentAmount;
         SendMessageToServer(message);
     }
 

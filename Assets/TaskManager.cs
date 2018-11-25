@@ -7,7 +7,7 @@ public class TaskManager : MonoBehaviour
     #region GlobalVariables
     public int taskId;
     [System.Serializable]
-    public struct PlayersPoiInTask
+    public class PlayersPoiInTask
     {
         public int playerId;
         public int[] poisInTask;
@@ -23,12 +23,12 @@ public class TaskManager : MonoBehaviour
         //Set Global Variable to Check if player Solved Task
         int poisSolved = 0;
 
-        foreach (PlayersPoiInTask playerInTask in playersInTask)
+        for (int i = 0; i<playersInTask.Length;i++) 
         {
             //Check Incoming Player
-            if (playerInTask.playerId == playerId)
+            if (playersInTask[i].playerId == playerId)
             {
-                SolvePoiInTaskForPlayer(playerInTask, incomingPoi, playerId, poisSolved);
+                SolvePoiInTaskForPlayer(playersInTask[i], incomingPoi, playerId, poisSolved);
             }
         }
     }
@@ -60,25 +60,31 @@ public class TaskManager : MonoBehaviour
                     CheckIFAllPlayersSolvedTask();
                 }
             }
-
-
         }
     }
 
     private void CheckIFAllPlayersSolvedTask()
     {
-        int playersReady = 0; 
-        foreach (PlayersPoiInTask player in playersInTask)
+        Debug.Log("Im checking wich players are ready");
+        int playersReady = 0;
+        for (int i = 0; i < playersInTask.Length; i++)
         {
-            if (player.taskDone)
+            Debug.Log("taskDone is " + playersInTask[i].taskDone);
+            if (playersInTask[i].taskDone)
             {
                 playersReady++;
+                Debug.Log("playersReady in task: " + taskId + " are: " + playersReady);
             }
             if (playersReady == playersInTask.Length)
             {
+                Debug.Log("WE COMPLETED TASK: " + taskId + " !!!!");
                 SendTaskReadyByGroup(taskId);
             }
-        }
+            else
+            {
+                Debug.Log("WE Havent Completed Task: " + taskId + " yet.");
+            }
+        } 
     }
 
     #endregion
@@ -92,6 +98,7 @@ public class TaskManager : MonoBehaviour
 
     public void SendTaskReadyByGroup(int taskSolved)
     {
+        Debug.Log("Task :" + taskSolved + " = solved!");
         Client.instance.SendMessageToServer("TaskReadyByGroup" + "/" +
                                                 taskSolved.ToString(), true);
     }

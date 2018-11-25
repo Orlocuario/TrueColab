@@ -12,9 +12,9 @@ public class HUDDisplay : MonoBehaviour
     public GameObject HPParticles;
     public GameObject MPParticles;
 
-    public float maxHP;
-    public float maxMP;
-    public float maxExp;
+    public int maxHP;
+    public int maxMP;
+    public int maxExp;
 
     public float hpCurrentPercentage;
     public float mpCurrentPercentage;
@@ -279,7 +279,6 @@ public class HUDDisplay : MonoBehaviour
 
     public void StopParticles()
     {
-        SendMessageToServer("StopChangeHpAndMpHUDToRoom/");
         StopLocalParticles();
     }
 

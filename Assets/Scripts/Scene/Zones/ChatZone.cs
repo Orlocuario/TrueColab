@@ -119,8 +119,6 @@ public class ChatZone : MonoBehaviour
             if (CanRegenerateHPorMP())
             {
                 ToggleParticles(true);
-                //activated = true;
-                //hpAndMp.ChangeHPAndMP(regenerationUnits);
                 SendMessageToServer("PlayerEnteredChatZone/");
             }
         }
@@ -149,9 +147,8 @@ public class ChatZone : MonoBehaviour
     {
         regenerationFrame = 0;
         ToggleParticles(false);
-        //activated = false;
         hpAndMp.StopParticles();
-
+        SendMessageToServer("StopChangeHpAndMpHUDToRoom/");
     }
     #endregion
 

@@ -15,6 +15,9 @@ public class HpMpManager : MonoBehaviour {
     public float percentageExp;
     private bool mpAtLimit;
 
+    public int hpCurrentAmount;
+    public int mpCurrentAmount;
+
     private int mpCost;
     private static int standardFrameRate;
     private float mpSpendingRate;
@@ -134,6 +137,7 @@ public class HpMpManager : MonoBehaviour {
         {
             return;
         }
+
         currentHP += deltaHP;
 
         if (currentHP >= maxHP)
@@ -156,6 +160,7 @@ public class HpMpManager : MonoBehaviour {
     public void ChangeMP(int deltaMP)
     {
         currentMP += deltaMP;
+        mpCurrentAmount =- deltaMP;
 
         if (currentMP > maxMP)
         {
@@ -184,6 +189,7 @@ public class HpMpManager : MonoBehaviour {
         if (hudDisplay != null)
         {
             hudDisplay.ChangeMP(deltaMP);
+            mpCurrentAmount -= deltaMP;
         }
         else
         {

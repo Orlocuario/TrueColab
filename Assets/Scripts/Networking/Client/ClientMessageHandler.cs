@@ -181,6 +181,9 @@ public class ClientMessageHandler : MonoBehaviour
             case "ResetDamagingObjects":
                 HandleResetCollisions(msg);
                 break;
+            case "SetHpMpFromServer":
+                HandleHpMpFromServer(msg);
+                break;
             default:
                 break;
         }
@@ -277,6 +280,20 @@ public class ClientMessageHandler : MonoBehaviour
         }
     }
 
+    private void HandleHpMpFromServer(string [] msg)
+    {
+        HpMpManager hpMp = FindObjectOfType<HpMpManager>();
+        HUDDisplay hud = FindObjectOfType<LevelManager>().hpAndMp;
+        int incHp = Int32.Parse(msg[1]);
+        int incMp = Int32.Parse(msg[2]);
+
+        int hpDif = Mathf.Abs(hpMp.hpCurrentAmount - incHp);
+        int mpDif = Mathf.Abs(hpMp.mpCurrentAmount - incMp);
+
+        hpMp.ChangeHP(hpDif);
+        hpMp.ChangeMP(mpDif);
+    }
+
     private void HandleResetCollisions(string[] msg)
     {
         if (NotInClientScene())
@@ -360,9 +377,9 @@ public class ClientMessageHandler : MonoBehaviour
 
             localPlayer.controlOverEnemies = control;
 
-
             if (control)
             {
+                Debug.Log("ControlOverEnemies Assigned");
                 client.StartFirstPlan();
                 localPlayer.PlayMusic();
             }

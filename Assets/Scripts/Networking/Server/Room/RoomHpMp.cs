@@ -6,11 +6,11 @@ public class RoomHpMp
     #region Attributes
 
     public int currentExp;  //TODO: Variable Global EXP
-    public float maxHP;
-    public float maxMP;
-    public float maxExp;
-    public float currentHP;
-    public float currentMP;
+    public int maxHP;
+    public int maxMP;
+    public int maxExp;
+    public int currentHP;
+    public int currentMP;
     public float percentageHP;
     public float percentageMP;
     public float percentageExp;
@@ -126,13 +126,13 @@ public class RoomHpMp
 
     #region ManaSpending
 
-    public void ReceivePowerStateChange(string ip, bool powerState, float percentage)
+    public void ReceivePowerStateChange(string ip, bool powerState, int incomingMP)
     {
         if (powerState == true)
         {
             if (IsPlayerMPSlotEmpty(ip))
             {
-                currentMP = percentage;
+                currentMP = incomingMP;
                 int id = GetPlayerId(ip);
                 GetPlayerSpendingMana(id);
             }
@@ -142,7 +142,7 @@ public class RoomHpMp
         {
             if (IsPlayerMPSlotOccupied(ip))
             {
-                currentMP = percentage;
+                currentMP = incomingMP;
                 int id = GetPlayerId(ip);
                 GetPlayerStopSpendingMana(id);
             }
@@ -221,6 +221,7 @@ public class RoomHpMp
 
     public void ChangeHPFromDamage(int damage)
     {
+        currentHP -= damage;
         room.SendMessageToAllPlayers("DisplayChangeHPToClient/" + damage.ToString(), true);
     }
 
@@ -238,7 +239,7 @@ public class RoomHpMp
         }
 
         percentageMP = currentMP / maxMP;
-
+        currentMP = currentMP - deltaMP;
         if (percentageMP == 1 || percentageMP == 0)
         {
             if (mpAtLimit)

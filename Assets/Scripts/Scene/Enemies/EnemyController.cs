@@ -368,6 +368,12 @@ public class EnemyController : MonoBehaviour
         return playerController && playerController.localPlayer;
     }
 
+    protected bool GameObjectIsMagedParticle(GameObject other)
+    {
+        MagePoweredParticles mParticles = other.GetComponent<MagePoweredParticles>();
+        return mParticles;
+    }
+
     protected void InitializeParticles()
     {
         ParticleSystem[] _particles = gameObject.GetComponentsInChildren<ParticleSystem>();
@@ -468,6 +474,22 @@ public class EnemyController : MonoBehaviour
         if (GameObjectIsPlayer(other.gameObject))
         {
             Attack(other.gameObject);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (GameObjectIsMagedParticle(other.gameObject))
+        {
+            UpdateCollisionsWithPlayer(false);
+            return;
+        }
+        else
+        {
+            if (maged == false)
+            {
+                UpdateCollisionsWithPlayer(false);
+            }
         }
     }
 
