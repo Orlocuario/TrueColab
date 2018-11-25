@@ -108,7 +108,7 @@ public class RoomHpMp
     private void SetRegenerationParameters()
     {
         int playersIn = 0;
-        
+
         for (int i = 0; i < regeneratingPlayers.Length; i++)
         {
             if (regeneratingPlayers[i] != null)
@@ -132,7 +132,7 @@ public class RoomHpMp
         {
             if (IsPlayerMPSlotEmpty(ip))
             {
-                currentMP = incomingMP;
+                room.hpMpManager.currentMP = incomingMP;
                 int id = GetPlayerId(ip);
                 GetPlayerSpendingMana(id);
             }
@@ -142,7 +142,7 @@ public class RoomHpMp
         {
             if (IsPlayerMPSlotOccupied(ip))
             {
-                currentMP = incomingMP;
+                room.hpMpManager.currentMP = incomingMP;
                 int id = GetPlayerId(ip);
                 GetPlayerStopSpendingMana(id);
             }
@@ -221,7 +221,7 @@ public class RoomHpMp
 
     public void ChangeHPFromDamage(int damage)
     {
-        currentHP -= damage;
+        room.hpMpManager.currentHP -= damage;
         room.SendMessageToAllPlayers("DisplayChangeHPToClient/" + damage.ToString(), true);
     }
 

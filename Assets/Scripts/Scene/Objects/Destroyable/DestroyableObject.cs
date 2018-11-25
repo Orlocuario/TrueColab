@@ -51,8 +51,7 @@ public class DestroyableObject : MonoBehaviour
             {
                 StartCoroutine(StopParticles());
             }
-            StartCoroutine(ReactivateSprite());
-            StartCoroutine(ReactivateColliders());  
+            StartCoroutine(Reactivate());
         }
 
         else
@@ -111,15 +110,10 @@ public class DestroyableObject : MonoBehaviour
         particle.SetActive(false);
     }
 
-    private IEnumerator ReactivateSprite()
+    private IEnumerator Reactivate()
     {
         yield return new WaitForSeconds(timeToReactivate);
         ToggleSpriteRenderer(true);
-    }
-
-    private IEnumerator ReactivateColliders()
-    {
-        yield return new WaitForSeconds(.8f);
         ToggleColliders(true);
     }
 
