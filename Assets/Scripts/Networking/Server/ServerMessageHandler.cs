@@ -77,6 +77,9 @@ public class ServerMessageHandler
             case "EnemiesStartPatrolling":
                 EnemiesStartPatrolling(ip);
                 break;
+            case "PlayerRequestOnlyId":
+                SendLocalPlayerData(ip);
+                break;
             case "PlayerRequestId":
                 SendAllData(ip, Server.instance.GetPlayer(ip).room); //Manda todo para manejar mejor reconexiones. Inclusive información de playerId.
                 break;
@@ -176,9 +179,29 @@ public class ServerMessageHandler
             case "TaskReadyByGroup":
                 SendGroupFinishedTask(msg, ip);
                 break;
+            case "MaxHPReached":
+                SetMaxHpInRoom(ip);
+                break;
+            case "MaxMPReached":
+                SetMaxMp(ip);
+                break;
             default:
                 break;
         }
+    }
+
+    private void SetMaxHpInRoom (string ip)
+    {
+        NetworkPlayer player = server.GetPlayer(ip);
+        Room room = player.room;
+        room.hpMpManager.SetMaxHp();
+    }
+
+    private void SetMaxMp(string ip)
+    {
+        NetworkPlayer player = server.GetPlayer(ip);
+        Room room = player.room;
+        room.hpMpManager.SetMaxMp();
     }
 
     private void SendGroupFinishedTask(string[] msg, string ip)
@@ -332,6 +355,11 @@ public class ServerMessageHandler
             room.SendMessageToPlayer(triggerMessage, ip, true);
         }
 
+    }
+
+    private void SendLocalPlayerData(string ip)
+    {
+        SendPlayerIdAndControl(ip);
     }
 
     private void SendIgnoreCollisionBetweenObjects(string message, string ip)
@@ -618,7 +646,10 @@ public class ServerMessageHandler
     {
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.hpMpManager.StopChangeHpAndMpHUD(ip);
+        int incomingHp = Int32.Parse(msg[1]);
+        int incomingMp = Int32.Parse(msg[2]);
+
+        room.hpMpManager.StopChangeHpAndMpHUD(ip, incomingHp, incomingMp);
         room.log.WritePlayernotCharging(player.id);
     }
 

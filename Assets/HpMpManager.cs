@@ -120,13 +120,17 @@ public class HpMpManager : MonoBehaviour
 
         else
         {
+            if (incomingMP != mpCurrentAmount)
+            {
+                ChangeMP(incomingMP - mpCurrentAmount);
+            }
             mpSpendingRate = standardFrameRate /= rateDivider;
             isSpendingMana = true;
         }
     }
 
 
-    public void ReceivePlayerChangedRegeneration(int rateDivider, int incomingMP)
+    public void ReceivePlayerChangedRegeneration(int rateDivider, int incomingMP, int incomingHP)
     {
         if (rateDivider <= 0)
         {
@@ -140,6 +144,10 @@ public class HpMpManager : MonoBehaviour
             {
                 ChangeMP(incomingMP - mpCurrentAmount);
             }
+            if (incomingHP != hpCurrentAmount)
+            {
+                ChangeHP(incomingHP - hpCurrentAmount);
+            }
             return;
         }
         else
@@ -148,6 +156,11 @@ public class HpMpManager : MonoBehaviour
             {
                 ChangeMP(incomingMP - mpCurrentAmount);
             }
+            if (incomingHP != hpCurrentAmount)
+            {
+                ChangeHP(incomingHP - hpCurrentAmount);
+            }
+
             regenerationFrameRate = standardRegFrameRate / rateDivider;
             isRegenerating = true;
         }
@@ -161,10 +174,18 @@ public class HpMpManager : MonoBehaviour
         }
 
         currentHP += deltaHP;
+        hpCurrentAmount += deltaHP;
+        Debug.Log("currentHP amount is: " + hpCurrentAmount);
+
+
 
         if (currentHP >= maxHP)
         {
             currentHP = maxHP;
+            if (LevelManager.lManager.GetLocalPlayerController().controlOverEnemies)
+            {
+                SendMessageToServer("MaxHPReached/");
+            }
         }
 
         else if (currentHP <= 0)
@@ -200,11 +221,17 @@ public class HpMpManager : MonoBehaviour
     public void ChangeMP(int deltaMP)
     {
         currentMP += deltaMP;
-        mpCurrentAmount += deltaMP;
+        mpCurrentAmount += deltaMP;         //int copy for data coordination
+
+        Debug.Log("CurrentMP amount is: " + mpCurrentAmount);
 
         if (currentMP > maxMP)
         {
             currentMP = maxMP;
+            if (LevelManager.lManager.GetLocalPlayerController().controlOverEnemies)
+            {
+                SendMessageToServer("MaxMPReached/");
+            }
         }
 
         if (mpCurrentAmount > maxMP)
@@ -238,7 +265,6 @@ public class HpMpManager : MonoBehaviour
         if (hudDisplay != null)
         {
             hudDisplay.ChangeMP(deltaMP);
-            mpCurrentAmount += deltaMP;
         }
         else
         {
@@ -252,7 +278,6 @@ public class HpMpManager : MonoBehaviour
                 Debug.Log("Mefui a la mierda no sirvió de nada. No tengo huddisplay");
             }
         }
-        //room.SendMessageToAllPlayers("DisplayChangeMPToClient/" + percentageMP, false);
     }
 
 

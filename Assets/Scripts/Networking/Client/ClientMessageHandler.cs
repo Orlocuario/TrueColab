@@ -286,11 +286,26 @@ public class ClientMessageHandler : MonoBehaviour
         int incHp = Int32.Parse(msg[1]);
         int incMp = Int32.Parse(msg[2]);
 
-        int hpDif = (hpMp.maxHP - incHp) * -1;
-        int mpDif = (hpMp.maxMP - incMp) * -1;
+        if (hpMp.hpCurrentAmount != incHp)
+        {
+            Debug.Log("Hps are different. I'll correctThem");
+            int hpDif = incHp - hpMp.hpCurrentAmount;
+            hpMp.ChangeHP(hpDif);
+        }
+        else{
+            Debug.Log("Hps were no different");
+        }
 
-        hpMp.ChangeHP(hpDif);
-        hpMp.ChangeMP(mpDif);
+        if (hpMp.mpCurrentAmount != incMp)
+        {
+            Debug.Log("Mps are different. I'll correctThem");
+            int mpDif = incMp - hpMp.mpCurrentAmount;
+            hpMp.ChangeMP(mpDif);
+        }
+        else{
+            Debug.Log("Mps were no different");
+        }
+
     }
 
     private void HandleResetCollisions(string[] msg)
@@ -560,7 +575,8 @@ public class ClientMessageHandler : MonoBehaviour
             {
                 int rateDivider = Int32.Parse(msg[1]);
                 int incomingMP = Int32.Parse(msg[2]);
-                hpMpManager.ReceivePlayerChangedRegeneration(rateDivider, incomingMP);
+                int incomingHP = Int32.Parse(msg[3]);
+                hpMpManager.ReceivePlayerChangedRegeneration(rateDivider, incomingMP, incomingHP);
             }
         }
     }

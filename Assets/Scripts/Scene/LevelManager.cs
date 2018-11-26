@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour
 {
 
     #region Attributes
-
+    public static LevelManager lManager;
     public Utils _;
     public PlayerController localPlayer;
     public GameObject[] players;
@@ -72,6 +72,8 @@ public class LevelManager : MonoBehaviour
             client = GameObject.Find("ClientObject").GetComponent<Client>();
             client.RequestPlayerIdToServer();
         }
+
+        lManager = this;
     }
 
     #endregion

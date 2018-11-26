@@ -91,16 +91,18 @@ public class RoomHpMp
         SetRegenerationParameters();
     }
 
-    private void GetPlayerStopRegenerating()
+    private void GetPlayerStopRegenerating(int incomingHp, int incomingMp)
     {
+        room.hpMpManager.currentHP = incomingHp;
+        room.hpMpManager.currentMP = incomingMp; 
         SetRegenerationParameters();
     }
 
-    public void StopChangeHpAndMpHUD(string ip)
+    public void StopChangeHpAndMpHUD(string ip, int currentHp, int curentMP)
     {
         if (IsPlayerSlotOccupied(ip))
         {
-            GetPlayerStopRegenerating();
+            GetPlayerStopRegenerating(currentHp, currentMP);
         }
     }
 
@@ -117,8 +119,7 @@ public class RoomHpMp
         }
 
         int regenerationFrameRateDivider = playersIn;
-        room.SendMessageToAllPlayers("ChangeRegeneration/" + regenerationFrameRateDivider.ToString(), true);
-
+        room.SendMessageToAllPlayers("ChangeRegeneration/" + regenerationFrameRateDivider.ToString() + "/" + currentMP + "/" + currentHP, true);
     }
 
     #endregion
@@ -152,6 +153,16 @@ public class RoomHpMp
     {
         room.hpMpManager.currentMP = incomingMP;
         room.hpMpManager.currentHP = incomingHP;
+    }
+
+    public void SetMaxHp()
+    {
+        room.hpMpManager.currentHP = maxHP;
+    }
+
+    public void SetMaxMp()
+    {
+        room.hpMpManager.currentMP = maxMP;
     }
 
     private bool IsPlayerMPSlotEmpty(string ip)

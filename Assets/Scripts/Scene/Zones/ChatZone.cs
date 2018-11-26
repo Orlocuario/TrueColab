@@ -131,7 +131,11 @@ public class ChatZone : MonoBehaviour
             TurnChatZoneOff();
             PlayerController player = other.gameObject.GetComponent<PlayerController>();
             player.availableChatZone = null;
-            SendMessageToServer("StopChangeHpAndMpHUDToRoom/");
+
+            HpMpManager hpManager = FindObjectOfType<HpMpManager>();
+            int currentHP = hpManager.hpCurrentAmount;
+            int currentMP = hpManager.mpCurrentAmount;
+            SendMessageToServer("StopChangeHpAndMpHUDToRoom/" + currentHP.ToString() + "/" + currentMP.ToString());
         }
     }
 
@@ -148,7 +152,6 @@ public class ChatZone : MonoBehaviour
         regenerationFrame = 0;
         ToggleParticles(false);
         hpAndMp.StopParticles();
-        SendMessageToServer("StopChangeHpAndMpHUDToRoom/");
     }
     #endregion
 

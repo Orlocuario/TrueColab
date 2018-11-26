@@ -10716,3 +10716,475 @@
 
 22:34:43 Player 2 stopped using his power
 
+10:59:27AdminChangedScene : Escena4
+10:59:31 Poi number: 1 was reached by Player1
+10:59:31 Player 1 stopped using his power
+
+10:59:31 Poi number: 1 was reached by Player0
+10:59:31 Player 0 stopped using his power
+
+10:59:32 Poi number: 1 was reached by Player2
+10:59:32 Player 2 stopped using his power
+
+10:59:35 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 8.696692
+10:59:46 Player 1 is going right from (-2.04,3.888304)
+
+10:59:48 Player 1 jumped from (-0.9170883,3.888304)
+
+10:59:48 Player 1 is going right from (-0.9170883,5.072554)
+
+10:59:49 Player 1 Stoped Charging
+10:59:49 Player 1 Stoped Charging
+10:59:49 Player 1 Stoped Charging
+10:59:49 Player 1 Stoped Charging
+10:59:50 Player 1 is going right from (2.269707,2.452993)
+
+10:59:51 Player 1 used his power
+
+10:59:58 Player 1 stopped using his power
+
+11:41:33AdminChangedScene : Escena4
+11:41:54 Player 1 is going right from (-1.58,3.888304)
+
+11:41:54 Player 1 jumped from (-1.037468,3.888304)
+
+11:41:55 Player 1 is going right from (-0.5274676,5.091241)
+
+11:41:55 Player 1 Stoped Charging
+11:41:55 Player 1 Stoped Charging
+11:41:55 Player 1 Stoped Charging
+11:41:56 Player 1 used his power
+
+11:41:56 Player 1 is going right from (2.125943,2.592446)
+
+11:42:02 Player 1 is going left from (4.241798,1.084748)
+
+11:42:04 Player 1 stopped using his power
+
+11:42:27 Player 1 is going right from (4.200665,1.084748)
+
+11:42:35 Player 1 is going right from (5.584743,1.084748)
+
+11:42:50 Player 1 is going left from (7.229992,1.084748)
+
+11:42:56 Player 1 is going left from (6.919612,1.084748)
+
+11:42:56 Player 1 is going right from (6.377081,1.084748)
+
+11:43:12 Player 1 is going left from (6.890593,1.084748)
+
+11:43:13 Player 1 is going right from (5.680628,1.084748)
+
+11:43:15 Player 1 is going left from (6.687461,1.084748)
+
+11:43:16 Player 1 used his power
+
+11:43:17 Player 1 is going right from (6.533195,1.084748)
+
+11:43:17 Player 1 stopped using his power
+
+11:43:18 Player 1 is Charging
+11:43:18 Player 1 is Charging
+11:43:21 Player 1 is going left from (9.598375,1.084748)
+
+11:43:21 Player 1 Stoped Charging
+11:43:21 Player 1 Stoped Charging
+11:43:21 Player 1 Stoped Charging
+11:43:21 Player 1 Stoped Charging
+11:43:22 Player 1 is going right from (6.473142,1.084748)
+
+11:43:23 Player 1 is Charging
+11:43:23 Player 1 is Charging
+11:43:24 Player 1 is going left from (9.656419,1.084748)
+
+11:43:24 Player 1 Stoped Charging
+11:43:24 Player 1 Stoped Charging
+11:43:24 Player 1 Stoped Charging
+11:43:24 Player 1 Stoped Charging
+11:43:25 Player 1 used his power
+
+11:43:28 Player 1 stopped using his power
+
+11:43:29 Player 1 is going right from (5.776694,1.084748)
+
+11:43:30 Player 1 is Charging
+11:43:30 Player 1 is Charging
+11:43:31 Player 1 is going left from (9.134075,1.084748)
+
+11:43:31 Player 1 Stoped Charging
+11:43:31 Player 1 Stoped Charging
+11:43:31 Player 1 Stoped Charging
+11:43:31 Player 1 Stoped Charging
+11:43:32 Player 1 used his power
+
+11:43:37 Player 1 stopped using his power
+
+12:17:26AdminChangedScene : Escena4
+12:17:31 Poi number: 1 was reached by Player0
+12:17:31 Player 0 stopped using his power
+
+12:17:31 Poi number: 1 was reached by Player2
+12:17:31 Player 2 stopped using his power
+
+12:17:31 Poi number: 1 was reached by Player1
+12:17:31 Player 1 stopped using his power
+
+12:17:34 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 9.7235001
+12:17:43 Player 1 is going right from (-2.04,3.888304)
+
+12:17:44 Player 1 jumped from (-0.9170883,3.888304)
+
+12:17:44 Player 1 is going right from (-0.3470879,5.151864)
+
+12:17:45 Player 1 Stoped Charging
+12:17:45 Player 1 Stoped Charging
+12:17:45 Player 1 Stoped Charging
+12:17:45 Player 1 Stoped Charging
+12:17:47 Player 1 used his power
+
+12:17:51 Player 1 stopped using his power
+
+12:18:19 Player 1 is going right from (4.136155,1.084748)
+
+12:18:21 Player 1 is going left from (8.160954,1.084748)
+
+12:18:23 Player 1 is going right from (1.872668,1.084748)
+
+12:18:29 Player 1 is going left from (8.189975,1.084748)
+
+12:18:31 Player 1 is going right from (3.729893,1.084748)
+
+12:18:32 Player 1 is Charging
+12:18:32 Player 1 is Charging
+12:18:47 Player 0 is going right from (-2.04,3.888304)
+
+12:18:48 Player 0 jumped from (-0.9170883,3.888304)
+
+12:18:48 Player 0 is going right from (-0.5870879,5.051414)
+
+12:18:49 Player 0 is Charging
+12:29:08AdminChangedScene : Escena4
+12:29:13 Poi number: 1 was reached by Player1
+12:29:13 Player 1 stopped using his power
+
+12:29:13 Poi number: 1 was reached by Player2
+12:29:13 Player 2 stopped using his power
+
+12:29:13 Player 0 stopped using his power
+
+12:29:16 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 11.9269747
+12:29:25 Player 0 is going right from (-2.04,3.888304)
+
+12:29:26 Player 0 jumped from (-1.207278,3.888304)
+
+12:29:26 Player 0 is going right from (-0.4903901,5.091241)
+
+12:29:26 Player 0 is going right from (-0.4903901,4.618775)
+
+12:29:28 Player 0 is going right from (-0.4903901,4.609999)
+
+12:29:28 Player 0 jumped from (-0.4903901,4.609999)
+
+12:29:28 Poi number: 20 was reached by Player0
+12:29:28 Player 0 is going right from (0.2896099,5.869586)
+
+12:29:28 Player 0 Stoped Charging
+12:29:28 Player 0 Stoped Charging
+12:29:29 Player 0 is going right from (2.743445,1.084748)
+
+12:29:30 Player 0 used his power
+
+12:29:32 Player 0 stopped using his power
+
+12:29:39 Player 0 is going right from (4.214588,1.084748)
+
+12:29:41 Player 0 is going right from (7.513913,1.084748)
+
+12:29:41 Player 0 is Charging
+12:29:43 Player 0 is going left from (9.478393,1.084748)
+
+12:29:44 Player 0 Stoped Charging
+12:29:44 Player 0 Stoped Charging
+12:29:46 Player 0 is going right from (2.812848,1.084748)
+
+12:29:48 Player 0 is going right from (4.516142,1.084748)
+
+12:29:50 Player 0 is going right from (6.828825,1.084748)
+
+12:29:51 Player 0 is Charging
+12:29:53 Player 0 is going left from (9.489758,1.084748)
+
+12:29:54 Player 0 Stoped Charging
+12:29:54 Player 0 Stoped Charging
+12:29:56 Player 0 is going right from (7.031961,1.084748)
+
+12:29:56 Player 0 is Charging
+12:29:58 Player 0 is going left from (9.808976,1.084748)
+
+12:30:02 Player 0 is going left from (9.767842,1.084748)
+
+12:30:03 Player 0 Stoped Charging
+12:30:03 Player 0 Stoped Charging
+12:30:05 Player 1 is going right from (-2.04,3.888304)
+
+12:30:07 Player 1 jumped from (-0.9170883,3.888304)
+
+12:30:07 Player 1 is going right from (-0.9170883,5.072554)
+
+12:30:07 Player 1 is Charging
+12:30:07 Player 1 is Charging
+12:30:09 Player 1 is going right from (0.132912,3.888304)
+
+12:30:09 Player 1 Stoped Charging
+12:30:09 Player 1 Stoped Charging
+12:30:09 Player 1 Stoped Charging
+12:30:09 Player 1 Stoped Charging
+12:30:24 Player 1 is going right from (2.329528,1.084748)
+
+12:30:27 Player 1 is going right from (7.747242,1.084748)
+
+12:30:28 Player 1 is Charging
+12:30:28 Player 1 is Charging
+12:30:30 Player 1 is going left from (9.276436,1.084748)
+
+12:30:31 Player 1 Stoped Charging
+12:30:31 Player 1 Stoped Charging
+12:30:31 Player 1 Stoped Charging
+12:30:31 Player 1 Stoped Charging
+12:51:39AdminChangedScene : Escena4
+12:51:44 Poi number: 1 was reached by Player0
+12:51:44 Player 0 stopped using his power
+
+12:51:44 Poi number: 1 was reached by Player1
+12:51:44 Poi number: 1 was reached by Player2
+12:51:44 Player 1 stopped using his power
+
+12:51:44 Player 2 stopped using his power
+
+12:51:47 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 12.3086474
+12:52:09 Player 2 is going right from (-2.04,3.888304)
+
+12:52:10 Player 2 jumped from (-0.9170883,3.888304)
+
+12:52:11 Player 2 jumped from (-0.9170883,3.888304)
+
+12:52:11 Player 2 is going right from (-0.545088,5.107476)
+
+12:52:11 Player 2 Stoped Charging
+12:52:11 Player 2 Stoped Charging
+12:52:14 Player 1 is going right from (-2.04,3.888304)
+
+12:52:14 Player 1 jumped from (-1.120221,3.888304)
+
+12:52:14 Player 1 is going right from (-0.5553107,5.072554)
+
+12:52:15 Player 1 Stoped Charging
+12:52:15 Player 1 Stoped Charging
+12:52:18 Player 1 used his power
+
+12:52:23 Player 1 stopped using his power
+
+12:52:28 Player 1 is going left from (3.694263,1.084748)
+
+12:52:28 Player 1 jumped from (2.397233,1.084748)
+
+12:52:28 Player 1 jumped from (1.707234,2.247858)
+
+12:52:31 Player 1 is going right from (1.707234,3.727592)
+
+12:52:35 Player 1 used his power
+
+12:53:53 Player 1 stopped using his power
+
+12:53:56 Player 2 is going right from (2.016361,1.084746)
+
+12:53:59 Player 1 is going right from (4.450371,1.084748)
+
+12:54:01 Player 1 is Charging
+12:54:01 Player 1 is Charging
+12:54:13 Player 1 is going left from (9.287718,1.084748)
+
+12:54:13 Player 1 Stoped Charging
+12:54:13 Player 1 Stoped Charging
+13:18:51AdminChangedScene : Escena4
+13:18:56 Poi number: 1 was reached by Player0
+13:18:56 Player 0 stopped using his power
+
+13:18:56 Poi number: 1 was reached by Player1
+13:18:56 Player 1 stopped using his power
+
+13:18:56 Poi number: 1 was reached by Player2
+13:18:56 Player 2 stopped using his power
+
+13:19:00 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 17.4280896
+13:19:22 Player 1 is going right from (-2.04,3.888304)
+
+13:19:24 Player 1 is going left from (-0.9170883,3.888304)
+
+13:19:25 Player 1 used his power
+
+13:19:31 Player 1 stopped using his power
+
+13:20:47 Player 1 used his power
+
+13:20:51 Player 1 stopped using his power
+
+13:20:56 Player 2 used his power
+
+13:21:00 Player 2 stopped using his power
+
+13:21:04 Player 1 used his power
+
+13:21:10 Player 2 used his power
+
+13:21:15 Player 2 is going right from (-2.04,3.888304)
+
+13:21:18 Player 0 used his power
+
+13:21:22 Player 2 stopped using his power
+
+13:21:23 Player 1 stopped using his power
+
+13:21:23 Player 1 used his power
+
+13:21:25 Player 2 used his power
+
+13:21:26 Player 2 stopped using his power
+
+13:21:28 Player 1 stopped using his power
+
+13:21:29 Player 0 stopped using his power
+
+13:21:43 Player 2 used his power
+
+13:21:48 Player 2 stopped using his power
+
+13:21:52 Player 2 used his power
+
+13:22:05 Player 2 stopped using his power
+
+13:22:12 Player 2 used his power
+
+13:22:20 Player 2 stopped using his power
+
+13:29:37AdminChangedScene : Escena4
+13:29:41 Poi number: 1 was reached by Player2
+13:29:41 Poi number: 1 was reached by Player0
+13:29:41 Player 2 stopped using his power
+
+13:29:41 Player 0 stopped using his power
+
+13:29:42 Poi number: 1 was reached by Player1
+13:29:42 Player 1 stopped using his power
+
+13:29:44 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 11.6290165
+13:29:56 Player 1 is going right from (-2.04,3.888304)
+
+13:29:59 Player 0 is going right from (-2.04,3.888304)
+
+13:30:00 Player 0 is going right from (-1.758639,3.888304)
+
+13:30:01 Player 0 is going left from (-1.448259,3.888304)
+
+13:30:03 Player 0 used his power
+
+13:30:09 Player 1 used his power
+
+13:30:17 Player 1 stopped using his power
+
+13:30:19 Player 0 stopped using his power
+
+13:31:52 Player 1 used his power
+
+13:32:00 Player 1 stopped using his power
+
+13:32:08 Player 1 used his power
+
+13:32:15 Player 1 stopped using his power
+
+13:47:10AdminChangedScene : Escena4
+13:47:15 Poi number: 1 was reached by Player0
+13:47:15 Poi number: 1 was reached by Player1
+13:47:15 Player 1 stopped using his power
+
+13:47:15 Player 0 stopped using his power
+
+13:47:15 Poi number: 1 was reached by Player2
+13:47:16 Player 2 stopped using his power
+
+13:47:18 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 10.7350911
+13:47:30 Player 2 is going left from (-2.04,3.888304)
+
+13:47:31 Player 2 is going right from (-3.099399,1.568239)
+
+13:47:32 Player 2 is going right from (-2.820113,1.080095)
+
+13:47:33 Player 2 is going left from (-1.552104,1.080095)
+
+13:47:34 Player 2 used his power
+
+13:47:49 Player 2 stopped using his power
+
+13:48:38 Player 1 used his power
+
+13:48:46 Player 1 stopped using his power
+
+13:48:50 Player 1 used his power
+
+13:48:52 Player 1 stopped using his power
+
+14:04:04AdminChangedScene : Escena4
+14:04:09 Poi number: 1 was reached by Player0
+14:04:09 Player 0 stopped using his power
+
+14:04:09 Poi number: 1 was reached by Player1
+14:04:09 Player 1 stopped using his power
+
+14:04:09 Poi number: 1 was reached by Player2
+14:04:09 Player 2 stopped using his power
+
+14:04:12 Poi number: 1 was reached by all the necessary players. Seconds spent reaching this POI from the last one was: 10.6509328
+14:04:22 Player 1 used his power
+
+14:04:38 Player 1 stopped using his power
+
+14:05:18 Player 1 used his power
+
+14:05:22 Player 1 stopped using his power
+
+14:05:26 Player 2 used his power
+
+14:05:48 Player 2 stopped using his power
+
+14:05:50 Player 1 used his power
+
+14:05:51 Player 1 stopped using his power
+
+14:05:53 Player 1 used his power
+
+14:05:56 Player 1 stopped using his power
+
+14:05:56 Player 1 used his power
+
+14:05:58 Player 1 stopped using his power
+
+14:05:59 Player 2 used his power
+
+14:06:19 Player 1 used his power
+
+14:06:27 Player 1 stopped using his power
+
+14:06:32 Player 2 stopped using his power
+
+14:06:37 Player 1 used his power
+
+14:06:38 Player 1 stopped using his power
+
+14:06:41 Player 1 used his power
+
+14:06:42 Player 1 stopped using his power
+
+14:06:44 Player 2 used his power
+
+14:06:45 Player 2 stopped using his power
+
