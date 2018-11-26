@@ -57,7 +57,6 @@ public class PlayerController : MonoBehaviour
     public int directionX;
     // 1 = derecha, -1 = izquierda
     public float gravityPower;
-    public bool playerHasReturned;
 
     protected SceneAnimator sceneAnimator;
     protected LevelManager levelManager;
@@ -171,13 +170,6 @@ public class PlayerController : MonoBehaviour
         if (transform.parent != null)
         {
             parent = transform.parent.gameObject;
-        }
-
-        if (playerHasReturned)
-        {
-            SendPlayerDataToServer();
-            SendPowerDataToServer();
-            playerHasReturned = false;
         }
 
         CheckCollisionWithPlayers();
@@ -451,8 +443,6 @@ public class PlayerController : MonoBehaviour
                 }
 
                 //  levelManager.hpAndMp.ChangeMP(mpSpendRate); // Change local
-
-
             }
         }
 

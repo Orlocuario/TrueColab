@@ -101,7 +101,6 @@ public class RoomHpMp
         if (IsPlayerSlotOccupied(ip))
         {
             GetPlayerStopRegenerating();
-            //room.SendMessageToAllPlayers("DisplayStopChangeHPMPToClient/", false);
         }
     }
 
@@ -147,6 +146,12 @@ public class RoomHpMp
                 GetPlayerStopSpendingMana(id);
             }
         }
+    }
+
+    public void ReceiveHPMPUpdate(int incomingHP, int incomingMP)
+    {
+        room.hpMpManager.currentMP = incomingMP;
+        room.hpMpManager.currentHP = incomingHP;
     }
 
     private bool IsPlayerMPSlotEmpty(string ip)
@@ -202,11 +207,11 @@ public class RoomHpMp
 
         if (mpRateDivider == 0)
         {
-            room.SendMessageToAllPlayers("StopSpendingMana/" + mpRateDivider.ToString(), true);
+            room.SendMessageToAllPlayers("StopSpendingMana/" + mpRateDivider.ToString() + "/" + currentMP, true);
         }
         else
         {
-            room.SendMessageToAllPlayers("StartSpendingMana/" + mpRateDivider.ToString(), true);
+            room.SendMessageToAllPlayers("StartSpendingMana/" + mpRateDivider.ToString() + "/" + currentMP, true);
         }
     }
     #endregion

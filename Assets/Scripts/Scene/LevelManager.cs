@@ -271,6 +271,15 @@ public class LevelManager : MonoBehaviour
         client.SendMessageToServer("ChangeScene/" + nextSceneName, true);
     }
 
+    public void DieAndStayInThisScene()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        Debug.Log("Changing to scene " + currentSceneName);
+
+        client.SendMessageToServer("ChangeScene/" + currentSceneName, true);
+    }
+
     public void ShowReconnectingMessage(bool valor)
     {
         reconnectText.SetActive(valor);
@@ -882,11 +891,8 @@ public class LevelManager : MonoBehaviour
 
     private void CoordinatePlayers()
     {
-        PlayerController[] pControllers = FindObjectsOfType<PlayerController>();
-        foreach (PlayerController pController in pControllers)
-        {
-            pController.playerHasReturned = true; 
-        }
+        HpMpManager hpManager = FindObjectOfType<HpMpManager>();
+        client.SendMessageToServer("UpdateHpMp" + "/" + hpManager.hpCurrentAmount.ToString() + "/" + hpManager.mpCurrentAmount.ToString(), true);
     }
     private void CoordinateMovingObjects()
     {

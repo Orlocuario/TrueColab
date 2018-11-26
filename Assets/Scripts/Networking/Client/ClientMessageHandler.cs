@@ -280,15 +280,14 @@ public class ClientMessageHandler : MonoBehaviour
         }
     }
 
-    private void HandleHpMpFromServer(string [] msg)
+    private void HandleHpMpFromServer(string[] msg)
     {
         HpMpManager hpMp = FindObjectOfType<HpMpManager>();
-        HUDDisplay hud = FindObjectOfType<LevelManager>().hpAndMp;
         int incHp = Int32.Parse(msg[1]);
         int incMp = Int32.Parse(msg[2]);
 
-        int hpDif = Mathf.Abs(hpMp.hpCurrentAmount - incHp);
-        int mpDif = Mathf.Abs(hpMp.mpCurrentAmount - incMp);
+        int hpDif = (hpMp.maxHP - incHp) * -1;
+        int mpDif = (hpMp.maxMP - incMp) * -1;
 
         hpMp.ChangeHP(hpDif);
         hpMp.ChangeMP(mpDif);
@@ -524,7 +523,7 @@ public class ClientMessageHandler : MonoBehaviour
 
     #region HUD
 
-    private void HandleStartSpendingMana(string[]msg)
+    private void HandleStartSpendingMana(string[] msg)
     {
         if (NotInClientScene())
         {
@@ -532,7 +531,8 @@ public class ClientMessageHandler : MonoBehaviour
             if (hpMpManager)
             {
                 int rateDivider = Int32.Parse(msg[1]);
-                hpMpManager.ReceivePlayerStartSpendingMana(rateDivider);
+                int incomingMP = Int32.Parse(msg[2]);
+                hpMpManager.ReceivePlayerStartSpendingMana(rateDivider, incomingMP);
             }
         }
     }
@@ -559,7 +559,8 @@ public class ClientMessageHandler : MonoBehaviour
             if (hpMpManager)
             {
                 int rateDivider = Int32.Parse(msg[1]);
-                hpMpManager.ReceivePlayerChangedRegeneration(rateDivider);
+                int incomingMP = Int32.Parse(msg[2]);
+                hpMpManager.ReceivePlayerChangedRegeneration(rateDivider, incomingMP);
             }
         }
     }
@@ -877,15 +878,12 @@ public class ClientMessageHandler : MonoBehaviour
         string scene = msg[1];
         Scene currentScene = SceneManager.GetActiveScene();
 
-        if (!(currentScene.name == scene))
+        if (GetLocalPlayerData() != null)
         {
-            if (GetLocalPlayerData() != null)
-            {
-                string message = GetLocalPlayerData();
-                client.SendMessageToServer("PlayerChangePositionForNewScene" + "/" + message, true);
-            }
-            SceneManager.LoadScene(scene);
+            string message = GetLocalPlayerData();
+            client.SendMessageToServer("PlayerChangePositionForNewScene" + "/" + message, true);
         }
+        SceneManager.LoadScene(scene);
 
     }
 
@@ -1051,9 +1049,11 @@ public class ClientMessageHandler : MonoBehaviour
     private void HandlePlayerStopSpendingMana(string[] msg)
     {
         int currentDivider = Int32.Parse(msg[1]);
+        int currentMana = Int32.Parse(msg[2]);
         HpMpManager hpMpManager = FindObjectOfType<HpMpManager>();
-        hpMpManager.ReceivePlayerStopSpendingMana(currentDivider);
+        hpMpManager.ReceivePlayerStopSpendingMana(currentDivider, currentMana);
     }
+
     private void HandlePlayersAreDead(string[] array)
     {
         if (NotInClientScene())

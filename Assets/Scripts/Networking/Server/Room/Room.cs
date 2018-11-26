@@ -307,7 +307,6 @@ public class Room
 
     public void Reset()
     {
-
         systemsManager.Reset();
         obstacleManager.Reset();
         objectManager.Reset();
@@ -325,7 +324,6 @@ public class Room
         mTriggersActivated = new MovableTriggersActivated();
         activatedColliderZones = new ActivatedColliderZones();
         activatedTeleporters = new ActivatedTeleporters();
-
 
     }
 

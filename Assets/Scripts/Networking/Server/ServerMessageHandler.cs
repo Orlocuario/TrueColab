@@ -562,10 +562,17 @@ public class ServerMessageHandler
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         room.log.WritePlayersAreDead();
-        room.SendMessageToAllPlayers("PlayersAreDead/", true);
+        room.Reset();
+        room.SendMessageToAllPlayers("PlayersAreDead" +"/"+ room.sceneToLoad, true);
+        foreach(NetworkPlayer nPlayer in room.players)
+        {
+            nPlayer.positionX = room.GetStartPosition()[0];
+            nPlayer.positionY = room.GetStartPosition()[1];
+        }
         room.SendMessageToAllPlayers("NewChatMessage/" + room.actualChat, true);
 
     }
+
     private void SendColliderActivatorSet(string[] msg, string message, string ip)
     {
         int onEnter = Int32.Parse(msg[2]);

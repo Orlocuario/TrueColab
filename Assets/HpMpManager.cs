@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class HpMpManager : MonoBehaviour {
+public class HpMpManager : MonoBehaviour
+{
 
-    public float maxHP;
-    public float maxMP;
+    public int maxHP;
+    public int maxMP;
     public float maxExp;
     public float currentHP;
     public float currentMP;
@@ -35,13 +37,16 @@ public class HpMpManager : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
 
         maxHP = 250;
         maxMP = 250;
         //maxExp = 250;
         currentHP = maxHP;
         currentMP = maxMP;
+        mpCurrentAmount = maxMP;
+        hpCurrentAmount = maxHP;
         percentageHP = 1;
         percentageMP = 1;
         percentageExp = 0;
@@ -60,7 +65,7 @@ public class HpMpManager : MonoBehaviour {
         isRegenerating = false;
 
         lManager = FindObjectOfType<LevelManager>();
-        hudDisplay = lManager.hpAndMp; 
+        hudDisplay = lManager.hpAndMp;
     }
 
     // Update is called once per frame
@@ -87,23 +92,32 @@ public class HpMpManager : MonoBehaviour {
                 ChangeMP(mpCost);
             }
         }
-    } 
+    }
 
-    public void ReceivePlayerStartSpendingMana(int rateDivider)
+    public void ReceivePlayerStartSpendingMana(int rateDivider, int incomingMP)
     {
         mpSpendingRate = standardFrameRate / rateDivider;
         currentMpRate = mpSpendingRate -= 2;
         isSpendingMana = true;
+        if (incomingMP != mpCurrentAmount)
+        {
+            ChangeMP(incomingMP - mpCurrentAmount);
+        }
     }
 
-    public void ReceivePlayerStopSpendingMana(int rateDivider)
+    public void ReceivePlayerStopSpendingMana(int rateDivider, int incomingMP)
     {
         if (rateDivider == 0)
         {
             currentRegRate = 0;
             mpSpendingRate = standardRegFrameRate;
             isSpendingMana = false;
+            if (incomingMP != mpCurrentAmount)
+            {
+                ChangeMP(incomingMP - mpCurrentAmount);
+            }
         }
+
         else
         {
             mpSpendingRate = standardFrameRate /= rateDivider;
@@ -112,7 +126,7 @@ public class HpMpManager : MonoBehaviour {
     }
 
 
-    public void ReceivePlayerChangedRegeneration(int rateDivider)
+    public void ReceivePlayerChangedRegeneration(int rateDivider, int incomingMP)
     {
         if (rateDivider <= 0)
         {
@@ -122,10 +136,18 @@ public class HpMpManager : MonoBehaviour {
 
             HUDDisplay hpAndMp = GameObject.FindObjectOfType<LevelManager>().hpAndMp;
             hpAndMp.StopLocalParticles(); // Only stop local particles
+            if (incomingMP != mpCurrentAmount)
+            {
+                ChangeMP(incomingMP - mpCurrentAmount);
+            }
             return;
         }
         else
         {
+            if (incomingMP != mpCurrentAmount)
+            {
+                ChangeMP(incomingMP - mpCurrentAmount);
+            }
             regenerationFrameRate = standardRegFrameRate / rateDivider;
             isRegenerating = true;
         }
@@ -148,23 +170,50 @@ public class HpMpManager : MonoBehaviour {
         else if (currentHP <= 0)
         {
             currentHP = 0;
-            SendMessageToServer("PlayersAreDead/" + Server.instance.sceneToLoad);
+
+            if (FindObjectOfType<LevelManager>().GetLocalPlayerController().controlOverEnemies)
+            {
+                SendMessageToServer("PlayersAreDead/");
+            }
+
+
             currentHP = maxHP;
             currentMP = maxMP;
+
         }
 
         percentageHP = currentHP / maxHP;
-        hudDisplay.ChangeHP(deltaHP);
+        if (!hudDisplay)
+        {
+            hudDisplay = FindObjectOfType<LevelManager>().hpAndMp;
+            if (!hudDisplay)
+            {
+                Debug.LogError("HPManager doesnt have a HUDDISPLAY");
+            }
+        }
+        if (hudDisplay)
+        {
+            hudDisplay.ChangeHP(deltaHP);
+        }
     }
 
     public void ChangeMP(int deltaMP)
     {
         currentMP += deltaMP;
-        mpCurrentAmount =- deltaMP;
+        mpCurrentAmount += deltaMP;
 
         if (currentMP > maxMP)
         {
             currentMP = maxMP;
+        }
+
+        if (mpCurrentAmount > maxMP)
+        {
+            mpCurrentAmount = maxMP;
+        }
+        if (mpCurrentAmount <= 0)
+        {
+            mpCurrentAmount = 0;
         }
         else if (currentMP <= 0)
         {
@@ -189,7 +238,7 @@ public class HpMpManager : MonoBehaviour {
         if (hudDisplay != null)
         {
             hudDisplay.ChangeMP(deltaMP);
-            mpCurrentAmount -= deltaMP;
+            mpCurrentAmount += deltaMP;
         }
         else
         {
