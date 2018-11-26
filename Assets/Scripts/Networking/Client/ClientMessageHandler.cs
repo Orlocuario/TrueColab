@@ -290,6 +290,7 @@ public class ClientMessageHandler : MonoBehaviour
         {
             Debug.Log("Hps are different. I'll correctThem");
             int hpDif = incHp - hpMp.hpCurrentAmount;
+            Debug.Log("Im changing hp with: " + hpDif + " units. FromHandleHpMpFromServer");
             hpMp.ChangeHP(hpDif);
         }
         else{
@@ -300,6 +301,8 @@ public class ClientMessageHandler : MonoBehaviour
         {
             Debug.Log("Mps are different. I'll correctThem");
             int mpDif = incMp - hpMp.mpCurrentAmount;
+            Debug.Log("Im changing mp with: " + mpDif + " units. FromHandleHpMpFromServer");
+
             hpMp.ChangeMP(mpDif);
         }
         else{
@@ -587,6 +590,7 @@ public class ClientMessageHandler : MonoBehaviour
         {
             int damage = Int32.Parse(msg[1]);
             HpMpManager hpAndMp = FindObjectOfType<HpMpManager>();
+            Debug.Log("Im changing hp with: " + damage + " units. FromHandleHpHudtoClient");
             hpAndMp.ChangeHP(damage);
         }
     }

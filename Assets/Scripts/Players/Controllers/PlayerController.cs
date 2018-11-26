@@ -535,6 +535,7 @@ public class PlayerController : MonoBehaviour
         if (availableChatZone != null)
         {
             ChatZone chatZoneOff = availableChatZone.GetComponent<ChatZone>();
+            chatZoneOff.TurnHpMpRegenerationOff();
             chatZoneOff.TurnChatZoneOff();
             availableChatZone = null;
         }

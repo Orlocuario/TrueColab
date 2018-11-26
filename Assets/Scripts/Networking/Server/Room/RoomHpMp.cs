@@ -49,11 +49,11 @@ public class RoomHpMp
     #region RegenerationWork
 
 
-    public void RecieveHpAndMpHUD(string ip)
+    public void RecieveHpAndMpHUD(string ip, int incomingHp, int incomingMp)
     {
         if (IsPlayerSlotEmpty(ip))
         {
-            GetPlayerRegenerating();
+            GetPlayerRegenerating(incomingHp, incomingMp);
         }
     }
 
@@ -86,8 +86,10 @@ public class RoomHpMp
     }
 
 
-    private void GetPlayerRegenerating()
+    private void GetPlayerRegenerating(int incomingHp, int incomingMp)
     {
+        room.hpMpManager.currentHP = incomingHp;
+        room.hpMpManager.currentMP = incomingMp;
         SetRegenerationParameters();
     }
 
@@ -119,7 +121,7 @@ public class RoomHpMp
         }
 
         int regenerationFrameRateDivider = playersIn;
-        room.SendMessageToAllPlayers("ChangeRegeneration/" + regenerationFrameRateDivider.ToString() + "/" + currentMP + "/" + currentHP, true);
+        room.SendMessageToAllPlayers("ChangeRegeneration/" + regenerationFrameRateDivider.ToString() + "/" + room.hpMpManager.currentMP + "/" + room.hpMpManager.currentHP, true);
     }
 
     #endregion
@@ -163,6 +165,15 @@ public class RoomHpMp
     public void SetMaxMp()
     {
         room.hpMpManager.currentMP = maxMP;
+    }
+
+    public int GetCurrentHP()
+    {
+        return room.hpMpManager.currentHP;
+    }
+    public int GetCurrentMP()
+    {
+        return room.hpMpManager.currentMP;
     }
 
     private bool IsPlayerMPSlotEmpty(string ip)

@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class HpMpManager : MonoBehaviour
 {
-
     public int maxHP;
     public int maxMP;
     public float maxExp;
@@ -39,7 +38,6 @@ public class HpMpManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
         maxHP = 250;
         maxMP = 250;
         //maxExp = 250;
@@ -77,6 +75,7 @@ public class HpMpManager : MonoBehaviour
             if (currentRegRate >= regenerationFrameRate)
             {
                 currentRegRate = 0;
+                Debug.Log("Im changing hp and mp with: " + regenerationUnits.ToString() + " units. From FixedUpdate");
                 ChangeHP(regenerationUnits);
                 ChangeMP(regenerationUnits);
             }
@@ -140,24 +139,32 @@ public class HpMpManager : MonoBehaviour
 
             HUDDisplay hpAndMp = GameObject.FindObjectOfType<LevelManager>().hpAndMp;
             hpAndMp.StopLocalParticles(); // Only stop local particles
-            if (incomingMP != mpCurrentAmount)
+           /* if (incomingMP != mpCurrentAmount)
             {
-                ChangeMP(incomingMP - mpCurrentAmount);
+                int howMuch = mpCurrentAmount - incomingMP;
+                Debug.Log("Im changing  mp with: " + howMuch + " units. FromReceivePlayer. RateDiv = 0");
+                ChangeMP(mpCurrentAmount - incomingMP);
             }
             if (incomingHP != hpCurrentAmount)
             {
-                ChangeHP(incomingHP - hpCurrentAmount);
-            }
+                int howMuch = hpCurrentAmount - incomingHP;
+                Debug.Log("Im changing hp with: " + howMuch + " units. FromReceivePlayer. RateDiv = 0");
+                ChangeHP(hpCurrentAmount - incomingHP);
+            }*/
             return;
         }
         else
         {
             if (incomingMP != mpCurrentAmount)
             {
+                int howMuch = mpCurrentAmount - incomingMP;
+                Debug.Log("Im changing  mp with: " + howMuch + " units. FromReceivePlayer. RateDiv != 0");
                 ChangeMP(incomingMP - mpCurrentAmount);
             }
             if (incomingHP != hpCurrentAmount)
             {
+                int howMuch = hpCurrentAmount - incomingHP;
+                Debug.Log("Im changing hp with: " + howMuch + " units. FromReceivePlayer. RateDiv = 0");
                 ChangeHP(incomingHP - hpCurrentAmount);
             }
 
@@ -175,9 +182,16 @@ public class HpMpManager : MonoBehaviour
 
         currentHP += deltaHP;
         hpCurrentAmount += deltaHP;
-        Debug.Log("currentHP amount is: " + hpCurrentAmount);
+        Debug.Log("hpCurrentAmount is: " + hpCurrentAmount);
 
-
+        if (hpCurrentAmount > maxMP)
+        {
+            hpCurrentAmount = maxMP;
+        }
+        if (hpCurrentAmount <= 0)
+        {
+            hpCurrentAmount = 0;
+        }
 
         if (currentHP >= maxHP)
         {
@@ -196,11 +210,8 @@ public class HpMpManager : MonoBehaviour
             {
                 SendMessageToServer("PlayersAreDead/");
             }
-
-
             currentHP = maxHP;
             currentMP = maxMP;
-
         }
 
         percentageHP = currentHP / maxHP;
@@ -216,6 +227,16 @@ public class HpMpManager : MonoBehaviour
         {
             hudDisplay.ChangeHP(deltaHP);
         }
+    }
+
+    public int GetCurrentHP()
+    {
+        return hpCurrentAmount;
+    }
+
+    public int GetCurrentMP()
+    {
+        return mpCurrentAmount;
     }
 
     public void ChangeMP(int deltaMP)
@@ -280,6 +301,10 @@ public class HpMpManager : MonoBehaviour
         }
     }
 
+    public void SendUpdateExitToServer()
+    {
+        SendMessageToServer("StopChangeHpAndMpHUDToRoom/" + hpCurrentAmount.ToString() + "/" + mpCurrentAmount.ToString());
+    }
 
     protected void SendMessageToServer(string message)
     {

@@ -657,7 +657,10 @@ public class ServerMessageHandler
     {
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
-        room.hpMpManager.RecieveHpAndMpHUD(ip);
+        int incomingHp = Int32.Parse(msg[1]);
+        int incomingMp = Int32.Parse(msg[2]);
+
+        room.hpMpManager.RecieveHpAndMpHUD(ip, incomingHp, incomingMp);
         room.log.WritePlayerIsCharging(player.id);
     }
 
@@ -666,7 +669,6 @@ public class ServerMessageHandler
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
         RoomLogger log = room.log;
-
     }
 
     private void SendPlayerLeftChatZoneSignalLogWriter(string msg, string ip)

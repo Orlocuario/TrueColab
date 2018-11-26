@@ -10,11 +10,6 @@ public class ChatZone : MonoBehaviour
     private GameObject[] particles;
     private HUDDisplay hpAndMp;
 
-    //private static float regenerationUnits = 6;
-    //private static int regenerationFrameRate = 17;
-
-    private int regenerationFrame;
-    //private bool activated;
 
     #endregion
 
@@ -22,9 +17,6 @@ public class ChatZone : MonoBehaviour
 
     private void Start()
     {
-        regenerationFrame = 0;
-        //activated = false;
-
         InitializeChatButtons();
         InitializeParticles();
     }
@@ -119,7 +111,12 @@ public class ChatZone : MonoBehaviour
             if (CanRegenerateHPorMP())
             {
                 ToggleParticles(true);
-                SendMessageToServer("PlayerEnteredChatZone/");
+                HpMpManager hpManager = FindObjectOfType<HpMpManager>();
+                int currentHP = hpManager.hpCurrentAmount;
+                Debug.Log("currentHp is: " + currentHP);
+                int currentMP = hpManager.mpCurrentAmount;
+                Debug.Log("currentMp is: " + currentMP);
+                SendMessageToServer("PlayerEnteredChatZone/" + currentHP.ToString() + " / " + currentMP.ToString());
             }
         }
     }
@@ -131,11 +128,7 @@ public class ChatZone : MonoBehaviour
             TurnChatZoneOff();
             PlayerController player = other.gameObject.GetComponent<PlayerController>();
             player.availableChatZone = null;
-
-            HpMpManager hpManager = FindObjectOfType<HpMpManager>();
-            int currentHP = hpManager.hpCurrentAmount;
-            int currentMP = hpManager.mpCurrentAmount;
-            SendMessageToServer("StopChangeHpAndMpHUDToRoom/" + currentHP.ToString() + "/" + currentMP.ToString());
+            TurnHpMpRegenerationOff();
         }
     }
 
@@ -147,9 +140,16 @@ public class ChatZone : MonoBehaviour
         }
     }
 
+    public void TurnHpMpRegenerationOff()
+    {
+        HpMpManager hpManager = FindObjectOfType<HpMpManager>();
+        int currentHP = hpManager.hpCurrentAmount;
+        int currentMP = hpManager.mpCurrentAmount;
+        Debug.Log("Im leaving Chatzone. CurrentHp is: " + currentHP.ToString() + "and currentMp is: + " + currentMP.ToString() + " I'll send the message");
+        hpManager.SendUpdateExitToServer();
+    }
     public void TurnChatZoneOff()
     {
-        regenerationFrame = 0;
         ToggleParticles(false);
         hpAndMp.StopParticles();
     }
