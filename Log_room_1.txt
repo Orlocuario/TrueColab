@@ -14426,3 +14426,9 @@
 
 18:05:58 Player 0 stopped using his power
 
+19:35:48AdminChangedScene : Escena3
+19:35:52 Poi number: 0 was reached by Player1
+19:35:52 Player 1 Stoped Charging
+19:35:52 Player 1 Stoped Charging
+19:35:52 Poi number: 0 was reached by Player0
+19:35:52 Poi number: 0 was reached by Player2
