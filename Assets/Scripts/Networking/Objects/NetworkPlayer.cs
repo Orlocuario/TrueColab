@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class NetworkPlayer
 {
-
     #region Attributes
 
     public string[] inventory = new string[8];
@@ -133,7 +132,5 @@ public class NetworkPlayer
             }
         }
     }
-
     #endregion
-
 }

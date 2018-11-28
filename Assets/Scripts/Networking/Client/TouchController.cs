@@ -16,6 +16,5 @@ public class TouchController : MonoBehaviour {
         GameObject.Find("ConnectText").GetComponent<Text>().text = "Conectar";
         listen.InitializeListening();
     }
-
     #endregion
 }

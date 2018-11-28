@@ -8,7 +8,6 @@ public class ForLoopDestroyer : MonoBehaviour {
     public int objectsDestroyed;
 	// Use this for initialization
 
-
 	private void Start () {
         CheckParameters();
         objectsDestroyed = 0;
@@ -34,6 +33,4 @@ public class ForLoopDestroyer : MonoBehaviour {
             Debug.LogError("The ForLoopDestroyer named: " + gameObject.name + "has no objects to destroy");
         }
     }
-
-
 }

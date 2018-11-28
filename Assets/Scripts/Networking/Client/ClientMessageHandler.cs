@@ -901,10 +901,12 @@ public class ClientMessageHandler : MonoBehaviour
         if (GetLocalPlayerData() != null)
         {
             string message = GetLocalPlayerData();
-            client.SendMessageToServer("PlayerChangePositionForNewScene" + "/" + message, true);
+            if (msg[2] != null)
+            {
+                client.SendMessageToServer("PlayerChangePositionForNewScene" + "/" + message, true);
+            }
         }
         SceneManager.LoadScene(scene);
-
     }
 
     #endregion

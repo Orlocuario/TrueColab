@@ -63,7 +63,5 @@ public class NetworkEnemy
     {
         return hp <= 0;
     }
-
     #endregion
-
 }

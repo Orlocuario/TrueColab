@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc0a5bdfd58e245468603fafc7fb8734, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BroadcastPort: 48888
+  m_BroadcastPort: 47777
   m_BroadcastKey: 2222
   m_BroadcastVersion: 1
   m_BroadcastSubVersion: 1

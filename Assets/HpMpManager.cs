@@ -313,5 +313,4 @@ public class HpMpManager : MonoBehaviour
             Client.instance.SendMessageToServer(message, true);
         }
     }
-
 }
