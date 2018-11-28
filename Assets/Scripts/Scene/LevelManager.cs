@@ -70,7 +70,7 @@ public class LevelManager : MonoBehaviour
         if (GameObject.Find("ClientObject"))
         {
             client = GameObject.Find("ClientObject").GetComponent<Client>();
-            client.RequestPlayerIdToServer();
+            client.RequestPlayerDataToServer();
         }
 
         lManager = this;
@@ -266,22 +266,10 @@ public class LevelManager : MonoBehaviour
         string currentSceneNumber = Regex.Match(currentSceneName, @"\d+").Value;
         int nextSceneNumber = int.Parse(currentSceneNumber) + 1;
         string nextSceneName = "Escena" + nextSceneNumber;
-
+        string motive = "Finished last scene";
 
         Debug.Log("Changing to scene " + nextSceneName);
-        int newData = 1;
-
-        client.SendMessageToServer("ChangeScene/" + nextSceneName + "/" + newData.ToString() , true);
-    }
-
-    public void DieAndStayInThisScene()
-    {
-        string currentSceneName = SceneManager.GetActiveScene().name;
-
-        Debug.Log("Changing to scene " + currentSceneName);
-        int newData = 1;
-
-        client.SendMessageToServer("ChangeScene/" + currentSceneName + "/" +  newData.ToString() , true);
+        client.SendMessageToServer("ChangeFromEndOfScene/" + nextSceneName + "/" + motive , true);
     }
 
     public void ShowReconnectingMessage(bool valor)
@@ -341,7 +329,7 @@ public class LevelManager : MonoBehaviour
 
     public void ReloadLevel(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        //SceneManager.LoadScene(sceneName);
     }
 
     #endregion

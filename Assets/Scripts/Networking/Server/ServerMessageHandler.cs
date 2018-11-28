@@ -23,6 +23,9 @@ public class ServerMessageHandler
             case "ChangeScene":
                 HandleChangeScene(msg, ip);
                 break;
+            case "ChangeFromEndOfScene":
+                ChangeFromEndOfScene(msg, ip);
+                break;
             case "ObjectMoved":
                 SendObjectMoved(message, ip);
                 break;
@@ -80,7 +83,7 @@ public class ServerMessageHandler
             case "PlayerRequestOnlyId":
                 SendLocalPlayerData(ip);
                 break;
-            case "PlayerRequestId":
+            case "PlayerRequestAllData":
                 SendAllData(ip, Server.instance.GetPlayer(ip).room); //Manda todo para manejar mejor reconexiones. Inclusive información de playerId.
                 break;
             case "ActivateThisTeleporter":
@@ -271,6 +274,7 @@ public class ServerMessageHandler
     private void HandleChangeScene(string[] msg, string ip)
     {
         string scence = msg[1];
+        string motive = msg[2];
 
         NetworkPlayer player = server.GetPlayer(ip);
         Room room = player.room;
@@ -279,7 +283,7 @@ public class ServerMessageHandler
         log.WriteTotalExp(totalExp);
         log.WriteChangeScene(scence);
 
-        SendChangeScene(scence, room);
+        SendChangeScene(scence, room, motive);
     }
 
 
@@ -354,8 +358,13 @@ public class ServerMessageHandler
         {
             room.SendMessageToPlayer(triggerMessage, ip, true);
         }
-
     }
+
+    private void PlayerRequestOnlyIdAndControl(string ip)
+    {
+        SendPlayerIdAndControl(ip);
+    }
+
 
     private void SendLocalPlayerData(string ip)
     {
@@ -592,13 +601,9 @@ public class ServerMessageHandler
         room.log.WritePlayersAreDead();
         room.Reset();
         room.SendMessageToAllPlayers("PlayersAreDead" +"/"+ room.sceneToLoad, true);
-        foreach(NetworkPlayer nPlayer in room.players)
-        {
-            nPlayer.positionX = room.GetStartPosition()[0];
-            nPlayer.positionY = room.GetStartPosition()[1];
-        }
-        room.SendMessageToAllPlayers("NewChatMessage/" + room.actualChat, true);
+        room.ResetNPlayersPositions();
 
+        room.SendMessageToAllPlayers("NewChatMessage/" + room.actualChat, true);
     }
 
     private void SendColliderActivatorSet(string[] msg, string message, string ip)
@@ -760,7 +765,7 @@ public class ServerMessageHandler
         float[] coordenadas = player.room.GetStartPosition();
 
         int charId = Int32.Parse(data[1]);
-        float positionX = coordenadas[0]; //Cambiar Aquí 
+        float positionX = coordenadas[0]; 
         float positionY = coordenadas[1];
         int directionX = Int32.Parse(data[2]);
         int directionY = Int32.Parse(data[3]);
@@ -869,14 +874,38 @@ public class ServerMessageHandler
         room.SendMessageToAllPlayers(message, true);
     }
 
-    public void SendChangeScene(string sceneName, Room room)
+    public void SendChangeScene(string sceneName, Room room, string motive)
     {
-        string message = "ChangeScene/" + sceneName;
-        room.log.WriteChangeSceneFromAdmin(sceneName);
+        string message = "ChangeScene/" + sceneName + "/" + motive;
+        room.log.WriteSceneChange(sceneName, motive);
         room.sceneToLoad = sceneName;
         room.SendMessageToAllPlayers(message, true);
-        room.Reset();
     }
+
+    public void ChangeFromEndOfScene(string[] msg, string ip)
+    {
+        NetworkPlayer nPlayer = server.GetPlayer(ip);
+        Room room = nPlayer.room;
+        string sceneName = msg[1];
+        string motive = msg[2];
+        room.sceneToLoad = sceneName;
+        string message = "ChangeScene/" + sceneName + "/" + motive;
+        room.SendMessageToAllPlayers(message, true);
+        room.ResetNPlayersPositions();
+        room.log.WriteSceneChange(sceneName, motive);
+    }
+
+    public void SendChangeSceneFromAdmin(string sceneName, Room room, string motive)
+    {
+        room.log.WriteSceneChange(sceneName, motive);
+        string message = "ChangeScene/" + sceneName + "/" + motive;
+        room.SendMessageToAllPlayers(message, true);
+        room.Reset();
+        room.ResetNPlayersPositions();
+        room.SendMessageToAllPlayers("NewChatMessage/" + room.actualChat, true);
+    }
+
+
 
     public void SendSceneNameForMusic(string message, string ip)
     {

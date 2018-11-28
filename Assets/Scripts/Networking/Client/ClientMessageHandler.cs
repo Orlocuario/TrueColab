@@ -293,7 +293,8 @@ public class ClientMessageHandler : MonoBehaviour
             Debug.Log("Im changing hp with: " + hpDif + " units. FromHandleHpMpFromServer");
             hpMp.ChangeHP(hpDif);
         }
-        else{
+        else
+        {
             Debug.Log("Hps were no different");
         }
 
@@ -305,7 +306,8 @@ public class ClientMessageHandler : MonoBehaviour
 
             hpMp.ChangeMP(mpDif);
         }
-        else{
+        else
+        {
             Debug.Log("Mps were no different");
         }
 
@@ -901,11 +903,9 @@ public class ClientMessageHandler : MonoBehaviour
         if (GetLocalPlayerData() != null)
         {
             string message = GetLocalPlayerData();
-            if (msg[2] != null)
-            {
-                client.SendMessageToServer("PlayerChangePositionForNewScene" + "/" + message, true);
-            }
+            client.SendMessageToServer("PlayerChangePosition" + "/" + message, true);
         }
+
         SceneManager.LoadScene(scene);
     }
 

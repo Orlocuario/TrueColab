@@ -75,7 +75,6 @@ public class HpMpManager : MonoBehaviour
             if (currentRegRate >= regenerationFrameRate)
             {
                 currentRegRate = 0;
-                Debug.Log("Im changing hp and mp with: " + regenerationUnits.ToString() + " units. From FixedUpdate");
                 ChangeHP(regenerationUnits);
                 ChangeMP(regenerationUnits);
             }
@@ -158,13 +157,11 @@ public class HpMpManager : MonoBehaviour
             if (incomingMP != mpCurrentAmount)
             {
                 int howMuch = mpCurrentAmount - incomingMP;
-                Debug.Log("Im changing  mp with: " + howMuch + " units. FromReceivePlayer. RateDiv != 0");
                 ChangeMP(incomingMP - mpCurrentAmount);
             }
             if (incomingHP != hpCurrentAmount)
             {
                 int howMuch = hpCurrentAmount - incomingHP;
-                Debug.Log("Im changing hp with: " + howMuch + " units. FromReceivePlayer. RateDiv = 0");
                 ChangeHP(incomingHP - hpCurrentAmount);
             }
 
@@ -182,7 +179,6 @@ public class HpMpManager : MonoBehaviour
 
         currentHP += deltaHP;
         hpCurrentAmount += deltaHP;
-        Debug.Log("hpCurrentAmount is: " + hpCurrentAmount);
 
         if (hpCurrentAmount > maxMP)
         {

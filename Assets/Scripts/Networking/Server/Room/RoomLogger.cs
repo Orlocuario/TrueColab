@@ -87,14 +87,11 @@ public class RoomLogger
         writer.Close();
     }
 
-    public void WriteChangeSceneFromAdmin(string sceneName)
+    public void WriteSceneChange(string sceneName, string motive)
     {
         StreamWriter writer = GetWriter();
-        writer.WriteLine(GetTime() + "AdminChangedScene : " + sceneName);
+        writer.WriteLine(GetTime() + " Scene change to: " + sceneName + ". Motive: " + motive);
         writer.Close();
-
-        ///144020796794
-        ///1-52182990000
     }
 
     public void WritePlayersAreDead()

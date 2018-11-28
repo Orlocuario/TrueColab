@@ -96,7 +96,8 @@ public class Room
         if (IsFull())
         {
             Debug.Log("Full room");
-            sender.SendChangeScene(sceneToLoad, this);
+            string motive = "StartingGame";
+            sender.SendChangeScene(sceneToLoad, this, motive);
             started = true;
             SendMessageToAllPlayers("Verde: Conectado", false);
             SendMessageToAllPlayers("Rojo: Conectado", false);
@@ -339,18 +340,22 @@ public class Room
         switch (sceneToLoad)
         {
             case ("Escena1"):
-                //coordenadas[0] = 63.46f;
-                //coordenadas[1] = -4.9f;     Posiciones para testear final de etapa
+                coordenadas[0] = 63.46f;
+                coordenadas[1] = -4.9f;     //Posiciones para testear final de etapa
 
-                coordenadas[0] = -20f;
-                coordenadas[1] = -42;             
+                //coordenadas[0] = -20f;    //Posiciones iniciales
+                //coordenadas[1] = -42;             
                 break;
+
             case ("Escena2"):
                 //coordenadas[0] = 63.46f;
-                //coordenadas[1] = -5f;         pOSICIONES PARA TESTEAR SPIDER
+                //coordenadas[1] = -5f;     //  Posiciones Test Spider
 
-                coordenadas[0] = -21.32f;              
-                coordenadas[1] = 0.33f;
+                coordenadas[0] = 78f;     //  Coordenadas fin de la escena?  
+                coordenadas[1] = 1.2f;
+
+                //coordenadas[0] = -21.32f;     //Coordenadas iniciales
+                //coordenadas[1] = 0.33f;
                 break;
 
             case ("Escena3"):
@@ -362,9 +367,6 @@ public class Room
                 break;
 
             case ("Escena4"):
-                //coordenadas[0] = -42.92f;
-                //coordenadas[1] = 1f;
-
                 coordenadas[0] = -2.04f;
                 coordenadas[1] = 4.18f;                   
                 break;
@@ -388,6 +390,15 @@ public class Room
                 break;
         }
         return coordenadas;
+    }
+
+    public void ResetNPlayersPositions()
+    {
+        foreach (NetworkPlayer nPlayer in players)
+        {
+            nPlayer.positionX = GetStartPosition()[0];
+            nPlayer.positionY = GetStartPosition()[1];
+        }
     }
 
     private int GetPlayerId()

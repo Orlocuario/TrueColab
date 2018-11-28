@@ -220,7 +220,8 @@ public class Server : MonoBehaviour
         {
             player.connected = true;
             player.connectionId = connectionId;
-            SendMessageToClient(connectionId, "ChangeScene/" + player.room.sceneToLoad, true);
+            string motive = "Reconnection";
+            SendMessageToClient(connectionId, "ChangeScene/" + player.room.sceneToLoad + "/" + motive, true);
             List <NetworkPlayer> players = player.room.players;
 			foreach (NetworkPlayer connectedPlayer in players)
 			{
@@ -230,7 +231,7 @@ public class Server : MonoBehaviour
 					break;
 				}	
 			}
-            messageHandler.SendAllData(recAddress, player.room);
+            //messageHandler.SendAllData(recAddress, player.room);
             player.room.SendControlEnemiesToClient(player, false);
             player.SendDataToRoomBoxManager();
             UnityEngine.Debug.Log("Client " + recAddress + " reconnected");
@@ -385,7 +386,8 @@ public class Server : MonoBehaviour
 
     public void ChangeRoomScene(Room room, string scene)
     {
-        room.sender.SendChangeScene(scene, room);
+        string motive = "Admin Changed Scene";
+        room.sender.SendChangeSceneFromAdmin(scene, room, motive);
     }
 
     #endregion

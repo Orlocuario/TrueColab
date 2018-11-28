@@ -221,9 +221,9 @@ public class Client : MonoBehaviour
         SendMessageToServer("NewChatMessage/" + newChatMessage, false);
     }
 
-    public void RequestPlayerIdToServer()
+    public void RequestPlayerDataToServer()
     {
-        SendMessageToServer("PlayerRequestId", true);
+        SendMessageToServer("PlayerRequestAllData", true);
     }
 
 
