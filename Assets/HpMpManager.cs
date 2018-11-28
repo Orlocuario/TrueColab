@@ -240,8 +240,6 @@ public class HpMpManager : MonoBehaviour
         currentMP += deltaMP;
         mpCurrentAmount += deltaMP;         //int copy for data coordination
 
-        Debug.Log("CurrentMP amount is: " + mpCurrentAmount);
-
         if (currentMP > maxMP)
         {
             currentMP = maxMP;
