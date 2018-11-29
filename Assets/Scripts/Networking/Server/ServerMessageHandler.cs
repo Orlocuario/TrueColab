@@ -41,6 +41,9 @@ public class ServerMessageHandler
             case "PlayersAreDead":
                 HandlePlayersAreDead(msg, ip);
                 break;
+            case "SaveCheckpoint":
+                HandleSaveCheckpoint(msg, ip);
+                break;
             case "ChangeObjectPosition":
                 SendUpdatedObjectPosition(message, ip);
                 break;
@@ -318,6 +321,7 @@ public class ServerMessageHandler
                 room.SendMessageToPlayer("UpdateInventoryFromServer" + "/" + nPlayer.inventory[i],ip,true);
             }
         }
+        room.SendMessageToPlayer("TakeYourCheckpoint" + "/" + nPlayer.lastRespawn.x.ToString() + "/" + nPlayer.lastRespawn.y.ToString(), ip, true);
 
         foreach (RoomSwitch switchi in room.switchs)
         {
@@ -435,6 +439,17 @@ public class ServerMessageHandler
         room.mTriggersActivated.AddActivatedTrigger(triggerName);
 
         //room.log.WriteTriggerActivated();
+    }
+
+    private void HandleSaveCheckpoint(string[] msg, string ip)
+    {
+        float x = float.Parse(msg[1]);
+        float y = float.Parse(msg[2]);
+        NetworkPlayer nPlayer = server.GetPlayer(ip);
+
+        nPlayer.lastRespawn.x = x;
+        nPlayer.lastRespawn.y = y;
+
     }
 
     private void SendActivatedTeleporter(string[] msg, string message, string ip)

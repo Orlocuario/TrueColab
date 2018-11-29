@@ -25,6 +25,7 @@ public class NetworkPlayer
     public bool pressingRight;
     public bool pressingLeft;
     public bool attacking;
+    public Vector2 lastRespawn;
 
     #endregion
 
@@ -47,6 +48,7 @@ public class NetworkPlayer
         pressingLeft = false;
         positionX = room.GetStartPosition()[0];  
         positionY = room.GetStartPosition()[1];
+        lastRespawn = new Vector2(room.GetStartPosition()[0], room.GetStartPosition()[1]);
         speedX = 0;
         directionX = 1;
         directionY = 1;

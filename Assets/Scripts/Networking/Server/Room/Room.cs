@@ -398,6 +398,8 @@ public class Room
         {
             nPlayer.positionX = GetStartPosition()[0];
             nPlayer.positionY = GetStartPosition()[1];
+            nPlayer.lastRespawn.x = GetStartPosition()[0];
+            nPlayer.lastRespawn.y = GetStartPosition()[1];
         }
     }
 

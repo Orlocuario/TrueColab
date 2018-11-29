@@ -40,6 +40,9 @@ public class ClientMessageHandler : MonoBehaviour
             case "ChangeScene":
                 HandleChangeScene(msg);
                 break;
+            case "TakeYourCheckpoint":
+                HandleMyCheckpoint(msg);
+                break;
             case "ObjectMoved":
                 HandleObjectMoved(msg);
                 break;
@@ -893,6 +896,17 @@ public class ClientMessageHandler : MonoBehaviour
         LevelManager lManager = GameObject.FindObjectOfType<LevelManager>();
         string poiId = msg[1];
         lManager.HandlePoiReady(poiId);
+    }
+
+    private void HandleMyCheckpoint(string[] msg)
+    {
+        float x = float.Parse(msg[1]);
+        float y = float.Parse(msg[2]);
+        if(FindObjectOfType<LevelManager>().GetLocalPlayerController())
+        {
+            PlayerController localPlayer = FindObjectOfType<LevelManager>().GetLocalPlayerController();
+            localPlayer.respawnPosition = new Vector3(x, y);
+        }
     }
 
     private void HandleChangeScene(string[] msg)
