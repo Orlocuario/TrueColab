@@ -1,0 +1,7 @@
+viajes uber mn:
+
+martes: ñuñoa - pudahuel= 9000 		//Matías pagó
+martes: provi - ñuñoa 	= 3000
+Miérco: ñuñoa - pudahuel= 9000
+Jueves: ñuñoa - pudahuel= 9000
+Jueves: pudahuel - ñuñoa= 9000
