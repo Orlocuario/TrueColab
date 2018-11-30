@@ -16,7 +16,6 @@ public class PickUpItem : MonoBehaviour
 
     public void PickUp(bool pickedFromServer)
     {
-
         Inventory.instance.AddItem(this, pickedFromServer);
 
         if (itemObj != null)

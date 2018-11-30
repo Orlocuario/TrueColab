@@ -33,6 +33,12 @@ public class ActivableSystemActions
         sceneAnimator.SetBool(parameter, value, activableSystem.gameObject);
     }
 
+    protected void SetAnimatorBool(string parameter, bool value, GameObject activableSystem)
+    {
+        SceneAnimator sceneAnimator = GameObject.FindObjectOfType<SceneAnimator>();
+        sceneAnimator.SetBool(parameter, value, activableSystem.gameObject);
+    }
+
     protected void SetAnimatorBool(string parameter, bool value, ActivableSystem activableSystem, float time)
     {
         SceneAnimator sceneAnimator = GameObject.FindObjectOfType<SceneAnimator>();

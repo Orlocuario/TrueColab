@@ -70,10 +70,16 @@ public class Inventory : MonoBehaviour
 
         if (system)
         {
+            Debug.Log("My system is named: " + system.name);
             if (system.PlaceItem(selectedItem.Value.sprite))
             {
                 RemoveItem();
             }
+        }
+        else
+        {
+            LevelManager lManager = FindObjectOfType<LevelManager>();
+            lManager.ActivateNPCFeedback("¿Estás cerca de una máquina?");
         }
     }
 

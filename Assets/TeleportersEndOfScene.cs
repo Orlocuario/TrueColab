@@ -47,6 +47,11 @@ public class TeleportersEndOfScene : MonoBehaviour
         {
             currentGears = 0;
         }
+        else
+        {
+            LevelManager lManager = FindObjectOfType<LevelManager>();
+            lManager.ActivateNPCFeedback("Con uno más probablemente es suficiente... Hay varios caminos para entontrar");
+        }
     }
 
     private void InstantiateEndOfScenePortals()

@@ -113,7 +113,6 @@ public class LevelManager : MonoBehaviour
         {
             Debug.LogError("ActivableSystem " + systemName + " does not exists");
         }
-
     }
 
 
@@ -269,7 +268,7 @@ public class LevelManager : MonoBehaviour
         string motive = "Finished last scene";
 
         Debug.Log("Changing to scene " + nextSceneName);
-        client.SendMessageToServer("ChangeFromEndOfScene/" + nextSceneName + "/" + motive , true);
+        client.SendMessageToServer("ChangeFromEndOfScene/" + nextSceneName + "/" + motive, true);
     }
 
     public void ShowReconnectingMessage(bool valor)
@@ -945,7 +944,7 @@ public class LevelManager : MonoBehaviour
     private void CoordinateCircuitMovingElements()
     {
         ObjectInCircuitMovementController[] mObjects = FindObjectsOfType<ObjectInCircuitMovementController>();
-        foreach(ObjectInCircuitMovementController mController in mObjects)
+        foreach (ObjectInCircuitMovementController mController in mObjects)
         {
             if (mController.move)
             {

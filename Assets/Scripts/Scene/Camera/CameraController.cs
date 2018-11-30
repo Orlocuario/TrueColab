@@ -307,7 +307,6 @@ public class CameraController : MonoBehaviour
         currentState = CameraState.TargetZoom;
 
         Vector3 currentDistance = targetPosition - transform.position;
-        currentDistance.Normalize();
 
         currentStepPos = currentDistance / movement.stepsToTarget;
         cameraRate = (movement.ortographic_size - initialSize) / movement.stepsToTarget;

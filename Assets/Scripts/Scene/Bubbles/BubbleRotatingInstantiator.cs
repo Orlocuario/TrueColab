@@ -122,7 +122,7 @@ public class BubbleRotatingInstantiator : MonoBehaviour
 	public void GearActivation()
 	{
 		gearsActivated++; 
-		Debug.LogError ("Number of gears who activated is: " + gearsActivated); 
+		Debug.LogError ("Number of gears activated is: " + gearsActivated); 
 		if (gearsActivated >= gearsNeeded) 
 		{
 			isWorking = true; 

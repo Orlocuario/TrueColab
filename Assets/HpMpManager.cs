@@ -184,6 +184,7 @@ public class HpMpManager : MonoBehaviour
         {
             hpCurrentAmount = maxMP;
         }
+
         if (hpCurrentAmount <= 0)
         {
             hpCurrentAmount = 0;

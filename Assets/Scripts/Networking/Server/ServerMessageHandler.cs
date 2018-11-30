@@ -29,6 +29,8 @@ public class ServerMessageHandler
             case "ObjectMoved":
                 SendObjectMoved(message, ip);
                 break;
+            case "ItemAddedToActivable":
+                break;
             case "ObjectDestroyed":
                 SendObjectDestroyed(message, msg, ip);
                 break;
@@ -914,9 +916,9 @@ public class ServerMessageHandler
     {
         room.log.WriteSceneChange(sceneName, motive);
         string message = "ChangeScene/" + sceneName + "/" + motive;
-        room.SendMessageToAllPlayers(message, true);
         room.Reset();
         room.ResetNPlayersPositions();
+        room.SendMessageToAllPlayers(message, true);
         room.SendMessageToAllPlayers("NewChatMessage/" + room.actualChat, true);
     }
 

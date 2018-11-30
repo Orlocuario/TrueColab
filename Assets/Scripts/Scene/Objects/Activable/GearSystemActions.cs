@@ -257,6 +257,8 @@ public class GearSystemActions : ActivableSystemActions
 
 		SpriteRenderer systemSpriteRenderer = gearSystem.GetComponent<SpriteRenderer>();
 		systemSpriteRenderer.sprite = gearSystem.activatedSprite;
+        SetAnimatorBool("startMoving", true, gearSystem);
+
 
         // Doing Something
 
@@ -308,11 +310,13 @@ public class GearSystemActions : ActivableSystemActions
 
         SpriteRenderer systemSpriteRenderer = gearSystem.GetComponent<SpriteRenderer>();
         systemSpriteRenderer.sprite = gearSystem.activatedSprite;
+        SetAnimatorBool("startMoving", true, gearSystem);
+
 
         // Doing Something
 
-        BubbleRotatingInstantiator bInstantiatior = GameObject.Find("BubbleCentralInstatiator").GetComponent<BubbleRotatingInstantiator>();
-        bInstantiatior.GearActivation();
+        TeleportersEndOfScene tEndOfScene = GameObject.Find("TeleportersEndOfScene").GetComponent<TeleportersEndOfScene>();
+        tEndOfScene.GearActivation();
 
         //  Planner 
         if (Object.FindObjectOfType<Planner>())
@@ -331,6 +335,7 @@ public class GearSystemActions : ActivableSystemActions
             SendMessageToServer("ActivateSystem/" + gearSystem.name, true);
         }
     }
+
     private void HandleGearSystemF(GearSystem gearSystem, bool notifyOthers)
     {
 

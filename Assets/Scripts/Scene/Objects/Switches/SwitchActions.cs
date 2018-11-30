@@ -495,8 +495,21 @@ public class SwitchActions : MonoBehaviour
             TriggerCamera tCamera = GameObject.Find("TriggerCameraForEnginScene3").GetComponent<TriggerCamera>();
             camera.ChangeState(CameraState.TargetZoom, tCamera.movements[0]);
         }
+
         levelManager.DestroyObject("ActivateNPCForEnginDestroyabe", .1f);
         levelManager.DestroyObject("CajaSwitchFierro", 3.1f);
+        GameObject eArrowRight = levelManager.InstatiateSprite("Arrows/engineerArrowRight", new Vector2(45.3f, -6.42f));
+        if (eArrowRight)
+        {
+            Transform theTransform = eArrowRight.GetComponent<Transform>();
+            theTransform.position = new Vector3(15.53f, 16.72f);
+            float arrowSize = eArrowRight.transform.localScale.y;
+            theTransform.localScale = new Vector3(theTransform.localScale.x, arrowSize *-1, theTransform.localScale.z);
+        }
+
+        GameObject wArrowUp = levelManager.InstatiateSprite("Arrows/warriorArrowUp", new Vector2(29.290f, -13.61f));
+        GameObject mArrowRight = levelManager.InstatiateSprite("Arrows/mageArrowRight", new Vector2(25.79f, -1.28f));
+
         levelManager.InstantiatePortal("EnginTeleporter", new Vector2(-11.3f, 17.5f), new Vector2(14.1f, 15.7f));
         levelManager.InstantiatePortal("MageTeleporter", new Vector2(-11.3f, 22.05f), new Vector2(25.1f, -1.1f));
         levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(-21.77f, 17.2f), new Vector2(26.06f, -12.9f));

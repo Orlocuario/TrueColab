@@ -38,27 +38,26 @@ public class ActivableSystem : MonoBehaviour
         if (!activated)
         {
             int pos = ComponentPosition(item);
-
+            Debug.Log("The position of this item in activable is: " + pos);
             if (pos != -1)
             {
                 PlaceComponent(pos);
-
                 if (AllComponentsPlaced())
                 {
+                    Debug.Log("Im ready! " + item.name);
                     activated = true;
                     StartCoroutine(Actioned());
                 }
-
                 return true;
             }
-
         }
-
         return false;
     }
 
     protected void PlaceComponent(int pos)
     {
+        Debug.Log("placing component in position: " + pos);
+
         components[pos].placed = true;
 
         SpriteRenderer[] componentSlots = GetComponentsInChildren<SpriteRenderer>();
@@ -67,10 +66,11 @@ public class ActivableSystem : MonoBehaviour
         {
             if (componentSlots[i].sprite == null)
             {
+                Debug.Log("Sprite placed in pos: " + pos);
+
                 componentSlots[i].sprite = components[pos].sprite;
             }
         }
-
     }
 
     #endregion
@@ -93,7 +93,7 @@ public class ActivableSystem : MonoBehaviour
             particles[i] = _particles[i].gameObject;
         }
         ToggleParticles(false);
-    } 
+    }
 
     public void ToggleParticles(bool activate)
     {
@@ -108,7 +108,6 @@ public class ActivableSystem : MonoBehaviour
 
     protected int ComponentPosition(Sprite item)
     {
-
         for (int i = 0; i < components.Length; i++)
         {
             if (components[i].sprite.Equals(item))
@@ -116,13 +115,23 @@ public class ActivableSystem : MonoBehaviour
                 return i;
             }
         }
+        return -1;
+    }
 
+    protected int ComponentPositionForMoreThanOneSprite(Sprite item)
+    {
+        for (int i = 0; i < components.Length; i++)
+        {
+            if (components[i].sprite.Equals(item))
+            {
+                return i;
+            }
+        }
         return -1;
     }
 
     protected bool AllComponentsPlaced()
     {
-
         for (int i = 0; i < components.Length; i++)
         {
             if (!components[i].placed)
@@ -130,7 +139,6 @@ public class ActivableSystem : MonoBehaviour
                 return false;
             }
         }
-
         return true;
     }
 
@@ -153,5 +161,18 @@ public class ActivableSystem : MonoBehaviour
     }
 
     #endregion
+
+    #region Messaging
+
+    private void SendMessageToServer(string message, bool secure)
+    {
+        if (Client.instance)
+        {
+            Client.instance.SendMessageToServer(message, secure);
+        }
+    }
+
+    #endregion
+
 
 }

@@ -359,7 +359,7 @@ public class Room
                 break;
 
             case ("Escena3"):
-                //coordenadas[0] = 80.81f;      Posiciones testear final de etapa
+                //coordenadas[0] = 80.81f;      //Posiciones testear final de etapa
                 //coordenadas[1] = -4.94f; 
 
                 coordenadas[0] = -1.24f;
