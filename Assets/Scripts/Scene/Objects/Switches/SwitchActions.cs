@@ -558,7 +558,7 @@ public class SwitchActions : MonoBehaviour
 
         //  Destroy Switches Blocker
         GameObject cajaSwitch = GameObject.Find("CajaSwitchFierroFinal");
-        Destroy(cajaSwitch, 1.5f);
+        Destroy(cajaSwitch, 2.5f);
 
         //  Destroy Feedback for Switches
         GameObject feedBack = GameObject.Find("ActivateNPCForFinalSwitches");
@@ -1043,7 +1043,6 @@ public class SwitchActions : MonoBehaviour
     #endregion
 
     #region Utils
-
 
     #endregion
 

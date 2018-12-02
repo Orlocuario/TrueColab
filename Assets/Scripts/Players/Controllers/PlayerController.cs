@@ -490,6 +490,7 @@ public class PlayerController : MonoBehaviour
             ResetDamagingObjects();
         }
 
+        ResetCamera();
         ResetChatZones();
         ResetDamagingTriggers();
         ResetParticleZones();
@@ -502,16 +503,10 @@ public class PlayerController : MonoBehaviour
 
     protected void ResetCamera()
     {
-        GameObject mCamera = GameObject.Find("MainCamera");
-        if (mCamera)
+        TriggerCamera[] cTriggers = FindObjectsOfType<TriggerCamera>();
+        foreach (TriggerCamera tCamera in cTriggers)
         {
-            mCamera.GetComponent<CameraController>().SetDefaultValues();
-            TriggerCamera[] cTriggers = FindObjectsOfType<TriggerCamera>();
-            foreach (TriggerCamera tCamera in cTriggers)
-            {
-                tCamera.CheckIfPlayerLeft(gameObject);
-            }
-
+            tCamera.ErasePlayerFromMEmory(playerId);
         }
     }
 

@@ -132,6 +132,16 @@ public class TriggerCamera : MonoBehaviour
         }
     }
 
+    public void ErasePlayerFromMEmory(int playerId)
+    {
+        foreach (PlayerController controller in playerControllers)
+        {
+            if(playerControllers[playerId] != null)
+            {
+                playerControllers[playerId] = null;
+            }
+        }
+    }
     public bool CheckIfPlayerLeft(GameObject playerObject)
     {
         PlayerController player = playerObject.GetComponent<PlayerController>();
