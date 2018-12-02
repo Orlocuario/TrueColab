@@ -55,8 +55,15 @@ public class RuneSystemActions : ActivableSystemActions
 
                 Planner planner = Object.FindObjectOfType<Planner>();
                 planner.Monitor();
-
             }
+        }
+
+        if (GameObject.Find("mageArrowLeft4Others"))
+        {
+            GameObject mageArrow = GameObject.Find("mageArrowLeft4Others");
+            Vector2 arrowPosition = new Vector2(mageArrow.transform.position.x, mageArrow.transform.position.y);
+            GameObject newArrow = LevelManager.lManager.InstatiateSprite("Arrows/warriorArrowRight", arrowPosition);
+            DestroyObject("mageArrowLeft4Others", 0);
         }
 
         if (notifyOthers)

@@ -30,6 +30,8 @@ public class HpMpManager : MonoBehaviour
     private float regenerationFrameRate;
     private int currentRegRate;
     private bool isRegenerating;
+    private int controllerCheckRate;
+    private int controllerCheckAmount;
 
     private LevelManager lManager;
     private HUDDisplay hudDisplay;
@@ -40,6 +42,8 @@ public class HpMpManager : MonoBehaviour
     {
         maxHP = 250;
         maxMP = 250;
+        controllerCheckRate = 600;
+        controllerCheckAmount = 0;
         //maxExp = 250;
         currentHP = maxHP;
         currentMP = maxMP;
@@ -138,18 +142,18 @@ public class HpMpManager : MonoBehaviour
 
             HUDDisplay hpAndMp = GameObject.FindObjectOfType<LevelManager>().hpAndMp;
             hpAndMp.StopLocalParticles(); // Only stop local particles
-           /* if (incomingMP != mpCurrentAmount)
-            {
-                int howMuch = mpCurrentAmount - incomingMP;
-                Debug.Log("Im changing  mp with: " + howMuch + " units. FromReceivePlayer. RateDiv = 0");
-                ChangeMP(mpCurrentAmount - incomingMP);
-            }
-            if (incomingHP != hpCurrentAmount)
-            {
-                int howMuch = hpCurrentAmount - incomingHP;
-                Debug.Log("Im changing hp with: " + howMuch + " units. FromReceivePlayer. RateDiv = 0");
-                ChangeHP(hpCurrentAmount - incomingHP);
-            }*/
+                                          /* if (incomingMP != mpCurrentAmount)
+                                           {
+                                               int howMuch = mpCurrentAmount - incomingMP;
+                                               Debug.Log("Im changing  mp with: " + howMuch + " units. FromReceivePlayer. RateDiv = 0");
+                                               ChangeMP(mpCurrentAmount - incomingMP);
+                                           }
+                                           if (incomingHP != hpCurrentAmount)
+                                           {
+                                               int howMuch = hpCurrentAmount - incomingHP;
+                                               Debug.Log("Im changing hp with: " + howMuch + " units. FromReceivePlayer. RateDiv = 0");
+                                               ChangeHP(hpCurrentAmount - incomingHP);
+                                           }*/
             return;
         }
         else
@@ -188,6 +192,12 @@ public class HpMpManager : MonoBehaviour
         if (hpCurrentAmount <= 0)
         {
             hpCurrentAmount = 0;
+            if (FindObjectOfType<LevelManager>().GetLocalPlayerController().controlOverEnemies)
+            {
+                SendMessageToServer("PlayersAreDead/");
+            }
+            currentHP = maxHP;
+            currentMP = maxMP;
         }
 
         if (currentHP >= maxHP)

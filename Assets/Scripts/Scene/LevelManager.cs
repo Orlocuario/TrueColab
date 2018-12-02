@@ -328,7 +328,7 @@ public class LevelManager : MonoBehaviour
 
     public void ReloadLevel(string sceneName)
     {
-        //SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName);
     }
 
     #endregion

@@ -491,10 +491,8 @@ public class PlayerController : MonoBehaviour
         }
 
         ResetChatZones();
-        //ResetCamera();                  //For Test // ShouldTry Again
         ResetDamagingTriggers();
         ResetParticleZones();
-        //ResetDecisions();
         ResetPowerables();
         justPowered = false;
         justJumped = false;

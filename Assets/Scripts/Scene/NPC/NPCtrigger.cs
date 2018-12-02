@@ -379,7 +379,7 @@ public class NPCtrigger : MonoBehaviour
 
     private IEnumerator WaitToBeActiveAgain()
     {
-        yield return new WaitForSeconds (timeForReactivation);
+        yield return new WaitForSeconds(timeForReactivation);
         UndestroyMyCollider();
         feedbackCount = 0;
     }
@@ -410,9 +410,7 @@ public class NPCtrigger : MonoBehaviour
                 default:
                     return;
             }
-
         }
-
         else
         {
             levelManager.ActivateNPCFeedback("Traigan " + expRequired.ToString() + " de EXP o mejor sigan buscando los 2 ENGRANAJES.");
@@ -422,7 +420,31 @@ public class NPCtrigger : MonoBehaviour
     protected void HandleEngInstantation()
     {
         ReadNextFeedback();
-        levelManager.InstantiatePrefab("Items/EngranajeA", new Vector2(-9.4f, -4f));
+        int numberOfGears = 3;
+        for (int i = 0; i < numberOfGears; i++)
+        {
+            switch (i)
+            {
+                case 0:
+                    if (GameObject.Find("EngranajeA") && GameObject.Find("MaquinaEngranajeC").GetComponent<GearSystem>().activated == false)
+                    {
+                        levelManager.InstantiatePrefab("Items/EngranajeA", new Vector2(-9.4f, -4f));
+                    }
+                    break;
+                case 1:
+                    if (GameObject.Find("EngranajeB") && GameObject.Find("MaquinaEngranajeD").GetComponent<GearSystem>().activated == false)
+                    {
+                        levelManager.InstantiatePrefab("Items/EngranajeB", new Vector2(-9.4f, -4f));
+                    }
+                    break;
+                case 2:
+                    if (GameObject.Find("EngranajeC") && GameObject.Find("MaquinaEngranajeE").GetComponent<GearSystem>().activated == false)
+                    {
+                        levelManager.InstantiatePrefab("Items/EngranajeC", new Vector2(-9.4f, -4f));
+                    }
+                    break;
+            }
+        }
     }
 
     protected void SendMessageToServer(string message, bool secure)

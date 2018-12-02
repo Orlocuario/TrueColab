@@ -329,15 +329,13 @@ public class SwitchActions : MonoBehaviour
 		rocaGigante.Slide();
 		Debug.Log ("Got Rock");
 
-        GameObject eArrowUp = levelManager.InstatiateSprite("Arrows/engineerArrowUp", new Vector2(45.3f, -6.42f));
-        eArrowUp.name = "eArrowUp";
-
         BendTree bendTree = FindObjectOfType<BendTree>();
 		bendTree.Fall();
 
-        levelManager.InstatiateSprite("Arrows/engineerArrowUp", new Vector2(33.07f, -6.3f));
-        levelManager.InstatiateSprite("Arrows/mageArrowDown", new Vector2(35.16f, -6.3f));
-        levelManager.InstatiateSprite("Arrows/warriorArrowDown", new Vector2(35.95f, -6.3f));
+        GameObject objectEArrowUp = levelManager.InstatiateSprite("Arrows/engineerArrowUp", new Vector2(33.07f, -6.3f));
+        GameObject objectMArrowDown = levelManager.InstatiateSprite("Arrows/mageArrowDown", new Vector2(35.16f, -6.3f));
+        GameObject objectWArrowDown = levelManager.InstatiateSprite("Arrows/warriorArrowDown", new Vector2(35.95f, -6.3f));
+        objectWArrowDown.name = "ChangingWarriorArrowTunnel";
         levelManager.InstantiatePrefab("Exp/ExpFeedback35", new Vector2(34.51f, -3.88f));
 
         GameObject sFeedback = GameObject.Find("ActivateNPCFor3DeactivableSwitches");
@@ -407,6 +405,14 @@ public class SwitchActions : MonoBehaviour
         /* Instantiate Arrow feedback y cambiar arrow de warrior*/
         GameObject sprite = GameObject.Find("CartelCambiante");
         Destroy(sprite);
+
+        GameObject changingWarriorArrow = GameObject.Find("ChangingWarriorArrowTunnel");
+        if (changingWarriorArrow)
+        {
+            Vector2 signPosition = new Vector2(changingWarriorArrow.transform.position.x, changingWarriorArrow.transform.position.y);
+            Destroy(changingWarriorArrow);
+            levelManager.InstatiateSprite("Arrows/warriorArrowRight", signPosition);
+        }
 
         levelManager.InstantiatePortal("WarriorTeleporter", new Vector2(82.64f, -18.55f), new Vector2(37.23f, -5.58f), true, 7);
 
@@ -639,6 +645,8 @@ public class SwitchActions : MonoBehaviour
 
         GameObject mPlatform = levelManager.InstantiatePrefab("MovPlatform", startPosition);
         levelManager.SetMovingObjectData(mPlatform, startPosition, endPosition, 1f, .8f, false);
+        GameObject filter = GameObject.Find("KillZoneForAllDownwards");
+        Destroy(filter);
     }
 
     private void HandlerGroup31()

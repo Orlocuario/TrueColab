@@ -73,7 +73,6 @@ public class Room
             log = logger;
         }
         sceneToLoad = Server.instance.sceneToLoad;
-
     }
 
     #endregion
@@ -229,7 +228,6 @@ public class Room
     //Set current controller to False, and find a new one that is connected
     public void ChangeControlEnemies()
     {
-
         foreach (NetworkPlayer player in players)
         {
             if (player.controlOverEnemies == true)
@@ -271,6 +269,33 @@ public class Room
         RoomSwitch switchi = new RoomSwitch(groupId, individualId, this);
         switchs.Add(switchi);
         return switchi;
+    }
+
+    public void CheckControlOverEnemies()
+    {
+        int playersInControl = 0;
+        foreach (NetworkPlayer player in players)
+        {
+            if (player.connected)
+            {
+                if(player.controlOverEnemies)
+                {
+                    playersInControl++;
+                }
+            }
+        }
+
+        if(playersInControl == 0)
+        {
+            foreach (NetworkPlayer player in players)
+            {
+                if (player.connected)
+                {
+                    SendControlEnemiesToClient(player, true);
+                    break;
+                }
+            }
+        }
     }
 
     public RoomSwitch GetSwitch(int groupId, int individualId)
@@ -351,8 +376,8 @@ public class Room
                 //coordenadas[0] = 63.46f;
                 //coordenadas[1] = -5f;     //  Posiciones Test Spider
 
-                //coordenadas[0] = 78f;     //  Coordenadas fin de la escena?  
-                //coordenadas[1] = 1.2f;
+                //coordenadas[0] = 90.6f;     //  Coordenadas fin de la escena  
+                //coordenadas[1] = -5f;
 
                 coordenadas[0] = -21.32f;     //Coordenadas iniciales
                 coordenadas[1] = 0.33f;
@@ -368,7 +393,7 @@ public class Room
 
             case ("Escena4"):
                 coordenadas[0] = -2.04f;
-                coordenadas[1] = 4.18f;                   
+                coordenadas[1] = 4.18f;
                 break;
 
             case ("Escena5"):
@@ -396,10 +421,10 @@ public class Room
     {
         foreach (NetworkPlayer nPlayer in players)
         {
-            nPlayer.positionX = GetStartPosition()[0];
-            nPlayer.positionY = GetStartPosition()[1];
-            nPlayer.lastRespawn.x = GetStartPosition()[0];
-            nPlayer.lastRespawn.y = GetStartPosition()[1];
+            nPlayer.positionX = nPlayer.room.GetStartPosition()[0];
+            nPlayer.positionY = nPlayer.room.GetStartPosition()[1];
+            nPlayer.lastRespawn.x = nPlayer.room.GetStartPosition()[0];
+            nPlayer.lastRespawn.y = nPlayer.room.GetStartPosition()[1];
         }
     }
 

@@ -67,6 +67,9 @@ public class ClientMessageHandler : MonoBehaviour
             case "StopSpendingMana":
                 HandlePlayerStopSpendingMana(msg);
                 break;
+            case "SendGroupToLastCheckpoint":
+                HandleResetPlayertoCheckpoint(msg);
+                break;
             case "ChangeRegeneration":
                 HandlePlayerChangedRegenerationState(msg);
                 break;
@@ -394,7 +397,7 @@ public class ClientMessageHandler : MonoBehaviour
 
             if (localPlayer)
             {
-                Debug.Log("Now I Have a Local Player!!!!!");
+                Debug.Log("Now local player is: " + localPlayer.gameObject.name);
             }
 
             localPlayer.controlOverEnemies = control;
@@ -1082,12 +1085,28 @@ public class ClientMessageHandler : MonoBehaviour
         }
     }
 
+    private void HandleResetPlayertoCheckpoint(string[] msg)
+    {
+        if (NotInClientScene())
+        {
+            float positionX = float.Parse(msg[1]);
+            float positionY = float.Parse(msg[2]);
+            Vector2 destination = new Vector2(positionX, positionY);
+            PlayerController lPlayer = LevelManager.lManager.GetLocalPlayerController();
+            lPlayer.respawnPosition = destination;
+            LevelManager.lManager.Respawn();
+        }
+    }
+
     private void HandlePlayerStopSpendingMana(string[] msg)
     {
-        int currentDivider = Int32.Parse(msg[1]);
-        int currentMana = Int32.Parse(msg[2]);
-        HpMpManager hpMpManager = FindObjectOfType<HpMpManager>();
-        hpMpManager.ReceivePlayerStopSpendingMana(currentDivider, currentMana);
+        if (NotInClientScene())
+        {
+            int currentDivider = Int32.Parse(msg[1]);
+            int currentMana = Int32.Parse(msg[2]);
+            HpMpManager hpMpManager = FindObjectOfType<HpMpManager>();
+            hpMpManager.ReceivePlayerStopSpendingMana(currentDivider, currentMana);
+        }
     }
 
     private void HandlePlayersAreDead(string[] array)

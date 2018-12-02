@@ -22,6 +22,8 @@ public class Server : MonoBehaviour
     private int bigChannelId;
     private int secureChannel;
     private bool listening;
+    private int checkControlInroomsRate = 600;
+    private int checkControlInRoomsUpdate = 0;
 
     public List<Room> rooms;
     public Room lastDestroyedRoom; //Almacena una referencia al ultimo room que se ha destruido para quue el siguiente room en crearse use el mismo logger que el anterior.
@@ -55,7 +57,6 @@ public class Server : MonoBehaviour
     public List<int> startLinePerLevel;
     //Cache de planes
     private Dictionary<string, string> cacheOutput = new Dictionary<string, string>();
-
     #endregion
 
     #region Start
@@ -66,7 +67,6 @@ public class Server : MonoBehaviour
         NPCsLastMessage = "";
         maxPlayers = 3;
         instance = this;
-
         NetworkTransport.Init();
 
         serverNetworkDiscovery = GetComponent<ServerNetworkDiscovery>();
@@ -187,6 +187,17 @@ public class Server : MonoBehaviour
                 UnityEngine.Debug.Log("Client " + recAddress + " disconnected");
                 break;
         }
+
+        checkControlInRoomsUpdate++;
+        if (checkControlInRoomsUpdate == checkControlInroomsRate)
+        {
+            foreach(Room room in rooms)
+            {
+                room.CheckControlOverEnemies();
+            }
+            checkControlInRoomsUpdate = 0;
+        }
+
     }
 
     #endregion
@@ -382,6 +393,11 @@ public class Server : MonoBehaviour
     {
         lastDestroyedRoom = room;
         rooms.Remove(room);
+    }
+
+    public void SenderResetCheckpoint(Room room)
+    {
+        room.sender.SendResetToCheckpoint(room);
     }
 
     public void ChangeRoomScene(Room room, string scene)

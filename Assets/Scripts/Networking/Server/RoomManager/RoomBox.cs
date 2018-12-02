@@ -21,7 +21,8 @@ public class RoomBox
         if (currentPlayers.ContainsValue(player))
         {
             Debug.LogError("CRITICAL ERROR ENCONTRAMOS EL BUG: Se intentó agregar más de una vez un " + player + " en el room " + roomId);
-        }
+        } 
+
         if (!currentPlayers.ContainsKey(connectionId))
         {
             currentPlayers.Add(connectionId, player);

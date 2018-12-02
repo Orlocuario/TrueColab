@@ -4,4 +4,5 @@ martes: ñuñoa - pudahuel= 9000 		//Matías pagó
 martes: provi - ñuñoa 	= 3000
 Miérco: ñuñoa - pudahuel= 9000
 Jueves: ñuñoa - pudahuel= 9000
-Jueves: pudahuel - ñuñoa= 9000
+Jueves: pudahuel - peñalolen = 12000
+viernes: ñuñoa pudahuel = 12000

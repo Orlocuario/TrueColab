@@ -78,6 +78,7 @@ public class PlayerTeleporter : MonoBehaviour
             }
 
             other.GetComponent<PlayerController>().respawnPosition = teleportPosition;
+            SendMessageToServer("SaveCheckpoint" + "/" + teleportPosition.x.ToString() + "/" + teleportPosition.y.ToString(), true );
             levelManager.Respawn();
         }
         else

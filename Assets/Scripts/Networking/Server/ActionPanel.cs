@@ -50,6 +50,16 @@ public class ActionPanel : MonoBehaviour {
         roomManager.FreeSpace(boxId);
     }
 
+    public void ResetToCheckpointPosition(int boxId)
+    {
+        RoomManager roomManager = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>();
+        if (!roomManager)
+        {
+            UnityEngine.Debug.LogError("No se encontró RoomManager en ServerScene. uwu 2");
+        }
+        Server.instance.SenderResetCheckpoint(roomManager.GetRoomFromRoomBox(boxId));
+    }
+
     public void ChangeSceneInRoom(int boxId)
     {
         Text inputText = GameObject.Find("InputText" + boxId).GetComponent<Text>();

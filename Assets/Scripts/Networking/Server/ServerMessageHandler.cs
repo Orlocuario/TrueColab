@@ -49,6 +49,9 @@ public class ServerMessageHandler
             case "ChangeObjectPosition":
                 SendUpdatedObjectPosition(message, ip);
                 break;
+            case "CheckForControllerInRoom":
+                CheckEnemyControllerInRoom(ip);
+                break;
             case "InstantiateObject":
                 SendInstantiation(message, ip);
                 break;
@@ -81,6 +84,9 @@ public class ServerMessageHandler
                 break;
             case "EnemyPatrollingPoint":
                 SendEnemyPatrollingPoint(message, msg, ip);
+                break;
+            case "RoomNeedsControlOverenemies":
+                SendControllerToRoom(msg, ip);
                 break;
             case "EnemiesStartPatrolling":
                 EnemiesStartPatrolling(ip);
@@ -291,6 +297,10 @@ public class ServerMessageHandler
         SendChangeScene(scence, room, motive);
     }
 
+    private void SendControllerToRoom(string[] msg, string ip)
+    {
+        Room room = server.GetPlayer(ip).room;
+    }
 
     private void EnemiesStartPatrolling(string ip)
     {
@@ -829,6 +839,13 @@ public class ServerMessageHandler
         room.SendMessageToAllPlayersExceptOne(message, ip, false);
     }
 
+    private void CheckEnemyControllerInRoom(string ip)
+    {
+        NetworkPlayer nPlayer = server.GetPlayer(ip);
+        Room room = nPlayer.room;
+        room.CheckControlOverEnemies();
+    }
+
     private void SendInstantiation(string message, string ip)
     {
         NetworkPlayer player = server.GetPlayer(ip);
@@ -917,12 +934,21 @@ public class ServerMessageHandler
         room.log.WriteSceneChange(sceneName, motive);
         string message = "ChangeScene/" + sceneName + "/" + motive;
         room.Reset();
+        room.sceneToLoad = sceneName;
         room.ResetNPlayersPositions();
         room.SendMessageToAllPlayers(message, true);
         room.SendMessageToAllPlayers("NewChatMessage/" + room.actualChat, true);
     }
 
-
+    public void SendResetToCheckpoint(Room room)
+    {
+        foreach (NetworkPlayer player in room.players)
+        {
+            float x = player.lastRespawn.x;
+            float y = player.lastRespawn.y;
+            room.SendMessageToPlayer("SendGroupToLastCheckpoint" + "/" + x.ToString() + "/" + y.ToString(), player.ipAddress, true);
+        }
+    }
 
     public void SendSceneNameForMusic(string message, string ip)
     {

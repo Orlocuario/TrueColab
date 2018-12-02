@@ -62,10 +62,9 @@ public class EndOfScene : MonoBehaviour
                     }
                     else
                     {
-                        if (levelManager.GetLocalPlayerController().controlOverEnemies)
-                        {
-                            levelManager.GoToNextScene();
-                        }
+                        SendMessageToServer("CheckForControllerInRoom", true);
+                        StartCoroutine(WaitForRoomAnswerToSendEndOfScene());
+
                     }
                 }
 
@@ -132,6 +131,16 @@ public class EndOfScene : MonoBehaviour
                     return;
             }
             
+        }
+    }
+
+    protected IEnumerator WaitForRoomAnswerToSendEndOfScene()
+    {
+        yield return new WaitForSeconds(.3f);
+
+        if (levelManager.GetLocalPlayerController().controlOverEnemies)
+        {
+            levelManager.GoToNextScene();
         }
     }
 
