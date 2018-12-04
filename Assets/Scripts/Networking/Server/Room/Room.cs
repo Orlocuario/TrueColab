@@ -378,28 +378,28 @@ public class Room
                 //coordenadas[0] = 63.46f;
                 //coordenadas[1] = -5f;     //  Posiciones Test Spider
 
-                coordenadas[0] = 90.6f;     //  Coordenadas fin de escena  
-                coordenadas[1] = -5f;
+                //coordenadas[0] = 90.6f;     //  Coordenadas fin de escena  
+                //coordenadas[1] = -5f;
 
-                //coordenadas[0] = -21.32f;     //Coordenadas iniciales
-                //coordenadas[1] = 0.33f;
+                coordenadas[0] = -21.32f;     //Coordenadas iniciales
+                coordenadas[1] = 0.33f;
                 break;
 
             case ("Escena3"):
-                coordenadas[0] = 80.81f;      //Posiciones final de etapa
-                coordenadas[1] = -4.94f; 
+                //coordenadas[0] = 80.81f;      //Posiciones final de etapa
+                //coordenadas[1] = -4.94f; 
 
-                //coordenadas[0] = -1.24f;      //Posiciones Iniciales
-                //coordenadas[1] = 0f;
+                coordenadas[0] = -1.24f;      //Posiciones Iniciales
+                coordenadas[1] = 0f;
                 break;
 
             case ("Escena4"):
 
-                coordenadas[0] = 2.92f;         //Posicion test camera change
-                coordenadas[1] = -7.06f;
+                //coordenadas[0] = 2.92f;         //Posicion test camera change
+                //coordenadas[1] = -7.06f;
 
-                //coordenadas[0] = -2.04f;        //Posiciones Iniciales
-                //coordenadas[1] = 4.18f;
+                coordenadas[0] = -2.04f;        //Posiciones Iniciales
+                coordenadas[1] = 4.18f;
                 break;
 
             case ("Escena5"):
