@@ -915,14 +915,6 @@ public class ClientMessageHandler : MonoBehaviour
     private void HandleChangeScene(string[] msg)
     {
         string scene = msg[1];
-        /*Scene currentScene = SceneManager.GetActiveScene();
-
-        if (GetLocalPlayerData() != null)
-        {
-            string message = GetLocalPlayerData();
-            client.SendMessageToServer("PlayerChangePosition" + "/" + message, true);
-        }
-        */
         SceneManager.LoadScene(scene);
     }
 

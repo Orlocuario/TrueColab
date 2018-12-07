@@ -925,6 +925,7 @@ public class ServerMessageHandler
         room.sceneToLoad = sceneName;
         string message = "ChangeScene/" + sceneName + "/" + motive;
         room.SendMessageToAllPlayers(message, true);
+        room.Reset();
         room.ResetNPlayersPositions();
         room.log.WriteSceneChange(sceneName, motive);
     }
