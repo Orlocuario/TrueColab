@@ -1,35 +1,3 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEditor;
-namespace Medvedya.SpriteDeformerTools
-{
-    //[CustomEditor(typeof(SpriteDeformerBlendShapeAnimatorProxy))]
-    public class SpriteDeformerBlendShapeAnimatorProxyEditor : Editor
-    {
-        SpriteDeformerBlendShapeAnimatorProxy proxy; 
-        public override void OnInspectorGUI()
-        {
-            proxy = (SpriteDeformerBlendShapeAnimatorProxy)this.target;
-            if (proxy.spriteDeformerBlendShape == null)
-            {
-                EditorGUILayout.LabelField("Sprite deformer blendShape is not found");
-                return;
-            }
-            float count = proxy.spriteDeformerBlendShape.countOfShapes;
-            if (count > 20) count = 20;
-            for (int i = 0; i < count; i++)
-            {
-                float value =  EditorGUILayout.Slider(proxy.getValueByIndex(i),0,1);
-                proxy.setValueByIndex(i, value);
-                
-            }
-            if (GUI.changed)
-            {
-                EditorUtility.SetDirty(proxy);
-                EditorUtility.SetDirty(proxy.spriteDeformerBlendShape);
-            }
-
-            //base.OnInspectorGUI();
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:d0db01a98e562551d366bb0d40f8e784f06f194762fc77ddaf53b0418af3df88
+size 1196

@@ -1,1 +1,3 @@
-Build from MacBook Air de hhhh at 11/23/2017 17:09:08
+version https://git-lfs.github.com/spec/v1
+oid sha256:98687800468ec9a480a7a2280d59aa3e3a6d4efd7f6c3b95b5742c4836b51e71
+size 53

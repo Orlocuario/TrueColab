@@ -1,23 +1,3 @@
-﻿using System.Collections;
-using UnityEngine;
-
-public class RuneSystem : ActivableSystem
-{
-
-    #region Attributes
-
-    public PlannerObstacle obstacleObj = null;
-
-    #endregion
-
-    #region Start
-
-    protected override void Start()
-    {
-        base.Start();
-        systemActions = new RuneSystemActions();
-    }
-
-    #endregion
-
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:4572ddcbe3fda3eccb95515731f2c92ce9200f7de25d019791c45daf9511db93
+size 339

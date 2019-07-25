@@ -1,25 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class PowerableForCascades : PowerableObject {
-
-    public int[] lavaId;
-
-    protected override void DoYourPowerableThing()
-    {
-        for (int id = 0; id<lavaId.Length; id++)
-        {
-            levelManager.PowerableToggleLavaIntoWater("WaterFalling", true, lavaId[id]);
-        }
-    }
-
-    protected override void UndoYourPowerableThing()
-    {
-        for (int id = 0; id < lavaId.Length; id++)
-        {
-            levelManager.PowerableToggleLavaIntoWater("WaterFalling", false, lavaId[id]);
-        }
-    }
-
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:32d0e2a04b559c1cd4f0702a680fab9ad2d05e10804ccca59440289020c233ca
+size 615

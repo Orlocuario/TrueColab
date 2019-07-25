@@ -1,35 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class BendTree : MonoBehaviour
-{
-
-    #region Start
-
-    void Start()
-    {
-        PolygonCollider2D collider = GetComponent<PolygonCollider2D>();
-        collider.enabled = false;
-    }
-
-    #endregion
-
-    #region Common
-
-	public void Fall()
-    {
-
-        PolygonCollider2D collider = GetComponent<PolygonCollider2D>();
-        collider.enabled = true;
-		Debug.Log ("Got Collider and activated it");
-
-        SceneAnimator sceneAnimator = GameObject.FindObjectOfType<SceneAnimator>();
-        sceneAnimator.SetBool("RockBottom", true, this.gameObject);
-		Debug.Log ("Got Sceneanimator and animated " + gameObject.name);
-
-    }
-
-    #endregion
-
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:c70fcb9cfe850421677f1448fb5979a9400b100327ed729831359e4a34d4123b
+size 739

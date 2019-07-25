@@ -1,36 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class ForLoopDestroyer : MonoBehaviour {
-
-    public GameObject[] objectsToDestroy;
-    public int objectsDestroyed;
-	// Use this for initialization
-
-	private void Start () {
-        CheckParameters();
-        objectsDestroyed = 0;
-	}
-
-    public void DestroyOneMoreObject()
-    {
-        for (int i = objectsDestroyed; i<objectsToDestroy.Length; i++)
-        {
-            if (objectsToDestroy[i] != null)
-            {
-                objectsDestroyed++;
-                Destroy(objectsToDestroy[i]);
-                break;
-            } 
-        }
-    }
-
-    private void CheckParameters()
-    {
-        if (objectsToDestroy.Length == 0)
-        {
-            Debug.LogError("The ForLoopDestroyer named: " + gameObject.name + "has no objects to destroy");
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:fa622037142625e8f91edb600577809929e8ea46be61b23e74dbd3d3dda75061
+size 867

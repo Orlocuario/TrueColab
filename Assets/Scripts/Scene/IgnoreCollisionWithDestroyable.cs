@@ -1,35 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class IgnoreCollisionWithDestroyable : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-
-        IgnoreCollisionWithDestroyableObjects(true);
-		
-	}
-
-    public void IgnoreCollisionWithDestroyableObjects(bool ignore)
-    {
-        DestroyableObject[] objectsWhoHateMe = FindObjectsOfType<DestroyableObject>();
-
-        if (objectsWhoHateMe != null)
-        {
-            foreach (DestroyableObject objectWhoHatesMe in objectsWhoHateMe)
-            {
-                Collider2D[] collidersWhoHateME = objectWhoHatesMe.GetComponents<Collider2D>();
-                foreach (Collider2D hatingCollider in collidersWhoHateME)
-                {
-                    Collider2D[] myColliders = GetComponents<Collider2D>();
-                    foreach (Collider2D colliderinho in myColliders)
-                    {
-
-                            Physics2D.IgnoreCollision(hatingCollider, GetComponent<Collider2D>(), ignore);
-                    }
-                }
-            }
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:d1d342e69bba11155a6fdc331d53250d667227fe1b5f4c593c8f0a332da3776f
+size 1091

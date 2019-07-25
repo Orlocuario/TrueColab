@@ -1,31 +1,3 @@
-﻿using UnityEngine;
-
-public class SwitchMovingObject : MovingObject
-{
-
-    #region Start
-
-    protected override void Start()
-    {
-        base.Start();
-        IgnoreSwitchMovingObjects();
-    }
-
-    #endregion
-
-    #region Utils
-
-    private void IgnoreSwitchMovingObjects()
-    {
-        SwitchMovingObject[] movingSwitchs = GameObject.FindObjectsOfType<SwitchMovingObject>();
-        Collider2D collider = GetComponent<Collider2D>();
-
-        foreach (SwitchMovingObject movingSwitch in movingSwitchs)
-        {
-            Physics2D.IgnoreCollision(collider, movingSwitch.GetComponent<Collider2D>());
-        }
-    }
-
-    #endregion
-
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:27f3896b1987f1ebb4eee723db066f84c0f8b2f212433d10d41fa8b4c39e8153
+size 644

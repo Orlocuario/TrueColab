@@ -1,21 +1,3 @@
-fileFormatVersion: 2
-guid: 505fd89c25a7fe646a292ac169f6e394
-timeCreated: 1516765728
-licenseType: Free
-TrueTypeFontImporter:
-  serializedVersion: 4
-  fontSize: 16
-  forceTextureCase: -2
-  characterSpacing: 0
-  characterPadding: 1
-  includeFontData: 1
-  fontName: SF Pixelate Shaded
-  fontNames:
-  - SF Pixelate Shaded
-  fallbackFontReferences: []
-  customCharacters: 
-  fontRenderingMode: 0
-  ascentCalculationMode: 1
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+version https://git-lfs.github.com/spec/v1
+oid sha256:7175391faa3571d98c6b042b077f40b9916d35968acdf23c73b687af92d2dd24
+size 473

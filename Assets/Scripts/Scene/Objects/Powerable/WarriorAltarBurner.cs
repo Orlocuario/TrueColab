@@ -1,20 +1,3 @@
-﻿
-public class WarriorAltarBurner : PowerableObject {
-
-    public int id; 
-
-	protected override void DoYourPowerableThing ()
-	{
-        if (id != 0)
-        {
-            BurnableObject[] bObjects = FindObjectsOfType<BurnableObject>();
-            foreach (BurnableObject bObject in bObjects)
-            {
-                if (bObject.gameObject.CompareTag("BurnableBranches" + id.ToString()))
-                {
-                    bObject.Burn();
-                }
-            }
-        }
-	}
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:8c7b0575f617fb1e001b48897e5029c6fcda084661478e905493a2f0a78ac326
+size 497

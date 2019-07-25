@@ -1,7 +1,3 @@
-Elementos Andrea
-
-Encuestas pre y post: 
-Ppt clase
-Matriz habilidades
-Matriz diseño. 
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:fd8e7763e954e4b493ad154b651f9e9ee18f5743f7f7dc475867f79503c57824
+size 87

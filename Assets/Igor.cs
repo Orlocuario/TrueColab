@@ -1,23 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Igor : MonoBehaviour {
-
-    public string mensajeAmiAmo;
-	// Use this for initialization
-	void Start () {
-        if(mensajeAmiAmo == null)
-        {
-            Debug.LogError("Eres un estúpido igor");
-        }
-        StartCoroutine(WaitToNameMyMastar());
-	}
-	
-    private IEnumerator WaitToNameMyMastar()
-    {
-        yield return new WaitForSeconds(2f);
-
-        Debug.Log(mensajeAmiAmo);
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:fdb5e6023933e499ab54d01c777d70be828569e2ed986171404d653956a408cf
+size 500

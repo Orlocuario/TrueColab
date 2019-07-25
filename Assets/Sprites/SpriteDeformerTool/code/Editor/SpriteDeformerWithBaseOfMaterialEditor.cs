@@ -1,34 +1,3 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEditor;
-namespace Medvedya.SpriteDeformerTools
-{
-
-    public class SpriteDeformerWithBaseOfMaterialEditor :SpriteDeformerEditor
-    {
-        SpriteDeformerWithMaterialPropertyBlock spriteDeformerWithM;
-        public void drawSelectMaterial()
-        {
-            //if (Application.isPlaying) return;
-            spriteDeformerWithM = (SpriteDeformerWithMaterialPropertyBlock)target;
-
-                spriteDeformerWithM.material 
-                = 
-                 (Material)EditorGUILayout.ObjectField("Material:", spriteDeformerWithM.material, typeof(Material),false);
-
-            
-        }
-        protected override void inspectorMain()
-        {
-            drawSelectMaterial();
-            base.inspectorMain();
-        }
-        protected override void OnEnable()
-        {
-
-            base.OnEnable();
-
-        }
-    }
-
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:f56f18f69a6e126041fa53d2fcb5d5c242be7c3c4c6d159567c7f129d28697b0
+size 897

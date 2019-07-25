@@ -1,26 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class ObjectsToDestroy : MonoBehaviour {
-
-    public GameObject[] objectsToBurn;
-	// Use this for initialization
-	void Start () {
-		if (objectsToBurn.Length == 0)
-        {
-            Debug.Log("ObjectBurner named: " + gameObject.name + " needs objects toDestroy, duh");
-        }
-	}
-	
-    public void BurnAllThisStuff()
-    {
-        foreach (GameObject gObject in objectsToBurn)
-        {
-            if (gObject.GetComponent<DestroyableObject>())
-            {
-                gObject.GetComponent<DestroyableObject>().DestroyMe(true);
-            }
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:d1bb1f1c39546608a561610aab77a4fa200d4518183d6040bf23fa7a5670f801
+size 662

@@ -1,34 +1,3 @@
-﻿
-public class RoomSwitch
-{
-
-    #region Attributes
-
-    public bool on;
-    public int groupId;
-    public int individualId;
-    public Room room;
-
-    #endregion
-
-    #region Constructor
-
-    public RoomSwitch(int groupId, int individualId, Room room)
-    {
-        this.groupId = groupId;
-        this.individualId = individualId;
-        this.room = room;
-    }
-
-    #endregion
-
-    #region Common
-
-    public string GetReconnectData()
-    {
-        return "ChangeSwitchStatus/" + groupId + "/" + individualId + "/" + on;
-    }
-
-    #endregion
-
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:d369354c348e5a418c41b856612993eb2c266d93150f9577d186d624b26621d6
+size 553

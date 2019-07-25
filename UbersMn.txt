@@ -1,8 +1,3 @@
-viajes uber mn:
-
-martes: ñuñoa - pudahuel= 9000 		//Matías pagó
-martes: provi - ñuñoa 	= 3000
-Miérco: ñuñoa - pudahuel= 9000
-Jueves: ñuñoa - pudahuel= 9000
-Jueves: pudahuel - peñalolen = 12000
-viernes: ñuñoa pudahuel = 12000
+version https://git-lfs.github.com/spec/v1
+oid sha256:9fe09e9d61f0350cf1cb34388ed987862c375ef3b25988d8efecf84bd52c8e17
+size 224
