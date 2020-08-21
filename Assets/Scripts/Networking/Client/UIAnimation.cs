@@ -60,7 +60,6 @@ public class UIAnimation : MonoBehaviour
     private IEnumerator WaitForSwing()
     {
         yield return new WaitForSeconds(swing);
-        Debug.LogError("I waaited");
         canAnimate = true;
     }
 

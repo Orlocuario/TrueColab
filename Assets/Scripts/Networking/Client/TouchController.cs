@@ -7,13 +7,17 @@ using UnityEngine.UI;
 
 public class TouchController : MonoBehaviour {
 
+    [SerializeField]
+    string textObjectName;
     #region Events
 
     public void OnClick()
     {
+        GameObject textObject = GameObject.Find(textObjectName);
+        textObject.GetComponent<Text>().text = "Conectando";               //Change 
+
         GameObject client = GameObject.Find("ClientObject");
         ClientNetworkDiscovery listen = client.GetComponent<ClientNetworkDiscovery>();
-        GameObject.Find("ConnectText").GetComponent<Text>().text = "Conectar";
         listen.InitializeListening();
     }
 
