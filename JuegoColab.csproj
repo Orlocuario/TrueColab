@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{ECBE9DB8-84E8-D880-3A31-F12F2213900A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
+    <CompilerResponseFile></CompilerResponseFile>
+    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityBuildTarget>Android:13</UnityBuildTarget>
+    <UnityVersion>5.5.4f1</UnityVersion>
+    <RootNamespace></RootNamespace>
+    <LangVersion>4</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\UnityVS_bin\Debug\</OutputPath>
+    <IntermediateOutputPath>Temp\UnityVS_obj\Debug\</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_5_4;UNITY_5_5;UNITY_5;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_GENERICS;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;UNITY_ANDROID;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;PLATFORM_SUPPORTS_ADS_ID;UNITY_CAN_SHOW_SPLASH_SCREEN;ENABLE_VIDEO;ENABLE_VR;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;ENABLE_VSTU</DefineConstants>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\UnityVS_bin\Release\</OutputPath>
+    <IntermediateOutputPath>Temp\UnityVS_obj\Release\</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_5_4;UNITY_5_5;UNITY_5;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_GENERICS;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;UNITY_ANDROID;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;PLATFORM_SUPPORTS_ADS_ID;UNITY_CAN_SHOW_SPLASH_SCREEN;ENABLE_VIDEO;ENABLE_VR;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;ENABLE_VSTU</DefineConstants>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Core" />
+    <Reference Include="Boo.Lang" />
+    <Reference Include="UnityScript.Lang" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PlaymodeTestsRunner">
+      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/PlaymodeTestsRunner/UnityEngine.PlaymodeTestsRunner.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Analytics">
+      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.HoloLens">
+      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VR">
+      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\Controles\CNControls\Scripts\CnInputSystem\CnInputManager.cs" />
+    <Compile Include="Assets\Controles\CNControls\Scripts\CnInputSystem\VirtualAxis.cs" />
+    <Compile Include="Assets\Controles\CNControls\Scripts\CnInputSystem\VirtualButton.cs" />
+    <Compile Include="Assets\Controles\CNControls\Scripts\Controllers\CommonOnScreenControl.cs" />
+    <Compile Include="Assets\Controles\CNControls\Scripts\Controllers\Dpad.cs" />
+    <Compile Include="Assets\Controles\CNControls\Scripts\Controllers\DpadAxis.cs" />
+    <Compile Include="Assets\Controles\CNControls\Scripts\Controllers\JumpButton.cs" />
+    <Compile Include="Assets\Controles\CNControls\Scripts\Controllers\SensitiveJoystick.cs" />
+    <Compile Include="Assets\Controles\CNControls\Scripts\Controllers\SimpleButton.cs" />
+    <Compile Include="Assets\Controles\CNControls\Scripts\Controllers\SimpleJoystick.cs" />
+    <Compile Include="Assets\Controles\CNControls\Scripts\Controllers\Touchpad.cs" />
+    <Compile Include="Assets\Scripts\Networking\Client\Client.cs" />
+    <Compile Include="Assets\Scripts\Networking\Client\ClientMessageHandler.cs" />
+    <Compile Include="Assets\Scripts\Networking\Client\ClientNetworkDiscovery.cs" />
+    <Compile Include="Assets\Scripts\Networking\Client\TouchController.cs" />
+    <Compile Include="Assets\Scripts\Networking\NetworkConsts.cs" />
+    <Compile Include="Assets\Scripts\Networking\Objects\NetworkEnemy.cs" />
+    <Compile Include="Assets\Scripts\Networking\Objects\NetworkPlayer.cs" />
+    <Compile Include="Assets\Scripts\Networking\Server\ActionPanel.cs" />
+    <Compile Include="Assets\Scripts\Networking\Server\Room\Room.cs" />
+    <Compile Include="Assets\Scripts\Networking\Server\Room\RoomHpMp.cs" />
+    <Compile Include="Assets\Scripts\Networking\Server\Room\RoomLogger.cs" />
+    <Compile Include="Assets\Scripts\Networking\Server\Room\RoomObstacles.cs" />
+    <Compile Include="Assets\Scripts\Networking\Server\Room\RoomSwitch.cs" />
+    <Compile Include="Assets\Scripts\Networking\Server\Room\RoomSystems.cs" />
+    <Compile Include="Assets\Scripts\Networking\Server\RoomManager\ResetRoomScript.cs" />
+    <Compile Include="Assets\Scripts\Networking\Server\RoomManager\RoomBox.cs" />
+    <Compile Include="Assets\Scripts\Networking\Server\RoomManager\RoomManager.cs" />
+    <Compile Include="Assets\Scripts\Networking\Server\Server.cs" />
+    <Compile Include="Assets\Scripts\Networking\Server\ServerMessageHandler.cs" />
+    <Compile Include="Assets\Scripts\Networking\Server\ServerNetworkDiscovery.cs" />
+    <Compile Include="Assets\Scripts\Planner\Planner.cs" />
+    <Compile Include="Assets\Scripts\Planner\PlannerItem.cs" />
+    <Compile Include="Assets\Scripts\Planner\PlannerObstacle.cs" />
+    <Compile Include="Assets\Scripts\Planner\PlannerPlayer.cs" />
+    <Compile Include="Assets\Scripts\Planner\PlannerPoi.cs" />
+    <Compile Include="Assets\Scripts\Planner\PlannerSwitch.cs" />
+    <Compile Include="Assets\Scripts\Players\Attacks\AttackController.cs" />
+    <Compile Include="Assets\Scripts\Players\Attacks\FireballController.cs" />
+    <Compile Include="Assets\Scripts\Players\Attacks\ProjectileController.cs" />
+    <Compile Include="Assets\Scripts\Players\Attacks\PunchController.cs" />
+    <Compile Include="Assets\Scripts\Players\Controllers\EngineerController.cs" />
+    <Compile Include="Assets\Scripts\Players\Controllers\MageController.cs" />
+    <Compile Include="Assets\Scripts\Players\Controllers\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Players\Controllers\WarriorController.cs" />
+    <Compile Include="Assets\Scripts\Players\Inventory.cs" />
+    <Compile Include="Assets\Scripts\Scene\Animations\MoveTowardsAndDie.cs" />
+    <Compile Include="Assets\Scripts\Scene\Animations\SceneAnimator.cs" />
+    <Compile Include="Assets\Scripts\Scene\Bubbles\BubbleController.cs" />
+    <Compile Include="Assets\Scripts\Scene\Bubbles\BubbleParticleController.cs" />
+    <Compile Include="Assets\Scripts\Scene\Bubbles\BubbleRotatingInstantiator.cs" />
+    <Compile Include="Assets\Scripts\Scene\Bubbles\WarriorBubbleController.cs" />
+    <Compile Include="Assets\Scripts\Scene\Camera\CameraController.cs" />
+    <Compile Include="Assets\Scripts\Scene\Camera\TriggerCamera.cs" />
+    <Compile Include="Assets\Scripts\Scene\Decisions\DecisionSystem.cs" />
+    <Compile Include="Assets\Scripts\Scene\Decisions\DecisionSystemActions.cs" />
+    <Compile Include="Assets\Scripts\Scene\Effects\BendTree.cs" />
+    <Compile Include="Assets\Scripts\Scene\Effects\BurnableObject.cs" />
+    <Compile Include="Assets\Scripts\Scene\Effects\ChangeSprite.cs" />
+    <Compile Include="Assets\Scripts\Scene\Effects\ChozaChanger.cs" />
+    <Compile Include="Assets\Scripts\Scene\Effects\Rotator.cs" />
+    <Compile Include="Assets\Scripts\Scene\Effects\SlideRock.cs" />
+    <Compile Include="Assets\Scripts\Scene\Enemies\EnemyController.cs" />
+    <Compile Include="Assets\Scripts\Scene\Enemies\EspirituController.cs" />
+    <Compile Include="Assets\Scripts\Scene\Enemies\MurcielagoController.cs" />
+    <Compile Include="Assets\Scripts\Scene\Enemies\SpiderController.cs" />
+    <Compile Include="Assets\Scripts\Scene\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\Scene\NPC\NPCtrigger.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Activable\ActivableSystem.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Activable\ActivableSystemActions.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Activable\GearSystem.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Activable\GearSystemActions.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Activable\RuneSystem.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Activable\RuneSystemActions.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Damaging\DamagingInstantiator.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Damaging\DamagingObject.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Destroyable\DestroyableBox.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Destroyable\DestroyableObject.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Killing\KillingObject.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Killing\PlayerFilter.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Movable\GiantRock.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Movable\MovableObject.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Movable\MovableTriggerInstantiator.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Moving\MovingObject.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Moving\MovingPlatformInstantiator.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Moving\OneTimeMovingObject.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Moving\SwitchMovingObject.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Pickable\PickUpExp.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Pickable\PickUpItem.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Powerable\AltarMageEnginZone1.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Powerable\ElectricParticles.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Powerable\PowerableCascade.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Powerable\PowerableObject.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Powerable\WarriorAltarPowerable.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Switches\GroupOfSwitchs.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Switches\Switch.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Switches\SwitchActions.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Switches\SwitchManager.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Teleporters\AttackTeleporter.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Teleporters\EnginTeleporter.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Teleporters\MageTeleporter.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Teleporters\PlayerTeleporter.cs" />
+    <Compile Include="Assets\Scripts\Scene\Objects\Teleporters\WarriorTeleporter.cs" />
+    <Compile Include="Assets\Scripts\Scene\SoundManager.cs" />
+    <Compile Include="Assets\Scripts\Scene\UI\Chat.cs" />
+    <Compile Include="Assets\Scripts\Scene\UI\HUD\HUDDisplay.cs" />
+    <Compile Include="Assets\Scripts\Scene\Utils\IgnoreCollisionWithAttacks.cs" />
+    <Compile Include="Assets\Scripts\Scene\Utils\IgnoreCollisionWithPlayers.cs" />
+    <Compile Include="Assets\Scripts\Scene\Utils\KillZoneDestroyer.cs" />
+    <Compile Include="Assets\Scripts\Scene\Utils\Utils.cs" />
+    <Compile Include="Assets\Scripts\Scene\Zones\ChatZone.cs" />
+    <Compile Include="Assets\Scripts\Scene\Zones\Checkpoint.cs" />
+    <Compile Include="Assets\Scripts\Scene\Zones\EndOfScene.cs" />
+    <Compile Include="Assets\Scripts\Scene\Zones\GravityZone.cs" />
+    <Compile Include="Assets\Scripts\Scene\Zones\RockBlocker.cs" />
+    <Compile Include="Assets\Sprites\SpriteDeformerTool\Examples\DragCamera2D.cs" />
+    <Compile Include="Assets\Sprites\SpriteDeformerTool\Examples\EXAMPLE_createSpriteDeformer.cs" />
+    <Compile Include="Assets\Sprites\SpriteDeformerTool\Examples\EXAMPLE_monster.cs" />
+    <Compile Include="Assets\Sprites\SpriteDeformerTool\code\BaseOfMaterials.cs" />
+    <Compile Include="Assets\Sprites\SpriteDeformerTool\code\Edge.cs" />
+    <Compile Include="Assets\Sprites\SpriteDeformerTool\code\MedvedyaMath.cs" />
+    <Compile Include="Assets\Sprites\SpriteDeformerTool\code\PointConstrain.cs" />
+    <Compile Include="Assets\Sprites\SpriteDeformerTool\code\SpriteDeformer.cs" />
+    <Compile Include="Assets\Sprites\SpriteDeformerTool\code\SpriteDeformerAnimation.cs" />
+    <Compile Include="Assets\Sprites\SpriteDeformerTool\code\SpriteDeformerBlendShape.cs" />
+    <Compile Include="Assets\Sprites\SpriteDeformerTool\code\SpriteDeformerBlendShapeAnimatorProxy.cs" />
+    <Compile Include="Assets\Sprites\SpriteDeformerTool\code\SpriteDeformerEditorSaver.cs" />
+    <Compile Include="Assets\Sprites\SpriteDeformerTool\code\SpriteDeformerStatic.cs" />
+    <Compile Include="Assets\Sprites\SpriteDeformerTool\code\SpriteDeformerTargetPoints.cs" />
+    <Compile Include="Assets\Sprites\SpriteDeformerTool\code\SpriteDeformerWithBaseOfMaterial_old.cs" />
+    <Compile Include="Assets\Sprites\SpriteDeformerTool\code\SpriteDeformerWithMaterialPropertyBlock.cs" />
+    <Compile Include="Assets\Sprites\SpriteDeformerTool\code\SpritePoint.cs" />
+    <Compile Include="Assets\Sprites\SpriteDeformerTool\code\Triangulator.cs" />
+    <Compile Include="Assets\Unity-Logs-Viewer\Reporter\MultiKeyDictionary.cs" />
+    <Compile Include="Assets\Unity-Logs-Viewer\Reporter\Reporter.cs" />
+    <Compile Include="Assets\Unity-Logs-Viewer\Reporter\ReporterGUI.cs" />
+    <Compile Include="Assets\Unity-Logs-Viewer\Reporter\ReporterMessageReceiver.cs" />
+    <Compile Include="Assets\Unity-Logs-Viewer\Reporter\Test\TestReporter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Sprites\Cave Platformer Tileset\readme.txt" />
+    <None Include="Assets\Sprites\Pixel Art Forest\readme.txt" />
+    <None Include="Assets\Sprites\SpriteDeformerTool\code\AlphaTestWithColor.shader" />
+    <None Include="Assets\StreamingAssets\build_info.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="GenerateTargetFrameworkMonikerAttribute" />
+</Project>
