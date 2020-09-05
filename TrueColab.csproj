@@ -94,6 +94,7 @@
     <Compile Include="Assets\ExpNameGiver.cs" />
     <Compile Include="Assets\HpMpManager.cs" />
     <Compile Include="Assets\Igor.cs" />
+    <Compile Include="Assets\LoveHateUIButton.cs" />
     <Compile Include="Assets\MovingObjectNameGiver.cs" />
     <Compile Include="Assets\OrganizeAndHide.cs" />
     <Compile Include="Assets\Scripts\FeedbackToggle.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="Assets\Scripts\Planner\PlannerSwitch.cs" />
     <Compile Include="Assets\Scripts\Players\Attacks\AttackController.cs" />
     <Compile Include="Assets\Scripts\Players\Attacks\FireballController.cs" />
+    <Compile Include="Assets\Scripts\Players\Attacks\LoveBallController.cs" />
     <Compile Include="Assets\Scripts\Players\Attacks\ProjectileController.cs" />
     <Compile Include="Assets\Scripts\Players\Attacks\PunchController.cs" />
     <Compile Include="Assets\Scripts\Players\Controllers\EngineerController.cs" />
